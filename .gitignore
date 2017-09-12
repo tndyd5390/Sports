@@ -1,2 +1,6 @@
 /build/
+<<<<<<< HEAD
 /target/
+=======
+/target/
+>>>>>>> refs/remotes/origin/test

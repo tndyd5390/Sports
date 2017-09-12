@@ -2,7 +2,8 @@ package com.sports.persistance.mapper;
 
 import java.util.List;
 
-import com.sports.config.Mapper;
+import config.Mapper;
+import com.sports.dto.NoticeDTO;
 import com.sports.dto.UserDTO;
 
 @Mapper("NoticeMapper")

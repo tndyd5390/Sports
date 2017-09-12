@@ -1,6 +1,6 @@
 package com.sports.persistance.mapper;
 
-import com.sports.config.Mapper;
+import config.Mapper;
 
 @Mapper("BasketMapper")
 public interface BasketMapper {
