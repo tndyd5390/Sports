@@ -44,7 +44,18 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>3.1.1.RELEASE</version>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.rosuda/jri -->
+		<dependency>
+		    <groupId>org.rosuda</groupId>
+		    <artifactId>jri</artifactId>
+		    <version>0.8.8-osx</version>
+		</dependency>
+		<!-- base64 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.10</version>
+		</dependency>
 		<!-- AspectJ -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
