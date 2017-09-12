@@ -1,4 +1,4 @@
-package config;
+package com.sports.config;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
