@@ -1,6 +1,6 @@
 package com.sports.persistance.mapper;
 
-import config.Mapper;
+import com.sports.config.Mapper;
 
 @Mapper("ComMapper")
 public interface ComMapper {
