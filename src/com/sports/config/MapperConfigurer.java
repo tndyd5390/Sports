@@ -1,4 +1,4 @@
-package config;
+package com.sports.config;
 
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 
