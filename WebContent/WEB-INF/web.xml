@@ -23,7 +23,7 @@
   </filter-mapping>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>classpath*:config/context*.xml</param-value>
+    <param-value>classpath*:/com/sports/config/context*.xml</param-value>
   </context-param>
   <listener>
     <listener-class>
