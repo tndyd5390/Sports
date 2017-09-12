@@ -8,7 +8,7 @@ import com.sports.persistance.mapper.AnalysisMapper;
 
 @Service("AnalysisService")
 public class AnalysisService {
-	@Resource(name="analysisMapper")
+	@Resource(name="AnalysisMapper")
 	private AnalysisMapper analysisMapper;
 
 }
