@@ -7,8 +7,8 @@ import org.rosuda.JRI.REXP;
 import org.rosuda.JRI.RList;
 import org.rosuda.JRI.Rengine;
 
-import sports.com.dto.Ord_testDTO;
-import sports.com.dto.R_testDTO;
+import com.sports.dto.Ord_testDTO;
+import com.sports.dto.R_testDTO;
 
 public class RUtil {
  public double R_list(List<Ord_testDTO> list){

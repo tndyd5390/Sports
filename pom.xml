@@ -44,12 +44,19 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>3.1.1.RELEASE</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/org.rosuda/jri -->
+<!-- R PROGRAMING -->
 		<dependency>
-		    <groupId>org.rosuda</groupId>
-		    <artifactId>jri</artifactId>
-		    <version>0.8.8-osx</version>
+			<groupId>org.nuiton.thirdparty</groupId>
+			<artifactId>JRI</artifactId>
+			<version>0.9-9</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.rosuda.REngine</groupId>
+			<artifactId>REngine</artifactId>
+			<version>2.1.0</version>
+		</dependency>
+
 		<!-- base64 -->
 		<dependency>
 			<groupId>commons-codec</groupId>
