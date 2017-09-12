@@ -45,11 +45,11 @@
 			<version>3.1.1.RELEASE</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.rosuda/jri -->
-		<dependency>
-		    <groupId>org.rosuda</groupId>
-		    <artifactId>jri</artifactId>
-		    <version>0.8.8-osx</version>
-		</dependency>
+			<dependency>
+			    <groupId>org.rosuda</groupId>
+			    <artifactId>jri</artifactId>
+			    <version>0.8.8-osx</version>
+			</dependency>
 		<!-- base64 -->
 		<dependency>
 			<groupId>commons-codec</groupId>

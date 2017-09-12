@@ -1,0 +1,30 @@
+	.goods_list_wrap .goods_list li:nth-child(2n-1) { /* 총명수정 .goods_list_wrap .goods_list li:first-child*/
+	  margin-right: 2%;
+	}
+	
+	.goods_list_wrap .register-btn.thumb-btn{
+	  background: #ff6b3d;
+	  position: relative;
+	  bottom: 0px;
+	  left: 2%;
+	  top: 5px;
+	  height: 40px;
+	  color: #fff;
+	  font-size: 15px;
+	  width: 45%;
+	  overflow: hidden;
+	  margin-right: 7%;
+	}
+	
+	.goods_list_wrap .edit-btn.thumb-btn2{
+	  background: #1777cb;
+	  position: relative;
+	  bottom: 0px;
+	  left: 1%;
+	  top: 5px;
+	  height: 40px;
+	  color: #fff;
+	  font-size: 15px;
+	  width: 45%;
+	  overflow: hidden;
+	}
