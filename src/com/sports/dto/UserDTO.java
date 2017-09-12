@@ -9,6 +9,9 @@ public class UserDTO {
 	private String email_first;
 	private String email_ck;
 	private String tel;
+	private String postcode;
+	private String address1;
+	private String address2;
 	private String auth;
 	private String delete_yn;
 	private String reg_user_no;
@@ -128,5 +131,23 @@ public class UserDTO {
 	}
 	public void setChg_dt(String chg_dt) {
 		this.chg_dt = chg_dt;
+	}
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+	public String getAddress1() {
+		return address1;
+	}
+	public void setAddress1(String address1) {
+		this.address1 = address1;
+	}
+	public String getAddress2() {
+		return address2;
+	}
+	public void setAddress2(String address2) {
+		this.address2 = address2;
 	}
 }

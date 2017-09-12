@@ -3,7 +3,10 @@
 
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <%@include file="/html5/include/head.jsp" %>
+
+</head>
 
 <body>
   <section id="wrapper" class="wrapper">

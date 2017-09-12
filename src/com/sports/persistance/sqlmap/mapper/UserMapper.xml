@@ -1,4 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.UserMapper">
+	<select id="getIdCheck" parameterType="UserDTO" resultType="int">
+		SELECT COUNT(*) FROM USER_INFO WHERE USER_ID = #{user_id}
+	</select>
+	<insert id="insertUserInfo" parameterType="UserDTO">
+		INSERT INTO USER_INFO (
+			USER_ID,
+			USER_NAME,
+			PASSWORD,
+			EMAIL,
+			TEL,
+			ADDRESS1,
+			ADDRESS2,
+			AUTH,
+			EMAIL_CK,
+			REG_USER_NO,
+			REG_DT
+		) VALUES (
+			#{user_id},
+			#{user_name},
+			PASSWORD(#{password}),
+			#{email},
+			#{tel},
+			#{address1},
+			#{address2},
+			'U',
+			'N',
+			last_insert_id(),
+			now()
+		)
+	</insert>
+	<update id="updateRegUser" parameterType="UserDTO">
+		UPDATE USER_INFO SET REG_USER_NO =
+		(SELECT * FROM (SELECT USER_NO FROM USER_INFO WHERE USER_ID=#{user_id}) AS s) WHERE USER_ID = #{user_id}
+	</update>
+	
 </mapper>

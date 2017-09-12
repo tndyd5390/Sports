@@ -661,7 +661,7 @@ body {
 }
 
 .search-wrap .search {
-  /* padding-right: 73px; 장총명 수정*/
+  /* padding-right: 73px; �옣珥앸챸 �닔�젙*/
   padding-bottom: 15px;
 }
 
@@ -874,7 +874,7 @@ body {
   overflow: hidden;
 }
 
-.goods_list_wrap .register-btn { /* 총명수정 버튼 등록*/
+.goods_list_wrap .register-btn { /* 珥앸챸�닔�젙 踰꾪듉 �벑濡�*/
   position: absolute;
   bottom: 0;
   left: 10px];
@@ -887,14 +887,14 @@ body {
   margin-right: 2%;
 }
 					/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-					   @         총명 수정 부분 시작                      @
+					   @         珥앸챸 �닔�젙 遺�遺� �떆�옉                      @
 					   @									@
 					   @  									@
 					   @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 					
 					*/
 					
-/* .goods_list_wrap .edit-btn { 총명수정  편집버튼
+/* .goods_list_wrap .edit-btn { 珥앸챸�닔�젙  �렪吏묐쾭�듉
   position: absolute;
   bottom: 0;
   left: 0;
@@ -907,18 +907,18 @@ body {
   
 }
 
-.goods_list_wrap .register-btn.thumb-btn { 총명수정 등록버튼 색상
+.goods_list_wrap .register-btn.thumb-btn { 珥앸챸�닔�젙 �벑濡앸쾭�듉 �깋�긽
   background: #ff6b3d;
 }
-.goods_list_wrap .edit-btn.thumb-btn2 { 총명수정 편집버튼 색상
+.goods_list_wrap .edit-btn.thumb-btn2 { 珥앸챸�닔�젙 �렪吏묐쾭�듉 �깋�긽
   background: #1777cb;
 }
 
-.goods_list_wrap .goods_list li:nth-child(2n-1) { 총명수정 .goods_list_wrap .goods_list li:first-child
+.goods_list_wrap .goods_list li:nth-child(2n-1) { 珥앸챸�닔�젙 .goods_list_wrap .goods_list li:first-child
   margin-right: 2%;
 } */
 
-.goods_list_wrap .goods_list li:nth-child(2n-1) { /* 총명수정 .goods_list_wrap .goods_list li:first-child*/
+.goods_list_wrap .goods_list li:nth-child(2n-1) { /* 珥앸챸�닔�젙 .goods_list_wrap .goods_list li:first-child*/
   margin-right: 2%;
 }
 	
@@ -1025,6 +1025,13 @@ body {
   font-weight: 600;
   cursor: pointer;
 }
+input.inputButton {
+  height: 51px;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 
 .btn-groub .deep-btn {
   color: #fff;
@@ -1066,7 +1073,7 @@ body {
 
  .sports_list li:nth-child(19), .sports_list li:nth-child(20) {
   border-bottom: 0;
-} /* 장총명수정 */
+} /* �옣珥앸챸�닔�젙 */
 
 .sports_list li:nth-child(3n-1) {
   border-right: 1px solid #bcbcbc;
@@ -1115,7 +1122,7 @@ body {
   padding-bottom: 15px;
   font-size: 0;
 }
-/*  총명 수정 */
+/*  珥앸챸 �닔�젙 */
 select.col-2 {
   width: 100%;
 }
@@ -1123,7 +1130,7 @@ select.col-2 {
 /* select.col-2:first-child {
   margin-right: 2%;
 } */
-/* ㅊ총명 수정 끝  */
+/* �뀏珥앸챸 �닔�젙 �걹  */
 .price_wrap {
   font-size: 14px;
   color: #1777cb;

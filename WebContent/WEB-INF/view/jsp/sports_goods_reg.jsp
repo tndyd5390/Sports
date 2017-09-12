@@ -2,8 +2,10 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<head>
 <%@include file="/html5/include/head.jsp" %>
 
+</head>
 <body>
   <section id="wrapper" class="wrapper">
        <header class="header">
@@ -24,65 +26,56 @@
 
 
     <div class="container detail">
-      <div class="wrap search-wrap">
-        <div class="search array">
-          <button class="array-btn"><img src="html5/common/images/ic_array.png" alt="정렬이미지"></button>
-          <input type="text" placeholder="검색하세요">
-          <button class="blue btn">검색</button>
+      <div class="wrap search-wrap btn-wrap">
+        <div class="select_wrap">
+          <select class="col-2">
+          <option value="태권도">태권도</option>
+          <option value="태권도">태권도</option>
+          </select>
+          <select class="col-2">
+            <option value="태권도 띠">태권도 띠</option>
+            <option value="사이즈">사이즈1</option>
+          </select>
         </div>
 
         <div class="list_wrap">
-          <ul class="sports_list">
-            <li><a href="#">태권도</a></li>
-            <li><a href="#">검도</a></li>
-            <li><a href="#">합기도</a></li>
-
-            <li><a href="#">복싱, MMA</a></li>
-            <li><a href="#">스포츠용품(구기)</a></li>
-            <li><a href="#">네트&amp;골대</a></li>
-
-            <li><a href="#">휘트니스</a></li>
-            <li><a href="#">스포츠의류</a></li>
-            <li><a href="#">측정용품&amp;호각</a></li>
-
-            <li><a href="#">펌프</a></li>
-            <li><a href="#">정리용품</a></li>
-            <li><a href="#">체육대회용품</a></li>
-
-            <li><a href="#">학교체육용품</a></li>
-            <li><a href="#">전체</a></li>
-          </ul>
-        </div>
-        <div class="goods_list_wrap">
-          <ul class="goods_list">
+          <ul class="register_list">
             <li>
-              <a href="#">
-              <div class="thumb">
-                <img src="html5/common/images/sample01.png" alt="thumb">
+              <p class="blue_text">제품사진</p>
+              <div class="input_btn_wrap">
+                <input type="text"><button class="line-btn">파일첨부</button>
               </div>
-              <div class="info">
-                <p class="title">한국스포츠 KSD 태권도 품 도복 (아동) TKD POOM Uniform (Child) </p>
-                <p class="price register">30,000원</p>
-              </div>
-              </a>
-              <button class="register-btn thumb-btn">등록</button>
+
             </li>
             <li>
-              <a href="#">
-              <div class="thumb">
-                <img src="html5/common/images/sample02.png" alt="thumb">
+              <p class="blue_text">제품명</p>
+              <input type="text">
+            </li>
+            <li>
+              <p class="blue_text">제품 가격</p>
+              <input type="text">
+            </li>
+            <li>
+              <p class="blue_text">제품 상세</p>
+              <textarea></textarea>
+              <div class="input_btn_wrap">
+                <input type="text"><button class="line-btn">파일첨부</button>
               </div>
-              <div class="info">
-                <p class="title">한국스포츠 KSD 태권도 품 도복 (아동) TKD POOM Uniform (Child) </p>
-                <p class="price edit">30,000원</p>
-                </div>
-                <button class="edit-btn thumb-btn">편집</button>
+            </li>
+            <li>
+              <p class="blue_text">옵션</p>
+              <div class="input_btn_wrap">
+                <input type="text" placeholder="옵션을 추가하세요"><button class="line-btn">등록/수정</button>
               </div>
+
             </li>
           </ul>
 
         </div>
-
+        <div class="btn-groub">
+          <button class="col-2 blue-btn button">등록</button>
+          <button class="col-2 glay-btn button">수정</button>
+        </div>
       </div>
     </div>
  <%@include file="/html5/include/footer.jsp" %>
