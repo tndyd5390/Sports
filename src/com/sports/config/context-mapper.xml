@@ -12,8 +12,7 @@
 	</bean>
 
 	<!-- MapperConfigurer setup for MyBatis Database Layer with @Mapper("deptMapper") in DeptMapper Interface -->
- 	<bean class="config.MapperConfigurer">
+ 	<bean class="com.sports.config.MapperConfigurer">
 		<property name="basePackage" value="com.sports.persistance.mapper" />
 	</bean>
-    
 </beans>
