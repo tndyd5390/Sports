@@ -21,8 +21,13 @@ public class CustomerQAController {
 	
 	@Resource(name="QAService")
 	private IQAService qAService;
-	
-	@RequestMapping(value="customer/qaList", method=RequestMethod.GET)
+	/**
+	 * 
+	 * 여기에 qna만들면 됨
+	 * 
+	 * 
+	 */
+	/*@RequestMapping(value="customer/qaList", method=RequestMethod.GET)
 	public String customerQaList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customer.qaList start!!!");
 		
@@ -50,9 +55,9 @@ public class CustomerQAController {
 		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		log.info(this.getClass() + " userNo : " + userNo);
 		
-		/**
+		*//**
 		 * qa 등록 로직 만들기
-		 */
+		 *//*
 		QADTO qDTO = new QADTO(userNo, secretStatus, title, contents, userNo);
 		int result = qAService.insertCustomerQA(qDTO);
 		if(result != 0){
@@ -69,5 +74,5 @@ public class CustomerQAController {
 		qDTO = null;
 		log.info(this.getClass() + ".customerQaRegProc end!!!");
 		return "alert";
-	}
+	}*/
 }
