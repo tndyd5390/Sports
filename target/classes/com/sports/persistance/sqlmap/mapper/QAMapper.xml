@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.QAMapper">
+	<insert id="insertCustomerQA" parameterType="QADTO">
+		INSERT INTO QA_INFO
+		(
+			USER_NO,
+			SECRET_YN,
+			TITLE,
+			CONTENTS,
+			REG_USER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{user_no},
+			#{secret_yn},
+			#{title},
+			#{contents},
+			#{reg_user_no},
+			NOW()
+		)
+	</insert>
 </mapper>

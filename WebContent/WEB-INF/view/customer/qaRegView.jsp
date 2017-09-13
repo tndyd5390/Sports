@@ -7,6 +7,28 @@
 <script type="text/javascript">
 	function doSubmit(){
 		var f = document.getElementById('qaForm');
+		var secretStatus;
+		if(f.secret.value == 'y'){
+			secretStatus = '비밀글로 등록됩니다.';
+		}else{
+			secretStatus = '공개글로 등록됩니다.';
+		}
+		
+		if(f.title.value == ""){
+			alert("제목을 입력해 주세요.");
+			f.title.focus();
+			return;
+		}
+		
+		if(f.contents.value == ""){
+			alert('내용을 입력해 주세요');
+			f.contents.focus();
+			return;
+		}
+		
+		if(confirm(secretStatus)){
+			f.submit();
+		}
 	}
 
 </script>	
@@ -33,21 +55,24 @@
     <div class="container detail">
       <div class="wrap search-wrap btn-wrap">
         <div class="list_wrap">
-	        <form action="#" method="post" id="qaForm">
-				<div class="select_wrap">
-					<select class="col-2">
-						<option value="태권도">태권도</option>
-						<option value="태권도">태권도</option>
-					</select>
-				</div>
+	        <form action="/customer/qaRegProc.do" method="post" id="qaForm">
 				<ul class="register_list">
 	            <li>
-	              <p class="blue_text">제품명</p>
-	              <input type="text" name="#">
+	              <p class="blue_text">제목</p>
+	              <input type="text" name="title">
 	            </li>
 	            <li>
-	              <p class="blue_text">제품 상세</p>
-	              <textarea name="#"></textarea>
+	            <p class="blue_text">비밀글 여부</p>
+				<div class="select_wrap">
+					<select class="col-2" name="secret">
+						<option value="n">공개글</option>
+						<option value="y">비밀글</option>
+					</select>
+				</div>
+				</li>
+	            <li>
+	              <p class="blue_text">내용</p>
+	              <textarea name="contents"></textarea>
 	            </li>
 	          </ul>
 			</form>
