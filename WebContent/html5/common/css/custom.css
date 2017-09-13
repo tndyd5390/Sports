@@ -1,0 +1,22 @@
+.width80 {
+	width: 80%;
+}
+
+.width100 {
+	width: 100%;
+	font-size: 16px;
+}
+.logout_wrap {
+  background: #f1f1f1;
+  font-size: 0;
+  padding: 0 15px;
+  border-top: 1px solid #bcbcbc;
+}
+.logout_wrap a {
+  font-size: 14px;
+  padding: 10px;
+  color: #000;
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+}
