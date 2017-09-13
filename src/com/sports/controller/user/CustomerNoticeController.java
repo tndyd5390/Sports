@@ -25,7 +25,12 @@ public class CustomerNoticeController {
 		log.info(this.getClass() + ".userNoticeList start!!!");
 		
 		log.info(this.getClass() + ".userNoticeList end!!!");
-		return "NoticeList";
+		return "jsp/qna_list";
+	}
+	
+	@RequestMapping(value="reg")
+	public String reg() throws Exception{
+		return "jsp/address_inquiry";
 	}
 
 }
