@@ -22,5 +22,10 @@ public class UserService implements IUserService{
 		userMapper.insertUserInfo(uDTO);
 		userMapper.updateRegUser(uDTO);
 	}
+	@Override
+	public int getLoginInfo(UserDTO uDTO) throws Exception {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }
