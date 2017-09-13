@@ -31,6 +31,7 @@
 			now()
 		)
 	</insert>
+	
 	<update id="updateRegUser" parameterType="UserDTO">
 		UPDATE USER_INFO SET REG_USER_NO =
 		(SELECT * FROM (SELECT USER_NO FROM USER_INFO WHERE USER_ID=#{user_id}) AS s) WHERE USER_ID = #{user_id}
@@ -40,4 +41,15 @@
 		SELECT USER_NO, USER_ID, USER_NAME FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
 	</select>
 	
+	<update id="updateEmailCode" parameterType="UserDTO">
+		UPDATE USER_INFO SET EMAIL_CODE = #{email_code} WHERE USER_NAME = #{user_name} AND EMAIL = #{email}
+	</update>
+	
+	<select id="getUserId" parameterType="UserDTO" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME FROM USER_INFO WHERE USER_NAME = #{user_name} AND EMAIL = #{email} AND EMAIL_CODE = #{email_code} 
+	</select>
+	
+	<update id="updatePassword" parameterType="UserDTO">
+		UPDATE USER_INFO SET PASSWORD = PASSWORD(#{password}) WHERE USER_NO = #{user_no}
+	</update>
 </mapper>

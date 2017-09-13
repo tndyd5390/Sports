@@ -6,8 +6,8 @@ public class UserDTO {
 	private String password;
 	private String user_name;
 	private String email;
-	private String email_first;
 	private String email_ck;
+	private String email_code;
 	private String tel;
 	private String postcode;
 	private String address1;
@@ -78,12 +78,6 @@ public class UserDTO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public String getEmail_first() {
-		return email_first;
-	}
-	public void setEmail_first(String email_first) {
-		this.email_first = email_first;
-	}
 	public String getEmail_ck() {
 		return email_ck;
 	}
@@ -149,5 +143,11 @@ public class UserDTO {
 	}
 	public void setAddress2(String address2) {
 		this.address2 = address2;
+	}
+	public String getEmail_code() {
+		return email_code;
+	}
+	public void setEmail_code(String email_code) {
+		this.email_code = email_code;
 	}
 }

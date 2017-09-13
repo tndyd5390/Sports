@@ -14,4 +14,10 @@ public interface UserMapper {
 
 	UserDTO getLoginInfo(UserDTO uDTO) throws Exception;
 
+	void updateEmailCode(UserDTO uDTO) throws Exception;
+
+	UserDTO getUserId(UserDTO uDTO) throws Exception;
+
+	void updatePassword(UserDTO uDTO) throws Exception;
+
 }

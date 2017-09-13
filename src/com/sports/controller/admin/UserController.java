@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sports.dto.UserDTO;
 import com.sports.service.IUserService;
 import com.sports.util.CmmUtil;
+import com.sports.util.MailUtil;
 
 @Controller
 public class UserController {
@@ -160,11 +161,109 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="certify")
-	public void certify(@RequestParam("email") String email, @RequestParam("name") String name) throws Exception{
+	public void certify(@RequestParam("email") String email, @RequestParam("name") String name, HttpServletResponse resp) throws Exception{
 		log.info(this.getClass() + " certifyEmail Start!!");
 		
+		log.info("email : " +email);
+		log.info("name : " +name);
 		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setEmail(email);
+		uDTO.setUser_name(name);
+		userService.updateEmailCode(uDTO);
 		
+		MailUtil.sendMail(email, "모두의 스포츠 인증번호입니다.","인증번호는 " +uDTO.getEmail_code()+"입니다.");
+		resp.getWriter().print("success");
+		resp.getWriter().flush();
+		resp.getWriter().close();
+		
+		uDTO = null;
 		log.info(this.getClass() + " certifyEmail End!!");
+	}
+	@RequestMapping(value="idSearch")
+	public String idSearch(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " idSearch Start!!");
+		
+		String name = CmmUtil.nvl(req.getParameter("name"));
+		String email = CmmUtil.nvl(req.getParameter("email"));
+		String emailCode = CmmUtil.nvl(req.getParameter("code"));
+		
+		log.info("name : "+name);
+		log.info("email : "+email);
+		log.info("emailCode : "+emailCode);
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_name(name);
+		uDTO.setEmail(email);;
+		uDTO.setEmail_code(emailCode);
+		
+		uDTO = userService.getUserId(uDTO);
+		
+		if(uDTO==null){
+			String msg = "회원정보가 일피하지 않습니다.";
+			String url = "idPwSearch.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			log.info(this.getClass() + " idSearch End!!");
+			return "alert/alert";
+		}else{
+			model.addAttribute("uDTO", uDTO);
+			uDTO = null;
+			log.info(this.getClass() + " idSearch End!!");
+			return "idSearch";
+		}
+	}
+	
+	@RequestMapping(value="pwSearch")
+	public String pwSearch(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " pwSearch Start!!");
+		
+		String userId = CmmUtil.nvl(req.getParameter("id"));
+		String userName = CmmUtil.nvl(req.getParameter("name"));
+		String email = CmmUtil.nvl(req.getParameter("email"));
+		String emailCode = CmmUtil.nvl(req.getParameter("code"));
+		
+		log.info(this.getClass() + " userId : "+ userId);
+		log.info(this.getClass() + " userName : "+ userName);
+		log.info(this.getClass() + " email : "+ email);
+
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(userId);
+		uDTO.setUser_name(userName);
+		uDTO.setEmail(email);
+		uDTO.setEmail_code(emailCode);
+		
+		uDTO = userService.getUserId(uDTO);
+		
+		if(uDTO==null){
+			String msg = "회원정보가 일치하지 않습니다.";
+			String url = "idPwSearch.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			log.info(this.getClass() + " idSearch End!!");
+			return "alert/alert";
+		}else{
+			model.addAttribute("uDTO", uDTO);
+			uDTO = null;
+			log.info(this.getClass() + " idSearch End!!");
+			return "pwSearch";
+		}
+	}
+	
+	@RequestMapping(value="pwSearchProc")
+	String pwSearchProc(HttpServletRequest req, Model model) throws Exception{
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		String password = CmmUtil.nvl(req.getParameter("password"));
+		
+		UserDTO uDTO = new UserDTO();
+		
+		uDTO.setUser_no(userNo);
+		uDTO.setPassword(password);
+		
+		userService.updatePassword(uDTO);
+		
+		model.addAttribute("msg", "변경이 완료되었습니다.");
+		model.addAttribute("url", "main.do");
+		
+		return "alert/alert";
 	}
 }
