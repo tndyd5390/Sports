@@ -22,10 +22,11 @@ public class UserController {
 	@Resource(name="UserService")
 	private IUserService userService;
 	
-	@RequestMapping(value="mainTest")
-	public String mainTest() throws Exception{
-		System.out.println("Ž");
+	@RequestMapping(value="main")
+	public String main() throws Exception{
+		log.info(this.getClass() + "mainPage Start!!");
 		
+		log.info(this.getClass() + "mainPage End!!");
 		return "jsp/main";
 	}
 	@RequestMapping(value="login")
@@ -37,20 +38,47 @@ public class UserController {
 		return "login";
 	}
 	@RequestMapping(value="loginProc")
-	public String loginProc(HttpServletRequest req, HttpSession session)throws Exception{
+	public String loginProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + " loginProc Start!!");
-		
 		String id = CmmUtil.nvl(req.getParameter("id"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
+		
+		log.info("id : " + id);
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		uDTO.setPassword(password);
-		int check = userService.getLoginInfo(uDTO);
+		uDTO = userService.getLoginInfo(uDTO);
 		
-		log.info(this.getClass() + " loginProc End!!");
-		return "redirect:mainTest.do";
+		if(uDTO ==null){
+			String msg = "아이디, 비밀번호를 확인해주세요.";
+			String url = "login.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "alert/alert";
+		}else{
+			session.setAttribute("ss_user_no", uDTO.getUser_no());
+			session.setAttribute("ss_user_id", uDTO.getUser_id());
+			session.setAttribute("ss_user_name", uDTO.getUser_name());
+			uDTO = null;
+			log.info(this.getClass() + " loginProc End!!");
+			return "redirect:main.do";
+		}
 	}
-	
+	@RequestMapping(value="logout")
+	public String logout(HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + " logout Start!!");
+		
+		log.info("id : "+session.getAttribute("ss_user_id"));
+		
+		session.setAttribute("ss_user_no", "");
+		session.setAttribute("ss_user_name", "");
+		session.setAttribute("ss_user_id", "");
+		session.invalidate();
+		model.addAttribute("msg", "로그아웃되었습니다");
+		model.addAttribute("url", "main.do");
+		log.info(this.getClass() + " logout End!!");
+		return "alert/alert";
+	}
 	
 	@RequestMapping(value="userReg")
 	public String userReg(HttpSession session) throws Exception{
@@ -59,11 +87,12 @@ public class UserController {
 		log.info(this.getClass() + "userReg End!!");
 		return "userReg";
 	}
+	
 	@RequestMapping(value="idCheck")
 	public void idCheck(@RequestParam(value="id") String id, HttpServletResponse resp) throws Exception{
 		log.info(this.getClass() + " idCheck Start!!");
 		
-		System.out.println(id);
+		log.info("id : "+id);
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_id(id);
 		int check = userService.getIdCheck(uDTO);
@@ -77,7 +106,6 @@ public class UserController {
 		
 		log.info(this.getClass() + " idCheck End!!");
 	}
-	
 	
 	@RequestMapping(value="userRegProc")
 	public String userRegProc(HttpServletRequest req, HttpSession session, Model model) throws Exception{
@@ -118,6 +146,25 @@ public class UserController {
 		uDTO = null;
 		
 		log.info(this.getClass() + "userRegProc End!!");
-		return "redirect:mainTest.do";
+		return "redirect:main.do";
+	}
+	
+	@RequestMapping(value="idPwSearch")
+	public String idPwSearch() throws Exception{
+		log.info(this.getClass() + " idPwSearch Start!!");
+		
+		
+		
+		log.info(this.getClass() + " idPwSearch End!!");
+		return "idPwSearch";
+	}
+	
+	@RequestMapping(value="certify")
+	public void certify(@RequestParam("email") String email, @RequestParam("name") String name) throws Exception{
+		log.info(this.getClass() + " certifyEmail Start!!");
+		
+		
+		
+		log.info(this.getClass() + " certifyEmail End!!");
 	}
 }

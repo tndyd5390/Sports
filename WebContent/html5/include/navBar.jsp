@@ -1,13 +1,24 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
- 
+ <%@ page import = "com.sports.util.CmmUtil" %>
+ <%
+ 	String ss_user_no =  CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+ 	String ss_user_id =  CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
+ 	String ss_user_name =  CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
+ %>
     <nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
 
 	<div class="profile">
+	<%if(ss_user_no.equals("")){%>
 		<p><img src="html5/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
 		<button class="c-menu__close"><img src="html5/common/images/menu/cancel.png" alt="닫기"></button>
-		<div class="login_wrap"><a href="#">로그인</a><a href="#">회원가입</a></div>
+		<div class="login_wrap"><a href="login.do">로그인</a><a href="userReg.do">회원가입</a></div>
 	</div>
+	<%}else{ %>
+		<p><img src="html5/common/images/menu/user.png" class="photo"><%=ss_user_name %>님 안녕하세요.</p>
+		<button class="c-menu__close"><img src="html5/common/images/menu/cancel.png" alt="닫기"></button>
+		<div class="logout_wrap"><a href="logout.do">로그아웃</a></div>
+	<%} %>
 	<ul class="menu_list">
 		<li><a href="#">주문관리</a></li>
 		<li>

@@ -36,4 +36,8 @@
 		(SELECT * FROM (SELECT USER_NO FROM USER_INFO WHERE USER_ID=#{user_id}) AS s) WHERE USER_ID = #{user_id}
 	</update>
 	
+	<select id="getLoginInfo" parameterType="UserDTO" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
+	</select>
+	
 </mapper>

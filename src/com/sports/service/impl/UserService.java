@@ -22,5 +22,9 @@ public class UserService implements IUserService{
 		userMapper.insertUserInfo(uDTO);
 		userMapper.updateRegUser(uDTO);
 	}
+	@Override
+	public UserDTO getLoginInfo(UserDTO uDTO) throws Exception {
+		return userMapper.getLoginInfo(uDTO);
+	}
 
 }

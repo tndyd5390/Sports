@@ -5,16 +5,6 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-<style>
-.width80 {
-	width: 80%;
-}
-
-.width100 {
-	width: 100%;
-	font-size: 16px;
-}
-</style>
 
 <script>
 function doSubmit(f){

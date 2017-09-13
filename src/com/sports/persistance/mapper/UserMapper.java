@@ -12,4 +12,6 @@ public interface UserMapper {
 
 	void updateRegUser(UserDTO uDTO) throws Exception;
 
+	UserDTO getLoginInfo(UserDTO uDTO) throws Exception;
+
 }
