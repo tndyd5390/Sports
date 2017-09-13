@@ -25,11 +25,6 @@ public class UserService implements IUserService{
 		userMapper.updateRegUser(uDTO);
 	}
 	@Override
-<<<<<<< HEAD
-	public int getLoginInfo(UserDTO uDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
-=======
 	public UserDTO getLoginInfo(UserDTO uDTO) throws Exception {
 		return userMapper.getLoginInfo(uDTO);
 	}
@@ -56,7 +51,5 @@ public class UserService implements IUserService{
 	@Override
 	public void updatePassword(UserDTO uDTO) throws Exception {
 		userMapper.updatePassword(uDTO);
->>>>>>> refs/remotes/origin/moon
 	}
-
 }
