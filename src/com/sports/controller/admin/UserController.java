@@ -254,6 +254,8 @@ public class UserController {
 		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
 		
+		log.info(this.getClass() + " userNo : "+userNo);
+		
 		UserDTO uDTO = new UserDTO();
 		
 		uDTO.setUser_no(userNo);
