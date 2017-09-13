@@ -5,16 +5,6 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-<style>
-.width80 {
-	width: 80%;
-}
-
-.width100 {
-	width: 100%;
-	font-size: 16px;
-}
-</style>
 
 <script>
 function doSubmit(f){
@@ -24,7 +14,7 @@ function doSubmit(f){
 		alert("아이디를 입력해주세요.");
 		id.focus();
 		return false;
-	}else if(password.val()=="")){
+	}else if(password.val()==""){
 		alert("비밀번호를 입력해주세요.");
 		password.focus();
 		return false;
@@ -46,7 +36,7 @@ function doSubmit(f){
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 

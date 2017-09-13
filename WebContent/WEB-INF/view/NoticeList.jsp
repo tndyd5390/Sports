@@ -187,7 +187,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		<header class="header">
 			<div class="wrap">
 				<div class="left_menu"><img src="/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
-				<div class="logo"><a href="/main.do"><h2 class="title">모두의 스포츠</h2></a></div>
+				<div class="logo"><a href="main.do"><h2 class="title">모두의 스포츠</h2></a></div>
 			</div>
 			<div class="page_title"><p>공지사항</p></div>
 		</header>
