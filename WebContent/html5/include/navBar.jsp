@@ -31,34 +31,28 @@
 		<li>
 			<a href="#">매출 분석 정보</a>
 			<ul class="col-3">
-<<<<<<< HEAD
-				<li><a href="/admin/sale/list.do"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
-=======
 				<li><a href="#"><img src="html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
 				<li><a href="#"><img src="html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
 				<li><a href="#"><img src="html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
->>>>>>> refs/remotes/origin/moon
 			</ul>
 		</li>
 		<li>
 			<a href="#">스포츠 용품 리스트 관리</a>
 			<ul class="col-2 more">
-				<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_03.png" class="icon">합기도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_04.png" class="icon">검도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_05.png" class="icon">복싱, MMA</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_06.png" class="icon">스포츠의류</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_07.png" class="icon">스포츠용품(구기)</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_08.png" class="icon">네트&amp;골대</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_09.png" class="icon">휘트니스</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_10.png" class="icon">학교체육용품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">펌프</a></li>
-        <li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_03.png" class="icon">합기도</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_04.png" class="icon">검도</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_05.png" class="icon">복싱, MMA</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_06.png" class="icon">스포츠의류</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_07.png" class="icon">스포츠용품(구기)</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_08.png" class="icon">네트&amp;골대</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_09.png" class="icon">휘트니스</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_10.png" class="icon">학교체육용품</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
+				<li><a href="#"><img src="html5/common/images/menu/ic_13.png" class="icon">펌프</a></li>
+        <li><a href="#"><img src="html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
 			</ul>
 		</li>
 		<li>
