@@ -8,4 +8,6 @@ public interface IUserService {
 
 	public void insertUserInfo(UserDTO uDTO) throws Exception;
 
+	public int getLoginInfo(UserDTO uDTO) throws Exception;
+
 }

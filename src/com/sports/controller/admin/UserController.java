@@ -28,6 +28,28 @@ public class UserController {
 		
 		return "jsp/main";
 	}
+	@RequestMapping(value="login")
+	public String login() throws Exception{
+		log.info(this.getClass() + " loginPage Start!!");
+		
+		
+		log.info(this.getClass() + " loginPage End!!");
+		return "login";
+	}
+	@RequestMapping(value="loginProc")
+	public String loginProc(HttpServletRequest req, HttpSession session)throws Exception{
+		log.info(this.getClass() + " loginProc Start!!");
+		
+		String id = CmmUtil.nvl(req.getParameter("id"));
+		String password = CmmUtil.nvl(req.getParameter("password"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_id(id);
+		uDTO.setPassword(password);
+		int check = userService.getLoginInfo(uDTO);
+		
+		log.info(this.getClass() + " loginProc End!!");
+		return "redirect:mainTest.do";
+	}
 	
 	
 	@RequestMapping(value="userReg")
@@ -35,7 +57,7 @@ public class UserController {
 		log.info(this.getClass() + "userReg Start!!");
 		
 		log.info(this.getClass() + "userReg End!!");
-		return "admin/userReg";
+		return "userReg";
 	}
 	@RequestMapping(value="idCheck")
 	public void idCheck(@RequestParam(value="id") String id, HttpServletResponse resp) throws Exception{
