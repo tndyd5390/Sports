@@ -31,7 +31,7 @@
 		<li>
 			<a href="#">매출 분석 정보</a>
 			<ul class="col-3">
-				<li><a href="/admin/sale/list.do"><img src="html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
+				<li><a href="#"><img src="html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
 				<li><a href="#"><img src="html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
 				<li><a href="#"><img src="html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
 			</ul>
