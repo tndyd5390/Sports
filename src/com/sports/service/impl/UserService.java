@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.sports.dto.UserDTO;
 import com.sports.persistance.mapper.UserMapper;
 import com.sports.service.IUserService;
+import com.sports.util.MailUtil;
 
 @Service("UserService")
 public class UserService implements IUserService{
@@ -23,6 +24,9 @@ public class UserService implements IUserService{
 	public void insertUserInfo(UserDTO uDTO) throws Exception {
 		userMapper.insertUserInfo(uDTO);
 		userMapper.updateRegUser(uDTO);
+		updateEmailCode(uDTO);
+		uDTO = userMapper.getUserId(uDTO);
+		MailUtil.sendMail(uDTO.getEmail(), "모두의 스포츠 이메일 인증", "http://localhost:8181/emailCheckProc.do?uNo="+uDTO.getUser_no()+"&code="+uDTO.getEmail_code());
 	}
 	@Override
 	public UserDTO getLoginInfo(UserDTO uDTO) throws Exception {
@@ -51,5 +55,9 @@ public class UserService implements IUserService{
 	@Override
 	public void updatePassword(UserDTO uDTO) throws Exception {
 		userMapper.updatePassword(uDTO);
+	}
+	@Override
+	public void updateEmailCheck(UserDTO uDTO) throws Exception {
+		userMapper.updateEmailCheck(uDTO);
 	}
 }
