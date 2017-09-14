@@ -64,10 +64,10 @@ function doSubmit(f){
 						<hr>
 						<li>
 							<div class="col-xs-6 text-center">
-								<a href="">아이디 찾기</a>
+								<a href="idPwSearch.do">아이디 찾기</a>
 							</div>
 							<div class="col-xs-6 text-center">
-								<a href="">비밀번호 찾기</a>
+								<a href="idPwSearch.do">비밀번호 찾기</a>
 							</div>
 						</li>
 					</ul>
