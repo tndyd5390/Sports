@@ -8,6 +8,16 @@
 <head>
 <%@include file="/html5/include/head.jsp"%>
 <style>
+.table-style{
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  border: 1px solid #bcbcbc;
+	
+}
+
+
 </style>
 </head>
 <body>
@@ -36,6 +46,26 @@
 						<option value="아이디">아이디</option>
 					</select> <input type="text">
 					<button class="blue btn">검색</button>
+				</div>
+				<div class="table-style">
+					<table style="width:80%; height:300px;">
+						<thead>
+							<tr>
+								<td>씨발</td>
+								<td>씨발</td>
+								<td>씨발</td>
+								<td>씨발</td>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td> 씨발년아</td>
+								<td> 씨발년아</td>
+								<td> 씨발년아</td>
+								<td> 씨발년아</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
 			</div>
 		</div>
