@@ -27,7 +27,17 @@ public class BasketController {
 		
 		log.info(this.getClass().getName() + "userBasket END!!");
 		
-		return "";
+		return "basket/userBasket";
+	}
+	@RequestMapping(value="qnaList")
+	public String qnaList(HttpServletRequest req,HttpServletResponse resp,Model model)throws Exception{
+		log.info(this.getClass().getName() + "userBasket Start!!");
+		
+		
+		
+		log.info(this.getClass().getName() + "userBasket END!!");
+		
+		return "jsp/qna_list";
 	}
 	
 }
