@@ -20,4 +20,6 @@ public interface UserMapper {
 
 	void updatePassword(UserDTO uDTO) throws Exception;
 
+	void updateEmailCheck(UserDTO uDTO) throws Exception;
+
 }

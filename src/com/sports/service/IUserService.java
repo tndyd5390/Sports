@@ -17,4 +17,6 @@ public interface IUserService {
 
 	public void updatePassword(UserDTO uDTO) throws Exception;
 
+	public void updateEmailCheck(UserDTO uDTO) throws Exception;
+
 }

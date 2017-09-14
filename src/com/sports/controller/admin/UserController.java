@@ -41,6 +41,8 @@ public class UserController {
 	@RequestMapping(value="loginProc")
 	public String loginProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + " loginProc Start!!");
+		String msg = "";
+		String url = "";
 		String id = CmmUtil.nvl(req.getParameter("id"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
 		
@@ -51,8 +53,14 @@ public class UserController {
 		uDTO = userService.getLoginInfo(uDTO);
 		
 		if(uDTO ==null){
-			String msg = "아이디, 비밀번호를 확인해주세요.";
-			String url = "login.do";
+			msg = "아이디, 비밀번호를 확인해주세요.";
+			url = "login.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "alert/alert";
+		}else if(uDTO.getEmail_ck().equals("N")){
+			msg = "이메일 인증을 완료해주세요";
+			url = "main.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 			return "alert/alert";
@@ -146,10 +154,32 @@ public class UserController {
 		
 		uDTO = null;
 		
+		model.addAttribute("msg", "이메일 인증 후 이용 가능합니다.");
+		model.addAttribute("url", "main.do");
+		
 		log.info(this.getClass() + "userRegProc End!!");
-		return "redirect:main.do";
+		return "alert/alert";
 	}
-	
+	@RequestMapping(value="emailCheckProc")
+	String emailCheckProc(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " emailCheckProc Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		String emailCode = CmmUtil.nvl(req.getParameter("code"));
+		log.info("userNo : " +userNo);
+		log.info("emailCode : " +emailCode);
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO.setEmail_code(emailCode);
+		userService.updateEmailCheck(uDTO);
+		
+		model.addAttribute("msg", "인증성공");
+		model.addAttribute("url", "main.do");
+		uDTO = null;
+		log.info(this.getClass() + " emailCheckProc End!!");
+		return "alert/alert";
+	}
+
 	@RequestMapping(value="idPwSearch")
 	public String idPwSearch() throws Exception{
 		log.info(this.getClass() + " idPwSearch Start!!");
@@ -193,7 +223,7 @@ public class UserController {
 		log.info("emailCode : "+emailCode);
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_name(name);
-		uDTO.setEmail(email);;
+		uDTO.setEmail(email);
 		uDTO.setEmail_code(emailCode);
 		
 		uDTO = userService.getUserId(uDTO);

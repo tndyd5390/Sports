@@ -38,7 +38,7 @@
 	</update>
 	
 	<select id="getLoginInfo" parameterType="UserDTO" resultType="UserDTO">
-		SELECT USER_NO, USER_ID, USER_NAME FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
 	</select>
 	
 	<update id="updateEmailCode" parameterType="UserDTO">
@@ -46,10 +46,15 @@
 	</update>
 	
 	<select id="getUserId" parameterType="UserDTO" resultType="UserDTO">
-		SELECT USER_NO, USER_ID, USER_NAME FROM USER_INFO WHERE USER_NAME = #{user_name} AND EMAIL = #{email} AND EMAIL_CODE = #{email_code} 
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL , EMAIL_CODE FROM USER_INFO WHERE USER_NAME = #{user_name} AND EMAIL = #{email} AND EMAIL_CODE = #{email_code} 
 	</select>
 	
 	<update id="updatePassword" parameterType="UserDTO">
 		UPDATE USER_INFO SET PASSWORD = PASSWORD(#{password}) WHERE USER_NO = #{user_no}
 	</update>
+	
+	<update id="updateEmailCheck" parameterType="UserDTO">
+		UPDATE USER_INFO SET EMAIL_CK = 'Y' WHERE USER_NO = #{user_no} AND EMAIL_CODE = #{email_code}
+	</update>
+	
 </mapper>
