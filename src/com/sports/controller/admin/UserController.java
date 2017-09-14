@@ -298,4 +298,14 @@ public class UserController {
 		
 		return "alert/alert";
 	}
+	
+	@RequestMapping(value="userList")
+	String userList(Model model) throws Exception{
+		log.info(this.getClass() + " userList Start!!");
+		
+		
+		
+		log.info(this.getClass() + " userList End!!");
+		return "user/userList";
+	}
 }
