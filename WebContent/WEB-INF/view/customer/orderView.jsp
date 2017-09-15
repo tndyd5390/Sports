@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 이 주석을 본다면 개발자겠지???우리 모두 화이팅 합시다ㅠㅠ -->
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
@@ -9,7 +10,7 @@
 		var f = document.getElementById('qaForm');
 		var secretStatus;
 		if(f.secret.value == 'y'){
-			secretStatus = '비밀글로 등록됩니다.';
+			secretStatus = '비밀글로 등록됩니다.';  
 		}else{
 			secretStatus = '공개글로 등록됩니다.';
 		}
@@ -39,7 +40,7 @@ hr {
 	margin-bottom: 0px;
 }
 
-.register_list li .orderView {
+.register_list li .psyOrderView {
 	line-height: 25px;
 	height: 10px;
 	padding-bottom: 5px;
@@ -84,6 +85,23 @@ div.psyMadeByDivTd {
 	position: relative;
 	padding-bottom: 5px;
 }
+
+a.psyATagButton {
+	width: 45%; 
+	float: right; 
+	height:40px; 
+}
+h5.psyBlue_text{
+	color: #1777cb;
+}
+ul > li > input[type=checkbox]{
+	width: 5%;
+	margin-bottom: 3px;
+}
+
+ul > li > textarea.psyTermsTextarea{
+	margin-bottom: -5px;
+}
 </style>	
 </head>
 <body>
@@ -113,29 +131,29 @@ div.psyMadeByDivTd {
 	        	<hr>
 				<ul class="register_list" style="padding: 7px;">
 		            <li class="psyLi">
-		              <p class="orderView blue_text">수령인</p>
+		              <p class="psyOrderView blue_text">수령인</p>
 		              <input type="text" name="title">
 		            </li>
 		            <li class="psyLi">
-		            <p class="orderView blue_text">연락처</p>
+		            <p class="psyOrderView blue_text">연락처</p>
 						<input type="text" name="title">
 					</li>
 		           <li class="psyLi">
-		            <p class="orderView blue_text">주소</p>
-						<input type="text" name="title" style="width: 50%;" placeholder="우편번호"><a href="#" class="btn btn-info" style="width: 40%; float: right; height:40px; margin-right: 10px;">우편 번호 검색</a>
+		            <p class="psyOrderView blue_text">주소</p>
+						<input type="text" name="title" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" >우편 번호 검색</a>
 					</li>
 					<li class="psyLi">
-						<input type="text" name="title" placeholder="주소">
+						<input type="text" name="title" placeholder="주소" readonly="readonly">
 					</li>
 					<li class="psyLi">
 						<input type="text" name="title" placeholder="상세 주소">
 					</li>
 					<li class="psyLi">
-		            <p class="orderView blue_text">배송 메세지</p>
+		            <p class="psyOrderView blue_text">배송 메세지</p>
 						<textarea placeholder="EX) 부재시 경비실에 맏겨주세요"></textarea>
 					</li>
 	          </ul>
-	          <h5>&nbsp;&nbsp;주문 상품</h5>
+	          <h5 class="psyBlue_text">&nbsp;&nbsp;주문 상품</h5>
 	          <hr>
 	          <ul class="register_list" style="padding: 7px;">
 	          	<li class="psyLi">
@@ -161,8 +179,23 @@ div.psyMadeByDivTd {
 	          		</div>
 	          	</li>
 	          </ul>
+	          <hr>
 	          <ul class="register_list" style="margin-bottom: 0px; padding: 7px;">
-	          	
+	          	<li>
+					<input type="checkbox" name="#"> 전체 동의(만 14세 이상 구매 가능)
+				</li>
+				<li class="psyLi">
+					<textarea class="psyTermsTextarea" readonly="readonly">약관 어쩌구 저쩌구</textarea>
+				</li>
+				<li>
+					<input type="checkbox" name="#"> 결제 약관 동의(필수)
+				</li>
+				<li class="psyLi">
+					<textarea class="psyTermsTextarea" readonly="readonly">약관 어쩌구 저쩌구</textarea>
+				</li>
+				<li>
+					<input type="checkbox" name="#"> 구매 약관 동의(필수)
+				</li>
 	          </ul>
 			</form>
         </div>
