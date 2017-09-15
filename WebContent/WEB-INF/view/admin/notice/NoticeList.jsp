@@ -30,13 +30,13 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 
 <title>모두의 스포츠</title>
 <!-- Styles : CSS & SASS Sorcemap -->
-<link rel="stylesheet" href="/common/css/style.css">
+<link rel="stylesheet" href="/html5/common/css/style.css">
 <!-- JavaScirpt Sorcemap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="/common/js/jquery-ui.js"></script>
-<script src="/common/js/modernizr.custom.js"></script>
+<script src="/html5/common/js/jquery-ui.js"></script>
+<script src="/html5/common/js/modernizr.custom.js"></script>
 <!--[if lte IE 9]>
-<script src="/common/js/placeholders.min.js"></script>
+<script src="/html5/common/js/placeholders.min.js"></script>
 <![endif]-->
 <!--[if lt IE 9]>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -77,7 +77,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		        }
 		        
 		        if (nw == 'Y'){ 
-		            contents += "<img src='/common/images/ic_new.png' alt='new' class='ic_new'>";
+		            contents += "<img src='/html5/common/images/ic_new.png' alt='new' class='ic_new'>";
 		         } 
 		            
 		        	contents += "</p>";
@@ -142,7 +142,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 													        }
 													        
 													        if (nw == 'Y'){ 
-													            contents += "<img src='/common/images/ic_new.png' alt='new' class='ic_new'>";
+													            contents += "<img src='/html5/common/images/ic_new.png' alt='new' class='ic_new'>";
 													         } 
 													            
 													        	contents += "</p>";
@@ -304,7 +304,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
       
     	<header class="header">
 			<div class="wrap">
-				<div class="left_menu"><img src="/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
+				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
 				<div class="logo"><a href="/main.do"><h2 class="title">모두의 스포츠</h2></a></div>
 			</div>
 			<div class="page_title" style=" float: left; width: 33%;"><span class="sub_text" onclick="javascript:deleteConfirm();" id="delete">삭제하기</span>&nbsp;</div>
@@ -314,8 +314,8 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 
     	<nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
 			<div class="profile">
-				<p><img src="/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
-				<button class="c-menu__close"><img src="/common/images/menu/cancel.png" alt="닫기"></button>
+				<p><img src="/html5/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
+				<button class="c-menu__close"><img src="/html5/common/images/menu/cancel.png" alt="닫기"></button>
 				<div class="login_wrap"><a href="#">로그인</a><a href="#">회원가입</a></div>
 			</div>
 			<ul class="menu_list">
@@ -330,28 +330,28 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 				<li>
 					<a href="#">매출 분석 정보</a>
 					<ul class="col-3">
-						<li><a href="#"><img src="/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
-						<li><a href="#"><img src="/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
-						<li><a href="#"><img src="/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
 					</ul>
 				</li>
 				<li>
 					<a href="#">스포츠 용품 리스트 관리</a>
 					<ul class="col-2 more">
-						<li><a href="#"><img src="/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_02.png" class="icon">태권도</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_03.png" class="icon">합기도</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_04.png" class="icon">검도</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_05.png" class="icon">복싱, MMA</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_06.png" class="icon">스포츠의류</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_07.png" class="icon">스포츠용품(구기)</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_08.png" class="icon">네트&amp;골대</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_09.png" class="icon">휘트니스</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_10.png" class="icon">학교체육용품</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
-						<li><a href="#"><img src="/common/images/menu/ic_13.png" class="icon">펌프</a></li>
-		        		<li><a href="#"><img src="/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_03.png" class="icon">합기도</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_04.png" class="icon">검도</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_05.png" class="icon">복싱, MMA</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_06.png" class="icon">스포츠의류</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_07.png" class="icon">스포츠용품(구기)</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_08.png" class="icon">네트&amp;골대</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_09.png" class="icon">휘트니스</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_10.png" class="icon">학교체육용품</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
+						<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">펌프</a></li>
+		        		<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
 					</ul>
 				</li>
 				<li>
@@ -388,7 +388,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
                 			<%} %>
                 			
                 			<% if (CmmUtil.nvl(nDTO.getNew_yn()).equals("Y")) {%>
-                				<img src="/common/images/ic_new.png" alt="new" class="ic_new">
+                				<img src="/html5/common/images/ic_new.png" alt="new" class="ic_new">
                 			<%} %>
                 			
                 			</p>
@@ -414,7 +414,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		</div>
 
 	    <footer class="footer">
-		    <a href="#"><img src="/common/images/ic_kakao.png" alt="카카오톡" class="kakao"></a>
+		    <a href="#"><img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao"></a>
 		    <div class="company_info">
 				<p>대표이사 : 장명훈 ㅣ 대표번호 : 010-9057-6156</p>
 				<p>사업자등록번호 : 567-36-00142</p>
@@ -429,8 +429,8 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 	</section>
 	
 	<div id="c-mask" class="c-mask"></div>
-	<script src="/common/js/classie.js"></script>
-	<script src="/common/js/common.js"></script>
+	<script src="/html5/common/js/classie.js"></script>
+	<script src="/html5/common/js/html5/common.js"></script>
 	
 </body>
 

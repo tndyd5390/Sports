@@ -41,6 +41,12 @@ public class NoticeController {
 		nList = noticeService.getNoticeList();
 		
 		
+		for(NoticeDTO DTO : nList){
+			System.out.println(DTO.getNotice_no());
+			System.out.println(DTO.getTitle());
+			System.out.println(DTO.getContents());
+		}
+		
 		if(nList == null){
 			nList = new ArrayList<NoticeDTO>();
 		}
@@ -68,7 +74,12 @@ public class NoticeController {
 		nDTO.setUser_name(AES256Util.strDecode(CmmUtil.nvl(nDTO.getUser_name())));//암호화된 유저이름 풀기
 		
 		}
-
+		
+		
+			
+			
+		
+		
 		model.addAttribute("nList",nList);
 		
 		nList = null;
@@ -94,7 +105,7 @@ public class NoticeController {
 		
 		for(NoticeDTO nDT : viewMore_list){//new 붙히는 시간 계산해서 nList의 title에 new 붙여주기
 			String reg_dt = CmmUtil.nvl(nDT.getReg_dt());
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date to = transFormat.parse(reg_dt);
 
 			long now = System.currentTimeMillis();
