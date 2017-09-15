@@ -22,7 +22,7 @@ function userList(){
 				contents += "<ul class='col-5'>";
 				contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
 				contents += "<li><p>"+value.user_no+"</p></li>";
-				contents += "<li><p><a href='#'>"+value.user_id+"</a></p></li>";
+				contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
 				contents += "<li><p>"+value.user_name+"</p></li>";
 				contents += "<li><p>"+value.auth+"</p></li>";
 				contents += "</ul>";
@@ -49,7 +49,7 @@ function doSearch(){
 						contents += "<ul class='col-5'>";
 						contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
 						contents += "<li><p>"+value.user_no+"</p></li>";
-						contents += "<li><p><a href='#'>"+value.user_id+"</a></p></li>";
+						contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
 						contents += "<li><p>"+value.user_name+"</p></li>";
 						contents += "<li><p>"+value.auth+"</p></li>";
 						contents += "</ul>";

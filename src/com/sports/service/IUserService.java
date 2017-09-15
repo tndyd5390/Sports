@@ -25,4 +25,6 @@ public interface IUserService {
 
 	public List<UserDTO> getSearchUser(UserDTO uDTO) throws Exception;
 
+	public UserDTO getUserDetail(UserDTO uDTO) throws Exception;
+
 }

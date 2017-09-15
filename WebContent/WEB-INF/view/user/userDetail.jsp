@@ -1,12 +1,24 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sports.dto.UserDTO" %>
+<%@ page import="com.sports.util.CmmUtil" %>
+<%
+	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-
 <script>
+	function goUpdate(uNo){
+		location.href = "userDetailUpdate.do?uNo="+uNo;
+	}
+	function goBack(){
+		location.href = "userList.do";
+	}
+	function doDelete(uNo){
+		location.href = "userDelete.do?uNo="+uNo;
+	}
 	
 </script>
 <style>
@@ -34,47 +46,57 @@
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="user_title">
-					<p><b>장총명</b>님의 회원정보</p>
+					<p><b><%=CmmUtil.nvl(uDTO.getUser_name())%></b>님의 회원정보</p>
+					<input type="hidden" id="uNo" value="<%=CmmUtil.nvl(uDTO.getUser_no()) %>">
 				</div>
 				<div>
 					<ul class="menulist">
 						<li>
 							<ul class="user_detail">
 								<li><p>ID</p></li>
-								<li><p>아이디들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getUser_id())%></p></li>
 							</ul>
 							<ul class="user_detail">
 								<li><p>이름</p></li>
-								<li><p>이름들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getUser_name())%></p></li>
 							</ul>
 							<ul class="user_detail">
 								<li><p>이메일</p></li>
-								<li><p>이메일들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getEmail())%></p></li>
 							</ul>
 							<ul class="user_detail">
 								<li><p>연락처</p></li>
-								<li><p>연락처들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getTel())%></p></li>
 							</ul>
-							<ul class="user_detail">
+							<ul class="add">
 								<li><p>주소</p></li>
-								<li><p>주소들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getAddress1()) %></p></li>
 							</ul>
 							<ul class="user_detail">
 								<li><p>세부주소</p></li>
-								<li><p>세부주소들어감</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getAddress2())%></p></li>
+							</ul>
+							<ul class="user_detail">
+								<li><p>가입일</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getReg_dt())%></p></li>
+							</ul>
+							<ul class="user_detail">
+								<li><p>권한</p></li>
+								<li><p><%=CmmUtil.nvl(uDTO.getAuth())%></p></li>
 							</ul>
 						</li>
 					</ul>
 				</div>
 				<div class="btn-groub">
-					<input type="submit" class="col-3 blue-btn"
+					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="수정"> <input type="button" class="col-3 blue-btn"
+						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(uDTO.getUser_no())%>)"> 
+					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						onclick="" value="탈퇴">
-						<input type="button" class="col-3 glay-btn"
+						value="탈퇴" onclick="doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
+					<input type="button" class="col-3 glay-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						onclick="" value="목록">
+						value="목록" onclick="goBack()">
 				</div>
 			</div>
 		</div>

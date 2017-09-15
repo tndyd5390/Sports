@@ -49,10 +49,9 @@
 	font-size: 0;
 	text-align: left;
 }
-.menulist>li ul li {
+-.menulist>li ul li {
 	display: inline-block;
 }
-
 .menulist>li ul.user_detail li {
 	text-align: center;
 	height: 36px;
@@ -88,7 +87,43 @@
 	line-height: 36px;
 	display: inline-block;
 }
+-.menulist>li ul li {
+	display: inline-block;
+}
+.menulist>li ul.add li {
+	text-align: center;
+	height: 72px;
+	border-bottom: 1px solid silver;
+	border-right: 1px solid silver;
+}
 
+.menulist>li ul.add li:nth-child(1) {
+	text-align: center;
+	width: 20%;
+	color: #ffffff;
+	height: 72px;
+	background-color: #1777cb;
+}
+
+.menulist>li ul.add li:nth-child(2) {
+	text-align: left;
+	width: 80%;
+	height: 72px;
+	color: black;
+	background-color: #fffff;
+}
+.menulist>li ul.add li:nth-child(1) p {
+	font-size: 15px;
+	line-height: 64px;
+	display: inline-block;
+}
+
+.menulist>li ul.add li:nth-child(2) p {
+	margin-left: 15px;
+	font-size: 15px;
+	height: 64px;
+	display: inline-block;
+}
 @media screen and (max-width: 413px) {
 	.menulist>li ul.user_detail li:nth-child(1) p{
 		font-size: 12px;
@@ -96,6 +131,20 @@
 	.menulist>li ul.user_detail li:nth-child(2) p{
 		font-size: 12px;
 	}
+	.menulist>li ul.add li:nth-child(1) {
+		height: 50px;
+	}
+	.menulist>li ul.add li:nth-child(2) {
+		height: 50px;
+	}
+	.menulist>li ul.add li:nth-child(1) p{
+		font-size: 12px;
+		line-height: 41px;
+	}
+	.menulist>li ul.add li:nth-child(2) p{
+		font-size: 10px;
+	}
+	
 }
 
 .more-type{
