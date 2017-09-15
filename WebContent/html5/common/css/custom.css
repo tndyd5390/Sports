@@ -1,3 +1,8 @@
+@charset "utf-8";
+@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
+/* 
+	유저 CSS 시작
+ */
 .width80 {
 	width: 80%;
 }
@@ -21,3 +26,162 @@
   display: inline-block;
 }
 
+.user_title{
+	height : 50px;
+	text-align : center;
+}
+.user_title p{
+	font-size : 15px;
+	height : 100%;
+	width : 100%;
+}
+.user_title p b{
+	font-size : 18px;
+}
+
+.menulist>li {
+	background: #1777cb;
+	text-align: center;
+}
+
+.menulist>li ul {
+	background: #fff;
+	font-size: 0;
+	text-align: left;
+}
+.menulist>li ul li {
+	display: inline-block;
+}
+
+.menulist>li ul.user_detail li {
+	text-align: center;
+	height: 36px;
+	border-bottom: 1px solid silver;
+	border-right: 1px solid silver;
+}
+
+.menulist>li ul.user_detail li:nth-child(1) {
+	text-align: center;
+	width: 20%;
+	color: #ffffff;
+	height: 36px;
+	background-color: #1777cb;
+}
+
+.menulist>li ul.user_detail li:nth-child(2) {
+	text-align: left;
+	width: 80%;
+	height: 36px;
+	color: black;
+	background-color: #fffff;
+}
+
+.menulist>li ul.user_detail li:nth-child(1) p {
+	font-size: 15px;
+	line-height: 36px;
+	display: inline-block;
+}
+
+.menulist>li ul.user_detail li:nth-child(2) p {
+	margin-left: 15px;
+	font-size: 15px;
+	line-height: 36px;
+	display: inline-block;
+}
+
+@media screen and (max-width: 413px) {
+	.menulist>li ul.user_detail li:nth-child(1) p{
+		font-size: 12px;
+	}
+	.menulist>li ul.user_detail li:nth-child(2) p{
+		font-size: 12px;
+	}
+}
+
+.more-type{
+	background : #1777cb;
+	height : 40px;
+	text-align : center;
+}
+.moremore{
+	display: inline-block;
+	width:100%;
+	height: 100%;
+	color : #fff;
+	font-size : 20px;
+	line-height: 42px;
+}
+.menulist>li {
+  background: #1777cb;
+  text-align: center;
+}
+.menulist>li ul {
+  background: #fff;
+  font-size: 0;
+  text-align: left;
+}
+.menulist>li ul li {
+  display: inline-block;
+}
+.menulist>li ul.theader li {
+  text-align: center;
+  width: 26.6%;
+  height: 36px;
+  border-bottom: 1px solid #ffffff;
+  border-right: 1px solid #ffffff;
+  background-color : #1777cb;
+}
+.menulist>li ul.theader li:nth-child(1) {
+  text-align: center;
+  width: 10%;
+  height: 36px;
+}
+.menulist>li ul.theader li:nth-child(2) {
+  text-align: center;
+  width: 10%;
+  height: 36px;
+}
+.menulist>li ul.theader li p {
+  font-size: 15px;
+  color: #ffffff;
+  line-height: 36px;
+  display: inline-block;
+}
+.menulist>li ul.col-5 li {
+  text-align: center;
+  width: 26.6%;
+  height: 36px;
+  border-bottom: 1px solid #bcbcbc;
+  border-right: 1px solid #bcbcbc;
+}
+.menulist>li ul.col-5 li:nth-child(1) {
+  text-align: center;
+  width: 10%;
+  height: 36px;
+}
+.menulist>li ul.col-5 li:nth-child(2) {
+  text-align: center;
+  width: 10%;
+  height: 36px;
+}
+.menulist>li ul.col-5 li p {
+  font-size: 15px;
+  color: #222;
+  line-height: 36px;
+  display: inline-block;
+}
+.menulist>li input.chkbox {
+	width : 17px;
+	height : 17px;
+}
+@media screen and (max-width: 413px) {
+	.menulist>li ul.theader li p{
+		font-size: 12px;
+	}
+	.menulist>li ul.col-5 li p{
+		font-size: 11px;
+	}
+}
+/* 
+	유저 CSS 끝
+ */

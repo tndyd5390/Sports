@@ -337,5 +337,13 @@ public class UserController {
 		log.info(this.getClass() + " userListSearch End!!");
 		return uList;
 	}
+	@RequestMapping(value="userDetail")
+	public String userDetail() throws Exception {
+		log.info(this.getClass() + " userDetail Start!!");
+		
+		log.info(this.getClass() + " userDetail End!!");
+		return "user/userDetail";
+	}
+	
 	
 }
