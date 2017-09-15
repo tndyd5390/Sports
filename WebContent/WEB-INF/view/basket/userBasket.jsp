@@ -170,5 +170,4 @@ div.chy-wrap{
     </div>
 <%@include file="/html5/include/footer.jsp" %>
 </body>
-
 </html>
