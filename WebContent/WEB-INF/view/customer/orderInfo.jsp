@@ -2,36 +2,15 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
+<!-- 
+	이 주석을 본다면 개발자겠지???
+	아 진짜 뷰 만들기 개 힘들다 진짜 ㅠㅠㅠㅠ 
+-->
 <head>
 <%@include file="/html5/include/head.jsp" %>
-<script type="text/javascript">
-	function doSubmit(){
-		var f = document.getElementById('qaForm');
-		var secretStatus;
-		if(f.secret.value == 'y'){
-			secretStatus = '비밀글로 등록됩니다.';
-		}else{
-			secretStatus = '공개글로 등록됩니다.';
-		}
-		
-		if(f.title.value == ""){
-			alert("제목을 입력해 주세요.");
-			f.title.focus();
-			return;
-		}
-		
-		if(f.contents.value == ""){
-			alert('내용을 입력해 주세요');
-			f.contents.focus();
-			return;
-		}
-		
-		if(confirm(secretStatus)){
-			f.submit();
-		}
-	}
+<style type="text/css">
 
-</script>	
+</style>	
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -54,32 +33,15 @@
 
     <div class="container detail">
       <div class="wrap search-wrap btn-wrap">
-        <div class="list_wrap">
-	        <form action="/customer/qaRegProc.do" method="post" id="qaForm">
-				<ul class="register_list">
-	            <li>
-	              <p class="blue_text">제목</p>
-	              <input type="text" name="title">
-	            </li>
-	            <li>
-	            <p class="blue_text">비밀글 여부</p>
-				<div class="select_wrap">
-					<select class="col-2" name="secret">
-						<option value="n">공개글</option>
-						<option value="y">비밀글</option>
-					</select>
-				</div>
-				</li>
-	            <li>
-	              <p class="blue_text">내용</p>
-	              <textarea name="contents"></textarea>
-	            </li>
-	          </ul>
-			</form>
-        </div>
+	        <div class="search type">
+				<select class="search_type" id="searchType">
+					<option value="name">이름</option>
+					<option value="id">아이디</option>
+				</select> <input type="text" id="searchValue" onkeyup="doSearch()">
+			</div>
         <div class="btn-groub">
-          <button class="col-2 blue-btn button" onclick="doSubmit();">등록</button>
-          <button class="col-2 glay-btn button">목록</button>
+          <button class="col-2 blue-btn button" onclick="doSubmit();">결제하기</button>
+          <button class="col-2 glay-btn button">취소하기</button>
         </div>
       </div>
     </div>
