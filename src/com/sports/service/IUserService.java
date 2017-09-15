@@ -1,5 +1,7 @@
 package com.sports.service;
 
+import java.util.List;
+
 import com.sports.dto.UserDTO;
 
 public interface IUserService {
@@ -18,5 +20,9 @@ public interface IUserService {
 	public void updatePassword(UserDTO uDTO) throws Exception;
 
 	public void updateEmailCheck(UserDTO uDTO) throws Exception;
+
+	public List<UserDTO> getUserList() throws Exception;
+
+	public List<UserDTO> getSearchUser(UserDTO uDTO) throws Exception;
 
 }
