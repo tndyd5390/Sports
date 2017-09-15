@@ -36,7 +36,7 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " loginPage End!!");
-		return "login";
+		return "user/login";
 	}
 	@RequestMapping(value="loginProc")
 	public String loginProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
@@ -94,7 +94,7 @@ public class UserController {
 		log.info(this.getClass() + "userReg Start!!");
 		
 		log.info(this.getClass() + "userReg End!!");
-		return "userReg";
+		return "user/userReg";
 	}
 	
 	@RequestMapping(value="idCheck")
@@ -187,7 +187,7 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " idPwSearch End!!");
-		return "idPwSearch";
+		return "user/idPwSearch";
 	}
 	
 	@RequestMapping(value="certify")
@@ -239,7 +239,7 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "idSearch";
+			return "user/idSearch";
 		}
 	}
 	
@@ -275,7 +275,7 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "pwSearch";
+			return "user/pwSearch";
 		}
 	}
 	
@@ -297,5 +297,15 @@ public class UserController {
 		model.addAttribute("url", "main.do");
 		
 		return "alert/alert";
+	}
+	
+	@RequestMapping(value="userList")
+	String userList(Model model) throws Exception{
+		log.info(this.getClass() + " userList Start!!");
+		
+		
+		
+		log.info(this.getClass() + " userList End!!");
+		return "user/userList";
 	}
 }
