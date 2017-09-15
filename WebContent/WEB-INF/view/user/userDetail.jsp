@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="com.sports.dto.UserDTO" %>
-<%@ page import="com.sports.util.CmmUtil" %>
-<%@ page import="com.sports.util.TextUtil" %>
+<%@ page import="com.sports.dto.UserDTO"%>
+<%@ page import="com.sports.util.CmmUtil"%>
+<%@ page import="com.sports.util.TextUtil"%>
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
 %>
@@ -18,12 +18,37 @@
 		location.href = "userList.do";
 	}
 	function doDelete(uNo){
-		location.href = "userDelete.do?uNo="+uNo;
+		if(confirm("해당 유저를 삭제 하시겠습니까?")){
+			alert("삭제되었습니다.");
+			location.href = "userDelete.do?uNo="+uNo;
+			return true;		
+		}else{
+			
+			return false;
+		}
+		
 	}
 	
 </script>
 <style>
 
+/* div.colspan,div.colspan+div.cell
+{
+    border:0;
+}
+
+div.colspan>div
+{
+    width:1px;
+}
+
+div.colspan>div>div
+{
+    position:relative;
+    width:99px;
+    overflow:hidden;
+}
+ */
 </style>
 </head>
 <body>
@@ -47,54 +72,78 @@
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="user_title">
-					<p><b><%=CmmUtil.nvl(uDTO.getUser_name())%></b>님의 회원정보</p>
-					<input type="hidden" id="uNo" value="<%=CmmUtil.nvl(uDTO.getUser_no()) %>">
+					<p>
+						<b><%=CmmUtil.nvl(uDTO.getUser_name())%></b>님의 회원정보
+					</p>
+					<input type="hidden" id="uNo"
+						value="<%=CmmUtil.nvl(uDTO.getUser_no())%>">
 				</div>
-				<div>
-					<ul class="menulist">
-						<li>
-							<ul class="user_detail">
-								<li><p>ID</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getUser_id())%></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>이름</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getUser_name())%></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>이메일</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getEmail())%></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>연락처</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getTel())%></p></li>
-							</ul>
-							<ul class="add">
-								<li><p>주소</p></li>
-								<li><p><%=TextUtil.exchangeEscapeNvl(uDTO.getAddress1()) %></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>세부주소</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getAddress2())%></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>가입일</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getReg_dt())%></p></li>
-							</ul>
-							<ul class="user_detail">
-								<li><p>권한</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getAuth())%></p></li>
-							</ul>
-						</li>
-					</ul>
+				<div class="user-detail-table">
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>ID</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getUser_id()) %></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>이름</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getUser_name())%></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>이메일</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getEmail()) %></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>우편번호</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getPostcode()) %></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>주소</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=TextUtil.exchangeEscapeNvl(uDTO.getAddress1()) %></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>주소2</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getAddress2()) %></span>
+						</div>
+					</div>
+					<div class="user-detail-row">
+						<div class="user-detail-cell1">
+							<span>권한</span>
+						</div>
+						<div class="user-detail-cell2">
+							<span><%=CmmUtil.nvl(uDTO.getAuth()) %></span>
+						</div>
+					</div>
 				</div>
 				<div class="btn-groub">
 					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(uDTO.getUser_no())%>)"> 
+						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
 					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="탈퇴" onclick="doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
+						value="탈퇴"
+						onclick="return doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
 					<input type="button" class="col-3 glay-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 						value="목록" onclick="goBack()">

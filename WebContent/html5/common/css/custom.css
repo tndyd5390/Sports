@@ -39,114 +39,6 @@
 	font-size : 18px;
 }
 
-.menulist>li {
-	background: #1777cb;
-	text-align: center;
-}
-
-.menulist>li ul {
-	background: #fff;
-	font-size: 0;
-	text-align: left;
-}
--.menulist>li ul li {
-	display: inline-block;
-}
-.menulist>li ul.user_detail li {
-	text-align: center;
-	height: 36px;
-	border-bottom: 1px solid silver;
-	border-right: 1px solid silver;
-}
-
-.menulist>li ul.user_detail li:nth-child(1) {
-	text-align: center;
-	width: 20%;
-	color: #ffffff;
-	height: 36px;
-	background-color: #1777cb;
-}
-
-.menulist>li ul.user_detail li:nth-child(2) {
-	text-align: left;
-	width: 80%;
-	height: 36px;
-	color: black;
-	background-color: #fffff;
-}
-
-.menulist>li ul.user_detail li:nth-child(1) p {
-	font-size: 15px;
-	line-height: 36px;
-	display: inline-block;
-}
-
-.menulist>li ul.user_detail li:nth-child(2) p {
-	margin-left: 15px;
-	font-size: 15px;
-	line-height: 36px;
-	display: inline-block;
-}
--.menulist>li ul li {
-	display: inline-block;
-}
-.menulist>li ul.add li {
-	text-align: center;
-	height: 72px;
-	border-bottom: 1px solid silver;
-	border-right: 1px solid silver;
-}
-
-.menulist>li ul.add li:nth-child(1) {
-	text-align: center;
-	width: 20%;
-	color: #ffffff;
-	height: 72px;
-	background-color: #1777cb;
-}
-
-.menulist>li ul.add li:nth-child(2) {
-	text-align: left;
-	width: 80%;
-	height: 72px;
-	color: black;
-	background-color: #fffff;
-}
-.menulist>li ul.add li:nth-child(1) p {
-	font-size: 15px;
-	line-height: 64px;
-	display: inline-block;
-}
-
-.menulist>li ul.add li:nth-child(2) p {
-	margin-left: 15px;
-	font-size: 15px;
-	height: 64px;
-	display: inline-block;
-}
-@media screen and (max-width: 413px) {
-	.menulist>li ul.user_detail li:nth-child(1) p{
-		font-size: 12px;
-	}
-	.menulist>li ul.user_detail li:nth-child(2) p{
-		font-size: 12px;
-	}
-	.menulist>li ul.add li:nth-child(1) {
-		height: 50px;
-	}
-	.menulist>li ul.add li:nth-child(2) {
-		height: 50px;
-	}
-	.menulist>li ul.add li:nth-child(1) p{
-		font-size: 12px;
-		line-height: 41px;
-	}
-	.menulist>li ul.add li:nth-child(2) p{
-		font-size: 10px;
-	}
-	
-}
-
 .more-type{
 	background : #1777cb;
 	height : 40px;
@@ -161,13 +53,7 @@
 	line-height: 42px;
 }
 .menulist>li {
-  background: #1777cb;
   text-align: center;
-}
-.menulist>li ul {
-  background: #fff;
-  font-size: 0;
-  text-align: left;
 }
 .menulist>li ul li {
   display: inline-block;
@@ -200,6 +86,7 @@
   text-align: center;
   width: 26.6%;
   height: 36px;
+  background-color : #ffffff;
   border-bottom: 1px solid #bcbcbc;
   border-right: 1px solid #bcbcbc;
 }
@@ -231,6 +118,54 @@
 		font-size: 11px;
 	}
 }
+div.user-detail-table {
+	display: table;
+	width: 100%;
+}
+
+div.user-detail-row {
+	display: table-row;
+	height: 40px;
+}
+
+div.user-detail-cell1 {
+	display: table-cell;
+	background-color: #1777cb;
+	border-bottom: 1px solid #ffffff;
+	border-right: 1px solid #ffffff;
+	width: 20%;
+	color: #fff;
+	text-align: center;
+	vertical-align:middle;
+}
+div.user-detail-cell2 {
+	display: table-cell;
+	background-color: #ffffff;
+	border-bottom: 1px solid silver;
+	border-right: 1px solid silver;
+	width: 80%;
+	vertical-align:middle;
+}
+
+.user-detail-cell1 span {
+	font-size: 15px;
+}
+
+.user-detail-cell2 span {
+	margin-left: 10px;
+	font-size: 15px;
+}
+@media screen and (max-width: 380px){
+	.user-detail-cell1 span {
+	font-size: 12px;
+}
+
+.user-detail-cell2 span {
+	font-size: 12px;
+}
+	
+}
+
 /* 
 	유저 CSS 끝
  */

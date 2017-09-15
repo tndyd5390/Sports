@@ -24,7 +24,7 @@
     <div class="container">
       <ul class="menu">
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_01member.png" alt="회원관리">
+          <a href="userList.do"><img src="html5/common/images/ic_menu_01member.png" alt="회원관리">
             <p>회원관리</p>
           </a>
         </li>

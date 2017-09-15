@@ -19,7 +19,6 @@ public class UserDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
-	
 	private String type;
 	private String value;
 	private String[] updateChk;

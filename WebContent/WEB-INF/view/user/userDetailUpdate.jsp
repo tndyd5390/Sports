@@ -73,7 +73,7 @@
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
-				<form name="f" id="f" action="#" method="post" onsubmit='return doUpdate();'>
+				<form name="f" id="f" action="userDetailUpdateProc.do" method="post" onsubmit='return doUpdate();'>
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
