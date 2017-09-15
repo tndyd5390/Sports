@@ -21,12 +21,12 @@ public class CustomerQAController {
 	
 	@Resource(name="QAService")
 	private IQAService qAService;
-	
-	
-	
-	
-	
-	
+	/**
+	 * 
+	 * 여기에 qna만들면 됨
+	 * 
+	 * 
+	 */
 	/*@RequestMapping(value="customer/qaList", method=RequestMethod.GET)
 	public String customerQaList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customer.qaList start!!!");
