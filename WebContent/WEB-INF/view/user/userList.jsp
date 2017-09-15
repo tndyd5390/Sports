@@ -23,18 +23,14 @@
   background: #1777cb;
   text-align: center;
 }
-
 .menu_list>li ul {
   background: #fff;
   font-size: 0;
   text-align: left;
 }
-
 .menu_list>li ul li {
   display: inline-block;
 }
-
-
 .menu_list>li ul.theader li {
   text-align: center;
   width: 26.6%;
@@ -53,14 +49,12 @@
   width: 10%;
   height: 36px;
 }
-
 .menu_list>li ul.theader li p {
   font-size: 15px;
   color: #ffffff;
   line-height: 36px;
   display: inline-block;
 }
-
 .menu_list>li ul.col-5 li {
   text-align: center;
   width: 26.6%;
@@ -73,13 +67,11 @@
   width: 10%;
   height: 36px;
 }
-
 .menu_list>li ul.col-5 li:nth-child(2) {
   text-align: center;
   width: 10%;
   height: 36px;
 }
-
 .menu_list>li ul.col-5 li p {
   font-size: 15px;
   color: #222;
@@ -90,7 +82,6 @@
 	width : 17px;
 	height : 17px;
 }
-
 @media screen and (max-width: 413px) {
 	.menu_list>li ul.theader li p{
 		font-size: 12px;
@@ -101,7 +92,6 @@
 }
 </style>
 <script>
-
 $(function(){
 	
 	userList();
@@ -126,7 +116,6 @@ function userList(){
 		}
 	})
 }
-
 function doSearch(){
 	var contents ="";
 	var searchType = $('#searchType').val();
@@ -153,7 +142,6 @@ function doSearch(){
 			}
 	})
 }
-
 </script>
 </head>
 <body>
