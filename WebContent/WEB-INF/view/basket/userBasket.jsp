@@ -87,6 +87,10 @@ div.chy-wrap{
     padding: 0px; 
     padding-bottom:80px;
 }
+
+span.chy-plus2{
+	padding-right: 10px;
+}
 </style>
 <%@include file="/html5/include/head.jsp" %>
 
@@ -158,7 +162,11 @@ div.chy-wrap{
             </li>
             <li class="chy-bottom">
             	<p class="chy-totalPrice">총 상품가격<span class="chy-totalPrice2">12,000원</span></p>
+<<<<<<< HEAD
             	<p class="chy-totalPrice">총 배송비<span class="chy-totalPrice2">3,000원</span></p>
+=======
+            	<p class="chy-totalPrice">총 배송비<span class="chy-totalPrice2"><span class="glyphicon-plus chy-plus2"></span>3,000원</span></p>
+>>>>>>> refs/remotes/origin/test
             	<p class="chy-payPrice">총 결제 예상금액 <span class="chy-payPrice2">15,000원</span></p>
             </li>
           </ul>
