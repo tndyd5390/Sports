@@ -65,4 +65,14 @@ public class UserService implements IUserService{
 	public List<UserDTO> getUserList() throws Exception {
 		return userMapper.getUserList();
 	}
+	@Override
+	public List<UserDTO> getSearchUser(UserDTO uDTO) throws Exception {
+		if(uDTO.getType().equals("name")){
+			
+			return userMapper.getSearchName(uDTO);
+		}else{
+			
+			return userMapper.getSearchId(uDTO);
+		}
+	}
 }

@@ -26,4 +26,8 @@ public interface UserMapper {
 
 	List<UserDTO> getUserList() throws Exception;
 
+	List<UserDTO> getSearchName(UserDTO uDTO) throws Exception;
+
+	List<UserDTO> getSearchId(UserDTO uDTO) throws Exception;
+
 }

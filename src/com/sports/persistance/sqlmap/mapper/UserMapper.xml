@@ -60,4 +60,16 @@
 	<select id="getUserList" resultType="UserDTO">
 		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH FROM USER_INFO ORDER BY USER_NO DESC
 	</select>
+	
+	<select id="getSearchName" resultType="UserDTO" parameterType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH FROM USER_INFO 
+		WHERE USER_NAME = #{value}
+		ORDER BY USER_NO DESC
+	</select>
+	
+	<select id="getSearchId" resultType="UserDTO" parameterType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH FROM USER_INFO 
+		WHERE USER_ID = #{value}
+		ORDER BY USER_NO DESC
+	</select>
 </mapper>

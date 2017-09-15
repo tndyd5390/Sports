@@ -18,8 +18,9 @@ public class UserDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
-	private String s_type;
-	private String s_text;
+	
+	private String type;
+	private String value;
 	private String[] updateChk;
 	private String[] updateCon;
 	
@@ -35,18 +36,17 @@ public class UserDTO {
 	public void setUpdateChk(String[] updateChk) {
 		this.updateChk = updateChk;
 	}
-	
-	public String getS_type() {
-		return s_type;
+	public String getType() {
+		return type;
 	}
-	public void setS_type(String s_type) {
-		this.s_type = s_type;
+	public void setType(String type) {
+		this.type = type;
 	}
-	public String getS_text() {
-		return s_text;
+	public String getValue() {
+		return value;
 	}
-	public void setS_text(String s_text) {
-		this.s_text = s_text;
+	public void setValue(String value) {
+		this.value = value;
 	}
 	public String getUser_no() {
 		return user_no;

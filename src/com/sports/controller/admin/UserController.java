@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sports.dto.UserDTO;
 import com.sports.service.IUserService;
@@ -164,7 +165,7 @@ public class UserController {
 		return "alert/alert";
 	}
 	@RequestMapping(value="emailCheckProc")
-	String emailCheckProc(HttpServletRequest req, Model model) throws Exception{
+	public String emailCheckProc(HttpServletRequest req, Model model) throws Exception{
 		log.info(this.getClass() + " emailCheckProc Start!!");
 		
 		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
@@ -283,7 +284,7 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="pwSearchProc")
-	String pwSearchProc(HttpServletRequest req, Model model) throws Exception{
+	public String pwSearchProc(HttpServletRequest req, Model model) throws Exception{
 		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
 		
@@ -303,17 +304,38 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="userList")
-	String userList(Model model) throws Exception{
+	public String userList(Model model) throws Exception{
 		log.info(this.getClass() + " userList Start!!");
 		
-		List<UserDTO> uList = new ArrayList<UserDTO>();
-		uList = userService.getUserList();
-		
-		model.addAttribute("uList" , uList);
-		
-		uList = null;
 		
 		log.info(this.getClass() + " userList End!!");
 		return "user/userList";
 	}
+	@RequestMapping(value="userListProc")
+	public @ResponseBody List<UserDTO> userListProc()throws Exception{
+		log.info(this.getClass() + " userListProc Start!!");
+		
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getUserList();
+		
+		log.info(this.getClass() + " userListProc End!!");
+		return uList;
+	}
+	
+	@RequestMapping(value="userListSearch")
+	public @ResponseBody List<UserDTO> userListSearch(@RequestParam("type") String type, @RequestParam("value") String value) throws Exception{
+		log.info(this.getClass() + " userListSearch Start!!");
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setType(type);
+		uDTO.setValue(value);
+		
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getSearchUser(uDTO);
+		
+		uDTO = null;
+		log.info(this.getClass() + " userListSearch End!!");
+		return uList;
+	}
+	
 }
