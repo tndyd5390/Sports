@@ -22,9 +22,12 @@
 <![endif]-->
 
 <style type="text/css">
-
-</style>
-
+<!-- JavaScirpt Sorcemap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="/common/js/jquery-ui.js"></script>
+<script src="/common/js/placeholders.min.js"></script>
+<script src="/common/js/placeholders.min.js"></script>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 </head>
 
 <body >

@@ -35,4 +35,12 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".customerOrderInfo end!!!");
 		return "customer/orderInfo";
 	}
+	
+	@RequestMapping(value="customer/orderDetail", method=RequestMethod.GET)
+	public String customerOrderDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".cutomerOrderDetail start!!!");
+		
+		log.info(this.getClass() + ".customerOrderDetail end!!!");
+		return "customer/orderDetail";
+	}
 }
