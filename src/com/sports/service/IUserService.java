@@ -27,4 +27,8 @@ public interface IUserService {
 
 	public UserDTO getUserDetail(UserDTO uDTO) throws Exception;
 
+	public void updateUserDetail(UserDTO uDTO) throws Exception;
+
+	public void userDelete(String userNo) throws Exception;
+
 }
