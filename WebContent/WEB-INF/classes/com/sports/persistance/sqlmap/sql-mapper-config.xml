@@ -5,5 +5,17 @@
     <typeAliases>
     	<!-- 사용할 DTO 등록  -->
 		<typeAlias type="com.sports.dto.UserDTO" alias="UserDTO"/>
+    	<typeAlias type="com.sports.dto.TestDTO" alias="TestDTO"/>
+    	<typeAlias type="com.sports.dto.AcademyDTO" alias="AcademyDTO"/>
+    	<typeAlias type="com.sports.dto.R_testDTO" alias="R_testDTO"/>
+    	<typeAlias type="com.sports.dto.NoticeDTO" alias="NoticeDTO"/>
+    	<typeAlias type="com.sports.dto.QADTO" alias="QADTO"/>
+    	<typeAlias type="com.sports.dto.ProductInfoDTO" alias="ProductInfoDTO"/>
+    	<typeAlias type="com.sports.dto.Ord_testDTO" alias="Ord_testDTO"/>
+    	<typeAlias type="com.sports.dto.DeliveryDTO" alias="DeliveryDTO"/>
+		<typeAlias type="com.sports.dto.ProductInfoOptionDTO" alias="ProductInfoOptionDTO"/>
+		<typeAlias type="com.sports.dto.ProductFileDTO" alias="ProductFileDTO"/>
+		<typeAlias type="com.sports.dto.Prod_test_jcmDTO" alias="Prod_test_jcmDTO"/>
+		<typeAlias type="com.sports.dto.ShoppingBasketDTO" alias="ShoppingBasketDTO"/>
     </typeAliases>
 </configuration>
