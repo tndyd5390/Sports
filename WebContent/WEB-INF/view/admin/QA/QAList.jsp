@@ -1,4 +1,3 @@
-<!-- for Administrator -->
 
 <%@ page import="com.sports.util.AES256Util"%>
 <%@ page import="java.util.Calendar"%>
