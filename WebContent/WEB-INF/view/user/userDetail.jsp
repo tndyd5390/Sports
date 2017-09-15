@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="com.sports.dto.UserDTO" %>
 <%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.TextUtil" %>
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
 %>
@@ -70,7 +71,7 @@
 							</ul>
 							<ul class="add">
 								<li><p>주소</p></li>
-								<li><p><%=CmmUtil.nvl(uDTO.getAddress1()) %></p></li>
+								<li><p><%=TextUtil.exchangeEscapeNvl(uDTO.getAddress1()) %></p></li>
 							</ul>
 							<ul class="user_detail">
 								<li><p>세부주소</p></li>
