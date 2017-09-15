@@ -9,10 +9,18 @@ public class DeliveryController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
 	@RequestMapping(value="deliverytracking")
-	public String main() throws Exception{
+	public String deliverytracking() throws Exception{
 		log.info(this.getClass() + "deliverytracking Start!!");
 		
 		log.info(this.getClass() + "deliverytracking End!!");
 		return "delivery/deliverytracking";
+	}
+	
+	@RequestMapping(value="accountmanagement")
+	public String accountmanagement() throws Exception{
+		log.info(this.getClass() + "deliverytracking Start!!");
+		
+		log.info(this.getClass() + "deliverytracking End!!");
+		return "account/accountmanagement";
 	}
 }
