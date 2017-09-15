@@ -1,3 +1,4 @@
+<!-- for Administrator -->
 
 <%@ page import="com.sports.util.AES256Util"%>
 <%@ page import="java.util.Calendar"%>
@@ -30,24 +31,34 @@ if (user_no.equals("")) {
 
 <head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
 <meta name="viewport" content="initial-scale=1, maximum-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
 <title>모두의 스포츠</title>
 <!-- Styles : CSS & SASS Sorcemap -->
 <link rel="stylesheet" href="/html5/common/css/style.css">
-<link rel="stylesheet" href="/html5/common/css/custom.css">
-<link rel="stylesheet" href="/html5/common/css/bootstrap.css">
 <!-- JavaScirpt Sorcemap -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="/html5/common/js/jquery-ui.js"></script>
+<script src="/html5/common/js/modernizr.custom.js"></script>
 <!--[if lte IE 9]>
-    <script src="/html5/common/js/placeholders.min.js"></script>
-    <![endif]-->
+<script src="/html5/common/js/placeholders.min.js"></script>
+<![endif]-->
 <!--[if lt IE 9]>
-    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+    
+<style>
+	.list_wrap .list-groub .title span.hj-checkBox {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+.search-wrap .search.type.hj-search {
+    padding-left: 0px;
+}
+</style>    
 
 <script type="text/javascript">
 
@@ -357,26 +368,16 @@ function doReg() {
 		<form name="f" id="f" method="post"
 			action="/admin/QA/QACheckboxDelete.do">
 
-			<header class="header">
-				<div class="wrap">
-					<div class="left_menu">
-						<img src="/html5/common/images/btn_gnb.png" alt="메뉴"
-							id="c-button--slide-left" class="c-button">
-					</div>
-					<div class="logo">
-						<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
-					</div>
-				</div>
-				<div class="page_title" style="float: left; width: 33%;">
-					<span class="sub_text" id="delete"
-						onclick="javascript:deleteConfirm(this.form);">삭제하기</span>&nbsp;
-				</div>
-				<div class="page_title" style="float: left; width: 33%;">
-					<p>Q&amp;A</p>
-				</div>
-				<div class="page_title" style="float: left; width: 33%;"></div>
-			</header>
-
+		<header class="header">
+			<div class="wrap">
+				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
+				<div class="logo"><a href="/main.do"><h2 class="title">모두의 스포츠</h2></a></div>
+			</div>
+			<div class="page_title" style=" float: left; width: 33%;"><span class="sub_text" id="delete" onclick="javascript:deleteConfirm(this.form);">삭제하기</span>&nbsp;</div>
+			<div class="page_title" style=" float: left; width: 33%;"><p>Q&amp;A</p></div>
+			<div class="page_title" style=" float: left; width: 33%;"></div>
+		</header>
+		
 		<nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
 			<div class="profile">
 				<p><img src="/html5/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
@@ -429,12 +430,14 @@ function doReg() {
 			</ul>
 		</nav>
 
+		<!--  <%@ include file="/html5/include/navBar.jsp" %> -->
+
 			<div class="container detail">
 				<div class="wrap search-wrap btn-wrap">
 
-					<div class="search type">
+					<div class="search type hj-search">
 						<input type="text" placeholder="제목 입력" id="searchbox"
-							style="width: 200px" />
+							style="width: 100%" />
 					</div>
 
 					<div class="list_wrap">
@@ -458,7 +461,7 @@ function doReg() {
 									<p class="title">
 
 										<img src="/html5/common/images/ic_reply.png" alt="답글"
-											class="ic_reply"> <span><%=CmmUtil.nvl(rDTO.getTitle())%></span>
+											class="ic_reply"> <span class="hj-checkBox"><%=CmmUtil.nvl(rDTO.getTitle())%></span>
 
 										<%
 											if (CmmUtil.nvl(rDTO.getSecret_yn()).equals("1")) {
@@ -487,7 +490,7 @@ function doReg() {
 
 									<p class="title">
 
-										<span><%=CmmUtil.nvl(rDTO.getTitle())%></span>
+										<span class="hj-checkBox"><%=CmmUtil.nvl(rDTO.getTitle())%></span>
 
 										<%
 											if (CmmUtil.nvl(rDTO.getSecret_yn()).equals("1")) {
@@ -539,9 +542,20 @@ function doReg() {
 				</div>
 			</div>
 
-			<%@ include file="/html5/include/footer.jsp"%>
+		<footer class="footer">
+    	<a href="#">
+      		<img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">
+    	</a>
+    	<div class="company_info">
+      		<p>대표이사 : 장명훈 ㅣ 대표번호 : 010-9057-6156</p>
+      		<p>사업자등록번호 : 567-36-00142</p>
+      		<p>통신판매업신고 : 2017-인천서구-0309호</p>
+      		<p>인천시 서구 보도진로 18번길 12(가좌동) 진성테크2층</p>
+      		<p>Copyright © <strong>모두의 스포츠</strong> All rights reserved. </p>
+    	</div>
+		</footer>
 
-		</form>
+	</form>
 
 	</section>
 	

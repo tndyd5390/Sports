@@ -39,17 +39,6 @@
 			CHG_DT = NOW()
 		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'N'
 	</update>
-	<update id="updateQA_file" parameterType="QADTO">
-		UPDATE QA_INFO
-		SET SECRET_YN = #{secret_yn}, 
-			TITLE = #{title}, 
-			CONTENTS = #{contents}, 
-			FILE_PATH = #{file_path}, 
-			FILE_NAME = #{file_name}, 
-			CHG_USER_NO = #{reg_user_no}, 
-			CHG_DT = NOW()
-		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'N'
-	</update>
 
 	<!-- 게시글 삭제 쿼리 -->
 	<delete id="deleteQADetail" parameterType="QADTO">
@@ -75,15 +64,6 @@
 		(SELECT IFNULL(MAX(QA.QA_NO),10000000)+1 FROM QA_INFO QA), #{q_no}, 'Y', #{secret_yn}, #{title}, #{contents}, #{reg_user_no}, NOW(), #{chg_user_no}, NOW()
 		)
 	</insert>
-	<insert id="insertQAAnswer_file" parameterType="QADTO">
-		INSERT INTO QA_INFO
-		(QA_NO, Q_NO, ANSWER_YN, SECRET_YN, TITLE, CONTENTS, FILE_PATH, FILE_NAME, REG_USER_NO, REG_DT, CHG_USER_NO, CHG_DT)
-		VALUES
-		(
-		(SELECT IFNULL(MAX(QA.QA_NO),10000000)+1 FROM QA_INFO QA), #{q_no}, 
-		'Y', #{secret_yn}, #{title}, #{contents}, #{file_path}, #{file_name}, #{reg_user_no}, NOW(), #{reg_user_no}, NOW()
-		)
-	</insert>
 	
 	<!-- 답글 상세 쿼리 -->
 	<select id="getQAAnswerDetail" resultType="QADTO" parameterType="QADTO">
@@ -99,17 +79,6 @@
 			TITLE = #{title},
 			CONTENTS = #{contents},
 			CHG_USER_NO = #{reg_user_no},
-			CHG_DT = NOW()
-		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'Y'
-	</update>
-	<update id="updateQAAnswer_file" parameterType="QADTO">
-		UPDATE QA_INFO
-		SET SECRET_YN = #{secret_yn}, 
-			TITLE = #{title}, 
-			CONTENTS = #{contents}, 
-			FILE_PATH = #{file_path}, 
-			FILE_NAME = #{file_name}, 
-			CHG_USER_NO = #{reg_user_no}, 
 			CHG_DT = NOW()
 		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'Y'
 	</update>
