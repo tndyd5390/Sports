@@ -40,7 +40,7 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " loginPage End!!");
-		return "login";
+		return "user/login";
 	}
 	@RequestMapping(value="loginProc")
 	public String loginProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
@@ -58,7 +58,7 @@ public class UserController {
 		
 		if(uDTO ==null){
 			msg = "아이디, 비밀번호를 확인해주세요.";
-			url = "login.do";
+			url = "user/login.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 			return "alert/alert";
@@ -98,7 +98,7 @@ public class UserController {
 		log.info(this.getClass() + "userReg Start!!");
 		
 		log.info(this.getClass() + "userReg End!!");
-		return "userReg";
+		return "user/userReg";
 	}
 	
 	@RequestMapping(value="idCheck")
@@ -191,7 +191,7 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " idPwSearch End!!");
-		return "idPwSearch";
+		return "user/idPwSearch";
 	}
 	
 	@RequestMapping(value="certify")
@@ -243,7 +243,7 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "idSearch";
+			return "user/idSearch";
 		}
 	}
 	
@@ -279,7 +279,7 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "pwSearch";
+			return "user/pwSearch";
 		}
 	}
 	
@@ -336,6 +336,36 @@ public class UserController {
 		uDTO = null;
 		log.info(this.getClass() + " userListSearch End!!");
 		return uList;
+	}
+	@RequestMapping(value="userDetail")
+	public String userDetail(HttpServletRequest req, Model model) throws Exception {
+		log.info(this.getClass() + " userDetail Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetail End!!");
+		return "user/userDetail";
+	}
+	@RequestMapping(value="userDetailUpdate")
+	public String userDetailUpdate(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " userDetailUpdate Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetailUpdate End!!");
+		return "user/userDetailUpdate";
 	}
 	
 }

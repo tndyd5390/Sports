@@ -75,4 +75,8 @@ public class UserService implements IUserService{
 			return userMapper.getSearchId(uDTO);
 		}
 	}
+	@Override
+	public UserDTO getUserDetail(UserDTO uDTO) throws Exception {
+		return userMapper.getUserDetail(uDTO);
+	}
 }

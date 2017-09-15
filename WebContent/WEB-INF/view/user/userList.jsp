@@ -6,90 +6,6 @@
 <head>
 <%@include file="/html5/include/head.jsp"%>
 <style>
-.more-type{
-	background : #1777cb;
-	height : 40px;
-	text-align : center;
-}
-.moremore{
-	display: inline-block;
-	width:100%;
-	height: 100%;
-	color : #fff;
-	font-size : 20px;
-	line-height: 42px;
-}
-.menu_list>li {
-  background: #1777cb;
-  text-align: center;
-}
-.menu_list>li ul {
-  background: #fff;
-  font-size: 0;
-  text-align: left;
-}
-.menu_list>li ul li {
-  display: inline-block;
-}
-.menu_list>li ul.theader li {
-  text-align: center;
-  width: 26.6%;
-  height: 36px;
-  border-bottom: 1px solid #ffffff;
-  border-right: 1px solid #ffffff;
-  background-color : #1777cb;
-}
-.menu_list>li ul.theader li:nth-child(1) {
-  text-align: center;
-  width: 10%;
-  height: 36px;
-}
-.menu_list>li ul.theader li:nth-child(2) {
-  text-align: center;
-  width: 10%;
-  height: 36px;
-}
-.menu_list>li ul.theader li p {
-  font-size: 15px;
-  color: #ffffff;
-  line-height: 36px;
-  display: inline-block;
-}
-.menu_list>li ul.col-5 li {
-  text-align: center;
-  width: 26.6%;
-  height: 36px;
-  border-bottom: 1px solid #bcbcbc;
-  border-right: 1px solid #bcbcbc;
-}
-.menu_list>li ul.col-5 li:nth-child(1) {
-  text-align: center;
-  width: 10%;
-  height: 36px;
-}
-.menu_list>li ul.col-5 li:nth-child(2) {
-  text-align: center;
-  width: 10%;
-  height: 36px;
-}
-.menu_list>li ul.col-5 li p {
-  font-size: 15px;
-  color: #222;
-  line-height: 36px;
-  display: inline-block;
-}
-.menu_list>li input.chkbox {
-	width : 17px;
-	height : 17px;
-}
-@media screen and (max-width: 413px) {
-	.menu_list>li ul.theader li p{
-		font-size: 12px;
-	}
-	.menu_list>li ul.col-5 li p{
-		font-size: 11px;
-	}
-}
 </style>
 <script>
 $(function(){
@@ -106,7 +22,7 @@ function userList(){
 				contents += "<ul class='col-5'>";
 				contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
 				contents += "<li><p>"+value.user_no+"</p></li>";
-				contents += "<li><p><a href='#'>"+value.user_id+"</a></p></li>";
+				contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
 				contents += "<li><p>"+value.user_name+"</p></li>";
 				contents += "<li><p>"+value.auth+"</p></li>";
 				contents += "</ul>";
@@ -120,8 +36,9 @@ function doSearch(){
 	var contents ="";
 	var searchType = $('#searchType').val();
 	var searchValue = $('#searchValue').val();
-	console.log(searchType);
-	console.log(searchValue);
+	if(searchValue == ""){
+		userList()
+	}else{
 	$.ajax({
 		url : 'userListSearch.do',
 		method : 'post',
@@ -132,7 +49,7 @@ function doSearch(){
 						contents += "<ul class='col-5'>";
 						contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
 						contents += "<li><p>"+value.user_no+"</p></li>";
-						contents += "<li><p><a href='#'>"+value.user_id+"</a></p></li>";
+						contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
 						contents += "<li><p>"+value.user_name+"</p></li>";
 						contents += "<li><p>"+value.auth+"</p></li>";
 						contents += "</ul>";
@@ -141,6 +58,7 @@ function doSearch(){
 					contents="";					
 			}
 	})
+	}
 }
 </script>
 </head>
@@ -171,7 +89,7 @@ function doSearch(){
 					</select> <input type="text" id="searchValue" onkeyup="doSearch()">
 				</div>
 				<div>
-					<ul class="menu_list">
+					<ul class="menulist">
 						<li>
 							<ul class="theader">
 								<li>

@@ -5,34 +5,6 @@
 <!-- 이 주석을 본다면 개발자겠지???우리 모두 화이팅 합시다ㅠㅠ -->
 <head>
 <%@include file="/html5/include/head.jsp" %>
-<script type="text/javascript">
-	function doSubmit(){
-		var f = document.getElementById('qaForm');
-		var secretStatus;
-		if(f.secret.value == 'y'){
-			secretStatus = '비밀글로 등록됩니다.';  
-		}else{
-			secretStatus = '공개글로 등록됩니다.';
-		}
-		
-		if(f.title.value == ""){
-			alert("제목을 입력해 주세요.");
-			f.title.focus();
-			return;
-		}
-		
-		if(f.contents.value == ""){
-			alert('내용을 입력해 주세요');
-			f.contents.focus();
-			return;
-		}
-		
-		if(confirm(secretStatus)){
-			f.submit();
-		}
-	}
-
-</script>
 <style type="text/css">
 
 hr {
