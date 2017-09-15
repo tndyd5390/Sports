@@ -70,7 +70,22 @@ div.chy-select select{
 </style>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
-
+	$(document).ready(function (){
+		$('#chy-monthsLeft').click(function (){
+			if($('#chy-month').text() != "1")
+			$('#chy-month').text(parseInt($('#chy-month').text())-1);
+		})
+		$('#chy-monthsRight').click(function (){
+			if($('#chy-month').text() != "12")
+			$('#chy-month').text(parseInt($('#chy-month').text())+1);
+		})
+		$('#chy-yearLeft').click(function (){
+			$('#chy-years').text(parseInt($('#chy-years').text())-1);
+		})
+		$('#chy-yearRight').click(function (){
+			$('#chy-years').text(parseInt($('#chy-years').text())+1);
+		})
+	})
 </script>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -109,7 +124,7 @@ div.chy-select select{
 	</div>
 	<div id="myTabContent" class="tab-content">
 	  <div role="tabpanel" class="tab-pane fade active in" id="home" aria-labelledby="home-tab">
-	  	<h2 class="chy-chartHeader"><a>&#60;</a><span class="chy-year">6월</span><a>&#62;</a></h2>
+	  	<h2 class="chy-chartHeader"><a id="chy-monthsLeft">&#60;</a><span class="chy-year"><span  id="chy-month">6</span>월</span><a id="chy-monthsRight">&#62;</a></h2>
 		<div class="chy-chartBody"></div>
 		    <div id="mainWrapper">
 		        <ul>
@@ -199,7 +214,7 @@ div.chy-select select{
 		    </div>
 	  </div>
 	  <div role="tabpanel" class="tab-pane fade" id="year" aria-labelledby="year-tab">
-	  		<h2 class="chy-chartHeader"><a>&#60;</a><span class="chy-year">2017</span><a>&#62;</a></h2>
+	  		<h2 class="chy-chartHeader"><a id="chy-yearLeft">&#60;</a><span class="chy-year"><span id="chy-years">2017</span>년</span><a id="chy-yearRight">&#62;</a></h2>
 		<div class="chy-chartBody"></div>
 		    <div id="mainWrapper">
 		        <ul>
