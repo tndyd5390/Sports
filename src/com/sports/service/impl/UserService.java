@@ -1,5 +1,6 @@
 package com.sports.service.impl;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.annotation.Resource;
@@ -59,5 +60,23 @@ public class UserService implements IUserService{
 	@Override
 	public void updateEmailCheck(UserDTO uDTO) throws Exception {
 		userMapper.updateEmailCheck(uDTO);
+	}
+	@Override
+	public List<UserDTO> getUserList() throws Exception {
+		return userMapper.getUserList();
+	}
+	@Override
+	public List<UserDTO> getSearchUser(UserDTO uDTO) throws Exception {
+		if(uDTO.getType().equals("name")){
+			
+			return userMapper.getSearchName(uDTO);
+		}else{
+			
+			return userMapper.getSearchId(uDTO);
+		}
+	}
+	@Override
+	public UserDTO getUserDetail(UserDTO uDTO) throws Exception {
+		return userMapper.getUserDetail(uDTO);
 	}
 }
