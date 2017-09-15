@@ -18,7 +18,15 @@
 		location.href = "userList.do";
 	}
 	function doDelete(uNo){
-		location.href = "userDelete.do?uNo="+uNo;
+		if(confirm("해당 유저를 삭제 하시겠습니까?")){
+			alert("삭제되었습니다.");
+			location.href = "userDelete.do?uNo="+uNo;
+			return true;		
+		}else{
+			
+			return false;
+		}
+		
 	}
 	
 </script>
@@ -94,7 +102,7 @@
 						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(uDTO.getUser_no())%>)"> 
 					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="탈퇴" onclick="doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
+						value="탈퇴" onclick="return doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
 					<input type="button" class="col-3 glay-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 						value="목록" onclick="goBack()">

@@ -10,6 +10,7 @@
 			USER_NAME,
 			PASSWORD,
 			EMAIL,
+			POSTCODE,
 			TEL,
 			ADDRESS1,
 			ADDRESS2,
@@ -22,6 +23,7 @@
 			#{user_name},
 			PASSWORD(#{password}),
 			#{email},
+			#{postcode},
 			#{tel},
 			#{address1},
 			#{address2},
@@ -76,4 +78,14 @@
 	<select id="getUserDetail" parameterType="UserDTO" resultType="UserDTO">
 		SELECT USER_NO, USER_ID, USER_NAME, EMAIL,TEL,POSTCODE, ADDRESS1, ADDRESS2, IF(AUTH='A','운영자','유저') AS AUTH, AUTH AS AUTH_CODE, REG_DT FROM USER_INFO WHERE USER_NO = #{user_no}
 	</select>
+	
+	<update id="updateUserDetail" parameterType="UserDTO">
+		UPDATE USER_INFO SET USER_NAME = #{user_name}, EMAIL = #{email}, POSTCODE = #{postcode}, ADDRESS1 = #{address1}, ADDRESS2 = #{address2}, AUTH = #{auth}, CHG_USER_NO = #{chg_user_no}, CHG_DT = NOW()
+		WHERE USER_NO = #{user_no}
+	</update>
+	
+	<delete id="userDelete" parameterType="String">
+		DELETE FROM USER_INFO WHERE USER_NO = #{userNo}
+	</delete>
+	
 </mapper>

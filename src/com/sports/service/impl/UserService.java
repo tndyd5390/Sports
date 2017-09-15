@@ -79,4 +79,12 @@ public class UserService implements IUserService{
 	public UserDTO getUserDetail(UserDTO uDTO) throws Exception {
 		return userMapper.getUserDetail(uDTO);
 	}
+	@Override
+	public void updateUserDetail(UserDTO uDTO) throws Exception {
+		userMapper.updateUserDetail(uDTO);
+	}
+	@Override
+	public void userDelete(String userNo) throws Exception {
+		userMapper.userDelete(userNo);
+	}
 }

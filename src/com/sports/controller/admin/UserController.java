@@ -326,7 +326,11 @@ public class UserController {
 	public @ResponseBody List<UserDTO> userListSearch(@RequestParam("type") String type, @RequestParam("value") String value) throws Exception{
 		log.info(this.getClass() + " userListSearch Start!!");
 		
+		log.info("type : "+type);
+		log.info("value : "+value);
+		
 		UserDTO uDTO = new UserDTO();
+		
 		uDTO.setType(type);
 		uDTO.setValue(value);
 		
@@ -342,6 +346,9 @@ public class UserController {
 		log.info(this.getClass() + " userDetail Start!!");
 		
 		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		
+		log.info("userNo : "+ userNo);
+		
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_no(userNo);
 		uDTO = userService.getUserDetail(uDTO);
@@ -366,6 +373,59 @@ public class UserController {
 		
 		log.info(this.getClass() + " userDetailUpdate End!!");
 		return "user/userDetailUpdate";
+	}
+	@RequestMapping(value="userDetailUpdateProc")
+	public String userDetailUpdateProc(HttpServletRequest req, HttpSession session) throws Exception{
+		log.info(this.getClass() + " userDetailUpdateProc Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		String userName = CmmUtil.nvl(req.getParameter("userName"));
+		String email = CmmUtil.nvl(req.getParameter("email"));
+		String tel = CmmUtil.nvl(req.getParameter("tel"));
+		String postcode = CmmUtil.nvl(req.getParameter("postcode"));
+		String address1 = CmmUtil.nvl(req.getParameter("address1"));
+		String address2 = CmmUtil.nvl(req.getParameter("address2"));
+		String auth = CmmUtil.nvl(req.getParameter("auth"));
+		String ss_user_no = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
+		
+		log.info("userNo : "+userNo);
+		log.info("userName : "+userName);
+		log.info("email : "+email);
+		log.info("tel : "+tel);
+		log.info("postcode : "+postcode);
+		log.info("address1 : "+address1);
+		log.info("address2 : "+address2);
+		log.info("auth : "+auth);
+		log.info("ss_user_no : "+ss_user_no);
+		
+		UserDTO uDTO =  new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO.setUser_name(userName);
+		uDTO.setEmail(email);
+		uDTO.setTel(tel);
+		uDTO.setPostcode(postcode);
+		uDTO.setAddress1(address1);
+		uDTO.setAddress2(address2);
+		uDTO.setAuth(auth);
+		uDTO.setChg_user_no(ss_user_no);
+		
+		userService.updateUserDetail(uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetailUpdateProc End!!");
+		return "redirect:userDetail.do?uNo="+userNo;
+	}
+	@RequestMapping(value="userDelete")
+	public String userDelete(HttpServletRequest req) throws Exception{
+		log.info(this.getClass() + " userDelete Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		log.info("userNo : "+userNo);
+		userService.userDelete(userNo);
+		
+		log.info(this.getClass() + " userDelete End!!");
+		return "redirect:userList.do";
 	}
 	
 }
