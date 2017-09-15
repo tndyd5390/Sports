@@ -120,8 +120,9 @@ function doSearch(){
 	var contents ="";
 	var searchType = $('#searchType').val();
 	var searchValue = $('#searchValue').val();
-	console.log(searchType);
-	console.log(searchValue);
+	if(searchValue == ""){
+		userList()
+	}else{
 	$.ajax({
 		url : 'userListSearch.do',
 		method : 'post',
@@ -141,6 +142,7 @@ function doSearch(){
 					contents="";					
 			}
 	})
+	}
 }
 </script>
 </head>
@@ -203,5 +205,6 @@ function doSearch(){
 			</div>
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
+	</section>
 </body>
 </html>
