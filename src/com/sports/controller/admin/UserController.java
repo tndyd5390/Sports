@@ -337,5 +337,35 @@ public class UserController {
 		log.info(this.getClass() + " userListSearch End!!");
 		return uList;
 	}
+	@RequestMapping(value="userDetail")
+	public String userDetail(HttpServletRequest req, Model model) throws Exception {
+		log.info(this.getClass() + " userDetail Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetail End!!");
+		return "user/userDetail";
+	}
+	@RequestMapping(value="userDetailUpdate")
+	public String userDetailUpdate(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " userDetailUpdate Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetailUpdate End!!");
+		return "user/userDetailUpdate";
+	}
 	
 }
