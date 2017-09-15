@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.TextUtil" %>
+<%@ page import="com.sports.dto.UserDTO" %>
+<%
+	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+%>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,25 +77,22 @@
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
-								<p class="blue_text">아이디</p><input type="text" id="id" name="id">
-							</li>
-							<li>
 								<p class="blue_text">이름</p> <input type="text" id="userName"
-								name="userName">
+								name="userName" value="<%=CmmUtil.nvl(uDTO.getUser_name())%>">
 							</li>
 							<li>
 								<p class="blue_text">이메일</p> <input type="email" id="email"
-								name="email">
+								name="email" value="<%=CmmUtil.nvl(uDTO.getEmail())%>">
 							</li>
 							<li>
 								<p class="blue_text">휴대폰번호</p> <input type="text" id="tel"
-								name="tel">
+								name="tel" value="<%=CmmUtil.nvl(uDTO.getTel())%>">
 							</li>
 							<li>
 								<p class="blue_text">우편번호</p>
 								<div class="input_btn_wrap">
 									<input type="text" id="postcode" name="postcode"
-										onclick="daumPostcode()">
+										onclick="daumPostcode()" value="<%=CmmUtil.nvl(uDTO.getPostcode())%>">
 									<input type="button" class="line-btn" onclick="daumPostcode()" value="주소찾기">
 									<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 									<script>
@@ -136,22 +139,23 @@
 							</li>
 							<li>
 								<p class="blue_text">주소</p> <input type="text" id="address1"
-								name="address1" onclick="daumPostcode()">
+								name="address1" onclick="daumPostcode()" value="<%=TextUtil.exchangeEscapeNvl(uDTO.getAddress1())%>">
 							</li>
 							<li>
 								<p class="blue_text">상세주소</p> <input type="text" id="address2"
-								name="address2">
+								name="address2" value="<%=CmmUtil.nvl(uDTO.getAddress2())%>">
 							</li>
 							<li>
 								<p class="blue_text">권한</p> 
 								<select name="auth" id="auth" style="width:50%;">
-									<option value="A">운영자</option>
-									<option value="U">유저</option>
+									<option value="A" <%=CmmUtil.select("A", uDTO.getAuth_code()) %>>운영자</option>
+									<option value="U" <%=CmmUtil.select("U", uDTO.getAuth_code()) %>>유저</option>
 								</select>
 							</li>
 						</ul>
 					</div>
 					<div class="btn-groub">
+						<input type="hidden" name="uNo" value="<%=CmmUtil.nvl(uDTO.getUser_no())%>">
 						<input type="submit" class="col-2 blue-btn"
 							style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 							value="수정"> 
