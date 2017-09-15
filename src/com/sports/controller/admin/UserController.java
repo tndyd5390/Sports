@@ -1,5 +1,8 @@
 package com.sports.controller.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -303,7 +306,12 @@ public class UserController {
 	String userList(Model model) throws Exception{
 		log.info(this.getClass() + " userList Start!!");
 		
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getUserList();
 		
+		model.addAttribute("uList" , uList);
+		
+		uList = null;
 		
 		log.info(this.getClass() + " userList End!!");
 		return "user/userList";
