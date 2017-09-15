@@ -8,6 +8,8 @@
 
 <!-- Styles : CSS & SASS Sorcemap -->
 <link rel="stylesheet" href="/common/css/style.css">
+<!-- Styles : sanghoon Kim-->
+<link rel="stylesheet" href="/html5/common/css/sangDelivery.css">
 <!-- JavaScirpt Sorcemap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="/common/js/jquery-ui.js"></script>
@@ -21,102 +23,6 @@
 
 <style type="text/css">
 
-	.shDTable{
-		display: table;
-		width: 100%;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	.shDTables{
-		display: table;
-		width: 100%;
-		margin-top: 60px;
-		margin-bottom: 10px;
-	}
-	.shCTitle{
-		display: inline-block;
-		width: 21%;
-		color: #7F7F7F;
-		font-weight: bold;
-		display: table-cell;
-		vertical-align: middle;
-		text-align: center;
-	}
-	.shCDetail{
-		display: inline-block;
-		width: 75%;
-		color: #000000;
-		font-weight: bold;
-		margin-left: 5%;
-	}
-	.shDelivey{
-		background-color: #F2F2F2;
-		margin-top: 5px;
-		font-weight: bold;
-		text-align: center;
-		height: 40px;
-		display: table-cell;
-		vertical-align: middle;
-		width: 10%;
-		margin-bottom: 20px;
-	}
-	.shNDelivey{
-		color: red;
-		font-weight: bold;
-		vertical-align: middle;
-		margin: 0 auto;
-		color: red;
-		font-size: 20px;
-		width: 100%;
-		
-	}
-	ul, li{ 
-        list-style:none;
-        text-align:center;
-        padding:0;
-        margin:0;
-	}
-    #mainWrapper{
-        width: 100%;
-        margin: 0 auto;
-        text-align: center;
-        margin-top: 0px;
-        padding-bottom: 20px;
-        
-    }
-    #mainWrapper > ul > li:first-child {
-        text-align: center;
-        font-size:14pt;
-        height:40px;
-        vertical-align:middle;
-        line-height:30px;
-	}
-    #ulTable {margin-top:0px;}
-    
-    #ulTable > li:first-child > ul > li {
-        background-color:#c9c9c9;
-        font-weight:bold;
-        text-align:center;
-	}
-    #ulTable > li > ul {
-        clear:both;
-        padding:0px auto;
-        position:relative;
-        min-width:40px;
-	}
-    #ulTable > li > ul > li { 
-        float:left;
-        font-size:9pt;
-        border-bottom:1px solid silver;
-        vertical-align:baseline;
-	}    
-    #ulTable > li > ul > li:first-child               {width:44%;}
-    #ulTable > li > ul > li:first-child +li           {width:28%;}
-    #ulTable > li > ul > li:first-child +li+li        {width:28%;}
-
-	#ulTable > li:nth-child(odd) {
-	background-color: #E1E1E1;
-	}
 </style>
 
 </head>
