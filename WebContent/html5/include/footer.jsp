@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
   <footer class="footer">
     <a href="#">
-      <img src="html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">
+      <img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">
     </a>
     <div class="company_info">
       <p>대표이사 : 장명훈 ㅣ 대표번호 : 010-9057-6156</p>
@@ -13,8 +13,8 @@
     
     </div>
 </footer>
-      
+  
   </section>
   <div id="c-mask" class="c-mask"></div>
-  <script src="html5/common/js/classie.js"></script>
-  <script src="html5/common/js/common.js"></script>
+  <script src="/html5/common/js/classie.js"></script>
+  <script src="/html5/common/js/common.js"></script>
