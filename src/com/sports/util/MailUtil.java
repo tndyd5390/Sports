@@ -13,19 +13,19 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 public class MailUtil {
-	public static void sendMail(String recipient, String subject, String body) throws AddressException, MessagingException {
+	public static void sendMail(String recipient, String subject, String body)
+			throws AddressException, MessagingException {
 		String host = "gmail-smtp.l.google.com";
 
-		final String username = "kangseokopo@gmail.com"; 
-		final String password = "vhfflxpr"; 
+		final String username = "kangseokopo@gmail.com";
+		final String password = "vhfflxpr";
 
-		Properties props = System.getProperties(); 
+		Properties props = System.getProperties();
 
-		  props.put("mail.transport.protocol", "smtp");
-	      props.put("mail.smtp.starttls.enable","true");
-	      props.put("mail.smtp.host", host);
-	      props.put("mail.smtp.auth", "true");
-
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.auth", "true");
 
 		Session session = Session.getDefaultInstance(props, new Authenticator() {
 			String un = username;
@@ -35,14 +35,12 @@ public class MailUtil {
 				return new PasswordAuthentication(un, pw);
 			}
 		});
-		session.setDebug(true); 
-
-		Message mimeMessage = new MimeMessage(session); 
-		mimeMessage.setFrom(new InternetAddress("kangseokopo@gmail.com"));
+		session.setDebug(true);
+		Message mimeMessage = new MimeMessage(session);
+		mimeMessage.setFrom(new InternetAddress("portfolio_jg@naver.com"));
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
-
-		mimeMessage.setSubject(subject); 
-		mimeMessage.setText(body); 
-		Transport.send(mimeMessage); 
+		mimeMessage.setSubject(subject);
+		mimeMessage.setText(body);
+		Transport.send(mimeMessage);
 	}
 }

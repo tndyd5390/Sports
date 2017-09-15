@@ -1,5 +1,8 @@
 package com.sports.controller.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sports.dto.UserDTO;
 import com.sports.service.IUserService;
@@ -36,11 +40,13 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " loginPage End!!");
-		return "login";
+		return "user/login";
 	}
 	@RequestMapping(value="loginProc")
 	public String loginProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + " loginProc Start!!");
+		String msg = "";
+		String url = "";
 		String id = CmmUtil.nvl(req.getParameter("id"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
 		
@@ -51,8 +57,14 @@ public class UserController {
 		uDTO = userService.getLoginInfo(uDTO);
 		
 		if(uDTO ==null){
-			String msg = "아이디, 비밀번호를 확인해주세요.";
-			String url = "login.do";
+			msg = "아이디, 비밀번호를 확인해주세요.";
+			url = "user/login.do";
+			model.addAttribute("msg", msg);
+			model.addAttribute("url", url);
+			return "alert/alert";
+		}else if(uDTO.getEmail_ck().equals("N")){
+			msg = "이메일 인증을 완료해주세요";
+			url = "main.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 			return "alert/alert";
@@ -86,7 +98,7 @@ public class UserController {
 		log.info(this.getClass() + "userReg Start!!");
 		
 		log.info(this.getClass() + "userReg End!!");
-		return "userReg";
+		return "user/userReg";
 	}
 	
 	@RequestMapping(value="idCheck")
@@ -146,10 +158,32 @@ public class UserController {
 		
 		uDTO = null;
 		
+		model.addAttribute("msg", "이메일 인증 후 이용 가능합니다.");
+		model.addAttribute("url", "main.do");
+		
 		log.info(this.getClass() + "userRegProc End!!");
-		return "redirect:main.do";
+		return "alert/alert";
 	}
-	
+	@RequestMapping(value="emailCheckProc")
+	public String emailCheckProc(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " emailCheckProc Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		String emailCode = CmmUtil.nvl(req.getParameter("code"));
+		log.info("userNo : " +userNo);
+		log.info("emailCode : " +emailCode);
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO.setEmail_code(emailCode);
+		userService.updateEmailCheck(uDTO);
+		
+		model.addAttribute("msg", "인증성공");
+		model.addAttribute("url", "main.do");
+		uDTO = null;
+		log.info(this.getClass() + " emailCheckProc End!!");
+		return "alert/alert";
+	}
+
 	@RequestMapping(value="idPwSearch")
 	public String idPwSearch() throws Exception{
 		log.info(this.getClass() + " idPwSearch Start!!");
@@ -157,7 +191,7 @@ public class UserController {
 		
 		
 		log.info(this.getClass() + " idPwSearch End!!");
-		return "idPwSearch";
+		return "user/idPwSearch";
 	}
 	
 	@RequestMapping(value="certify")
@@ -193,7 +227,7 @@ public class UserController {
 		log.info("emailCode : "+emailCode);
 		UserDTO uDTO = new UserDTO();
 		uDTO.setUser_name(name);
-		uDTO.setEmail(email);;
+		uDTO.setEmail(email);
 		uDTO.setEmail_code(emailCode);
 		
 		uDTO = userService.getUserId(uDTO);
@@ -209,7 +243,7 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "idSearch";
+			return "user/idSearch";
 		}
 	}
 	
@@ -245,14 +279,16 @@ public class UserController {
 			model.addAttribute("uDTO", uDTO);
 			uDTO = null;
 			log.info(this.getClass() + " idSearch End!!");
-			return "pwSearch";
+			return "user/pwSearch";
 		}
 	}
 	
 	@RequestMapping(value="pwSearchProc")
-	String pwSearchProc(HttpServletRequest req, Model model) throws Exception{
+	public String pwSearchProc(HttpServletRequest req, Model model) throws Exception{
 		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
 		String password = CmmUtil.nvl(req.getParameter("password"));
+		
+		log.info(this.getClass() + " userNo : "+userNo);
 		
 		UserDTO uDTO = new UserDTO();
 		
@@ -266,4 +302,70 @@ public class UserController {
 		
 		return "alert/alert";
 	}
+	
+	@RequestMapping(value="userList")
+	public String userList(Model model) throws Exception{
+		log.info(this.getClass() + " userList Start!!");
+		
+		
+		log.info(this.getClass() + " userList End!!");
+		return "user/userList";
+	}
+	@RequestMapping(value="userListProc")
+	public @ResponseBody List<UserDTO> userListProc()throws Exception{
+		log.info(this.getClass() + " userListProc Start!!");
+		
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getUserList();
+		
+		log.info(this.getClass() + " userListProc End!!");
+		return uList;
+	}
+	
+	@RequestMapping(value="userListSearch")
+	public @ResponseBody List<UserDTO> userListSearch(@RequestParam("type") String type, @RequestParam("value") String value) throws Exception{
+		log.info(this.getClass() + " userListSearch Start!!");
+		
+		UserDTO uDTO = new UserDTO();
+		uDTO.setType(type);
+		uDTO.setValue(value);
+		
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getSearchUser(uDTO);
+		
+		uDTO = null;
+		log.info(this.getClass() + " userListSearch End!!");
+		return uList;
+	}
+	@RequestMapping(value="userDetail")
+	public String userDetail(HttpServletRequest req, Model model) throws Exception {
+		log.info(this.getClass() + " userDetail Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetail End!!");
+		return "user/userDetail";
+	}
+	@RequestMapping(value="userDetailUpdate")
+	public String userDetailUpdate(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " userDetailUpdate Start!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("uNo"));
+		UserDTO uDTO = new UserDTO();
+		uDTO.setUser_no(userNo);
+		uDTO = userService.getUserDetail(uDTO);
+		model.addAttribute("uDTO", uDTO);
+		
+		uDTO = null;
+		
+		log.info(this.getClass() + " userDetailUpdate End!!");
+		return "user/userDetailUpdate";
+	}
+	
 }

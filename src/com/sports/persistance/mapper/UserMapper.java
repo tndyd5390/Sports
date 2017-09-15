@@ -1,5 +1,7 @@
 package com.sports.persistance.mapper;
 
+import java.util.List;
+
 import com.sports.config.Mapper;
 import com.sports.dto.UserDTO;
 
@@ -19,5 +21,15 @@ public interface UserMapper {
 	UserDTO getUserId(UserDTO uDTO) throws Exception;
 
 	void updatePassword(UserDTO uDTO) throws Exception;
+
+	void updateEmailCheck(UserDTO uDTO) throws Exception;
+
+	List<UserDTO> getUserList() throws Exception;
+
+	List<UserDTO> getSearchName(UserDTO uDTO) throws Exception;
+
+	List<UserDTO> getSearchId(UserDTO uDTO) throws Exception;
+
+	UserDTO getUserDetail(UserDTO uDTO) throws Exception;
 
 }
