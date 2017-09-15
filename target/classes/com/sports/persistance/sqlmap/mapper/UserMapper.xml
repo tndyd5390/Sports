@@ -72,4 +72,8 @@
 		WHERE USER_ID = #{value}
 		ORDER BY USER_NO DESC
 	</select>
+	
+	<select id="getUserDetail" parameterType="UserDTO" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL,TEL, ADDRESS1, ADDRESS2, IF(AUTH='A','운영자','유저') AS AUTH, REG_DT FROM USER_INFO WHERE USER_NO = #{user_no}
+	</select>
 </mapper>

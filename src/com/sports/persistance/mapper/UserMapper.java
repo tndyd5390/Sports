@@ -30,4 +30,6 @@ public interface UserMapper {
 
 	List<UserDTO> getSearchId(UserDTO uDTO) throws Exception;
 
+	UserDTO getUserDetail(UserDTO uDTO) throws Exception;
+
 }
