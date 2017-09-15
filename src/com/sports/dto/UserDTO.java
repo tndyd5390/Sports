@@ -13,6 +13,7 @@ public class UserDTO {
 	private String address1;
 	private String address2;
 	private String auth;
+	private String auth_code;
 	private String delete_yn;
 	private String reg_user_no;
 	private String reg_dt;
@@ -149,5 +150,11 @@ public class UserDTO {
 	}
 	public void setEmail_code(String email_code) {
 		this.email_code = email_code;
+	}
+	public String getAuth_code() {
+		return auth_code;
+	}
+	public void setAuth_code(String auth_code) {
+		this.auth_code = auth_code;
 	}
 }
