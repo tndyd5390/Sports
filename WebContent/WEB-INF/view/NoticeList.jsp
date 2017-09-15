@@ -16,7 +16,7 @@ if (nList == null) {
 
 String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 %>
-
+<!-- 테스트 -->
 <!DOCTYPE html>
 <html lang="ko">
 
