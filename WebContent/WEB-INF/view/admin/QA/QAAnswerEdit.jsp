@@ -2,14 +2,30 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.CmmUtil"%>
+<%@ page import="com.sports.dto.QADTO"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%
+QADTO rDTO = (QADTO)request.getAttribute("rDTO");
+
+List<QADTO> rList = (List<QADTO>) request.getAttribute("rList");
+
+if (rDTO==null) {
+	rDTO = new QADTO();
+}
+
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
-%>
+
+int access = 1; 
+
+if (CmmUtil.nvl((String)session.getAttribute("ss_user_no")).equals(CmmUtil.nvl(rDTO.getReg_user_no()))) {
+	access = 2;
+}
+%> 
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 
 <meta charset="UTF-8">
@@ -32,6 +48,17 @@ String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
 
 <script type="text/javascript">
 
+function doOnload() {
+	
+	if ("<%=access%>"=="1") {
+		
+		alert("본인이 작성한 답글만 수정 가능합니다.");
+		location.href="/admin/QA/QAList.do";
+		
+	}
+	
+}
+
 function doSubmit(f) {
 	
 	if (f.title.value == "") {
@@ -42,7 +69,7 @@ function doSubmit(f) {
 		
 	}
 	
-	if (calBytes(f.title.value) > 100) {
+	if (calBytes(f.title.value) > 200) {
 		
 		alert("제목은 최대 100Bytes까지만 입력 가능합니다.");
 		f.title.focus();
@@ -94,7 +121,7 @@ function calBytes(str) {
 
 	var onechar;
 	
-	for (i=0;i<strCnt;i++) {
+	for (i=0; i<strCnt; i++) {
 		
 		onechar = tmpStr.charAt(i);
 		
@@ -115,15 +142,19 @@ function calBytes(str) {
 }
 
 </script>
-
+	
 </head>
 
-<body>
+<body onload="doOnload();">
 
-	<section id="wrapper" class="wrapper">
-  
-	<form name="f" method="post" action="/admin/QA/QAInsert.do" enctype="multipart/form-data" onsubmit="return doSubmit(this);">
-  
+	<section id="wrapper" class="wrapper">	
+
+	<form name="f" method="post" action="/admin/QA/QAAnswerUpdate.do" enctype="multipart/form-data" onsubmit="return doSubmit(this);">
+
+	<input type="hidden" name="qa_no" value="<%=CmmUtil.nvl(request.getParameter("qa_no")) %>" />
+	<input type="hidden" name="secret_yn" value="<%=CmmUtil.nvl(rDTO.getSecret_yn()) %>" />
+	<input type="hidden" name="title" value="<%=CmmUtil.nvl(rDTO.getTitle()) %>" />
+	
 	    <header class="header">
 			<div class="wrap">
 				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
@@ -188,7 +219,7 @@ function calBytes(str) {
 					</ul>
 				</li>
 			</ul>
-		</nav>	   
+		</nav>
 
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
@@ -197,34 +228,34 @@ function calBytes(str) {
 					<ul class="register_list">
 						<li>
 							<p class="blue_text">제목</p>
-							<div><input type="text" name="title" maxlength="50" /></div>				
-						</li>
+							<div><%=CmmUtil.nvl(rDTO.getTitle()) %></div>				
+						</li>	
 						<li>
 							<p class="blue_text">비밀글 여부</p>
 							<div>
-								예 <input type="radio" name="secret_yn" value="1" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
-								아니오 <input type="radio" name="secret_yn" value="2" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
+								예 <input type="radio" name="secret_yn" value="1" <%=CmmUtil.checked(CmmUtil.nvl(rDTO.getSecret_yn()), "1") %> disabled="disabled" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
+								아니오 <input type="radio" name="secret_yn" value="2" <%=CmmUtil.checked(CmmUtil.nvl(rDTO.getSecret_yn()), "2") %> disabled="disabled" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
 							</div>
 						</li>
 						<li>
 							<p class="blue_text">내용</p>
-							<textarea name="contents" maxlength="2000" wrap="physical"></textarea>
+							<textarea name="contents" maxlength="2000" wrap="physical"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("<br>", "\r\n") %></textarea>
 						</li>
 						<li>
 							<p class="blue_text">첨부파일</p>
 							<div><input type="file" name="qa_file" /></div>
 						</li>
 					</ul>
-				</div>	
+				</div>
 				
 				<div class="btn-groub">
-					<button class="col-2 blue-btn button" type="submit">등록</button>
-					<button class="col-2 glay-btn button" onclick="location.href='/admin/QA/QAList.do';return false;">목록</button>
-				</div>	
-						
+					<button class="col-2 blue-btn button" type="submit">수정</button>
+					<button class="col-2 glay-btn button" onclick="location.href='/admin/QA/QAAnswerDetail.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>';return false;">이전으로</button>
+				</div>					
+	
 			</div>
-		</div>
-	    
+		</div>	
+
 		<footer class="footer">
     	<a href="#">
       		<img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">

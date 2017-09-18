@@ -2,14 +2,22 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.CmmUtil"%>
+<%@ page import="com.sports.dto.QADTO"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <%
+QADTO rDTO = (QADTO)request.getAttribute("rDTO");
+
+if (rDTO==null) {
+	rDTO = new QADTO();
+}
+
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
 %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 <head>
 
 <meta charset="UTF-8">
@@ -121,9 +129,14 @@ function calBytes(str) {
 <body>
 
 	<section id="wrapper" class="wrapper">
-  
-	<form name="f" method="post" action="/admin/QA/QAInsert.do" enctype="multipart/form-data" onsubmit="return doSubmit(this);">
-  
+
+	<form name="f" method="post" action="/admin/QA/QAAnswerInsert.do" enctype="multipart/form-data" onsubmit="return doSubmit(this);">
+
+	<input type="hidden" name="q_no" value="<%=CmmUtil.nvl(rDTO.getQ_no()) %>" />
+	<input type="hidden" name="title" value="<%=CmmUtil.nvl(rDTO.getTitle()) %>" />
+	<input type="hidden" name="secret_yn" value="<%=CmmUtil.nvl(rDTO.getSecret_yn()) %>" />
+	<input type="hidden" name="reg_user_no" value="<%=CmmUtil.nvl(rDTO.getReg_user_no()) %>" />
+	
 	    <header class="header">
 			<div class="wrap">
 				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
@@ -188,7 +201,7 @@ function calBytes(str) {
 					</ul>
 				</li>
 			</ul>
-		</nav>	   
+		</nav>
 
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
@@ -197,13 +210,13 @@ function calBytes(str) {
 					<ul class="register_list">
 						<li>
 							<p class="blue_text">제목</p>
-							<div><input type="text" name="title" maxlength="50" /></div>				
-						</li>
+							<div><%=CmmUtil.nvl(rDTO.getTitle()) %></div>				
+						</li>	
 						<li>
 							<p class="blue_text">비밀글 여부</p>
 							<div>
-								예 <input type="radio" name="secret_yn" value="1" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
-								아니오 <input type="radio" name="secret_yn" value="2" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
+								예 <input type="radio" name="secret_yn" value="1" <%=CmmUtil.checked(CmmUtil.nvl(rDTO.getSecret_yn()), "1") %> disabled="disabled" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
+								아니오 <input type="radio" name="secret_yn" value="2" <%=CmmUtil.checked(CmmUtil.nvl(rDTO.getSecret_yn()), "2") %> disabled="disabled" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
 							</div>
 						</li>
 						<li>
@@ -215,16 +228,16 @@ function calBytes(str) {
 							<div><input type="file" name="qa_file" /></div>
 						</li>
 					</ul>
-				</div>	
+				</div>
 				
 				<div class="btn-groub">
 					<button class="col-2 blue-btn button" type="submit">등록</button>
 					<button class="col-2 glay-btn button" onclick="location.href='/admin/QA/QAList.do';return false;">목록</button>
-				</div>	
-						
+				</div>
+	
 			</div>
 		</div>
-	    
+
 		<footer class="footer">
     	<a href="#">
       		<img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">

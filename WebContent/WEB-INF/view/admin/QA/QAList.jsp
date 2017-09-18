@@ -18,11 +18,14 @@ if (rList==null) {
 	rList = new ArrayList<QADTO>();
 }
 
-String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+String ss_user_id =  CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
+String ss_user_name =  CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
+String ss_user_auth =  CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 
 int access = 1;
 
-if (user_no.equals("")) {
+if (ss_user_no.equals("")) {
 	access = 2;
 }
 %>
@@ -99,12 +102,13 @@ $('#searchbox').keyup(function() {
 				}
 				
 				contents += "<p class='title'>";
+				contents += "<span class='hj-checkBox'>"
 				
 				if (value.answer_yn == "Y") {
 					contents += "<img src='/html5/common/images/ic_reply.png' alt='답글' class='ic_reply'>";
 				}
 				
-				contents += "<span>"+value.title+"</span>";
+				contents += value.title+"</span>";
 				
 				if (nw == 'Y') {	
 					contents += "<img src='/html5/common/images/ic_new.png' alt='new' class='ic_new'>";
@@ -116,7 +120,16 @@ $('#searchbox').keyup(function() {
 				
 				contents += "</p>";
 				contents += "</a>"
-				contents += "<p class='sub_text'>"+value.user_name+"<span>"+value.reg_dt+"</span></p>";
+				contents += "<p class='sub_text'>"
+				
+				if (value.answer_yn == 'Y') {
+					contents += "관리자";
+				} else {
+					contents += value.user_name;
+				}
+				
+				contents += "<span>"+value.reg_dt+"</span>"
+				contents += "</p>";
 				contents += "</li>";
 				
 			});
@@ -181,12 +194,13 @@ $("#addview").add("#searchadd").click(function() {
 				}
 				
 				contents += "<p class='title'>"
+				contents += "<span class='hj-checkBox'>"
 				
 				if (value.answer_yn == "Y") {
 					contents += "<img src='/html5/common/images/ic_reply.png' alt='답글' class='ic_reply'>";
 				}
 				
-				contents += "<span>"+value.title+"</span>";
+				contents += value.title+"</span>";
 				
 				if (nw == 'Y') {	
 					contents += "<img src='/html5/common/images/ic_new.png' alt='new' class='ic_new'>";
@@ -198,7 +212,16 @@ $("#addview").add("#searchadd").click(function() {
 					
 				contents += "</p>"
 				contents += "</a>"
-				contents += "<p class='sub_text'>"+value.user_name+"<span>"+value.reg_dt+"</span></p>";
+				contents += "<p class='sub_text'>"
+				
+				if (value.answer_yn == 'Y') {
+					contents += "관리자";
+				} else {
+					contents += value.user_name;
+				}
+				
+				contents += "<span>"+value.reg_dt+"</span>";
+				contents += "</p>";
 				contents += "</li>"
 				
 			});
@@ -380,9 +403,15 @@ function doReg() {
 		
 		<nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
 			<div class="profile">
+			<% if(ss_user_no.equals("")) {%>
 				<p><img src="/html5/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
 				<button class="c-menu__close"><img src="/html5/common/images/menu/cancel.png" alt="닫기"></button>
-				<div class="login_wrap"><a href="#">로그인</a><a href="#">회원가입</a></div>
+				<div class="login_wrap"><a href="/login.do">로그인</a><a href="/userReg.do">회원가입</a></div>
+			<%} else {%>
+				<p><img src="/html5/common/images/menu/user.png" class="photo"><%=ss_user_name %>님 안녕하세요.</p>
+				<button class="c-menu__close"><img src="/html5/common/images/menu/cancel.png" alt="닫기"></button>
+				<div class="logout_wrap"><a href="/logout.do">로그아웃</a></div>
+			<%} %>
 			</div>
 			<ul class="menu_list">
 				<li><a href="#">주문관리</a></li>
@@ -396,7 +425,7 @@ function doReg() {
 				<li>
 					<a href="#">매출 분석 정보</a>
 					<ul class="col-3">
-						<li><a href="#"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
+						<li><a href="/admin/sale/list.do"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
 						<li><a href="#"><img src="/html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
 						<li><a href="#"><img src="/html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
 					</ul>
@@ -430,8 +459,6 @@ function doReg() {
 			</ul>
 		</nav>
 
-		<!--  <%@ include file="/html5/include/navBar.jsp" %> -->
-
 			<div class="container detail">
 				<div class="wrap search-wrap btn-wrap">
 
@@ -453,15 +480,14 @@ function doReg() {
 								<div style="float: left">
 									<input type="checkbox" name="deleteSelect" class="deleteSelect"
 										value="<%=rDTO.getQa_no()%>" />
-								</div> <%
- 	if (CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y")) {
- %> <a
-								href="javascript:doAnswerDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>');">
+								</div>
+								<% if (CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y")) {%>
+ 									<a href="javascript:doAnswerDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>');">
 
 									<p class="title">
 
-										<img src="/html5/common/images/ic_reply.png" alt="답글"
-											class="ic_reply"> <span class="hj-checkBox"><%=CmmUtil.nvl(rDTO.getTitle())%></span>
+										<span class="hj-checkBox"><img src="/html5/common/images/ic_reply.png" alt="답글"
+											class="ic_reply"><%=CmmUtil.nvl(rDTO.getTitle())%></span>
 
 										<%
 											if (CmmUtil.nvl(rDTO.getSecret_yn()).equals("1")) {
@@ -483,10 +509,9 @@ function doReg() {
 
 									</p>
 
-							</a> <%
- 	} else {
- %> <a
-								href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>');">
+									</a>
+								<%} else {%>
+									<a href="javascript:doDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>');">
 
 									<p class="title">
 
@@ -512,16 +537,12 @@ function doReg() {
 
 									</p>
 
-							</a> <%
- 	}
- %>
-
-								<p class="sub_text"><%=CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y") ? "관리자"
-						: AES256Util.strDecode(CmmUtil.nvl(rDTO.getUser_name()))%><span><%=CmmUtil.nvl(rDTO.getReg_dt().substring(0, 10))%></span>
-								</p>
+									</a>
+								<%}%>
+								<p class="sub_text"><%=CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y") ? "관리자" : CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt().substring(0, 10))%></span></p>
 							</li>
 							<%
-								}
+							}
 							%>
 						</ul>
 						<label class="all_select" id="alltext"><input
@@ -533,10 +554,12 @@ function doReg() {
 					</div>
 
 					<div class="btn-groub">
+						<% if (ss_user_auth.equals('A')) {%>
 						<button class="col-2 blue-btn button"
 							onclick="javascript:edit(this.form);return false;">편집하기</button>
 						<button class="col-2 glay-btn button"
 							onclick="javascript:doReg();return false;">작성하기</button>
+						<%} %>
 					</div>
 
 				</div>

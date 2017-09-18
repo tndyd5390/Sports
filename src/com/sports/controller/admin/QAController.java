@@ -106,7 +106,7 @@ public class QAController {
 		
 		try {
 			
-			String reg_user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+			String reg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 			String secret_yn = CmmUtil.nvl(request.getParameter("secret_yn"));
 			String title = CmmUtil.nvl(request.getParameter("title"));
 			String contents = CmmUtil.nvl(request.getParameter("contents"));
@@ -315,8 +315,7 @@ public class QAController {
 		
 		try {
 			
-			String reg_user_no = CmmUtil.nvl(request.getParameter("reg_user_no"));
-			String chg_user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+			String reg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			String answer_yn = CmmUtil.nvl(request.getParameter("answer_yn"));
@@ -337,7 +336,6 @@ public class QAController {
 			QADTO qaDTO = new QADTO();
 			
 			qaDTO.setReg_user_no(reg_user_no);
-			qaDTO.setChg_user_no(chg_user_no);
 			qaDTO.setQa_no(qa_no);
 			qaDTO.setQ_no(q_no);
 			qaDTO.setAnswer_yn(answer_yn);
@@ -451,7 +449,7 @@ public class QAController {
 		
 		try {
 			
-			String reg_user_no = CmmUtil.nvl((String)session.getAttribute("user_no")); 
+			String reg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no")); 
 			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			String answer_yn = CmmUtil.nvl(request.getParameter("answer_yn"));
@@ -578,7 +576,7 @@ public class QAController {
 			long now = System.currentTimeMillis();
 			long inputDate = to.getTime();
 
-			String title = CmmUtil.nvl(qaDT.getTitle());	//제목이 14자 이상이면 ...붙여주기
+			String title = CmmUtil.nvl(qaDT.getTitle());	//제목이 14자 이상이면 ...붙여주
 			
 			if (title.length() >= 14) {
 			
@@ -591,7 +589,7 @@ public class QAController {
 				qaDT.setNew_yn("Y");
 			}
 			
-			qaDT.setUser_name(AES256Util.strDecode(CmmUtil.nvl(qaDT.getUser_name())));
+			qaDT.setUser_name(qaDT.getUser_name());
 			
 		}
 		
@@ -640,7 +638,7 @@ public class QAController {
 				qaDT.setNew_yn("Y");
 			}
 			
-			qaDT.setUser_name(AES256Util.strDecode(CmmUtil.nvl(qaDT.getUser_name())));
+			qaDT.setUser_name(qaDT.getUser_name());
 			
 		}	
 		

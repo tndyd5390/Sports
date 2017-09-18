@@ -14,11 +14,11 @@
 	<!-- 게시글 등록 쿼리 -->
 	<insert id="insertQADetail" parameterType="QADTO">
 		INSERT INTO QA_INFO
-		(QA_NO, Q_NO, ANSWER_YN, SECRET_YN, TITLE, CONTENTS, REG_USER_NO, REG_DT, CHG_USER_NO, CHG_DT)
+		(QA_NO, Q_NO, ANSWER_YN, SECRET_YN, TITLE, CONTENTS, REG_USER_NO, REG_DT)
 		VALUES
 		(
 		(SELECT IFNULL(MAX(QA.QA_NO),10000000)+1 FROM QA_INFO QA), (SELECT IFNULL(MAX(QA.Q_NO),10000000)+1 FROM QA_INFO QA), 
-		'N', #{secret_yn}, #{title}, #{contents}, #{reg_user_no}, NOW(), #{reg_user_no}, NOW()
+		'N', #{secret_yn}, #{title}, #{contents}, #{reg_user_no}, NOW() 
 		)
 	</insert>
 	
@@ -58,10 +58,10 @@
 	<!-- 답글 등록 쿼리 -->
 	<insert id="insertQAAnswerDetail" parameterType="QADTO">
 		INSERT INTO QA_INFO
-		(QA_NO, Q_NO, ANSWER_YN, SECRET_YN, TITLE, CONTENTS, REG_USER_NO, REG_DT, CHG_USER_NO, CHG_DT)
+		(QA_NO, Q_NO, ANSWER_YN, SECRET_YN, TITLE, CONTENTS, REG_USER_NO, REG_DT)
 		VALUES
 		(
-		(SELECT IFNULL(MAX(QA.QA_NO),10000000)+1 FROM QA_INFO QA), #{q_no}, 'Y', #{secret_yn}, #{title}, #{contents}, #{reg_user_no}, NOW(), #{chg_user_no}, NOW()
+		(SELECT IFNULL(MAX(QA.QA_NO),10000000)+1 FROM QA_INFO QA), #{q_no}, 'Y', #{secret_yn}, #{title}, #{contents}, #{reg_user_no}, NOW()
 		)
 	</insert>
 	

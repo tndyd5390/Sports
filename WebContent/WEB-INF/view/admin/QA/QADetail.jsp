@@ -1,14 +1,39 @@
 <!-- for Administrator -->
 
+<%@ page import="com.sports.util.AES256Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.CmmUtil"%>
+<%@ page import="com.sports.dto.QADTO"%>
+<%@ page import="java.util.ArrayList"%>		
+<%@ page import="java.util.List"%>
 <%
+QADTO rDTO = (QADTO)request.getAttribute("rDTO");
+
+if (rDTO==null) {
+	rDTO = new QADTO();
+}
+
+String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
+
+int access = 1;
+
+if (ss_user_no.equals("")) {
+	
+	access = 3;
+	
+} else if (ss_user_no.equals(CmmUtil.nvl(rDTO.getReg_user_no()))) {
+	
+	access = 2;
+	
+}
+
+System.out.println("user_no: " + CmmUtil.nvl(rDTO.getReg_user_no()));
 %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="ko">
 
 <head>
 
@@ -32,98 +57,50 @@ String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
 
 <script type="text/javascript">
 
-function doSubmit(f) {
+function doReply() {
 	
-	if (f.title.value == "") {
+	if ("<%=access%>"==3) {
 		
-		alert("제목을 입력하시기 바랍니다.");
-		f.title.focus();
-		return false;
+		alert("로그인을 하시기 바랍니다.");
+	
+	} else {
+		
+		location.href="/admin/QA/QAAnswerReg.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>&answer_yn=<%=CmmUtil.nvl(rDTO.getAnswer_yn())%>";
 		
 	}
-	
-	if (calBytes(f.title.value) > 100) {
-		
-		alert("제목은 최대 100Bytes까지만 입력 가능합니다.");
-		f.title.focus();
-		return false;
-		
-	}	
-	
-	var secretCheck = false;
-	
-	for (var i=0; i<f.secret_yn.length; i++) {
-		
-		if (f.secret_yn[i].checked) {
-			secretCheck = true;
-		}
-		
-	}
-	
-	if (secretCheck==false) {
-		
-		alert("비밀글 여부를 선택하시기 바랍니다.");
-		f.secret_yn[0].focus();
-		return false;
-		
-	}	
-	
-	if (f.contents.value == "") {
-		
-		alert("내용을 입력하시기 바랍니다.");
-		f.contents.focus();
-		return false;
-		
-	}	
-	
-	if (calBytes(f.contents.value) > 4000) {
-		
-		alert("내용은 최대 4000Bytes까지만 입력 가능합니다.");
-		f.contents.focus();
-		return false;
-		
-	}		
 	
 }
 
-function calBytes(str) {
+function doDelete() {
 	
-	var tcount = 0;
-	var tmpStr = new String(str);
-	var strCnt = tmpStr.length;
-
-	var onechar;
-	
-	for (i=0;i<strCnt;i++) {
+	if ("<%=access%>"==3) {
 		
-		onechar = tmpStr.charAt(i);
+		alert("로그인을 하시기 바랍니다.");
 		
-		if (escape(onechar).length > 4) {
-			
-			tcount += 2;
-			
-		} else {
-			
-			tcount += 1;
-			
+	} else {
+		
+		if (confirm("작성한 게시글을 삭제하시겠습니까?")) {
+			location.href="/admin/QA/QADelete.do?q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
 		}
 		
 	}
 	
-	return tcount;
-	
+}
+
+function doList() {
+	location.href="/admin/QA/QAList.do";
 }
 
 </script>
-
+	
 </head>
 
 <body>
 
 	<section id="wrapper" class="wrapper">
-  
-	<form name="f" method="post" action="/admin/QA/QAInsert.do" enctype="multipart/form-data" onsubmit="return doSubmit(this);">
-  
+		
+	<form name="f" id="f" method="post">	
+	
 	    <header class="header">
 			<div class="wrap">
 				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
@@ -131,7 +108,7 @@ function calBytes(str) {
 			</div>
 			<div class="page_title"><p>Q&amp;A</p></div>
 		</header>
-	
+
 		<nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
 			<div class="profile">
 			<% if(ss_user_no.equals("")) {%>
@@ -188,43 +165,27 @@ function calBytes(str) {
 					</ul>
 				</li>
 			</ul>
-		</nav>	   
+		</nav>
 
 		<div class="container detail">
-			<div class="wrap search-wrap btn-wrap">
+			<div class="wrap btn-wrap">
 			
-				<div class="list_wrap">
-					<ul class="register_list">
-						<li>
-							<p class="blue_text">제목</p>
-							<div><input type="text" name="title" maxlength="50" /></div>				
-						</li>
-						<li>
-							<p class="blue_text">비밀글 여부</p>
-							<div>
-								예 <input type="radio" name="secret_yn" value="1" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
-								아니오 <input type="radio" name="secret_yn" value="2" style="MARGIN: 0px 3px 1px 0px; WIDTH: 13px; HEIGHT: 13px" />
-							</div>
-						</li>
-						<li>
-							<p class="blue_text">내용</p>
-							<textarea name="contents" maxlength="2000" wrap="physical"></textarea>
-						</li>
-						<li>
-							<p class="blue_text">첨부파일</p>
-							<div><input type="file" name="qa_file" /></div>
-						</li>
-					</ul>
-				</div>	
+				<div class="list_wrap qna_detail">
+					<div class="top">
+						<p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
+						<p class="sub_text"><%=CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
+					</div>
+          			<div class="content"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %></div>
+				</div>
+        		<div class="btn-groub">
+					<button class="col-3 deep-btn button" onclick="javascript:doReply();return false;">답글</button>
+					<button class="col-3 blue-btn button" onclick="javascript:doDelete();return false;">삭제</button>
+					<button class="col-3 glay-btn button" onclick="javascript:doList();return false;">목록</button>
+				</div>
 				
-				<div class="btn-groub">
-					<button class="col-2 blue-btn button" type="submit">등록</button>
-					<button class="col-2 glay-btn button" onclick="location.href='/admin/QA/QAList.do';return false;">목록</button>
-				</div>	
-						
 			</div>
 		</div>
-	    
+		
 		<footer class="footer">
     	<a href="#">
       		<img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">
@@ -237,15 +198,15 @@ function calBytes(str) {
       		<p>Copyright © <strong>모두의 스포츠</strong> All rights reserved. </p>
     	</div>
 		</footer>
-	
-	</form>	
 
+	</form>	
+		
 	</section>
-  
+		  
 	<div id="c-mask" class="c-mask"></div>
 	<script src="/html5/common/js/classie.js"></script>
 	<script src="/html5/common/js/common.js"></script>
-  
+	  
 </body>
 
 </html>
