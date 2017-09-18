@@ -87,4 +87,8 @@ public class UserService implements IUserService{
 	public void userDelete(String userNo) throws Exception {
 		userMapper.userDelete(userNo);
 	}
+	@Override
+	public List<UserDTO> getMoreUserList(int readMore) throws Exception {
+		return userMapper.getMoreUserList(readMore);
+	}
 }

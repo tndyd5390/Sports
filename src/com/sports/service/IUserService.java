@@ -31,4 +31,6 @@ public interface IUserService {
 
 	public void userDelete(String userNo) throws Exception;
 
+	public List<UserDTO> getMoreUserList(int readMore) throws Exception;
+
 }
