@@ -31,10 +31,10 @@ public class NoticeController {
 	@Resource(name = "NoticeService")
 	private INoticeService noticeService;
 	
-	@RequestMapping(value="/admin/notice/NoticeList",method=RequestMethod.GET)
+	@RequestMapping(value="/notice/NoticeList",method=RequestMethod.GET)
 	public String noticeList(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/admin_join");
+		log.info("welcome _join");
 		
 		List<NoticeDTO> nList = new ArrayList<NoticeDTO>();
 		
@@ -75,10 +75,10 @@ public class NoticeController {
 		
 		log.info(this.getClass().getName() + ".NoticeList end!");
 		
-		return "/admin/notice/NoticeList";
+		return "/notice/NoticeList";
 	}
 	
-	@RequestMapping(value="/admin/notice/readMore.do")
+	@RequestMapping(value="/notice/readMore.do")
 	public @ResponseBody List<NoticeDTO> Notice_MoreView(@RequestParam(value = "cnt") String cnt,@RequestParam(value = "search") String search) throws Exception{
 		
 		NoticeDTO nDTO = new NoticeDTO();
@@ -94,7 +94,7 @@ public class NoticeController {
 		
 		for(NoticeDTO nDT : viewMore_list){//new 붙히는 시간 계산해서 nList의 title에 new 붙여주기
 			String reg_dt = CmmUtil.nvl(nDT.getReg_dt());
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date to = transFormat.parse(reg_dt);
 
 			long now = System.currentTimeMillis();
@@ -127,7 +127,7 @@ public class NoticeController {
 	}
 	
 	
-	@RequestMapping(value="/admin/notice/search")
+	@RequestMapping(value="/notice/search")
 	public @ResponseBody List<NoticeDTO> searchNoticeList(@RequestParam(value="search") String search) throws Exception{
 		
 		System.out.println("search : " + search);
@@ -140,7 +140,7 @@ public class NoticeController {
 		
 		for(NoticeDTO nDT : ndTO){//new 붙히는 시간 계산해서 nList의 title에 new 붙여주기
 			String reg_dt = CmmUtil.nvl(nDT.getReg_dt());
-			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd");
 			Date to = transFormat.parse(reg_dt);
 
 			long now = System.currentTimeMillis();
@@ -169,10 +169,10 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value="/admin/notice/NoticeInfo",method={RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value="/notice/NoticeInfo",method={RequestMethod.GET, RequestMethod.POST})
 	public String noticeInfo(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/NoticeInfo");
+		log.info("welcome /NoticeInfo");
 		
 		String notice_no = request.getParameter("notice_no");
 		
@@ -189,10 +189,10 @@ public class NoticeController {
 		
 		log.info(this.getClass().getName() + ".NoticeInfo end!");
 		
-		return "/admin/notice/NoticeInfo";
+		return "/notice/NoticeInfo";
 	}
 	
-	@RequestMapping(value="/admin/notice/NoticeReg",method=RequestMethod.GET)
+	@RequestMapping(value="/notice/NoticeReg",method=RequestMethod.GET)
 	public String noticeReg(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
 		
@@ -202,14 +202,14 @@ public class NoticeController {
 		
 		log.info(this.getClass().getName() + ".NoticeReg end!");
 		
-		return "/admin/notice/NoticeReg";
+		return "/notice/NoticeReg";
 		
 	}
 	
-	@RequestMapping(value="/admin/notice/NoticeInsert",method=RequestMethod.POST)
+	@RequestMapping(value="/notice/NoticeInsert",method=RequestMethod.POST)
 	public String noticeInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/NoticeInsert");
+		log.info("welcome /NoticeInsert");
 		
 		String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		String title = CmmUtil.nvl(request.getParameter("title"));
@@ -235,17 +235,17 @@ public class NoticeController {
 		noticeDTO = null;
 		
 		model.addAttribute("msg","게시글 등록에 성공하였습니다.");
-		model.addAttribute("url","/admin/notice/NoticeList.do");
+		model.addAttribute("url","/notice/NoticeList.do");
 		
-		return "/admin/notice/redirect";
+		return "alert/alert";
 	}
 	
 	
 	
-	@RequestMapping(value="/admin/notice/NoticeEditInfo",method=RequestMethod.GET)
+	@RequestMapping(value="/notice/NoticeEditInfo",method=RequestMethod.GET)
 	public String noticeEditInfo(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/NoticeEditInfo");
+		log.info("welcome /NoticeEditInfo");
 		
 		String notice_no = request.getParameter("notice_no");
 		
@@ -259,13 +259,13 @@ public class NoticeController {
 		
 		model.addAttribute("rDTO",rDTO);
 
-		return "/admin/notice/NoticeEditInfo";
+		return "/notice/NoticeEditInfo";
 	}
 	
-	@RequestMapping(value="/admin/notice/NoticeUpdate",method=RequestMethod.POST)
+	@RequestMapping(value="/notice/NoticeUpdate",method=RequestMethod.POST)
 	public String noticeUpdate(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/NoticeUpdate");
+		log.info("welcome /NoticeUpdate");
 		
 		String notice_no = CmmUtil.nvl(request.getParameter("notice_no"));
 		String title = CmmUtil.nvl(request.getParameter("title"));
@@ -289,16 +289,16 @@ public class NoticeController {
 		noticeService.updateNoticeInfo(noticeDTO);
 		
 		model.addAttribute("msg","게시글 수정에 성공하였습니다.");
-		model.addAttribute("url","/admin/notice/NoticeInfo.do?notice_no="+notice_no);
+		model.addAttribute("url","/notice/NoticeInfo.do?notice_no="+notice_no);
 		
 		
-		return "/admin/notice/redirect";
+		return "alert/alert";
 	}
 	
-	@RequestMapping(value="/admin/notice/NoticeDelete",method=RequestMethod.GET)
+	@RequestMapping(value="/notice/NoticeDelete",method=RequestMethod.GET)
 	public String noticeDelete(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception{
-		log.info("welcome /admin/NoticeDelete");
+		log.info("welcome /NoticeDelete");
 		
 		String notice_no = request.getParameter("notice_no");
 		
@@ -308,17 +308,17 @@ public class NoticeController {
 		noticeService.deleteNoticeInfo(nDTO);
 		
 		model.addAttribute("msg","게시글 삭제에 성공하였습니다.");
-		model.addAttribute("url","/admin/notice/NoticeList.do");
+		model.addAttribute("url","/notice/NoticeList.do");
 		
-		return "/admin/notice/redirect";
+		return "alert/alert";
 	}
 	
 	
-	@RequestMapping(value="/admin/notice/NoticeCheckboxDelete",method=RequestMethod.POST)
+	@RequestMapping(value="/notice/NoticeCheckboxDelete",method=RequestMethod.POST)
 	public String NoticeCheckboxDelete(HttpServletRequest request, HttpServletResponse response,
 			ModelMap model) throws Exception {
 		
-		log.info("welcome /admin/NoticeCheckboxDelete");
+		log.info("welcome /NoticeCheckboxDelete");
 
 		String[] deleteSelect = request.getParameterValues("checkbox");
 		
@@ -330,9 +330,9 @@ public class NoticeController {
 			noticeService.deleteCheckList(nDTO);
 		
 		model.addAttribute("msg","선택된 게시글 삭제에 성공하였습니다.");
-		model.addAttribute("url","/admin/notice/NoticeList.do");
+		model.addAttribute("url","/notice/NoticeList.do");
 		
-		return "/admin/notice/redirect";
+		return "alert/alert";
 		
 	}
 	
