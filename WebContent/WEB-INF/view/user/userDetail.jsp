@@ -23,33 +23,12 @@
 			location.href = "userDelete.do?uNo="+uNo;
 			return true;		
 		}else{
-			
 			return false;
 		}
 		
 	}
 	
 </script>
-<style>
-
-/* div.colspan,div.colspan+div.cell
-{
-    border:0;
-}
-
-div.colspan>div
-{
-    width:1px;
-}
-
-div.colspan>div>div
-{
-    position:relative;
-    width:99px;
-    overflow:hidden;
-}
- */
-</style>
 </head>
 <body>
 	<section id="wrapper" class="wrapper">
