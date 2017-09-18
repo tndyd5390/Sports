@@ -8,7 +8,6 @@
 
 <!-- Styles : CSS & SASS Sorcemap -->
 <link rel="stylesheet" href="/common/css/style.css">
-<<<<<<< HEAD
 <!-- Styles : sanghoon Kim-->
 <link rel="stylesheet" href="/html5/common/css/sangAccount.css">
 <!-- JavaScirpt Sorcemap -->
@@ -40,7 +39,6 @@
 			</div>
 			<div class="logo">
 				<a href="main.do"><h2 class="title">모두dd의 스포츠</h2></a>
-=======
 <!-- JavaScirpt Sorcemap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="/common/js/jquery-ui.js"></script>

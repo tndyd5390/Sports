@@ -4,7 +4,32 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
+<style>
+div.col-2-group{
+	margin-top :10px;
+	width : 100%;
+	height: 40px;
+}
+div.col-2-group a{
+	display: inline-block;
+ 	width : 50%;
+ 	height: 100%;
+ 	font-size : 20px;
+ 	text-align : center;
+ 	line-height: 42px;
+}
+div.col-2-group a:nth-child(1){
+	border-right : 2px solid #F5F5F5;
+	background-color : #1777CB;
+	color : #fff;
+}
+div.col-2-group a:nth-child(2){
+	border-left : 2px solid #F5F5F5;
+	background-color : #9E9E9E;
+	color : #fff;
+}
 
+</style>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -67,7 +92,6 @@
                 <p class="price register">30,000원</p>
               </div>
               </a>
-              <button class="register-btn thumb-btn">등록</button>
             </li>
             <li>
               <a href="#">
@@ -78,15 +102,22 @@
                 <p class="title">한국스포츠 KSD 태권도 품 도복 (아동) TKD POOM Uniform (Child) </p>
                 <p class="price edit">30,000원</p>
                 </div>
-                <button class="edit-btn thumb-btn">편집</button>
-              </div>
-            </li>
+              </a>
+             </li>
           </ul>
-
+          <div id ="more-div">
+          	<div class="more-type">
+				<a href="#" class="moremore">더보기</a>
+			</div>
+			<div class="col-2-group">
+				<a href="#" >등록</a>
+				<a href="#" >삭제</a>
+			</div>
+          </div>
         </div>
-
+        
       </div>
-    </div>
+    </section>
  <%@include file="/html5/include/footer.jsp" %>
 </body>
 
