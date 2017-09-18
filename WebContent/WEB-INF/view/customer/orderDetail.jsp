@@ -8,84 +8,89 @@
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <style type="text/css">
-.shDTable{
-		display: table;
-		width: 100%;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	.shDTables{
-		display: table;
-		width: 100%;
-		margin-top: 60px;
-		margin-bottom: 10px;
-	}
-	.shCTitle{
-		display: inline-block;
-		width: 27%;
-		color: #7f7f7f;
-		font-weight: bold;
-		display: table-cell;
-		vertical-align: middle;
-		text-align: center;
-		height: 30px;
-	}
-	.shCDetail{
-		display: inline-block;
-		width: 75%;
-		color: #000000;
-		display: table-cell;
-		font-weight: bold;
-		height: 30px;
-		vertical-align: middle;
-		padding-left: 5px;
-	}
-	.shDelivey{
-		background-color: #F2F2F2;
-		margin-top: 5px;
-		font-weight: bold;
-		text-align: center;
-		height: 40px;
-		display: table-cell;
-		vertical-align: middle;
-		width: 10%;
-		margin-bottom: 20px;
-	}
-	.shNDelivey{
-		color: red;
-		font-weight: bold;
-		vertical-align: middle;
-		margin: 0 auto;
-		color: red;
-		font-size: 20px;
-		width: 100%;
-		
-	}
-	a.psyOrderDetailBtn {
+.shDTable {
+	display: table;
+	width: 100%;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.shDTables {
+	display: table;
+	width: 100%;
+	margin-top: 60px;
+	margin-bottom: 10px;
+}
+
+.shCTitle {
+	display: inline-block;
+	width: 27%;
+	color: #7f7f7f;
+	font-weight: bold;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 30px;
+}
+
+.shCDetail {
+	display: inline-block;
+	width: 75%;
+	color: #000000;
+	display: table-cell;
+	font-weight: bold;
+	height: 30px;
+	vertical-align: middle;
+	padding-left: 5px;
+}
+
+.shDelivey {
+	background-color: #F2F2F2;
+	margin-top: 5px;
+	font-weight: bold;
+	text-align: center;
+	height: 40px;
+	display: table-cell;
+	vertical-align: middle;
+	width: 10%;
+	margin-bottom: 20px;
+}
+
+.shNDelivey {
+	color: red;
+	font-weight: bold;
+	vertical-align: middle;
+	margin: 0 auto;
+	color: red;
+	font-size: 20px;
+	width: 100%;
+}
+
+a.psyOrderDetailBtn {
 	width: 45%;
-    height: 40px;
-    top: 15px;
-    right: 15px;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.8;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    text-decoration: none;
-    color: #fff;
-    background-color: #5bc0de;
-    border-color: #46b8da;
-    margin-bottom: 16px;
+	height: 40px;
+	top: 15px;
+	right: 15px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.8;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	margin-bottom: 16px;
 }
 </style>	
 </head>
