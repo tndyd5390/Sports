@@ -28,12 +28,12 @@ public class CustomerOrderController {
 		return "customer/orderView";
 	}
 	
-	@RequestMapping(value="customer/orderInfo", method=RequestMethod.GET)
+	@RequestMapping(value="customer/orderList", method=RequestMethod.GET)
 	public String customerOrderInfo(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customerOrderInfo start!!!");
 		
 		log.info(this.getClass() + ".customerOrderInfo end!!!");
-		return "customer/orderInfo";
+		return "customer/orderList";
 	}
 	
 	@RequestMapping(value="customer/orderDetail", method=RequestMethod.GET)
@@ -42,5 +42,21 @@ public class CustomerOrderController {
 		
 		log.info(this.getClass() + ".customerOrderDetail end!!!");
 		return "customer/orderDetail";
+	}
+	
+	@RequestMapping(value="customer/orderRefundDetail", method=RequestMethod.GET)
+	public String customerOrderRefundDetail(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".customerOrderRefundDetail start!!!");
+		
+		log.info(this.getClass() + ".customerOrderRefundDetail end!!!");
+		return "customer/orderRefundDetail";
+	}
+	
+	@RequestMapping(value="customer/orderRefundList", method=RequestMethod.GET)
+	public String customerOrderRefundList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".customerOrderRefundList start!!!");
+		
+		log.info(this.getClass() + ".customerOrderRefundList end!!!");
+		return "customer/orderRefundList";
 	}
 }
