@@ -60,11 +60,7 @@
 	</update>
 	
 	<select id="getUserList" resultType="UserDTO">
-		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH,(SELECT COUNT(*) FROM USER_INFO) AS COUNT FROM USER_INFO ORDER BY USER_NO DESC LIMIT 10
-	</select>
-	
-	<select id="getMoreUserList" resultType="UserDTO" parameterType="int">
-		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH,(SELECT COUNT(*) FROM USER_INFO) AS COUNT FROM USER_INFO ORDER BY USER_NO DESC LIMIT 10 OFFSET #{readMore}
+		SELECT USER_NO, USER_ID, USER_NAME, IF(AUTH='A','운영자','유저') AS AUTH FROM USER_INFO ORDER BY USER_NO DESC
 	</select>
 	
 	<select id="getSearchName" resultType="UserDTO" parameterType="UserDTO">

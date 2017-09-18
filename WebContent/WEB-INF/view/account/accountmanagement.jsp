@@ -8,6 +8,39 @@
 
 <!-- Styles : CSS & SASS Sorcemap -->
 <link rel="stylesheet" href="/common/css/style.css">
+<<<<<<< HEAD
+<!-- Styles : sanghoon Kim-->
+<link rel="stylesheet" href="/html5/common/css/sangAccount.css">
+<!-- JavaScirpt Sorcemap -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<script src="/common/js/jquery-ui.js"></script>
+
+<script src="/common/js/placeholders.min.js"></script>
+<!--[if lte IE 9]>
+<script src="/common/js/placeholders.min.js"></script>
+<![endif]-->
+<!--[if lt IE 9]>
+<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<style type="text/css">
+
+
+
+</style>
+
+</head>
+
+<body >
+  <section id="wrapper" class="wrapper">
+  	<header class="header">
+		<div class="wrap">
+			<div class="left_menu">
+				<img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
+			</div>
+			<div class="logo">
+				<a href="main.do"><h2 class="title">모두dd의 스포츠</h2></a>
+=======
 <!-- JavaScirpt Sorcemap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="/common/js/jquery-ui.js"></script>
@@ -178,6 +211,7 @@
 			</div>
 			<div class="logo">
 				<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+>>>>>>> refs/remotes/origin/psy
 			</div>
 		</div>
 		
