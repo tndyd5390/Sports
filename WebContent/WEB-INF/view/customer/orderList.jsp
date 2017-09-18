@@ -40,7 +40,7 @@ a.psySearchBtn {
     border-radius: 4px;
     text-decoration: none;
     color: #fff;
-    background-color: #5bc0de;
+    background-color: #1777CB;
     border-color: #46b8da;
     float: right;
 }
@@ -145,7 +145,7 @@ a.psyOrderDetailBtn {
 	border-radius: 4px;
 	text-decoration: none;
 	color: #fff;
-	background-color: #5bc0de;
+	background-color: #1777CB;
 	border-color: #46b8da;
 	margin-bottom: 16px;
 }
