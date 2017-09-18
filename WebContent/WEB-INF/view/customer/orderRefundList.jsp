@@ -18,7 +18,7 @@
 	margin-bottom: 10px;
 }
 
-a.psySearchBtn {
+a.psyOrderRefundListBtn {
 	width: 25%;
     height: 40px;
     top: 15px;
@@ -183,7 +183,7 @@ a.psyOrderDetailBtn {
 					<option value="#">환불 일자</option>
 					<option value="#">주소</option>
 				</select> 
-				<input class="psySearchText" type="text"><a href="#" class="psySearchBtn" >검색</a>
+				<input class="psySearchText" type="text"><a href="#" class="psyOrderRefundListBtn" >검색</a>
 			</div>
  		<div class="shDTables" align="left" style="margin-top:10px;">
  			<div class="psyTitle" align="left" onclick="toggleFunc('1');">2017/05/22</div>

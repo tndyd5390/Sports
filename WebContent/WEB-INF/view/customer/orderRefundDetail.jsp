@@ -66,7 +66,7 @@
 	width: 100%;
 }
 
-a.psyOrderDetailBtn {
+a.psyOrderRefundDetilBtn {
 	width: 45%;
 	height: 40px;
 	top: 15px;
@@ -152,8 +152,8 @@ a.psyOrderDetailBtn {
  			<div class="shCTitle" align="left">운송장 번호</div>
  			<div class="shCDetail" align="left">123456789</div>
  		</div>
- 	<a href="#" class="psyOrderDetailBtn">환불하기</a>
- 	<a href="#" class="psyOrderDetailBtn">취소</a>
+ 	<a href="#" class="psyOrderRefundDetilBtn">환불하기</a>
+ 	<a href="#" class="psyOrderRefundDetilBtn">취소</a>
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>
