@@ -36,4 +36,6 @@ public interface UserMapper {
 
 	void userDelete(String userNo) throws Exception;
 
+	List<UserDTO> getMoreUserList(int readMore) throws Exception;
+
 }

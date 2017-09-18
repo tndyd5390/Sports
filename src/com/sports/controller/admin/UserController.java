@@ -321,6 +321,17 @@ public class UserController {
 		log.info(this.getClass() + " userListProc End!!");
 		return uList;
 	}
+	@RequestMapping(value="moreUserListProc")
+	public @ResponseBody List<UserDTO> moreUserListProc(@RequestParam("readMore") String readMore) throws Exception{
+		log.info(this.getClass() + " moreUserListProc Start!!");
+		
+		log.info("readMore : "+ readMore);
+		List<UserDTO> uList = new ArrayList<UserDTO>();
+		uList = userService.getMoreUserList(Integer.parseInt(readMore));
+		
+		log.info(this.getClass() + " moreUserListProc Start!!");
+		return uList;
+	}
 	
 	@RequestMapping(value="userListSearch")
 	public @ResponseBody List<UserDTO> userListSearch(@RequestParam("type") String type, @RequestParam("value") String value) throws Exception{
