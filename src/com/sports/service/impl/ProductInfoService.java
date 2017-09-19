@@ -1,5 +1,10 @@
 package com.sports.service.impl;
 
-public class ProductInfoService {
+import org.springframework.stereotype.Service;
+
+import com.sports.service.IProductInfoService;
+
+@Service("ProductInfoService")
+public class ProductInfoService implements IProductInfoService{
 
 }

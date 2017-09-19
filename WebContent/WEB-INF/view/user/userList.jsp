@@ -7,59 +7,14 @@
 <%@include file="/html5/include/head.jsp"%>
 <style>
 </style>
+<script src="/html5/common/js/userlist.js"></script>
 <script>
+var readMore = 10;
+
 $(function(){
-	
 	userList();
 })
-function userList(){
-	var contents ="";
-	$.ajax({
-		url : 'userListProc.do',
-		method : 'post',
-		success : function(data){
-			$.each(data, function(key, value){
-				contents += "<ul class='col-5'>";
-				contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
-				contents += "<li><p>"+value.user_no+"</p></li>";
-				contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
-				contents += "<li><p>"+value.user_name+"</p></li>";
-				contents += "<li><p>"+value.auth+"</p></li>";
-				contents += "</ul>";
-			})
-			$('#userList').html(contents);
-			contents="";
-		}
-	})
-}
-function doSearch(){
-	var contents ="";
-	var searchType = $('#searchType').val();
-	var searchValue = $('#searchValue').val();
-	if(searchValue == ""){
-		userList()
-	}else{
-	$.ajax({
-		url : 'userListSearch.do',
-		method : 'post',
-		data : {'type' : searchType,
-				'value' : searchValue},
-		success : function(data){
-					$.each(data, function(key, value){
-						contents += "<ul class='col-5'>";
-						contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
-						contents += "<li><p>"+value.user_no+"</p></li>";
-						contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
-						contents += "<li><p>"+value.user_name+"</p></li>";
-						contents += "<li><p>"+value.auth+"</p></li>";
-						contents += "</ul>";
-					})
-					$('#userList').html(contents);
-					contents="";					
-			}
-	})
-	}
-}
+
 </script>
 </head>
 <body>
@@ -115,8 +70,10 @@ function doSearch(){
  						</li>
 					</ul>
 				</div>
-			<div class="more-type">
+			<div id="more-div">
+			<!-- 	<div class="more-type">
 				<a href="#" class="moremore">더보기</a>
+			</div> -->
 			</div>
 			</div>
 		</div>

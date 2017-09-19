@@ -19,9 +19,10 @@ public class UserDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
-	
 	private String type;
 	private String value;
+	private String count;
+	private String readmore;
 	private String[] updateChk;
 	private String[] updateCon;
 	
@@ -156,5 +157,17 @@ public class UserDTO {
 	}
 	public void setAuth_code(String auth_code) {
 		this.auth_code = auth_code;
+	}
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	public String getReadmore() {
+		return readmore;
+	}
+	public void setReadmore(String readmore) {
+		this.readmore = readmore;
 	}
 }

@@ -32,4 +32,10 @@ public interface UserMapper {
 
 	UserDTO getUserDetail(UserDTO uDTO) throws Exception;
 
+	void updateUserDetail(UserDTO uDTO) throws Exception;
+
+	void userDelete(String userNo) throws Exception;
+
+	List<UserDTO> getMoreUserList(int readMore) throws Exception;
+
 }
