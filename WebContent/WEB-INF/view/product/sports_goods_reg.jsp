@@ -82,7 +82,6 @@
 		});
 	});
 </script>
-
 </head>
 <body>
 	<section id="wrapper" class="wrapper">
