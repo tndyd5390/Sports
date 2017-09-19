@@ -60,24 +60,23 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		var mainfileTarget = $('.filebox .upload-hidden');
+		var mainfileTarget = $('#main_file');
 		var detailfileTarget = $('#detail_file');
 		
 		mainfileTarget.on('change',function() {
-					if (window.FileReader) {
-						var filename = $(this)[0].files[0].name;
-					} else {
-						var filename = $(this).val().split('/').pop().split('\\').pop();
-					}
-					$(this).siblings('#main_label').val(filename);
-				});
+			if (window.FileReader) {
+				var filename = $(this)[0].files[0].name;
+			} else {
+				var filename = $(this).val().split('/').pop().split('\\').pop();
+			}
+			$(this).siblings('#main_label').val(filename);
+		});
 		
 		detailfileTarget.on('change',function() {
 			if (window.FileReader) {
 				var filename = $(this)[0].files[0].name;
 			} else {
-				var filename = $(this).val().split('/').pop().split(
-						'\\').pop();
+				var filename = $(this).val().split('/').pop().split('\\').pop();
 			}
 			$(this).siblings('#detail_label').val(filename);
 		});
@@ -155,5 +154,4 @@
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
 </body>
-
 </html>
