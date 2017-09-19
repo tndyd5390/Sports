@@ -152,5 +152,6 @@
 			</div>
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
+		</section>
 </body>
 </html>
