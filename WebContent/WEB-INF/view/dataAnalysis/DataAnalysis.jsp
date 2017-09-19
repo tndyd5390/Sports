@@ -24,57 +24,6 @@ div.chy-chartBody {
 	background-color: #ECF0F4;
 }
 
-#mainWrapper>ul>li:first-child {
-	text-align: center;
-	font-size: 14pt;
-	height: 40px;
-	vertical-align: middle;
-	line-height: 30px;
-}
-
-#ulTable {
-	margin-top: 0px;
-	margin-bottom: 20px;
-}
-
-#ulTable>li:first-child>ul>li {
-	background-color: #EEEFEF;
-	font-weight: bold;
-	text-align: center;
-}
-
-#ulTable>li>ul {
-	clear: both;
-	padding: 0px auto;
-	position: relative;
-	min-width: 40px;
-	margin-bottom: 20px;
-}
-
-#ulTable>li>ul>li {
-	float: left;
-	font-size: 9pt;
-	border-bottom: 1px solid silver;
-	vertical-align: baseline;
-	background-color: white;
-}
-
-#ulTable>li>ul>li:first-child {
-	width: 7%;
-}
-
-#ulTable>li>ul>li:first-child+li {
-	width: 31%;
-}
-
-#ulTable>li>ul>li:first-child+li+li {
-	width: 31%;
-}
-
-#ulTable>li>ul>li:first-child+li+li+li {
-	width: 31%;
-}
-
 div.chy-select {
 	height: 35px;
 	width: 100%;
@@ -90,30 +39,79 @@ div.chy-bottom {
 	padding-bottom: 30px;
 }
 
-div.chy-table {
-	display: table;
-}
-
-div.chy-table-row {
-	display: table-row;
-}
-
-.chy-td {
-	display: table-cell;
-}
-
-.chy-th {
-	display: table-cell;
-	background-color: #EEEFEF;
-	font-weight: bold;
-	border-bottom: 1px solid;
-}
-
 @media screen and (max-width: 320px) {
-	#ulTable>li>ul>li {
-		font-size: 8px;
+	div.chy-TableHead{
+		font-size: 13px;
+	}
+	
+	div.chy-TableBody{
+		font-size: 12px;
 	}
 }
+
+@media screen and (min-width:321px) and (max-width:375px){
+	div.chy-TableHead{
+		font-size: 15px;
+	}
+	
+	div.chy-TableBody{
+		font-size: 14px;
+	}
+	
+	div.chy-TableCell:first-child{
+		width:18%;
+	}
+}
+
+@media screen and (min-width:376px) and (max-width:420px){
+	div.chy-TableHead{
+		font-size: 17px;
+	}
+	
+	div.chy-TableBody{
+		font-size: 15px;
+	}
+	
+	div.chy-TableCell:first-child{
+		width:20%;
+	}
+}
+
+.chy-Table {
+	display:table;
+	width:100%;
+}
+.chy-TableHead {
+	display:table-header-group;
+	background-color: #1777CB;
+	font-weight: bold;
+	font-size: 18px;
+	text-align: center;
+	color: white;
+}
+.chy-TableBody {
+	display:table-row-group;
+	background-color: white;
+	color:black;
+	text-align: center;
+}
+.chy-TableRow {
+	display:table-row;
+	border-bottom: 1px solid #1777CB;
+}
+.chy-TableCell:first-child{
+	width:15%;
+}
+.chy-TableCell {
+	display:table-cell;
+	border-right:1px solid white;
+	border-radius: 4px;
+	width:28.%;
+}
+.chy-TableRow:nth-child(even) {
+	background-color: #E1E1E1;
+	}
+
 </style>
 <%@include file="/html5/include/head.jsp"%>
 <script type="text/javascript">
@@ -192,47 +190,77 @@ div.chy-table-row {
 						<a id="chy-monthsLeft" href="#">&#60;</a><span class="chy-year"><span
 							id="chy-month">6</span>월</span><a id="chy-monthsRight" href="#">&#62;</a>
 					</h2>
-					<div class="chy-chartBody"></div>
-					<div id="mainWrapper">
-						<ul>
-							<li>
-								<ul id="ulTable">
-									<li>
-										<ul>
-											<li>일</li>
-											<li>태권도복</li>
-											<li>태권도화</li>
-											<li>운용매트</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>1</li>
-											<li>태권도띠(85%)</li>
-											<li>태권도복(78%)</li>
-											<li>격파운송판(33%)</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>2</li>
-											<li>태권도화(74%)</li>
-											<li>태권도띠(49%)</li>
-											<li>발차기매트(22%)</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>3</li>
-											<li>헤드기어(38%)</li>
-											<li>격파용송판(38%)</li>
-											<li>격투용샌드백(17%)</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
+					<div class="chy-chartBody">
+						<!-- 여기에 차트 -->
 					</div>
+					<!--  테이블시작 -->
+					<div class="chy-Table">
+						<!-- 테이블헤드 -->
+						<div class="chy-TableHead">
+							<!-- tr -->
+							<div class="chy-TableRow">
+								<!-- td -->
+								<div class="chy-TableCell">
+									6월
+								</div>
+								<div class="chy-TableCell">
+									태권도복
+								</div>
+								<div class="chy-TableCell">
+									태권도화
+								</div>
+								<div class="chy-TableCell">
+									운동매트
+								</div>
+							</div>	
+						</div>	
+						<!-- 테이블 바디 -->
+						<div class="chy-TableBody">
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									1
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									2
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									3
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+						</div>
+					</div>				
+				
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="profile"
 					aria-labelledby="profile-tab">
@@ -240,47 +268,70 @@ div.chy-table-row {
 						<a href="#" id="chy-countLeft">&#60;</a><span class="chy-year"><span
 							id="chy-count">1</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
 					</h2>
-					<div class="chy-chartBody"></div>
-					<div id="mainWrapper">
-						<ul>
-							<li>
-								<ul id="ulTable">
-									<li>
-										<ul>
-											<li>월</li>
-											<li>태권도복</li>
-											<li>태권도화</li>
-											<li>운용매트</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>1</li>
-											<li>태권도띠(85%)</li>
-											<li>태권도복(78%)</li>
-											<li>격파운송판(33%)</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>2</li>
-											<li>태권도화(74%)</li>
-											<li>태권도띠(49%)</li>
-											<li>발차기매트(22%)</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>3</li>
-											<li>헤드기어(38%)</li>
-											<li>격파용송판(38%)</li>
-											<li>격투용샌드백(17%)</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
+					<div class="chy-chartBody"><!-- 차트넣으면됨 --></div>
+						<!--  테이블 시작 -->
+						<div class="chy-Table">
+						<div class="chy-TableHead">
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									1분기
+								</div>
+								<div class="chy-TableCell">
+									태권도복
+								</div>
+								<div class="chy-TableCell">
+									태권도화
+								</div>
+								<div class="chy-TableCell">
+									운동매트
+								</div>
+							</div>	
+						</div>	
+						<div class="chy-TableBody">
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									1
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									2
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									3
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+						</div>
+					</div>			
 				</div>
 				<div role="tabpanel" class="tab-pane fade" id="year"
 					aria-labelledby="year-tab">
@@ -289,73 +340,68 @@ div.chy-table-row {
 							id="chy-years">2017</span>년</span><a id="chy-yearRight" href="#">&#62;</a>
 					</h2>
 					<div class="chy-chartBody"></div>
-					<div id="mainWrapper">
-						<ul>
-							<li>
-								<ul id="ulTable">
-									<li>
-										<ul>
-											<li>월</li>
-											<li>태권도복</li>
-											<li>태권도화</li>
-											<li>운용매트</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>1</li>
-											<li>태권도띠(85%)</li>
-											<li>태권도복(78%)</li>
-											<li>격파운송판(33%)</li>
-										</ul>
-									</li>
-
-									<li>
-										<ul>
-											<li>2</li>
-											<li>태권도띠(85%)</li>
-											<li>태권도복(78%)</li>
-											<li>격파운송판(33%)</li>
-										</ul>
-									</li>
-									<li>
-										<ul>
-											<li>3</li>
-											<li>태권도띠(85%)</li>
-											<li>태권도복(78%)</li>
-											<li>격파운송판(33%)</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-			<div class="chy-table">
-				<div class="chy-table-row">
-					<div class="chy-th">
-						일
-					</div>
-					<div class="chy-th">
-						태권도복
-					</div>
-					<div class="chy-th" >
-						태권도화
-					</div>
-					<div class="chy-th">
-						운용매트
-					</div>
-				</div>
-				<div class="chy-table-row">
-					<div class="chy-td">
-					</div>
-					<div class="chy-td">
-					</div>
-					<div class="chy-td">
-					</div>
-					<div class="chy-td">
-					</div>
+						<div class="chy-Table">
+						<div class="chy-TableHead">
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									2017년
+								</div>
+								<div class="chy-TableCell">
+									태권도복
+								</div>
+								<div class="chy-TableCell">
+									태권도화
+								</div>
+								<div class="chy-TableCell">
+									운동매트
+								</div>
+							</div>	
+						</div>	
+						<div class="chy-TableBody">
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									1
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									2
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+							<div class="chy-TableRow">
+								<div class="chy-TableCell">
+									3
+								</div>
+								<div class="chy-TableCell">
+									태권도띠(85%)
+								</div>
+								<div class="chy-TableCell">
+									태권도복(78%)
+								</div>
+								<div class="chy-TableCell">
+									격파운송판(33%)
+								</div>
+							</div>						
+						</div>
+					</div>			
 				</div>
 			</div>
 		</div>
