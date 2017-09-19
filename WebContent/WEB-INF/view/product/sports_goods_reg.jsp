@@ -90,6 +90,7 @@
 		</header>
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
+		<form name="f" id="f" action="" method="post">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="select_wrap">
 					<select class="col-2" id="parents_depth">
@@ -97,9 +98,7 @@
 						<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name()) %></option>					
 					<%}%>
 					</select> 
-					<select class="col-2" id="child_depth">
-						<option value="태권도 띠">태권도 띠</option>
-						<option value="사이즈">사이즈1</option>
+					<select class="col-2" id="child_depth" name="category_no">
 					</select>
 				</div>
 					<div class="list_wrap">
@@ -112,13 +111,13 @@
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">제품명</p> <input type="text">
+								<p class="blue_text">제품명</p> <input type="text" name="product_name">
 							</li>
 							<li>
-								<p class="blue_text">제품 가격</p> <input type="text">
+								<p class="blue_text">제품 가격</p> <input type="text" name="price">
 							</li>
 							<li>
-								<p class="blue_text">제품 상세</p> <textarea></textarea>
+								<p class="blue_text">제품 상세</p> <textarea name="detail"></textarea>
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
 									<label for="detail_file">업로드</label> <input type="file"
@@ -140,6 +139,7 @@
 						<button type="button" class="col-2 glay-btn button">수정</button>
 					</div>
 			</div>
+		</form>	
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
 		</section>
