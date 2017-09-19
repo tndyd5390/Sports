@@ -22,6 +22,11 @@ String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 String ss_user_id =  CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
 String ss_user_name =  CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
 String ss_user_auth =  CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
+System.out.println("ss_user_no: " + ss_user_no);
+
+if (!ss_user_no.equals("5")) {
+	response.sendRedirect("/main.do");
+}
 
 int access = 1;
 
