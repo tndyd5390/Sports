@@ -209,7 +209,6 @@
 			</div>
 			<div class="logo">
 				<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
->>>>>>> refs/remotes/origin/psy
 			</div>
 		</div>
 		
@@ -398,7 +397,15 @@
     
     
         </div>
+        
     <button class="add_btn" id="addview">더보기</button>
+	<div class="btn-groub">
+		<a href="accountReg">
+			<input type="submit" class="col-2 blue-btn"
+			style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
+			value="등록">
+		</a>
+	</div>
     </div>
     </div>
     
