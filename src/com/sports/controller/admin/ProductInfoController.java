@@ -30,7 +30,6 @@ public class ProductInfoController {
 		return "product/sports_goods_list";
 	}
 	
-	
 	@RequestMapping(value="productReg")
 	public String productReg(Model model) throws Exception{
 		log.info(this.getClass() + " productReg Start!!");
