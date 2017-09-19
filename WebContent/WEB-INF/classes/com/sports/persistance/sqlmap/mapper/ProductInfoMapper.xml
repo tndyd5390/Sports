@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.ProductInfoMapper">
+	<select id="getCategoryParents" resultType="ProductInfoDTO">
+		SELECT CATEGORY_NO ,CATEGORY_NAME FROM CATEGORY_INFO WHERE DEPTH = '1'
+	</select>
+	<select id="getCategoryChild" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
+		SELECT CATEGORY_NO, CATEGORY_NAME, PARENTS_NO FROM CATEGORY_INFO WHERE PARENTS_NO = #{parents_no}
+	</select>
 </mapper>

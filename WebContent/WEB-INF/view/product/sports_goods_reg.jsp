@@ -1,7 +1,11 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+	pageEncoding="UTF-8"%>\
+<%@ page import="java.util.List" %>
+<%@ page import="com.sports.dto.ProductInfoDTO" %>
+<%@ page import="com.sports.util.CmmUtil" %>
+<%
+	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
+%>
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
@@ -58,28 +62,13 @@
 	width: 100%;
 }
 </style>
+<script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var mainfileTarget = $('#main_file');
-		var detailfileTarget = $('#detail_file');
-		
-		mainfileTarget.on('change',function() {
-			if (window.FileReader) {
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-			$(this).siblings('#main_label').val(filename);
-		});
-		
-		detailfileTarget.on('change',function() {
-			if (window.FileReader) {
-				var filename = $(this)[0].files[0].name;
-			} else {
-				var filename = $(this).val().split('/').pop().split('\\').pop();
-			}
-			$(this).siblings('#detail_label').val(filename);
-		});
+		var parents = $('#parents_depth option:selected').val();
+		selected(parents);
+		selectDepth();
+		inputFile();
 	});
 </script>
 </head>
@@ -95,7 +84,6 @@
 					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
-
 			<div class="page_title">
 				<p>스포츠 용품</p>
 			</div>
@@ -104,10 +92,12 @@
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="select_wrap">
-					<select class="col-2">
-						<option value="태권도">태권도</option>
-						<option value="태권도">태권도</option>
-					</select> <select class="col-2">
+					<select class="col-2" id="parents_depth">
+					<%for(ProductInfoDTO pDTO : pList){%>
+						<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name()) %></option>					
+					<%}%>
+					</select> 
+					<select class="col-2" id="child_depth">
 						<option value="태권도 띠">태권도 띠</option>
 						<option value="사이즈">사이즈1</option>
 					</select>
