@@ -115,7 +115,7 @@ div.col-2-group a:nth-child(2){
 			</div>
           </div>
         </div>
-        
+        </div>
       </div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>

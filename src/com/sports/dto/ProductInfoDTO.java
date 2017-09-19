@@ -12,6 +12,11 @@ public class ProductInfoDTO {
 	private String chg_dt;
 	private String file_no;
 	private String file_grp;
+	private String category_no;
+	private String category_name;
+	private String parents_no;
+	private String depth;
+	private String url;
 	private int read_more;
 	private String option;
 	private String opt_grp;
@@ -118,6 +123,45 @@ public class ProductInfoDTO {
 	
 	public void setChg_dt(String chg_dt) {
 		this.chg_dt = chg_dt;
+	}
+	public String getCategory_no() {
+		return category_no;
+	}
+
+	public void setCategory_no(String category_no) {
+		this.category_no = category_no;
+	}
+
+	public String getCategory_name() {
+		return category_name;
+	}
+
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
+	public String getParents_no() {
+		return parents_no;
+	}
+
+	public void setParents_no(String parents_no) {
+		this.parents_no = parents_no;
+	}
+
+	public String getDepth() {
+		return depth;
+	}
+
+	public void setDepth(String depth) {
+		this.depth = depth;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 }
