@@ -23,6 +23,13 @@ if (nList == null) {
 String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 %>
 
+<style type="text/css">
+	ul{
+		margin-bottom: 0px; 
+	}
+</style>
+ 
+ 
 <script type="text/javascript">
 
 		$(function() {
@@ -295,10 +302,13 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 
     	<%@include file="/html5/include/navBar.jsp"%>
 
-    	<div class="container detail">
+    	<div class="container detail" style="padding-right: 0px;
+  											 padding-left: 0px;
+  											 margin-right: 0px;
+  											 margin-left: 0px;"	>
 			<div class="wrap search-wrap btn-wrap">
 			
-				<div class="search type"><input type="text" placeholder="제목 입력" id="searchbox" style="width:200px" /></div>
+				<div class="search type" style="padding-left: 0px;"><input type="text" placeholder="제목 입력" id="searchbox" style="width:100%" /></div>
         		
         		<div class="list_wrap" >
           			<ul class="list-groub" id="list_more">
@@ -336,7 +346,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
           			<div id="searchadd"><button class="add_btn" id="addview">더보기</button></div>
         		</div>
         		
-        		<div class="btn-groub">
+        		<div class="btn-groub"style="margin-bottom: 50px;">
 					<button class="col-2 blue-btn button" onclick="javascript:edit(this.form);return false;">편집하기</button>
 					<button type="button" class="col-2 glay-btn button" onclick="javascript:reg();return false;">작성하기</button>
 				</div>
