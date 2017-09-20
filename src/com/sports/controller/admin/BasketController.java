@@ -25,10 +25,7 @@ public class BasketController {
 	public String userBasket(HttpServletRequest req,HttpServletResponse resp,Model model)throws Exception{
 		log.info(this.getClass().getName() + "userBasket Start!!");
 		
-		
-		
 		log.info(this.getClass().getName() + "userBasket END!!");
-		
 		return "basket/userBasket";
 	}
 	

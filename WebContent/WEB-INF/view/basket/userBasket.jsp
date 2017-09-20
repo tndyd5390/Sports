@@ -91,6 +91,10 @@ div.chy-wrap{
 span.chy-plus2{
 	padding-right: 10px;
 }
+
+.list_wrap .notice,.psyNotice{
+	height: 135px;
+}
 </style>
 <%@include file="/html5/include/head.jsp" %>
 
@@ -100,7 +104,7 @@ span.chy-plus2{
     <header class="header">
 	<div class="wrap">
 		<div class="left_menu">
-			<img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
+			<img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
 		</div>
 		<div class="logo">
 			<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
@@ -124,7 +128,7 @@ span.chy-plus2{
           		<a class="btn btn-primary chy-btn" style="display:inline;">선택 삭제</a>
           		</div>
           	</li>
-            <li class="notice">
+            <li class="notice psyNotice">
               	<input type="checkbox" class="checkbox">
               	<div class="chy-margin">
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
@@ -133,7 +137,7 @@ span.chy-plus2{
             		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
             	</div>	
             </li>
-            <li class="notice">
+            <li class="notice psyNotice">
               	<input type="checkbox" class="checkbox">
               	<div class="chy-margin">
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
@@ -142,7 +146,7 @@ span.chy-plus2{
             		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
             	</div>	
             </li>
-            <li class="notice">
+            <li class="notice psyNotice">
               	<input type="checkbox" class="checkbox">
               	<div class="chy-margin">
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
@@ -151,7 +155,7 @@ span.chy-plus2{
             		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
             	</div>	
             </li>
-            <li class="notice">
+            <li class="notice psyNotice">
               	<input type="checkbox" class="checkbox">
               	<div class="chy-margin">
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
