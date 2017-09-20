@@ -22,4 +22,13 @@ public class DataAnalysisController {
 	public String userDataAnaysis(HttpServletRequest req,HttpServletResponse resp,Model model)throws Exception{
 		return "dataAnalysis/DataAnalysis";
 	}
+	
+	@RequestMapping(value="userBasketAnalysis")
+	public String userBasketAnalysis(HttpServletRequest req,HttpServletResponse resp,Model model)throws Exception{
+		log.info(this.getClass().getName() + "userBasketAnalysis Start !!");
+		log.info(this.getClass().getName() + "userBasketAnalysis End !!");
+		
+		
+		return "dataAnalysis/basketAnalysis";
+	}
 }
