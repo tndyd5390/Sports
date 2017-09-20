@@ -84,8 +84,8 @@
         </div>
 
         <div class="btn-groub">
-          <button class="col-2 blue-btn button">수정</button>
-          <button class="col-2 glay-btn button">삭제</button>
+          <button class="col-2 blue-btn button">바로 구매</button>
+          <button class="col-2 glay-btn button">장바구니 담기</button>
         </div>
       </div>
     </div>

@@ -134,7 +134,7 @@ span.chy-plus2{
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
                 	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
             		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
+            		<p class="chy-count">수량 : 3 
             	</div>	
             </li>
             <li class="notice psyNotice">
@@ -143,7 +143,7 @@ span.chy-plus2{
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
                 	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
             		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
+            		<p class="chy-count">수량 : 3 
             	</div>	
             </li>
             <li class="notice psyNotice">
@@ -152,7 +152,7 @@ span.chy-plus2{
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
                 	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
             		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
+            		<p class="chy-count">수량 : 3 
             	</div>	
             </li>
             <li class="notice psyNotice">
@@ -161,7 +161,7 @@ span.chy-plus2{
                 	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
                 	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
             		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 <a class="btn btn-default" style="display: inline;"><span class="glyphicon-plus chy-plus"></span></a><a class="btn btn-default" style="display: inline;"><span class="glyphicon-minus chy-plus"></span></a></p>
+            		<p class="chy-count">수량 : 3 
             	</div>	
             </li>
             <li class="chy-bottom">
