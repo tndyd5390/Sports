@@ -58,7 +58,7 @@ public class ProductInfoController {
 		pDTO.setParents_no(parentsNo);
 		
 		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
-		pList = productInfoService.getProductSelectList();
+		//pList = productInfoService.getProductSelectList();
 		
 		log.info(this.getClass() + " productSelect End!!");
 		return pList;

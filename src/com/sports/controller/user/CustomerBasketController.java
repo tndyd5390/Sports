@@ -13,13 +13,4 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class CustomerBasketController {
 	
-	private Logger log = Logger.getLogger(this.getClass());
-	
-	@RequestMapping(value="customer/basketList", method=RequestMethod.GET)
-	public String customerBasketList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
-		log.info(this.getClass() + ".customerBasketList start!!!");
-		
-		log.info(this.getClass() + ".customerBasketList end!!!");
-		return "basket/userBasket";
-	}
 }
