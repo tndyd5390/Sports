@@ -50,6 +50,19 @@ public class ProductInfoController {
 		log.info(this.getClass() + " productAll End!!");
 		return pList;
 	}
+	@RequestMapping(value="productSelect")
+	public @ResponseBody List<ProductInfoDTO> productSelect(@RequestParam("") String parentsNo) throws Exception{
+		log.info(this.getClass() + " productSelect Start!!");
+
+		ProductInfoDTO pDTO = new ProductInfoDTO();
+		pDTO.setParents_no(parentsNo);
+		
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
+		pList = productInfoService.getProductSelectList();
+		
+		log.info(this.getClass() + " productSelect End!!");
+		return pList;
+	}
 	
 	@RequestMapping(value="productReg")
 	public String productReg(Model model) throws Exception{
