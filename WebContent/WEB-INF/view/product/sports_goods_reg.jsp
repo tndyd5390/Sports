@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>\
+	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%@ page import="com.sports.util.CmmUtil" %>
@@ -9,59 +9,6 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-<style>
-.filebox input[type="file"] {
-	position: absolute;
-	width: 1px;
-	height: 1px;
-	padding: 0;
-	margin: -1px;
-	overflow: hidden;
-	clip: rect(0, 0, 0, 0);
-	border: 0;
-}
-
-.filebox label {
-	display: inline-block;
-	padding: .5em .75em;
-	color: #999;
-	font-size: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #fdfdfd;
-	cursor: pointer;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-}
-
-.filebox .upload-name {
-	width: 80%;
-	display: inline-block;
-	padding: .5em .75em;
-	font-size: inherit;
-	font-family: inherit;
-	line-height: normal;
-	vertical-align: middle;
-	background-color: #f5f5f5;
-	border: 1px solid #ebebeb;
-	border-bottom-color: #e2e2e2;
-	border-radius: .25em;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	ppearance: none;
-}
-
-.filebox.bs3-primary label {
-	color: #fff;
-	background-color: #337ab7;
-	border-color: #2e6da4;
-}
-
-.filebox.bs3-primary {
-	width: 100%;
-}
-</style>
 <script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -90,6 +37,7 @@
 		</header>
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
+		<form name="f" id="f" action="productRegProc.do" method="post" enctype="multipart/form-data" >
 			<div class="wrap search-wrap btn-wrap">
 				<div class="select_wrap">
 					<select class="col-2" id="parents_depth">
@@ -97,9 +45,7 @@
 						<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name()) %></option>					
 					<%}%>
 					</select> 
-					<select class="col-2" id="child_depth">
-						<option value="태권도 띠">태권도 띠</option>
-						<option value="사이즈">사이즈1</option>
+					<select class="col-2" id="child_depth" name="category_no">
 					</select>
 				</div>
 					<div class="list_wrap">
@@ -108,28 +54,28 @@
 								<p class="blue_text">제품사진</p>
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="main_label">
-									<label for="main_file">업로드</label> <input type="file" name="main_file" id="main_file" class="upload-hidden">
+									<label for="main_file">업로드</label> <input type="file" name="files" id="main_file" class="upload-hidden">
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">제품명</p> <input type="text">
+								<p class="blue_text">제품명</p> <input type="text" name="product_name">
 							</li>
 							<li>
-								<p class="blue_text">제품 가격</p> <input type="text">
+								<p class="blue_text">제품 가격</p> <input type="text" name="product_price">
 							</li>
 							<li>
-								<p class="blue_text">제품 상세</p> <textarea></textarea>
+								<p class="blue_text">제품 상세</p> <textarea name="product_contents"></textarea>
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
 									<label for="detail_file">업로드</label> <input type="file"
-										id="detail_file" name="detail_file" class="upload-hidden">
+										id="detail_file" name="files" class="upload-hidden">
 								</div>
 							</li>
 							<li>
 								<p class="blue_text">옵션</p>
 								<div class="input_btn_wrap">
 									<input type="text" placeholder="옵션을 추가하세요">
-									<button class="line-btn">등록/수정</button>
+									<button type="button" class="line-btn">등록</button>
 								</div>
 							</li>
 						</ul>
@@ -140,6 +86,7 @@
 						<button type="button" class="col-2 glay-btn button">수정</button>
 					</div>
 			</div>
+		</form>	
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
 		</section>
