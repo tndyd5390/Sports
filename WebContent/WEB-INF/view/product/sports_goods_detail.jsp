@@ -9,7 +9,45 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
-
+<script type="text/javascript">
+	function addBasket(prod_no){
+		$.ajax({
+			url : "customer/addBasket.do",
+			data : {
+				'prod_no' : prod_no,
+				'prod_qty' : document.getElementById('prod_qty').value
+			},
+			method : "post",
+			dataType : "json",
+			success : function(data){
+				if(data == 1){
+					alert("장바구니에 추가되었습니다.");
+				}else if(data == 2){
+					alert("장바구니에 추가 실패했습니다");
+				}else{
+					alert("로그인을 해주세요");
+					location.href="#";
+				}
+			},
+			error:function(x,e){
+				if(x.status==0){
+		            alert('네트워크가 정상적으로 동작하지 않습니다.');
+		            alert('네트워크 상태를 확인 하거나 업체에게 문의해 주세요.')
+		            }else if(x.status==404){
+		            alert('페이지를 찾을수가 없습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+		            }else if(x.status==500){
+		            alert('서버에서 오류가 발생했습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+		            }else if(e=='parsererror'){
+		            alert('json파싱에 실패했습니다.');
+		            }else if(e=='timeout'){
+		            alert('응답 요청 시간이 지났습니다.');
+		            }else {
+		            alert('Unknow Error.n'+x.responseText);
+		            }
+		    }
+		});
+	}
+</script>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -60,7 +98,7 @@
             <p class="blue_text">수량</p>
             <div class="count_input">
               <a class="incr-btn">–</a>
-              <input class="quantity" type="text" value="1" readonly="true">
+              <input class="quantity" id="prod_qty" type="text" value="1" readonly="true">
               <a class="incr-btn">+</a>
             </div>
             <div class="price_wrap">총금액<span class="price">33,000</span><span class="won">원</span></div>
@@ -84,8 +122,8 @@
         </div>
 
         <div class="btn-groub">
-          <button class="col-2 blue-btn button">수정</button>
-          <button class="col-2 glay-btn button">삭제</button>
+          <button class="col-2 blue-btn button">바로 구매</button>
+          <button class="col-2 glay-btn button" onclick="addBasket('<%=CmmUtil.nvl(pDTO.getProd_no()) %>');">장바구니 담기</button>
         </div>
       </div>
     </div>
