@@ -10,8 +10,7 @@ public class ProductInfoDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
-	private String file_no;
-	private String file_grp;
+	private String src_filename;
 	private String category_no;
 	private String category_name;
 	private String parents_no;
@@ -36,22 +35,6 @@ public class ProductInfoDTO {
 
 	public void setOption(String option) {
 		this.option = option;
-	}
-
-	public String getFile_no() {
-		return file_no;
-	}
-	
-	public void setFile_no(String file_no) {
-		this.file_no = file_no;
-	}
-	
-	public String getFile_grp() {
-		return file_grp;
-	}
-	
-	public void setFile_grp(String file_grp) {
-		this.file_grp = file_grp;
 	}
 
 	public int getRead_more() {
@@ -162,6 +145,14 @@ public class ProductInfoDTO {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public String getSrc_filename() {
+		return src_filename;
+	}
+
+	public void setSrc_filename(String src_filename) {
+		this.src_filename = src_filename;
 	}
 
 }

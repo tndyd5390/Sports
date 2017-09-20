@@ -2,7 +2,7 @@ package com.sports.dto;
 
 public class ProductFileDTO {
 	private String file_no;
-	private String file_grp;
+	private String prod_no;
 	private String file_path;
 	private String org_filename;
 	private String src_filename;
@@ -16,12 +16,6 @@ public class ProductFileDTO {
 	}
 	public void setFile_no(String file_no) {
 		this.file_no = file_no;
-	}
-	public String getFile_grp() {
-		return file_grp;
-	}
-	public void setFile_grp(String file_grp) {
-		this.file_grp = file_grp;
 	}
 	public String getFile_path() {
 		return file_path;
@@ -64,5 +58,11 @@ public class ProductFileDTO {
 	}
 	public void setChg_dt(String chg_dt) {
 		this.chg_dt = chg_dt;
+	}
+	public String getProd_no() {
+		return prod_no;
+	}
+	public void setProd_no(String prod_no) {
+		this.prod_no = prod_no;
 	}
 }
