@@ -30,6 +30,37 @@ div.col-2-group a:nth-child(2){
 }
 
 </style>
+<script type="text/javascript">
+	$(function(){
+		prodList();
+		
+	});
+	
+	function prodList(){
+		var contents = "";
+		$.ajax({
+			url : 'productAll.do',
+			method : 'post',
+			success : function(data){
+				$.each(data, function(key, value){
+					contents += "<li>";
+					contents += "<a href='#'>";
+					contents += "<div class='thumb'>";
+					contents += "<img src='"+value.src_filename+"' alt='thumb'>";
+					contents += "</div>";
+					contents += "<div class='info'>";
+					contents += "<p class='title'>"+value.prod_name+"</p>";
+					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "</div>"
+					contents += "</a>";
+					contents += "</li>";
+				});
+				$('#goods_list').html(contents);
+			}
+		});
+	}
+</script>
+
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -81,7 +112,7 @@ div.col-2-group a:nth-child(2){
           </ul>
         </div>
         <div class="goods_list_wrap">
-          <ul class="goods_list">
+          <ul class="goods_list" id="goods_list">
             <li>
               <a href="#">
               <div class="thumb">

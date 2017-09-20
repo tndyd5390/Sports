@@ -37,7 +37,7 @@
 		</header>
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
-		<form name="f" id="f" action="" method="post">
+		<form name="f" id="f" action="productRegProc.do" method="post" enctype="multipart/form-data" >
 			<div class="wrap search-wrap btn-wrap">
 				<div class="select_wrap">
 					<select class="col-2" id="parents_depth">
@@ -61,10 +61,10 @@
 								<p class="blue_text">제품명</p> <input type="text" name="product_name">
 							</li>
 							<li>
-								<p class="blue_text">제품 가격</p> <input type="text" name="price">
+								<p class="blue_text">제품 가격</p> <input type="text" name="product_price">
 							</li>
 							<li>
-								<p class="blue_text">제품 상세</p> <textarea name="detail"></textarea>
+								<p class="blue_text">제품 상세</p> <textarea name="product_contents"></textarea>
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
 									<label for="detail_file">업로드</label> <input type="file"

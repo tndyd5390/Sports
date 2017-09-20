@@ -7,4 +7,46 @@
 	<select id="getCategoryChild" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
 		SELECT CATEGORY_NO, CATEGORY_NAME, PARENTS_NO FROM CATEGORY_INFO WHERE PARENTS_NO = #{parents_no}
 	</select>
+	
+	<select id="getProductList" resultType="ProductInfoDTO">
+		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, F.SRC_FILENAME AS SRC_FILENAME FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO ORDER BY PROD_NO LIMIT 6
+	</select>
+	
+	<insert id="insertProduct" parameterType="ProductInfoDTO">
+		INSERT INTO PRODUCT_INFO (
+				PROD_NAME,
+				PROD_PRICE,
+				PROD_CONTENTS,
+				CATEGORY_NO,
+				REG_USER_NO,
+				REG_DT
+			) VALUES (
+				#{prod_name},
+				#{prod_price},
+				#{prod_contents},
+				#{category_no},
+				'5',
+				NOW()
+			)<selectKey resultType="String" keyProperty="prod_no" order="AFTER">
+				SELECT LAST_INSERT_ID()
+			</selectKey>
+	</insert>
+	
+	<insert id="insertProductFile" parameterType="ProductFileDTO">
+		INSERT INTO PROD_FILE (
+				PROD_NO,FILE_PATH,
+				ORG_FILENAME,
+				SRC_FILENAME,
+				REG_USER_NO,
+				REG_DT
+			) VALUES (
+				#{prod_no},
+				#{file_path},
+				#{org_filename},
+				#{src_filename},
+				'5',
+				NOW()
+			)
+	</insert>
+	
 </mapper>
