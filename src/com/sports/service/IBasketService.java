@@ -1,5 +1,7 @@
 package com.sports.service;
 
-public interface IBasketService {
+import com.sports.dto.BasketDTO;
 
+public interface IBasketService {
+	public int insertCustomerAddBasket(BasketDTO bDTO) throws Exception;
 }

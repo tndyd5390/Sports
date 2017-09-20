@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<!--
+	설계 다시하자 
+ -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -21,13 +23,17 @@
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
-<style type="text/css">
 <!-- JavaScirpt Sorcemap -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
 <script src="/common/js/jquery-ui.js"></script>
 <script src="/common/js/placeholders.min.js"></script>
 <script src="/common/js/placeholders.min.js"></script>
 <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<script type="text/javascript">
+	function func(){
+		window.open("http://nexs.cjgls.com/web/info.jsp?slipno="+$("#cjInfo").val());
+	}
+</script>
 </head>
 
 <body >
@@ -50,7 +56,7 @@
 <%@include file="/html5/include/navBar.jsp" %>
 
     <div class="container" align="center">
-
+	
  
  		<div class="shDTables" align="left">
  			<div class="shCTitle" align="left">받는 사람</div>
@@ -70,7 +76,7 @@
     <div class="shDelivey">
     	<p class="shNDelivey">배달출발 </p>
     </div>
-    
+    <button onclick="func();">asdfasdfaaa</button>
     <div class="wrap search-wrap btn-wrap">
       <div id="mainWrapper">
         <ul>

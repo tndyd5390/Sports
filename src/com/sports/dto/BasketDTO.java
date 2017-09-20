@@ -1,7 +1,9 @@
 package com.sports.dto;
 
-public class ShoppingBasketDTO {
+public class BasketDTO {
 	
+	private String user_no;
+	private String prod_qty;
 	private String prod_no;
 	private String opt_no;
 	private String opt_name;
@@ -12,6 +14,18 @@ public class ShoppingBasketDTO {
 	private String chg_user_no;
 	private String chg_dt;
 	
+	public String getUser_no() {
+		return user_no;
+	}
+	public void setUser_no(String user_no) {
+		this.user_no = user_no;
+	}
+	public String getProd_qty() {
+		return prod_qty;
+	}
+	public void setProd_qty(String prod_qty) {
+		this.prod_qty = prod_qty;
+	}
 	public String getProd_no() {
 		return prod_no;
 	}

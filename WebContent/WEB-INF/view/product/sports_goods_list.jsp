@@ -1,5 +1,11 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import = "java.util.List" %>
+<%@ page import = "com.sports.util.CmmUtil" %>
+<%@ page import = "com.sports.dto.ProductInfoDTO" %>
+<%
+	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -30,6 +36,68 @@ div.col-2-group a:nth-child(2){
 }
 
 </style>
+<script type="text/javascript">
+	$(function(){
+		prodList();
+		
+	});
+	function prodReg(){
+		location.href="productReg.do";
+	}
+	function prodDetail(pNo){
+		location.href="productDetail.do?pNo="+pNo
+	}
+	
+	function prodList(){
+		var contents = "";
+		$.ajax({
+			url : 'productAll.do',
+			method : 'post',
+			success : function(data){
+				$.each(data, function(key, value){
+					contents += "<li>";
+					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
+					contents += "<div class='thumb'>";
+					contents += "<img src='"+value.main_src+"' alt='thumb'>";
+					contents += "</div>";
+					contents += "<div class='info'>";
+					contents += "<p class='title'>"+value.prod_name+"</p>";
+					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "</div>"
+					contents += "</a>";
+					contents += "</li>";
+				});
+				$('#goods_list').html(contents);
+			}
+		});
+	}
+	
+	function prodSelect(pNo){
+		var contents = "";
+		$.ajax({
+			url : 'productSelect.do',
+			method : 'post',
+			data : {'pNo' : pNo},
+			success : function(data){
+				$.each(data, function(key, value){
+					contents += "<li>";
+					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
+					contents += "<div class='thumb'>";
+					contents += "<img src='"+value.main_src+"' alt='thumb'>";
+					contents += "</div>";
+					contents += "<div class='info'>";
+					contents += "<p class='title'>"+value.prod_name+"</p>";
+					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "</div>"
+					contents += "</a>";
+					contents += "</li>";
+				});
+				$('#goods_list').html(contents);
+			}
+		});
+	}
+</script>
+
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -48,8 +116,6 @@ div.col-2-group a:nth-child(2){
       </div>
     </header>
 <%@include file="/html5/include/navBar.jsp" %>
-
-
     <div class="container detail">
       <div class="wrap search-wrap">
         <div class="search array">
@@ -60,29 +126,15 @@ div.col-2-group a:nth-child(2){
 
         <div class="list_wrap">
           <ul class="sports_list">
-            <li><a href="#">태권도</a></li>
-            <li><a href="#">검도</a></li>
-            <li><a href="#">합기도</a></li>
-
-            <li><a href="#">복싱, MMA</a></li>
-            <li><a href="#">스포츠용품(구기)</a></li>
-            <li><a href="#">네트&amp;골대</a></li>
-
-            <li><a href="#">휘트니스</a></li>
-            <li><a href="#">스포츠의류</a></li>
-            <li><a href="#">측정용품&amp;호각</a></li>
-
-            <li><a href="#">펌프</a></li>
-            <li><a href="#">정리용품</a></li>
-            <li><a href="#">체육대회용품</a></li>
-
-            <li><a href="#">학교체육용품</a></li>
-            <li><a href="#">전체</a></li>
-          </ul>
+          	<li><a href="#" onclick="prodList()">전체</a></li>
+          <%for(ProductInfoDTO pDTO : pList){%>
+			<li><a href="#" onclick="prodSelect(<%=CmmUtil.nvl(pDTO.getCategory_no())%>)"><%=CmmUtil.nvl(pDTO.getCategory_name())%></a></li>
+          <% }%>
+		 </ul>
         </div>
         <div class="goods_list_wrap">
-          <ul class="goods_list">
-            <li>
+          <ul class="goods_list" id="goods_list">
+<!--             <li>
               <a href="#">
               <div class="thumb">
                 <img src="html5/common/images/sample01.png" alt="thumb">
@@ -104,13 +156,14 @@ div.col-2-group a:nth-child(2){
                 </div>
               </a>
              </li>
-          </ul>
+ -->         
+ 			</ul>
           <div id ="more-div">
           	<div class="more-type">
 				<a href="#" class="moremore">더보기</a>
 			</div>
 			<div class="col-2-group">
-				<a href="#" >등록</a>
+				<a href="#" onclick="prodReg(); return false;">등록</a>
 				<a href="#" >삭제</a>
 			</div>
           </div>
