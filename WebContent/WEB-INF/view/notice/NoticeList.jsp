@@ -336,7 +336,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
           			<div id="searchadd"><button class="add_btn" id="addview">더보기</button></div>
         		</div>
         		
-        		<div class="btn-groub">
+        		<div class="btn-groub"style="margin-bottom: 50px;">
 					<button class="col-2 blue-btn button" onclick="javascript:edit(this.form);return false;">편집하기</button>
 					<button type="button" class="col-2 glay-btn button" onclick="javascript:reg();return false;">작성하기</button>
 				</div>
