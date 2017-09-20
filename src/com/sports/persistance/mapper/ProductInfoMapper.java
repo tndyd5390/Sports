@@ -13,7 +13,9 @@ public interface ProductInfoMapper {
 
 	List<ProductInfoDTO> getCategoryChild(ProductInfoDTO pDTO) throws Exception;
 
-	int insertProductFile(ProductFileDTO fDTO) throws Exception;
+	int insertProductMainFile(ProductFileDTO fDTO) throws Exception;
+
+	int insertProductDetailFile(ProductFileDTO fdDTO) throws Exception;
 
 	void insertProduct(ProductInfoDTO pDTO) throws Exception;
 
@@ -22,5 +24,6 @@ public interface ProductInfoMapper {
 	List<ProductInfoDTO> getProductSelectList(ProductInfoDTO pDTO) throws Exception;
 
 	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
+
 
 }

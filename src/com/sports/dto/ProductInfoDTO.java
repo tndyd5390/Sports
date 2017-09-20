@@ -10,6 +10,8 @@ public class ProductInfoDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
+	private String main_src;
+	private String detail_src;
 	private String src_filename;
 	private String category_no;
 	private String category_name;
@@ -154,5 +156,19 @@ public class ProductInfoDTO {
 	public void setSrc_filename(String src_filename) {
 		this.src_filename = src_filename;
 	}
+	public String getMain_src() {
+		return main_src;
+	}
 
+	public void setMain_src(String main_src) {
+		this.main_src = main_src;
+	}
+
+	public String getDetail_src() {
+		return detail_src;
+	}
+
+	public void setDetail_src(String detail_src) {
+		this.detail_src = detail_src;
+	}
 }
