@@ -19,4 +19,8 @@ public interface ProductInfoMapper {
 
 	List<ProductInfoDTO> getProductList() throws Exception;
 
+	List<ProductInfoDTO> getProductSelectList(ProductInfoDTO pDTO) throws Exception;
+
+	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
+
 }

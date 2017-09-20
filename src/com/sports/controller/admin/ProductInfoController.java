@@ -32,12 +32,19 @@ public class ProductInfoController {
 	private IProductInfoService productInfoService;
 	
 	@RequestMapping(value="productList")
-	public String productList()throws Exception{
+	public String productList(Model model)throws Exception{
 		log.info(this.getClass() + " productList Start!!");
-				
+		
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
+		
+		pList = productInfoService.getCategoryParents();
+		
+		model.addAttribute("pList", pList);
+		pList = null;
 		log.info(this.getClass() + " productList End!!");
 		return "product/sports_goods_list";
 	}
+	
 	@RequestMapping(value="productAll")
 	public @ResponseBody List<ProductInfoDTO> productAll() throws Exception{
 		log.info(this.getClass() + " productAll Start!!");
@@ -51,14 +58,14 @@ public class ProductInfoController {
 		return pList;
 	}
 	@RequestMapping(value="productSelect")
-	public @ResponseBody List<ProductInfoDTO> productSelect(@RequestParam("") String parentsNo) throws Exception{
+	public @ResponseBody List<ProductInfoDTO> productSelect(@RequestParam("pNo") String parentsNo) throws Exception{
 		log.info(this.getClass() + " productSelect Start!!");
 
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		pDTO.setParents_no(parentsNo);
 		
 		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
-		pList = productInfoService.getProductSelectList();
+		pList = productInfoService.getProductSelectList(pDTO);
 		
 		log.info(this.getClass() + " productSelect End!!");
 		return pList;
@@ -143,5 +150,20 @@ public class ProductInfoController {
 		fDTO = null;
 		log.info(this.getClass() + " productRegProc End!!");
 		return "alert/alert";
+	}
+	
+	@RequestMapping(value="productDetail")
+	public String productDetail(HttpServletRequest req, Model model) throws Exception{
+		log.info(this.getClass() + " productDetail Start!!");
+		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
+		log.info("prodNo : " + prodNo);
+		ProductInfoDTO pDTO = new ProductInfoDTO();
+		pDTO.setProd_no(prodNo);
+		pDTO = productInfoService.getProductDetail(pDTO);
+		
+		model.addAttribute("pDTO", pDTO);
+		pDTO = null;
+		log.info(this.getClass() + " productDetail End!!");
+		return "product/sports_goods_detail";
 	}
 }
