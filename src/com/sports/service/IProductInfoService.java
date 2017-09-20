@@ -19,4 +19,6 @@ public interface IProductInfoService {
 
 	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
 
+	int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO) throws Exception;
+
 }
