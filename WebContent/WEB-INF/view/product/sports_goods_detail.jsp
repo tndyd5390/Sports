@@ -1,5 +1,10 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.dto.ProductInfoDTO" %>
+<%
+	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -32,10 +37,10 @@
         <div class="list_wrap">
           <div class="goods_detail">
             <div class="thumb">
-              <img src="html5/common/images/sample01.png" alt="thumb">
+              <img src="<%=CmmUtil.nvl(pDTO.getSrc_filename())%>" alt="thumb">
             </div>
             <div class="info">
-              <p class="title">한국스포츠 KSD 태권도 품 도복 (아동) TKD POOM Uniform (Child) </p>
+              <p class="title"><%=CmmUtil.nvl(pDTO.getProd_name())%></p>
               <p class="sub_text">배송비 2,500원 (50,000원 이상 무료배송)</p>
             </div>
           </div>
@@ -79,8 +84,8 @@
         </div>
 
         <div class="btn-groub">
-          <button class="col-2 blue-btn button">수정</button>
-          <button class="col-2 glay-btn button">삭제</button>
+          <button class="col-2 blue-btn button">바로 구매</button>
+          <button class="col-2 glay-btn button">장바구니 담기</button>
         </div>
       </div>
     </div>
