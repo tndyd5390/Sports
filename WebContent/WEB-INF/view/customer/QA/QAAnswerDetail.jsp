@@ -1,12 +1,12 @@
-<!-- for Administrator -->
+<!-- for Customer -->
 
 <%@ page import="com.sports.util.AES256Util"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.sports.util.CmmUtil"%>
-<%@ page import="com.sports.dto.QADTO"%>
-<%@ page import="java.util.ArrayList"%>		
-<%@ page import="java.util.List"%>
+<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.dto.QADTO" %>
+<%@ page import="java.util.ArrayList" %>		
+<%@ page import="java.util.List" %>
 <%
 QADTO rDTO = (QADTO)request.getAttribute("rDTO");
 
@@ -17,18 +17,6 @@ if (rDTO==null) {
 String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 String ss_user_name = CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
-
-int access = 1;
-
-if (ss_user_no.equals("")) {
-	
-	access = 3;
-	
-} else if (ss_user_no.equals(CmmUtil.nvl(rDTO.getReg_user_no()))) {
-	
-	access = 2;
-	
-}
 
 System.out.println("ss_user_no: " + CmmUtil.nvl(rDTO.getReg_user_no()));
 %>
@@ -57,38 +45,8 @@ System.out.println("ss_user_no: " + CmmUtil.nvl(rDTO.getReg_user_no()));
 
 <script type="text/javascript">
 
-function doReply() {
-	
-	if ("<%=access%>"==3) {
-		
-		alert("로그인을 하시기 바랍니다.");
-	
-	} else {
-		
-		location.href="/admin/QA/QAAnswerReg.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>&answer_yn=<%=CmmUtil.nvl(rDTO.getAnswer_yn())%>";
-		
-	}
-	
-}
-
-function doDelete() {
-	
-	if ("<%=access%>"==3) {
-		
-		alert("로그인을 하시기 바랍니다.");
-		
-	} else {
-		
-		if (confirm("작성한 게시글을 삭제하시겠습니까?")) {
-			location.href="/admin/QA/QADelete.do?q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
-		}
-		
-	}
-	
-}
-
 function doList() {
-	location.href="/admin/QA/QAList.do";
+	location.href="/customer/QA/QAList.do";
 }
 
 </script>
@@ -98,8 +56,8 @@ function doList() {
 <body>
 
 	<section id="wrapper" class="wrapper">
-		
-	<form name="f" id="f" method="post">	
+
+	<form name="f" id="f" method="post">
 	
 	    <header class="header">
 			<div class="wrap">
@@ -160,43 +118,41 @@ function doList() {
 				<li>
 					<a href="#">고객센터 관리</a>
 					<ul class="col-2">
-						<li><a href="/admin/notice/NoticeList.do">공지사항 관리</a></li>
-						<li><a href="/admin/QA/QAList.do">Q&amp;A 관리</a></li>
+						<li><a href="/customer/notice/NoticeList.do">공지사항 관리</a></li>
+						<li><a href="/customer/QA/QAList.do">Q&amp;A 관리</a></li>
 					</ul>
 				</li>
 			</ul>
 		</nav>
-
+	
 		<div class="container detail">
 			<div class="wrap btn-wrap">
 			
 				<div class="list_wrap qna_detail">
-					<div class="top">
+					<div class="top">	
 						<p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
-						<p class="sub_text"><%=CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
+						<p class="sub_text">관리자<span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
 					</div>
           			<div class="content"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %></div>
 				</div>
         		<div class="btn-groub">
-					<button class="col-3 deep-btn button" onclick="javascript:doReply();return false;">답글</button>
-					<button class="col-3 blue-btn button" onclick="javascript:doDelete();return false;">삭제</button>
+					<button class="col-3 glay-btn button" onclick="javascript:doList();return false;"></button>
 					<button class="col-3 glay-btn button" onclick="javascript:doList();return false;">목록</button>
-				</div>
-				
+					<button class="col-3 glay-btn button" onclick="javascript:doList();return false;"></button>
+				</div>	
+
 			</div>
 		</div>
-		
+	
 		<footer class="footer">
-    	<a href="#">
-      		<img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao">
-    	</a>
-    	<div class="company_info">
-      		<p>대표이사 : 장명훈 ㅣ 대표번호 : 010-9057-6156</p>
-      		<p>사업자등록번호 : 567-36-00142</p>
-      		<p>통신판매업신고 : 2017-인천서구-0309호</p>
-      		<p>인천시 서구 보도진로 18번길 12(가좌동) 진성테크2층</p>
-      		<p>Copyright © <strong>모두의 스포츠</strong> All rights reserved. </p>
-    	</div>
+			<a href="#"><img src="/html5/common/images/ic_kakao.png" alt="카카오톡" class="kakao"></a>
+			<div class="company_info">
+				<p>대표이사 : 장명훈 ㅣ 대표번호 : 010-9057-6156</p>
+				<p>사업자등록번호 : 567-36-00142</p>
+				<p>통신판매업신고 : 2017-인천서구-0309호</p>
+				<p>인천시 서구 보도진로 18번길 12(가좌동) 진성테크2층</p>
+				<p>Copyright © <strong>모두의 스포츠</strong> All rights reserved. </p>
+			</div>
 		</footer>
 
 	</form>	

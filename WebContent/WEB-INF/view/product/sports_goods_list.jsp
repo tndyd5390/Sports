@@ -58,7 +58,7 @@ div.col-2-group a:nth-child(2){
 					contents += "<li>";
 					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
 					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.src_filename+"' alt='thumb'>";
+					contents += "<img src='"+value.main_src+"' alt='thumb'>";
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";
@@ -83,7 +83,7 @@ div.col-2-group a:nth-child(2){
 					contents += "<li>";
 					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
 					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.src_filename+"' alt='thumb'>";
+					contents += "<img src='"+value.main_src+"' alt='thumb'>";
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";

@@ -31,7 +31,7 @@ public class ProductInfoService implements IProductInfoService{
 		productInfoMapper.insertProduct(pDTO);
 		fDTO.setProd_no(pDTO.getProd_no());
 		System.out.println("file_prod_no : " +pDTO.getProd_no());
-		return productInfoMapper.insertProductFile(fDTO);
+		return productInfoMapper.insertProductMainFile(fDTO);
 	}
 
 	@Override
@@ -47,5 +47,15 @@ public class ProductInfoService implements IProductInfoService{
 	@Override
 	public ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception {
 		return productInfoMapper.getProductDetail(pDTO);
+	}
+
+	@Override
+	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO) throws Exception {
+		productInfoMapper.insertProduct(pDTO);
+		fDTO.setProd_no(pDTO.getProd_no());
+		fdDTO.setProd_no(pDTO.getProd_no());
+		System.out.println("file_prod_no : " +pDTO.getProd_no());
+		productInfoMapper.insertProductMainFile(fDTO);
+		return productInfoMapper.insertProductDetailFile(fdDTO);
 	}
 }

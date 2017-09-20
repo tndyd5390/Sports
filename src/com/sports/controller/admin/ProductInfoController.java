@@ -97,7 +97,7 @@ public class ProductInfoController {
 		return pList;
 	}
 	@RequestMapping(value="productRegProc")
-	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("main_file") MultipartFile file) throws Exception{
+	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("files") MultipartFile[] files ) throws Exception{
 		log.info(this.getClass() + " productRegProc Start!!");
 		
 		String prodName = CmmUtil.nvl(req.getParameter("product_name"));
@@ -110,24 +110,25 @@ public class ProductInfoController {
 		log.info("prodContents : " +prodContents);
 		log.info("categoryNo : " +categoryNo);
 		log.info("--------product---------");
+		
 		String newName = "";
-		String orgName = file.getOriginalFilename();
+		String orgName = files[0].getOriginalFilename();
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		String extension = orgName.substring(orgName.indexOf("."), orgName.length());
-		newName = filePath + now + extension;
+		newName = filePath + "MAIN_" +now + extension;
 		File newFile = new File(newName);
-		file.transferTo(newFile);
-		log.info("--------file---------");
+		files[0].transferTo(newFile);
+		log.info("--------mainfile---------");
 		log.info("filePath : "+filePath);
 		log.info("orgName : "+orgName);
 		log.info("newName : "+now);
 		log.info("extension : "+extension);
 		log.info("fullName : "+newName);
-		log.info("--------file---------");
+		log.info("--------mainfile---------");
 		
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		ProductFileDTO fDTO = new ProductFileDTO();
-		newName = "upload\\product_file\\"+now+extension;
+		newName = "upload\\product_file\\MAIN_"+now+extension;
 		pDTO.setProd_name(prodName);
 		pDTO.setProd_price(prodPrice);
 		pDTO.setProd_contents(prodContents);
@@ -135,10 +136,27 @@ public class ProductInfoController {
 		fDTO.setOrg_filename(orgName);
 		fDTO.setFile_path(filePath);
 		fDTO.setSrc_filename(newName);
-		
 		int res = -1;
+		if(files[1].getSize()!=0){
+			String detailOrgName = files[1].getOriginalFilename();
+			String detailExtension = detailOrgName.substring(orgName.indexOf("."), detailOrgName.length());
+			String detailName = filePath + "DETAIL_" +now + detailExtension;
+			File detailFile = new File(detailName);
+			files[1].transferTo(detailFile);
+			log.info("--------detailfile---------");
+			log.info("filePath : "+filePath);
+			log.info("detailOrgName : "+detailOrgName);
+			log.info("detailExtension : "+detailExtension);
+			log.info("detailName : "+detailName);
+			log.info("--------detailfile---------");
+			ProductFileDTO fdDTO = new ProductFileDTO();
+			fdDTO.setFile_path(filePath);
+			fdDTO.setOrg_filename(detailOrgName);
+			fdDTO.setSrc_filename(detailName);
+			res = productInfoService.insertProduct(pDTO, fDTO, fdDTO);
+		}else{
 		res = productInfoService.insertProduct(pDTO, fDTO);
-		
+		}
 		if(res != 0){
 			model.addAttribute("msg", "등록 성공!");
 		}else{
