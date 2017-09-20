@@ -1071,10 +1071,11 @@ input.inputButton {
   display: block;
 }
 
- .sports_list li:nth-child(19), .sports_list li:nth-child(20) {
+/*  .sports_list li:nth-child(19), .sports_list li:nth-child(20) {
   border-bottom: 0;
-} /* �옣珥앸챸�닔�젙 */
-
+} �옣珥앸챸�닔�젙
+ */
+ 
 .sports_list li:nth-child(3n-1) {
   border-right: 1px solid #bcbcbc;
   border-left: 1px solid #bcbcbc;

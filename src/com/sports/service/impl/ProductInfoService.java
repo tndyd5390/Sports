@@ -38,4 +38,14 @@ public class ProductInfoService implements IProductInfoService{
 	public List<ProductInfoDTO> getProductList() throws Exception {
 		return productInfoMapper.getProductList();
 	}
+
+	@Override
+	public List<ProductInfoDTO> getProductSelectList(ProductInfoDTO pDTO) throws Exception {
+		return productInfoMapper.getProductSelectList(pDTO);
+	}
+
+	@Override
+	public ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception {
+		return productInfoMapper.getProductDetail(pDTO);
+	}
 }
