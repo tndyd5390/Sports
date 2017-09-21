@@ -54,7 +54,7 @@
 								<p class="blue_text">제품사진</p>
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="main_label">
-									<label for="main_file">업로드</label> <input type="file" name="main_file" id="main_file" class="upload-hidden">
+									<label for="main_file">업로드</label> <input type="file" name="files" id="main_file" class="upload-hidden">
 								</div>
 							</li>
 							<li>
@@ -68,14 +68,14 @@
 								<div class="filebox bs3-primary">
 									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
 									<label for="detail_file">업로드</label> <input type="file"
-										id="detail_file" name="detail_file" class="upload-hidden">
+										id="detail_file" name="files" class="upload-hidden">
 								</div>
 							</li>
 							<li>
 								<p class="blue_text">옵션</p>
 								<div class="input_btn_wrap">
 									<input type="text" placeholder="옵션을 추가하세요">
-									<button class="line-btn">등록/수정</button>
+									<button type="button" class="line-btn">등록</button>
 								</div>
 							</li>
 						</ul>
