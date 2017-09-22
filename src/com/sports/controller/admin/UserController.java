@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sports.dto.UserDTO;
 import com.sports.service.IUserService;
 import com.sports.util.CmmUtil;
-import com.sports.util.MailUtil;
+import com.sports.util.MailUtil; 
 
 @Controller
 public class UserController {
@@ -72,6 +72,7 @@ public class UserController {
 			session.setAttribute("ss_user_no", uDTO.getUser_no());
 			session.setAttribute("ss_user_id", uDTO.getUser_id());
 			session.setAttribute("ss_user_name", uDTO.getUser_name());
+			session.setAttribute("ss_auth", uDTO.getAuth());
 			uDTO = null;
 			log.info(this.getClass() + " loginProc End!!");
 			return "redirect:main.do";
@@ -86,6 +87,7 @@ public class UserController {
 		session.setAttribute("ss_user_no", "");
 		session.setAttribute("ss_user_name", "");
 		session.setAttribute("ss_user_id", "");
+		session.setAttribute("ss_auth", "");
 		session.invalidate();
 		model.addAttribute("msg", "로그아웃되었습니다");
 		model.addAttribute("url", "main.do");
