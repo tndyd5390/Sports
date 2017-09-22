@@ -1,14 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List" %>
-<%@ page import="com.sports.dto.ProductInfoDTO" %>
-<%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="java.util.List"%>
+<%@ page import="com.sports.dto.ProductInfoDTO"%>
+<%@ page import="com.sports.util.CmmUtil"%>
 <%
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 %>
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
+<style>
+.select-80{
+	width : 80%;
+}
+.select-btn{
+	display: inline-block;
+	background-color : #1777cb;
+	color : #ffffff;
+	margin-left : 10px;
+	height : 40px;
+	width : 15%;
+	font-size: 14px;
+ 	border-radius: 5px;
+}
+.input_btn_wrap .opt-line-btn {
+  position: absolute;
+  right: 0;
+  background: #fff;
+  height: 40px;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  width: 72px;
+}
+</style>
+
+
 <script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -17,6 +43,28 @@
 		selectDepth();
 		inputFile();
 	});
+	
+	
+	function optAdd(){
+		var contents = "";
+		var optParents = $('#optParents');
+		
+		if(optParents.val() == 0){
+			alert("옵션을 선택하세요.");
+			return false;
+		}else{
+			contents += "<div class='input_btn_wrap' name='opt_child'>";
+			contents += "<input type='text' placeholder='"+optParents.val()+"을 추가하세요'>";
+			contents += "<button type='button' class='opt-line-btn' name='btn' onclick='optDel(this)'>제거</button>"
+			contents += "</div>";
+			$('#opt_list').append(contents);
+			return true;
+		}
+	}
+	function optDel(obj){
+		var index = $('#opt_list [name=btn]').index(obj);
+		$('#opt_list [name=opt_child]').eq(index).remove();
+	}
 </script>
 </head>
 <body>
@@ -37,46 +85,65 @@
 		</header>
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
-		<form name="f" id="f" action="productRegProc.do" method="post" enctype="multipart/form-data" >
-			<div class="wrap search-wrap btn-wrap">
-				<div class="select_wrap">
-					<select class="col-2" id="parents_depth">
-					<%for(ProductInfoDTO pDTO : pList){%>
-						<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name()) %></option>					
-					<%}%>
-					</select> 
-					<select class="col-2" id="child_depth" name="category_no">
-					</select>
-				</div>
+			<form name="f" id="f" action="productRegProc.do" method="post"
+				enctype="multipart/form-data">
+				<div class="wrap search-wrap btn-wrap">
+					<div class="select_wrap">
+						<select class="col-2" id="parents_depth">
+							<%
+								for (ProductInfoDTO pDTO : pList) {
+							%>
+							<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name())%></option>
+							<%
+								}
+							%>
+						</select> <select class="col-2" id="child_depth" name="category_no">
+						</select>
+					</div>
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
 								<p class="blue_text">제품사진</p>
 								<div class="filebox bs3-primary">
-									<input class="upload-name" value="파일선택" disabled="disabled" id="main_label">
-									<label for="main_file">업로드</label> <input type="file" name="files" id="main_file" class="upload-hidden">
+									<input class="upload-name" value="파일선택" disabled="disabled"
+										id="main_label"> <label for="main_file">업로드</label> <input
+										type="file" name="files" id="main_file" class="upload-hidden">
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">제품명</p> <input type="text" name="product_name">
+								<p class="blue_text">제품명</p> <input type="text"
+								name="product_name">
 							</li>
 							<li>
-								<p class="blue_text">제품 가격</p> <input type="text" name="product_price">
+								<p class="blue_text">제품 가격</p> <input type="text"
+								name="product_price">
 							</li>
 							<li>
 								<p class="blue_text">제품 상세</p> <textarea name="product_contents"></textarea>
 								<div class="filebox bs3-primary">
-									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
-									<label for="detail_file">업로드</label> <input type="file"
-										id="detail_file" name="files" class="upload-hidden">
+									<input class="upload-name" value="파일선택" disabled="disabled"
+										id="detail_label"> <label for="detail_file">업로드</label>
+									<input type="file" id="detail_file" name="files"
+										class="upload-hidden">
 								</div>
 							</li>
 							<li>
 								<p class="blue_text">옵션</p>
-								<div class="input_btn_wrap">
+								<div class="select_wrap">
+									<select class="select-80" id="optParents">
+										<option value="0" selected>선택하세요</option>
+										<option>색상</option>
+									</select>
+									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
+								</div> 
+								<div id="opt_list">
+									
+									
+								</div>
+								<!-- <div class="input_btn_wrap">
 									<input type="text" placeholder="옵션을 추가하세요">
 									<button type="button" class="line-btn">등록</button>
-								</div>
+								</div> -->
 							</li>
 						</ul>
 
@@ -85,10 +152,10 @@
 						<button type="submit" class="col-2 blue-btn button">등록</button>
 						<button type="button" class="col-2 glay-btn button">수정</button>
 					</div>
-			</div>
-		</form>	
+				</div>
+			</form>
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
-		</section>
+	</section>
 </body>
 </html>

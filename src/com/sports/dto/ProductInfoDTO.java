@@ -1,5 +1,9 @@
 package com.sports.dto;
 
+/**
+ * @author Data8311-03
+ *
+ */
 public class ProductInfoDTO {
 
 	private String prod_no;
@@ -19,24 +23,24 @@ public class ProductInfoDTO {
 	private String depth;
 	private String url;
 	private int read_more;
-	private String option;
-	private String opt_grp;
+	private String opt_code;
+	private String opt_name;
 	
 	
-	public String getOpt_grp() {
-		return opt_grp;
+	public String getOpt_code() {
+		return opt_code;
 	}
 
-	public void setOpt_grp(String opt_grp) {
-		this.opt_grp = opt_grp;
+	public void setOpt_code(String opt_code) {
+		this.opt_code = opt_code;
 	}
 
-	public String getOption() {
-		return option;
+	public String getOpt_name() {
+		return opt_name;
 	}
 
-	public void setOption(String option) {
-		this.option = option;
+	public void setOpt_name(String opt_name) {
+		this.opt_name = opt_name;
 	}
 
 	public int getRead_more() {

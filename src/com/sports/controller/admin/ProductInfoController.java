@@ -75,7 +75,7 @@ public class ProductInfoController {
 	public String productReg(Model model) throws Exception{
 		log.info(this.getClass() + " productReg Start!!");
 		
-		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();		
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
 		pList = productInfoService.getCategoryParents();
 		
 		model.addAttribute("pList", pList);
@@ -96,6 +96,9 @@ public class ProductInfoController {
 		log.info(this.getClass() + " selectParents End!!");
 		return pList;
 	}
+	@RequestMapping(value="selectOpt")
+	public @ResponseBody List<ProductInfoDTO> selectOpt()
+	
 	@RequestMapping(value="productRegProc")
 	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("files") MultipartFile[] files ) throws Exception{
 		log.info(this.getClass() + " productRegProc Start!!");
@@ -155,7 +158,7 @@ public class ProductInfoController {
 			fdDTO.setSrc_filename(detailName);
 			res = productInfoService.insertProduct(pDTO, fDTO, fdDTO);
 		}else{
-		res = productInfoService.insertProduct(pDTO, fDTO);
+			res = productInfoService.insertProduct(pDTO, fDTO);
 		}
 		if(res != 0){
 			model.addAttribute("msg", "등록 성공!");
