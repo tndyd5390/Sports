@@ -22,7 +22,16 @@ public class ProductInfoDTO {
 	private String code_name;
 	private String opt_name;
 	private String opt_kind;
+	private String opt_price;
 	
+
+	public String getOpt_price() {
+		return opt_price;
+	}
+
+	public void setOpt_price(String opt_price) {
+		this.opt_price = opt_price;
+	}
 
 	public String getCode_no() {
 		return code_no;

@@ -124,7 +124,6 @@ public class ProductInfoController {
 		log.info("categoryNo : " +categoryNo);
 		log.info("--------product---------");
 		
-		
 		String optParents[] = req.getParameterValues("opt_parents");
 				
 		String newName = "";
@@ -174,15 +173,18 @@ public class ProductInfoController {
 				fdDTO = null;
 			}else{
 				String optName[] = req.getParameterValues("opt_name");
+				String optPrice[] = req.getParameterValues("opt_price");
 				List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
 				log.info("-----option-----");
 				for(int i=0;i<optName.length;i++){
 					ProductInfoDTO optDTO = new ProductInfoDTO();
 					optDTO.setOpt_name(optName[i]);
 					optDTO.setOpt_kind(optParents[i]);
+					optDTO.setOpt_price(optPrice[i]);
 					optList.add(optDTO);
 					log.info("optName : "+optName[i]);
 					log.info("optKind : "+optParents[i]);
+					log.info("optPrice : "+optPrice[i]);
 				}
 				log.info("-----option-----");
 				res = productInfoService.insertProduct(pDTO, fDTO, fdDTO, optList);
@@ -194,6 +196,7 @@ public class ProductInfoController {
 				res = productInfoService.insertProduct(pDTO, fDTO);
 			}else{
 				String optName[] = req.getParameterValues("opt_name");
+				String optPrice[] = req.getParameterValues("opt_price");
 				List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
 			
 				log.info("-----option-----");
@@ -201,9 +204,11 @@ public class ProductInfoController {
 					ProductInfoDTO optDTO = new ProductInfoDTO();
 					optDTO.setOpt_name(optName[i]);
 					optDTO.setOpt_kind(optParents[i]);
+					optDTO.setOpt_price(optPrice[i]);
 					optList.add(optDTO);
 					log.info("optName : "+optName[i]);
 					log.info("optKind : "+optParents[i]);
+					log.info("optPrice : "+optPrice[i]);
 				}
 				log.info("-----option-----");
 

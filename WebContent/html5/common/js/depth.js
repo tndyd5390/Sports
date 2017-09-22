@@ -66,6 +66,7 @@
 		}else{
 			contents += "<div class='input_btn_wrap' name='opt_child'>";
 			contents += "<input type='text' name='opt_name' placeholder='"+optParents.text()+"을 추가하세요'>";
+			contents += "<input type='text' name='opt_price' placeholder='추가금' value='0'>";
 			contents += "<input type='hidden' name='opt_parents' value='"+optParents.val()+"'>";
 			contents += "<button type='button' class='opt-line-btn' name='btn' onclick='optDel(this)'>제거</button>"
 			contents += "</div>";
