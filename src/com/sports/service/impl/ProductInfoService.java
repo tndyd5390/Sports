@@ -1,6 +1,7 @@
 package com.sports.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -45,7 +46,8 @@ public class ProductInfoService implements IProductInfoService{
 	}
 
 	@Override
-	public ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception {
-		return productInfoMapper.getProductDetail(pDTO);
+	public Map<String, Object> getProductDetail(ProductInfoDTO pDTO) throws Exception {
+		//return productInfoMapper.getProductDetail(pDTO);
+		return null;
 	}
 }

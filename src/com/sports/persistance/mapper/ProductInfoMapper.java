@@ -3,6 +3,7 @@ package com.sports.persistance.mapper;
 import java.util.List;
 
 import com.sports.config.Mapper;
+import com.sports.dto.ProdOptionDTO;
 import com.sports.dto.ProductFileDTO;
 import com.sports.dto.ProductInfoDTO;
 
@@ -22,5 +23,6 @@ public interface ProductInfoMapper {
 	List<ProductInfoDTO> getProductSelectList(ProductInfoDTO pDTO) throws Exception;
 
 	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
-
+	
+	ProdOptionDTO getProductOption(String prodNo) throws Exception;
 }
