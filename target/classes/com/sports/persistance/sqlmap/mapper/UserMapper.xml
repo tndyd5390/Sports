@@ -40,7 +40,7 @@
 	</update>
 	
 	<select id="getLoginInfo" parameterType="UserDTO" resultType="UserDTO">
-		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK, AUTH FROM USER_INFO WHERE USER_ID=#{user_id} AND PASSWORD = PASSWORD(#{password})
 	</select>
 	
 	<update id="updateEmailCode" parameterType="UserDTO">
