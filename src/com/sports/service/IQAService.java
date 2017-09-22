@@ -29,6 +29,4 @@ public interface IQAService {
 	
 	List<QADTO> getQASearchList(QADTO qaDTO) throws Exception;
 	
-	//public int insertCustomerQA(QADTO qDTO) throws Exception;
-	
 }
