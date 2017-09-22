@@ -172,7 +172,7 @@ public class ProductInfoController {
 	
 	@RequestMapping(value="productDetail")
 	public String productDetail(HttpServletRequest req, Model model) throws Exception{
-		log.info(this.getClass() + " productDetail Start!!");
+		/*log.info(this.getClass() + " productDetail Start!!");
 		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
 		log.info("prodNo : " + prodNo);
 		ProductInfoDTO pDTO = new ProductInfoDTO();
@@ -181,7 +181,7 @@ public class ProductInfoController {
 		
 		model.addAttribute("pDTO", pDTO);
 		pDTO = null;
-		log.info(this.getClass() + " productDetail End!!");
+		log.info(this.getClass() + " productDetail End!!");*/
 		return "product/sports_goods_detail";
 	}
 }

@@ -90,4 +90,18 @@
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
 	
+	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+		SELECT 
+    		C.CODE_NAME, 
+  		  	O.OPT_NAME, 
+    		O.OPT_PRICE 
+		FROM 
+			PRODUCT_INFO P, 
+    		CODE_INFO C, 
+    		PROD_OPTION O 
+		WHERE 
+			P.#{prodNo} = O.#{prodNo} 
+		AND 
+			C.CODE_NO = O.OPT_KIND;
+	</select>
 </mapper>

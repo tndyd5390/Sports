@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.AcademyMapper">
-
+	<insert id="insertAcademy" parameterType="AcademyDTO">
+		INSERT INTO ACADEMY (
+			ACA_NAME, ACA_AREA1, ACA_AREA2, ACA_AREA3, ACA_EVENT1,
+			TEL, ACA_COMMENT, REG_USER_NO, REG_DT
+		) VALUES (
+			#{aca_name}, #{aca_area1}, #{aca_area2}, #{aca_area3}, #{aca_event1},
+			#{tel}, #{aca_comment}, '1111111', now()
+		)
+	</insert>
 </mapper>
