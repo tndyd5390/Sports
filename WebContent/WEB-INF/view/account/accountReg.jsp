@@ -12,7 +12,7 @@
 	function doJoin() {
 		var accountName = $('#accountName');
 		var upstream = $('#upstream');
-		var representative = $('#representative');
+		/* var representative = $('#representative'); */
 		var postcode = $('#postcode');
 		var address1 = $('#address1');
 		var tel = $('#tel');
@@ -25,11 +25,11 @@
 			alert("업종을 입력하세요.");
 			upstream.focus();
 			return false;
-		} else if (representative.val() == "") {
+		}/*  else if (representative.val() == "") {
 			alert("대표자명을 입력하세요.");
 			representative.focus();
 			return false;
-		} else if (postcode.val() == "" || address1.val() == "") {
+		}*/ else if (postcode.val() == "" || address1.val() == "") {
 			alert("주소를 입력하세요.");
 			return false;
 		} else if (tel.val() == "") {
@@ -77,10 +77,10 @@
 								<p class="blue_text">업종</p> <input type="text" id="upstream"
 								name="upstream">
 							</li>
-							<li>
+							<!-- <li>
 								<p class="blue_text">대표자명</p> <input type="text" id="representative"
 								name="representative">
-							</li>
+							</li> -->
 							<li>
 								<p class="blue_text">전화번호</p> <input type="text" id="tel"
 								name="tel">
@@ -143,7 +143,7 @@
 								name="address2">
 							</li>
 							<li>
-								<p class="blue_text">거래발생일</p> <textarea></textarea>
+								<p class="blue_text">거래발생일</p> <textarea id="dealDate" name="dealDate"></textarea>
 							</li>
 						</ul>
 					</div>

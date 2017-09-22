@@ -75,9 +75,4 @@ public class QAService implements IQAService {
 		return qaMapper.getQASearchList(qaDTO);
 	}
 	
-	/*@Override
-	public int insertCustomerQA(QADTO qDTO) throws Exception {
-		return qaMapper.insertCustomerQA(qDTO);
-	}*/
-
 }
