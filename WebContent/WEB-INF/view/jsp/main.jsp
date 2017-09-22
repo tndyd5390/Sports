@@ -49,7 +49,7 @@
           </a>
         </li>
         <li>
-          <a href="#" class="two-rows"><img src="html5/common/images/ic_menu_06list.png" alt="스포츠용품리스트관리">
+          <a href="productList.do" class="two-rows"><img src="html5/common/images/ic_menu_06list.png" alt="스포츠용품리스트관리">
             <p>스포츠용품<br>리스트관리</p>
           </a>
         </li>
