@@ -1,5 +1,6 @@
 package com.sports.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +32,6 @@ public class ProductInfoService implements IProductInfoService{
 	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO) throws Exception {
 		productInfoMapper.insertProduct(pDTO);
 		fDTO.setProd_no(pDTO.getProd_no());
-		System.out.println("file_prod_no : " +pDTO.getProd_no());
 		return productInfoMapper.insertProductMainFile(fDTO);
 	}
 
@@ -56,8 +56,48 @@ public class ProductInfoService implements IProductInfoService{
 		productInfoMapper.insertProduct(pDTO);
 		fDTO.setProd_no(pDTO.getProd_no());
 		fdDTO.setProd_no(pDTO.getProd_no());
-		System.out.println("file_prod_no : " +pDTO.getProd_no());
 		productInfoMapper.insertProductMainFile(fDTO);
 		return productInfoMapper.insertProductDetailFile(fdDTO);
+	}
+
+	@Override
+	public List<ProductInfoDTO> getSelectOption() throws Exception {
+		return productInfoMapper.getSelectOption();
+	}
+
+	@Override
+	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO, List<ProductInfoDTO> optList) throws Exception {
+		productInfoMapper.insertProduct(pDTO);
+		fDTO.setProd_no(pDTO.getProd_no());
+		fdDTO.setProd_no(pDTO.getProd_no());
+		List<ProductInfoDTO> setList = new ArrayList<ProductInfoDTO>();
+		for(ProductInfoDTO optDTO : optList){
+			ProductInfoDTO setDTO = new ProductInfoDTO();
+			setDTO.setOpt_kind(optDTO.getOpt_kind());
+			setDTO.setOpt_name(optDTO.getOpt_name());
+			setDTO.setOpt_price(optDTO.getOpt_price());
+			setDTO.setProd_no(pDTO.getProd_no());
+			setList.add(setDTO);
+		}
+		productInfoMapper.insertProductMainFile(fDTO);
+		productInfoMapper.insertProductOption(setList);
+		return productInfoMapper.insertProductDetailFile(fdDTO);
+	}
+
+	@Override
+	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, List<ProductInfoDTO> optList) throws Exception {
+		productInfoMapper.insertProduct(pDTO);
+		fDTO.setProd_no(pDTO.getProd_no());
+		List<ProductInfoDTO> setList = new ArrayList<ProductInfoDTO>();
+		for(ProductInfoDTO optDTO : optList){
+			ProductInfoDTO setDTO = new ProductInfoDTO();
+			setDTO.setOpt_kind(optDTO.getOpt_kind());
+			setDTO.setOpt_name(optDTO.getOpt_name());
+			setDTO.setOpt_price(optDTO.getOpt_price());
+			setDTO.setProd_no(pDTO.getProd_no());
+			setList.add(setDTO);
+		}
+		productInfoMapper.insertProductOption(setList);
+		return productInfoMapper.insertProductMainFile(fDTO);
 	}
 }

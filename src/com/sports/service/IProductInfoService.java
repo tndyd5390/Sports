@@ -22,4 +22,10 @@ public interface IProductInfoService {
 
 	int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO) throws Exception;
 
+	List<ProductInfoDTO> getSelectOption() throws Exception;
+
+	int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO, List<ProductInfoDTO> optList) throws Exception;
+
+	int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, List<ProductInfoDTO> optList) throws Exception;
+
 }
