@@ -25,5 +25,9 @@ public interface ProductInfoMapper {
 
 	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
 
+	List<ProductInfoDTO> getSelectOption() throws Exception;
+
+	int insertProductOption(List<ProductInfoDTO> setList) throws Exception;
+
 
 }

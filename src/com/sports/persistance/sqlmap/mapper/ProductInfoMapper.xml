@@ -20,6 +20,9 @@
 		ORDER BY P.PROD_NO DESC
 	</select>
 	
+	<select id="getSelectOption" resultType="ProductInfoDTO">
+		SELECT CODE_NO, CODE_NAME FROM CODE_INFO
+	</select>
 	<insert id="insertProduct" parameterType="ProductInfoDTO">
 		INSERT INTO PRODUCT_INFO (
 				PROD_NAME,
@@ -75,6 +78,13 @@
 				'5',
 				NOW()
 			)
+	</insert>
+	
+	<insert id="insertProductOption" parameterType="ProductInfoDTO">
+		INSERT INTO PROD_OPTION (PROD_NO, OPT_NAME, OPT_KIND, REG_USER_NO, REG_DT) VALUES
+		<foreach collection="list" item='item' separator=" , ">
+			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, '5', NOW())
+		</foreach>
 	</insert>
 	
 	<select id="getProductDetail" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">

@@ -97,7 +97,17 @@ public class ProductInfoController {
 		return pList;
 	}
 	@RequestMapping(value="selectOpt")
-	public @ResponseBody List<ProductInfoDTO> selectOpt()
+	public @ResponseBody List<ProductInfoDTO> selectOpt()throws Exception{
+		log.info(this.getClass() + " selectOpt Start!!");
+		
+			
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();	
+		
+		pList = productInfoService.getSelectOption();
+		
+		log.info(this.getClass() + " selectOpt End!!");
+		return pList;
+	}
 	
 	@RequestMapping(value="productRegProc")
 	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("files") MultipartFile[] files ) throws Exception{
@@ -114,6 +124,9 @@ public class ProductInfoController {
 		log.info("categoryNo : " +categoryNo);
 		log.info("--------product---------");
 		
+		
+		String optParents[] = req.getParameterValues("opt_parents");
+				
 		String newName = "";
 		String orgName = files[0].getOriginalFilename();
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
@@ -156,9 +169,47 @@ public class ProductInfoController {
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);
-			res = productInfoService.insertProduct(pDTO, fDTO, fdDTO);
+			if(optParents[0].equals("0")){
+				res = productInfoService.insertProduct(pDTO, fDTO, fdDTO);
+				fdDTO = null;
+			}else{
+				String optName[] = req.getParameterValues("opt_name");
+				List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
+				log.info("-----option-----");
+				for(int i=0;i<optName.length;i++){
+					ProductInfoDTO optDTO = new ProductInfoDTO();
+					optDTO.setOpt_name(optName[i]);
+					optDTO.setOpt_kind(optParents[i]);
+					optList.add(optDTO);
+					log.info("optName : "+optName[i]);
+					log.info("optKind : "+optParents[i]);
+				}
+				log.info("-----option-----");
+				res = productInfoService.insertProduct(pDTO, fDTO, fdDTO, optList);
+				fdDTO = null;
+				optList = null;
+			}
 		}else{
-			res = productInfoService.insertProduct(pDTO, fDTO);
+			if(optParents[0].equals("0")){
+				res = productInfoService.insertProduct(pDTO, fDTO);
+			}else{
+				String optName[] = req.getParameterValues("opt_name");
+				List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
+			
+				log.info("-----option-----");
+				for(int i=0;i<optName.length;i++){
+					ProductInfoDTO optDTO = new ProductInfoDTO();
+					optDTO.setOpt_name(optName[i]);
+					optDTO.setOpt_kind(optParents[i]);
+					optList.add(optDTO);
+					log.info("optName : "+optName[i]);
+					log.info("optKind : "+optParents[i]);
+				}
+				log.info("-----option-----");
+
+				res = productInfoService.insertProduct(pDTO, fDTO, optList);
+				optList = null;
+			}
 		}
 		if(res != 0){
 			model.addAttribute("msg", "등록 성공!");

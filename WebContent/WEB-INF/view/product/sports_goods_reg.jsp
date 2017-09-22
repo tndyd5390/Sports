@@ -9,31 +9,6 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-<style>
-.select-80{
-	width : 80%;
-}
-.select-btn{
-	display: inline-block;
-	background-color : #1777cb;
-	color : #ffffff;
-	margin-left : 10px;
-	height : 40px;
-	width : 15%;
-	font-size: 14px;
- 	border-radius: 5px;
-}
-.input_btn_wrap .opt-line-btn {
-  position: absolute;
-  right: 0;
-  background: #fff;
-  height: 40px;
-  border: 1px solid #bcbcbc;
-  border-radius: 4px;
-  width: 72px;
-}
-</style>
-
 
 <script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
@@ -42,29 +17,8 @@
 		selected(parents);
 		selectDepth();
 		inputFile();
+		optList();
 	});
-	
-	
-	function optAdd(){
-		var contents = "";
-		var optParents = $('#optParents');
-		
-		if(optParents.val() == 0){
-			alert("옵션을 선택하세요.");
-			return false;
-		}else{
-			contents += "<div class='input_btn_wrap' name='opt_child'>";
-			contents += "<input type='text' placeholder='"+optParents.val()+"을 추가하세요'>";
-			contents += "<button type='button' class='opt-line-btn' name='btn' onclick='optDel(this)'>제거</button>"
-			contents += "</div>";
-			$('#opt_list').append(contents);
-			return true;
-		}
-	}
-	function optDel(obj){
-		var index = $('#opt_list [name=btn]').index(obj);
-		$('#opt_list [name=opt_child]').eq(index).remove();
-	}
 </script>
 </head>
 <body>
@@ -130,9 +84,8 @@
 							<li>
 								<p class="blue_text">옵션</p>
 								<div class="select_wrap">
-									<select class="select-80" id="optParents">
+									<select class="select-80" id="optParents" name="code_no">
 										<option value="0" selected>선택하세요</option>
-										<option>색상</option>
 									</select>
 									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
 								</div> 
