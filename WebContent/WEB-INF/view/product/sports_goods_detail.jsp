@@ -1,9 +1,21 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.sports.dto.ProdOptionDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.sports.util.CmmUtil" %>
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%
 	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
+	if(pDTO == null){
+		pDTO = new ProductInfoDTO();
+	}
+	Map<String, List<ProdOptionDTO>> pMap = (Map<String, List<ProdOptionDTO>>)request.getAttribute("pMap");
+	if(pMap == null){
+		pMap = new HashMap<String, List<ProdOptionDTO>>();
+	}
 	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
@@ -82,7 +94,7 @@
         <div class="list_wrap">
           <div class="goods_detail">
             <div class="thumb">
-              <img src="<%=CmmUtil.nvl(pDTO.getSrc_filename())%>" alt="thumb">
+              <img src="<%=CmmUtil.nvl(pDTO.getMain_src())%>" alt="thumb">
             </div>
             <div class="info">
               <p class="title"><%=CmmUtil.nvl(pDTO.getProd_name())%></p>
@@ -92,16 +104,26 @@
           <div class="goods_option">
             <p class="blue_text">옵션 선택</p>
             <div class="select_wrap">
-              <select class="col-2">
-              <option value="색상선택">색상선택</option>
-              <option value="빨강">빨강</option>
+            <%
+              Iterator<String> keys = pMap.keySet().iterator();
+              while(keys.hasNext()){
+				String key = keys.next();            	  
+            %>
+                <select class="col-2">
+                <option value="<%=key%>"><%=key %></option>
+            <%
+            	List<ProdOptionDTO> pList = pMap.get(key);
+            	for(ProdOptionDTO p : pList){
+            %>
+              		<option value="<%=p.getOpt_name() %>"><%=p.getOpt_name() %></option>
+            <%
+            	}
+            %>
               </select>
-              <select class="col-2">
-                <option value="선택">사이즈선택</option>
-                <option value="사이즈">사이즈1</option>
-              </select>
+            <%
+              }
+            %>
             </div>
-
             <p class="blue_text">수량</p>
             <div class="count_input">
               <a class="incr-btn">–</a>
@@ -115,7 +137,7 @@
         <div class="list_wrap">
           <h4 class="goods_detail_title">제품 상세정보</h4>
           <div class="detail_contents">
-            <img src="html5/common/images/sample02.png" alt="thumb">
+            <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>" alt="thumb">
             <dl>
               <dt>제품특징</dt>
               <dd>훈련을 위한 기본 장비로써 가볍고 터칭감이 뛰어나 다양한 훈련에 적합한 제품입니다.

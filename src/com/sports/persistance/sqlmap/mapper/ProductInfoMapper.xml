@@ -90,7 +90,7 @@
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
 	
-	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
 		SELECT 
     		C.CODE_NAME, 
   		  	O.OPT_NAME, 
@@ -100,7 +100,7 @@
     		CODE_INFO C, 
     		PROD_OPTION O 
 		WHERE 
-			P.#{prodNo} = O.#{prodNo} 
+			P.PROD_NO = #{prodNo} 
 		AND 
 			C.CODE_NO = O.OPT_KIND;
 	</select>
