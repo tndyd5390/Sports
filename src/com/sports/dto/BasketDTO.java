@@ -9,11 +9,25 @@ public class BasketDTO {
 	private String opt_name;
 	private String opt_kind;
 	private String opt_price;
+	private String status;
 	private String reg_user_no;
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
+	private String bsk_price;
 	
+	public String getBsk_price() {
+		return bsk_price;
+	}
+	public void setBsk_price(String bsk_price) {
+		this.bsk_price = bsk_price;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getUser_no() {
 		return user_no;
 	}

@@ -100,10 +100,13 @@
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
 	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
-		SELECT 
-    		C.CODE_NAME, 
-  		  	O.OPT_NAME, 
-    		O.OPT_PRICE 
+		SELECT
+			O.OPT_NO,
+			O.PROD_NO,
+		    O.OPT_NAME,
+		    O.OPT_KIND,
+		    O.OPT_PRICE,
+		    C.CODE_NAME
 		FROM 
 			PROD_OPTION O,
 		    CODE_INFO C
