@@ -4,6 +4,7 @@
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%
 	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
+	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -11,41 +12,47 @@
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
 	function addBasket(prod_no){
-		$.ajax({
-			url : "customer/addBasket.do",
-			data : {
-				'prod_no' : prod_no,
-				'prod_qty' : document.getElementById('prod_qty').value
-			},
-			method : "post",
-			dataType : "json",
-			success : function(data){
-				if(data == 1){
-					alert("장바구니에 추가되었습니다.");
-				}else if(data == 2){
-					alert("장바구니에 추가 실패했습니다");
-				}else{
-					alert("로그인을 해주세요");
-					location.href="#";
-				}
-			},
-			error:function(x,e){
-				if(x.status==0){
-		            alert('네트워크가 정상적으로 동작하지 않습니다.');
-		            alert('네트워크 상태를 확인 하거나 업체에게 문의해 주세요.')
-		            }else if(x.status==404){
-		            alert('페이지를 찾을수가 없습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
-		            }else if(x.status==500){
-		            alert('서버에서 오류가 발생했습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
-		            }else if(e=='parsererror'){
-		            alert('json파싱에 실패했습니다.');
-		            }else if(e=='timeout'){
-		            alert('응답 요청 시간이 지났습니다.');
-		            }else {
-		            alert('Unknow Error.n'+x.responseText);
-		            }
-		    }
-		});
+		var userNo = '<%=userNo%>';
+		if(userNo == ""){
+			alert("로그인을 해주세요");
+			location.href="login.do";
+		}else{
+			$.ajax({
+				url : "customer/addBasket.do",
+				data : {
+					'prod_no' : prod_no,
+					'prod_qty' : document.getElementById('prod_qty').value
+				},
+				method : "post",
+				dataType : "json",
+				success : function(data){
+					if(data == 1){
+						alert("장바구니에 추가되었습니다.");
+					}else if(data == 2){
+						alert("장바구니에 추가 실패했습니다");
+					}else{
+						alert("로그인을 해주세요");
+						location.href="#";
+					}
+				},
+				error:function(x,e){
+					if(x.status==0){
+			            alert('네트워크가 정상적으로 동작하지 않습니다.');
+			            alert('네트워크 상태를 확인 하거나 업체에게 문의해 주세요.')
+			            }else if(x.status==404){
+			            alert('페이지를 찾을수가 없습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+			            }else if(x.status==500){
+			            alert('서버에서 오류가 발생했습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+			            }else if(e=='parsererror'){
+			            alert('json파싱에 실패했습니다.');
+			            }else if(e=='timeout'){
+			            alert('응답 요청 시간이 지났습니다.');
+			            }else {
+			            alert('Unknow Error.n'+x.responseText);
+			            }
+			    }
+			});
+		}
 	}
 </script>
 </head>
@@ -75,7 +82,7 @@
         <div class="list_wrap">
           <div class="goods_detail">
             <div class="thumb">
-              <img src="<%=CmmUtil.nvl(pDTO.getSrc_filename())%>" alt="thumb">
+              <img src="<%=CmmUtil.nvl(pDTO.getMain_src())%>" alt="thumb">
             </div>
             <div class="info">
               <p class="title"><%=CmmUtil.nvl(pDTO.getProd_name())%></p>
@@ -108,7 +115,7 @@
         <div class="list_wrap">
           <h4 class="goods_detail_title">제품 상세정보</h4>
           <div class="detail_contents">
-            <img src="html5/common/images/sample02.png" alt="thumb">
+            <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>" alt="thumb">
             <dl>
               <dt>제품특징</dt>
               <dd>훈련을 위한 기본 장비로써 가볍고 터칭감이 뛰어나 다양한 훈련에 적합한 제품입니다.
