@@ -101,17 +101,17 @@
     </select>
 	
 	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
-		SELECT 
-    		C.CODE_NAME, 
-  		  	O.OPT_NAME, 
-    		O.OPT_PRICE 
+		SELECT
+			O.OPT_NO,
+			O.PROD_NO,
+		    O.OPT_NAME,
+		    O.OPT_KIND,
+		    O.OPT_PRICE,
+		    C.CODE_NAME
 		FROM 
-			PRODUCT_INFO P, 
-    		CODE_INFO C, 
-    		PROD_OPTION O 
-		WHERE 
-			P.PROD_NO = #{prodNo} 
-		AND 
-			C.CODE_NO = O.OPT_KIND;
+			PROD_OPTION O,
+		    CODE_INFO C
+		WHERE
+			O.PROD_NO = #{prodNo} AND C.CODE_NO = O.OPT_KIND;
 	</select>
 </mapper>

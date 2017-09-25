@@ -61,12 +61,13 @@ public class ProductInfoService implements IProductInfoService{
 		if(prodDTO == null){
 			prodDTO = new ProductInfoDTO();
 		}
-		
 		//제품의 옵션을 가져온다. 옵션은 Map형태로 정제한다
-		List<ProdOptionDTO> pList = productInfoMapper.getProductOption(CmmUtil.nvl(pDTO.getProd_no()));
+		String prodNo = CmmUtil.nvl(pDTO.getProd_no());
+		List<ProdOptionDTO> pList = productInfoMapper.getProductOption(prodNo);
 		if(pList == null){
 			pList = new ArrayList<ProdOptionDTO>();
 		}
+		System.out.println("pList.size() : " + pList.size());
 		
 		Map<String, List<ProdOptionDTO>> pMap = new HashMap<String, List<ProdOptionDTO>>();
 		if(pList.size() != 0){

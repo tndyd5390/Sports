@@ -6,6 +6,14 @@ public class ProdOptionDTO {
 	private String code_name;
 	private String opt_name;
 	private String opt_price;
+	private String opt_no;
+	
+	public String getOpt_no() {
+		return opt_no;
+	}
+	public void setOpt_no(String opt_no) {
+		this.opt_no = opt_no;
+	}
 	public String getProd_no() {
 		return prod_no;
 	}

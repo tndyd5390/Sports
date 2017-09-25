@@ -110,12 +110,12 @@
 				String key = keys.next();            	  
             %>
                 <select class="col-2">
-                <option value="<%=key%>"><%=key %></option>
+                <option value="<%=key%>"><%=key + "선택" %></option>
             <%
             	List<ProdOptionDTO> pList = pMap.get(key);
             	for(ProdOptionDTO p : pList){
             %>
-              		<option value="<%=p.getOpt_name() %>"><%=p.getOpt_name() %></option>
+              		<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
             <%
             	}
             %>
