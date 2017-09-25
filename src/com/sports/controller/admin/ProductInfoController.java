@@ -1,6 +1,7 @@
 package com.sports.controller.admin;
 
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -10,8 +11,10 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.lf5.viewer.configure.MRUFileManager;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -157,7 +160,7 @@ public class ProductInfoController {
 		int res = -1;
 		if(files[1].getSize()!=0){
 			String detailOrgName = files[1].getOriginalFilename();
-			String detailExtension = detailOrgName.substring(orgName.indexOf("."), detailOrgName.length());
+			String detailExtension = detailOrgName.substring(detailOrgName.indexOf("."), detailOrgName.length());
 			String detailName = filePath + "DETAIL_" +now + detailExtension;
 			File detailFile = new File(detailName);
 			files[1].transferTo(detailFile);
@@ -168,6 +171,7 @@ public class ProductInfoController {
 			log.info("detailName : "+detailName);
 			log.info("--------detailfile---------");
 			ProductFileDTO fdDTO = new ProductFileDTO();
+			detailName = "upload\\product_file\\DETAIL_"+now+detailExtension;
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);
@@ -278,4 +282,167 @@ public class ProductInfoController {
 		 */
 		return "product/sports_goods_detail";	
 		}
+	
+	@RequestMapping(value="productUpdate")
+	public String updateProd(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + " updateProd Start!!");
+		
+		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
+		pList = productInfoService.getCategoryParents();
+		
+
+		log.info("prodNo : " +prodNo);
+		ProductInfoDTO pDTO = new ProductInfoDTO();
+		pDTO.setProd_no(prodNo);
+		
+		//service호출
+		Map<String, Object> pMap = productInfoService.getProductDetail(pDTO);
+		if(pMap == null){
+			pMap = new HashMap<String, Object>();
+		}
+		
+		log.info(((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
+		log.info(((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
+		
+		//model에 올리기
+		model.addAttribute("pDTO", (ProductInfoDTO)pMap.get("prodDetail"));
+		model.addAttribute("pMap", (Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt"));
+		model.addAttribute("pList", pList);
+		
+		//null 처리
+		prodNo = null;
+		pDTO = null;
+		pMap = null;
+		pList = null;
+		log.info(this.getClass() + " updateProd End!!");
+		return "product/sports_goods_update";
+	}
+	
+	@RequestMapping("productUpdateProc")
+	public String productUpdateProc(HttpServletRequest req, HttpSession session, @RequestParam("files") MultipartFile[] files) throws Exception{
+		log.info(this.getClass() + " productUpdateProc Start!!");
+		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
+		String prodName = CmmUtil.nvl(req.getParameter("product_name"));
+		String prodPrice = CmmUtil.nvl(req.getParameter("product_price"));
+		String prodContents = CmmUtil.nvl(req.getParameter("product_contents"));
+		String categoryNo = CmmUtil.nvl(req.getParameter("category_no"));
+		log.info("--------product---------");
+		log.info("prodName : " +prodName);
+		log.info("prodPrice : " +prodPrice);
+		log.info("prodContents : " +prodContents);
+		log.info("categoryNo : " +categoryNo);
+		log.info("--------product---------");
+		String optParents[] = req.getParameterValues("opt_parents");
+		ProductInfoDTO pDTO = new ProductInfoDTO();
+		pDTO.setProd_no(prodNo);
+		pDTO.setProd_name(prodName);
+		pDTO.setProd_price(prodPrice);
+		pDTO.setProd_contents(prodContents);
+		pDTO.setCategory_no(categoryNo);
+
+		
+		String mainFileNo = CmmUtil.nvl(req.getParameter("mainFileNo"));
+		String detailFileNo = CmmUtil.nvl(req.getParameter("detailFileNo"));
+		String mainSrc = "C:\\sportspace\\Sports\\WebContent\\"+CmmUtil.nvl(req.getParameter("mainFileSrc"));
+		String detailSrc = "C:\\sportspace\\Sports\\WebContent\\"+CmmUtil.nvl(req.getParameter("detailFileSrc"));
+		
+		if(optParents==null){
+			fileUpdate(files, prodNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
+		}else{
+			fileUpdate(files, prodNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
+			String optName[] = req.getParameterValues("opt_name");
+			String optPrice[] = req.getParameterValues("opt_price");
+			List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
+			log.info("-----option-----");
+			for(int i=0;i<optName.length;i++){
+				ProductInfoDTO optDTO = new ProductInfoDTO();
+				optDTO.setProd_no(prodNo);
+				optDTO.setOpt_name(optName[i]);
+				optDTO.setOpt_kind(optParents[i]);
+				optDTO.setOpt_price(optPrice[i]);
+				optList.add(optDTO);
+				log.info("optName : "+optName[i]);
+				log.info("optKind : "+optParents[i]);
+				log.info("optPrice : "+optPrice[i]);
+			}
+			log.info("-----option-----");
+			productInfoService.insertOption(optList);
+		}
+		log.info(this.getClass() + " productUpdateProc End!!");
+		return "redirect:productDetail.do?pNo="+prodNo;
+	}
+	public void fileDelete(String fileNo, String fileSrc) throws Exception{
+		if(!fileNo.equals("") || fileNo!=null){
+			ProductFileDTO pfDTO = new ProductFileDTO();
+			pfDTO.setFile_no(fileNo);
+			productInfoService.deleteFile(pfDTO);
+			
+			File file = new File(fileSrc);
+			if(file.exists()==true){
+				file.delete();
+			}
+		}
+	}
+	public void fileUpdate(MultipartFile files[], String prodNo, String mainFileNo, String detailFileNo, String mainSrc, String detailSrc) throws Exception{
+		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+		
+		if(files[0].getSize() != 0){
+			fileDelete(mainFileNo, mainSrc);
+			String newName = "";
+			String orgName = files[0].getOriginalFilename();
+			String extension = orgName.substring(orgName.indexOf("."), orgName.length());
+			newName = filePath + "MAIN_" +now + extension;
+			File newFile = new File(newName);
+			files[0].transferTo(newFile);
+			log.info("--------mainfile---------");
+			log.info("filePath : "+filePath);
+			log.info("orgName : "+orgName);
+			log.info("newName : "+now);
+			log.info("extension : "+extension);
+			log.info("fullName : "+newName);
+			log.info("--------mainfile---------");
+			ProductFileDTO fDTO = new ProductFileDTO();
+			newName = "upload\\product_file\\MAIN_"+now+extension;
+			fDTO.setOrg_filename(orgName);
+			fDTO.setFile_path(filePath);
+			fDTO.setSrc_filename(newName);
+			fDTO.setProd_no(prodNo);
+			productInfoService.insertMainFile(fDTO);
+		}
+		if(files[1].getSize() != 0){
+			fileDelete(detailFileNo, detailSrc);
+			String detailOrgName = files[1].getOriginalFilename();
+			String detailExtension = detailOrgName.substring(detailOrgName.indexOf("."), detailOrgName.length());
+			String detailName = filePath + "DETAIL_" +now + detailExtension;
+			File detailFile = new File(detailName);
+			files[1].transferTo(detailFile);
+			log.info("--------detailfile---------");
+			log.info("filePath : "+filePath);
+			log.info("detailOrgName : "+detailOrgName);
+			log.info("detailExtension : "+detailExtension);
+			log.info("detailName : "+detailName);
+			log.info("--------detailfile---------");
+			ProductFileDTO fdDTO = new ProductFileDTO();
+			detailName = "upload\\product_file\\DETAIL_"+now+detailExtension;
+			fdDTO.setFile_path(filePath);
+			fdDTO.setOrg_filename(detailOrgName);
+			fdDTO.setSrc_filename(detailName);
+			fdDTO.setProd_no(prodNo);
+			productInfoService.insertDetailFile(fdDTO);
+		}
+	}
+	
+	@RequestMapping(value="deleteOpt")
+	public @ResponseBody String deleteOpt(@RequestParam(value="optNo") String optNo) throws Exception{
+		log.info(this.getClass() + " deleteOpt Start!!");
+		
+		ProdOptionDTO poDTO = new ProdOptionDTO();
+		poDTO.setOpt_no(optNo);
+		productInfoService.deleteOpt(poDTO);
+		
+		
+		log.info(this.getClass() + " deleteOpt End!!");
+		return "success";
+	}
 }

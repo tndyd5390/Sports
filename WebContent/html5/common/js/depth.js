@@ -21,6 +21,25 @@
 		});
 	};
 	
+	function UpSelected(parents , select){
+		var contents = '';
+		$.ajax({
+			url : 'selectParents.do',
+			method : 'post',
+			data : {'parents' : parents},
+			success : function(data){
+				$.each(data, function(key,value){
+					if(value.category_no == select){
+						contents += "<option value='"+value.category_no+"' selected>"+value.category_name+"</option>";
+					}else{
+						contents += "<option value='"+value.category_no+"'>"+value.category_name+"</option>";
+					}
+				});
+			$('#child_depth').html(contents);
+			}
+		});
+	};
+	
 	function selected(parents){
 		var contents = '';
 		$.ajax({
