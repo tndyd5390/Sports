@@ -141,4 +141,36 @@ public class ProductInfoService implements IProductInfoService{
 		productInfoMapper.insertProductOption(setList);
 		return productInfoMapper.insertProductMainFile(fDTO);
 	}
+
+	@Override
+	public void deleteOpt(ProdOptionDTO poDTO) throws Exception {
+		productInfoMapper.deleteOpt(poDTO);
+	}
+
+	@Override
+	public void insertMainFile(ProductFileDTO fDTO) throws Exception {
+		productInfoMapper.insertProductMainFile(fDTO);
+	}
+
+	@Override
+	public void insertDetailFile(ProductFileDTO fdDTO) throws Exception {
+		productInfoMapper.insertProductDetailFile(fdDTO);
+	}
+
+	@Override
+	public void insertOption(List<ProductInfoDTO> optList) throws Exception {
+		productInfoMapper.insertProductOption(optList);
+	}
+
+	@Override
+	public void updateProduct(ProductInfoDTO pDTO) throws Exception {
+		System.out.println("พรพร");
+		System.out.println(pDTO.getProd_no());
+		productInfoMapper.updateProduct(pDTO);
+	}
+
+	@Override
+	public void deleteFile(ProductFileDTO pDTO) throws Exception {
+		productInfoMapper.deleteFile(pDTO);
+	}
 }

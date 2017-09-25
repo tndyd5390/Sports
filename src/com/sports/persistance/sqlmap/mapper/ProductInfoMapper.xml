@@ -88,13 +88,25 @@
 	</insert>
 	
 	<select id="getProductDetail" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
-		SELECT DISTINCT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, P.PROD_CONTENTS, C.CATEGORY_NO, C.CATEGORY_NAME,
+		SELECT DISTINCT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, P.PROD_CONTENTS, C.CATEGORY_NO, C.CATEGORY_NAME, C.PARENTS_NO AS PARENTS_NO,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
 		    ) AS DETAIL_SRC,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    ) AS MAIN_SRC
+		    ) AS MAIN_SRC,
+		    (
+			SELECT ORG_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
+		    ) AS DETAIL_ORG_NAME,
+		    (
+			SELECT ORG_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
+		    ) AS MAIN_ORG_NAME,
+		    (
+		    SELECT FILE_NO FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
+		    ) AS DETAIL_FILE_NO,
+		    (
+		    SELECT FILE_NO FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
+		    ) AS MAIN_FILE_NO
 		FROM PRODUCT_INFO P, CATEGORY_INFO C, PROD_FILE F
 	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
@@ -113,4 +125,18 @@
 		WHERE
 			O.PROD_NO = #{prodNo} AND C.CODE_NO = O.OPT_KIND;
 	</select>
+	
+	<delete id="deleteOpt" parameterType="ProdOptionDTO">
+		DELETE FROM PROD_OPTION WHERE OPT_NO = #{opt_no}
+	</delete>
+	
+	<update id="updateProduct" parameterType="ProductInfoDTO">
+		UPDATE PRODUCT_INFO SET 
+		PROD_NAME = #{prod_name}, PROD_PRICE = #{prod_price}, PROD_CONTENTS = #{prod_contents}, CATEGORY_NO = #{category_no}
+		WHERE PROD_NO = #{prod_no}
+	</update>
+	
+	<delete id="deleteFile" parameterType="ProductFileDTO">
+		DELETE FROM PROD_FILE WHERE FILE_NO = #{file_no}
+	</delete>
 </mapper>
