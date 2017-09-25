@@ -88,6 +88,11 @@
 			});
 		}
 	}
+	
+	
+function updateProd(){
+	location.href="productUpdate.do?pNo=<%=pDTO.getProd_no()%>";
+}
 </script>
 </head>
 <body>
@@ -180,10 +185,9 @@
           <button class="col-2 glay-btn button" onclick="addBasket('<%=CmmUtil.nvl(pDTO.getProd_no()) %>');">장바구니 담기</button>
         </div>
         <div class="btn-groub">
-          <button class="col-2 blue-btn button">수정</button>
+          <button class="col-2 blue-btn button" onclick="updateProd();">수정</button>
           <button class="col-2 glay-btn button">삭제</button>
         </div>
-        
       </div>
     </div>
  <%@include file="/html5/include/footer.jsp" %>

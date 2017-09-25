@@ -23,7 +23,43 @@ public class ProductInfoDTO {
 	private String opt_name;
 	private String opt_kind;
 	private String opt_price;
+	private String main_org_name;
+	private String detail_org_name;
+	private String main_file_no;
+	private String detail_file_no;
 	
+
+	public String getMain_file_no() {
+		return main_file_no;
+	}
+
+	public void setMain_file_no(String main_file_no) {
+		this.main_file_no = main_file_no;
+	}
+
+	public String getDetail_file_no() {
+		return detail_file_no;
+	}
+
+	public void setDetail_file_no(String detail_file_no) {
+		this.detail_file_no = detail_file_no;
+	}
+
+	public String getMain_org_name() {
+		return main_org_name;
+	}
+
+	public void setMain_org_name(String main_org_name) {
+		this.main_org_name = main_org_name;
+	}
+
+	public String getDetail_org_name() {
+		return detail_org_name;
+	}
+
+	public void setDetail_org_name(String detail_org_name) {
+		this.detail_org_name = detail_org_name;
+	}
 
 	public String getOpt_price() {
 		return opt_price;
