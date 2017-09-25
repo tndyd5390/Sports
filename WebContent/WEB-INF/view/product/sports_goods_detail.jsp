@@ -26,7 +26,6 @@
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
 
-	var orgPrice = '<%=CmmUtil.nvl(pDTO.getProd_price())%>';
 	function addComma(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
