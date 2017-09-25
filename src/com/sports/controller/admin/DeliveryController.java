@@ -23,7 +23,7 @@ public class DeliveryController {
 		
 		log.info(this.getClass() + "deliverytracking Start!!");
 		String url = "http://tracking.sweettracker.net/tracking"; //서비스URL
-        String key = "X12Wsgl4c8NuVRBikX2T4g"; //신청해서 받은 키
+        String key = "g1KSViceIkKV0hWrnB6rgQ"; //신청해서 받은 키
         String code = "04";
         String invoice = "610154387133";
         

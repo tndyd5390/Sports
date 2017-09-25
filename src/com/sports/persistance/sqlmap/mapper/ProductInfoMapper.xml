@@ -99,7 +99,7 @@
 	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
-	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
 		SELECT 
     		C.CODE_NAME, 
   		  	O.OPT_NAME, 
