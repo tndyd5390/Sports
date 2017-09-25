@@ -1,3 +1,4 @@
+<%@page import="javax.swing.JComboBox.KeySelectionManager"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.sports.dto.ProdOptionDTO"%>
@@ -86,8 +87,6 @@
     </header>
 <%@include file="/html5/include/navBar.jsp" %>
 
-
-
     <div class="container detail">
       <div class="wrap btn-wrap">
 
@@ -102,28 +101,36 @@
             </div>
           </div>
           <div class="goods_option">
+          <%
+          	if(pMap.size() != 0){
+          %>
             <p class="blue_text">옵션 선택</p>
             <div class="select_wrap">
-            <%
+            <select class="col-2">
+                       <%
               Iterator<String> keys = pMap.keySet().iterator();
               while(keys.hasNext()){
 				String key = keys.next();            	  
             %>
-                <select class="col-2">
                 <option value="<%=key%>"><%=key + "선택" %></option>
             <%
             	List<ProdOptionDTO> pList = pMap.get(key);
             	for(ProdOptionDTO p : pList){
             %>
-              		<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
+              	<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
             <%
             	}
             %>
-              </select>
             <%
               }
-            %>
+            %>      
+            </select>
             </div>
+          <%
+          }
+          %>
+          	
+         
             <p class="blue_text">수량</p>
             <div class="count_input">
               <a class="incr-btn">–</a>
@@ -140,8 +147,7 @@
             <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>" alt="thumb">
             <dl>
               <dt>제품특징</dt>
-              <dd>훈련을 위한 기본 장비로써 가볍고 터칭감이 뛰어나 다양한 훈련에 적합한 제품입니다.
-            내구성이 뛰어난 소재로 제작이 되어 더욱 실용적입니다.</dd>
+              <dd><%=CmmUtil.nvl(pDTO.getProd_contents()) %></dd>
               <dt>상품규격정보</dt>
               <dd>- 재질 : 폴리에스테르 65% + 면 35%<br>
             - 색상 : 검정/노랑/주황/빨강/파랑/밤색/보라</dd>
