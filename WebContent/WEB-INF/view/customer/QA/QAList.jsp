@@ -95,9 +95,9 @@ $('#searchbox').keyup(function() {
 				contents += "<li>";
 				
 				if (value.answer_yn == "Y") {
-					contents += "<a href='/customer/QA/QAAnswerDetail.do?qa_no="+value.qa_no+"'>";
+					contents += "<a href='javascript:doAnswerDetail("+value.qa_no+","+value.secret_yn+","+value.reg_user_no+");'>"
 				} else {
-					contents += "<a href='/customer/QA/QADetail.do?qa_no="+value.qa_no+"'>";
+					contents += "<a href='javascript:doDetail("+value.qa_no+","+value.secret_yn+","+value.reg_user_no+");'>"
 				}
 				
 				contents += "<p class='title'>";
@@ -160,15 +160,19 @@ $("#addview").add("#searchadd").click(function() {
 			console.log(data)
 			
 			$.each(data,function (key,value) {
+				
 				var nw = value.new_yn;
 				var lock = value.secret_yn;
 				
 				contents += "<li>";
 				
 				if (value.answer_yn == "Y") {
-					contents += "<a href='doAnswerDetail('" + value.qa_no + "','" + value.secret_yn + "','" + value.reg_user_no + "');'>"
+					<%--contents += "<a href='/customer/QA/QAAnswerDetail.do?qa_no="+value.qa_no+"'>";--%>
+					contents += "<a href='javascript:doAnswerDetail("+value.qa_no+","+value.secret_yn+","+value.reg_user_no+");'>"
+				
 				} else {
-					contents += "<a href='doDetail('" + value.qa_no + ",'" + value.secret_yn + "','" + value.reg_user_no + "');'>"
+					<%--contents += "<a href='/customer/QA/QADetail.do?qa_no="+value.qa_no+"'>";--%>
+					contents += "<a href='javascript:doDetail("+value.qa_no+","+value.secret_yn+","+value.reg_user_no+");'>"
 				}
 				
 				contents += "<p class='title'>"
@@ -224,16 +228,21 @@ function doDetail(qa_no, secret_yn, reg_user_no) {
 	}
 	
 	location.href="/customer/QA/QADetail.do?qa_no=" + qa_no;
+	
 }
 
 //답글 상세 이동
 function doAnswerDetail(qa_no, secret_yn, reg_user_no) {
+	
 	console.log("1");
+	
 	var ss_user_no = "<%=ss_user_no %>";
+	
 	console.log("2");
-	console.log("reg_user_no : " + reg_user_no);
-	console.log("ss_user_no : " + ss_user_no);
-	console.log("secret_yn : " + secret_yn);
+	console.log("reg_user_no: " + reg_user_no);
+	console.log("ss_user_no: " + ss_user_no);
+	console.log("secret_yn: " + secret_yn);
+	
 	if (reg_user_no != ss_user_no && secret_yn == 1) {
 		
 		alert('비밀글입니다.');

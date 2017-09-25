@@ -5,6 +5,9 @@
 <%@ page import="com.sports.util.CmmUtil"
 	import="com.sports.dto.NoticeDTO" import="java.util.ArrayList"
 	import="java.util.List"%>
+<%
+String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+%>
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -137,10 +140,12 @@
       
 	</form>
 	     
+    <%@include file="/html5/include/footer.jsp"%>
 	</section>
 	
-    <%@include file="/html5/include/footer.jsp"%>
-	
+	<div id="c-mask" class="c-mask"></div>
+	<script src="/html5/common/js/classie.js"></script>
+	<script src="/html5/common/js/common.js"></script>
 	
 </body>
 

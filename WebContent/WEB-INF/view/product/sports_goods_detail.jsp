@@ -29,6 +29,10 @@
 	function addComma(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
+	function unComma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
 	function plItemCnt(){
 		var qty = parseInt($('#prod_qty').val());
 		if(qty<99){
@@ -45,28 +49,42 @@
 			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
 		}
 	}
-	function addBasket(prod_no){
+	function addBasket(){
 		var userNo = '<%=userNo%>';
+		var prod_no = '<%=CmmUtil.nvl(pDTO.getProd_no())%>';
+		var price = $('#prod_price').text();
 		if(userNo == ""){
 			alert("로그인을 해주세요");
 			location.href="login.do";
 		}else{
+			var sel = document.getElementsByName('optSelect');
+			var selectedItemArray = [];
+			for(var i = 0 ;i< sel.length; i++){
+				for(var j = 0; j < sel[i].options.length; j++){
+					if(sel[i].options[j].selected == true){
+						if(sel[i].options[j].value == "-1"){
+							alert("옵션을 선택해 주세요");
+							return;
+						}
+						selectedItemArray.push(sel[i].options[j].value);
+					}
+				}
+			}
 			$.ajax({
 				url : "customer/addBasket.do",
 				data : {
 					'prod_no' : prod_no,
-					'prod_qty' : document.getElementById('prod_qty').value
+					'prod_qty' : document.getElementById('prod_qty').value,
+					'opt_no' : selectedItemArray,
+					'bsk_price' : unComma(price)
 				},
 				method : "post",
-				dataType : "json",
 				success : function(data){
-					if(data == 1){
-						alert("장바구니에 추가되었습니다.");
-					}else if(data == 2){
-						alert("장바구니에 추가 실패했습니다");
+					var result = parseInt(data);
+					if(result == 1){
+						alert("장바구니에 담았습니다.");
 					}else{
-						alert("로그인을 해주세요");
-						location.href="#";
+						alert("장바구니 담기에 실패했습니다.");
 					}
 				},
 				error:function(x,e){
@@ -132,25 +150,25 @@ function updateProd(){
           %>
             <p class="blue_text">옵션 선택</p>
             <div class="select_wrap">
-            <select class="col-2">
                        <%
               Iterator<String> keys = pMap.keySet().iterator();
               while(keys.hasNext()){
 				String key = keys.next();            	  
             %>
-                <option value="<%=key%>"><%=key + "선택" %></option>
+            	<select class="col-2" id="optSelect" name="optSelect">
+                <option value="-1"><%=key + "선택" %></option>
             <%
             	List<ProdOptionDTO> pList = pMap.get(key);
             	for(ProdOptionDTO p : pList){
             %>
-              	<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
+              		<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
             <%
             	}
             %>
+            </select>
             <%
               }
             %>      
-            </select>
             </div>
           <%
           }
@@ -182,7 +200,7 @@ function updateProd(){
 
         <div class="btn-groub">
           <button class="col-2 blue-btn button">바로 구매</button>
-          <button class="col-2 glay-btn button" onclick="addBasket('<%=CmmUtil.nvl(pDTO.getProd_no()) %>');">장바구니 담기</button>
+          <button class="col-2 glay-btn button" onclick="addBasket();">장바구니 담기</button>
         </div>
         <div class="btn-groub">
           <button class="col-2 blue-btn button" onclick="updateProd();">수정</button>
