@@ -8,7 +8,9 @@
 <%
 NoticeDTO rDTO = (NoticeDTO) request.getAttribute("rDTO");
 
-String user_no = CmmUtil.nvl((String)session.getAttribute("user_no")); 
+String auth = CmmUtil.nvl((String)session.getAttribute("ss_auth")); 
+
+
 %>
 
 <!DOCTYPE html>
@@ -18,10 +20,9 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 	
 <script type="text/javascript">
 
-var user_no = "<%=user_no%>";
-	
+var auth = "<%=auth%>"
+
 	function deleteConfirm() {
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
 		
 		
 		if(confirm("작성한 게시글을 삭제하시겠습니까?")){
@@ -31,18 +32,29 @@ var user_no = "<%=user_no%>";
 		}
 	}
 	
+	
+	
 	function editConfirm() {
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
 		
 		
 		location.href="/notice/NoticeEditInfo.do?notice_no=<%=rDTO.getNotice_no()%>";
 	}
 	
+	
+	
+	function hiddenBox(){
+		
+		if( auth != 'A' ){
+			document.getElementById("editId").style.display = "none";
+			document.getElementById("deleteId").style.display = "none";
+			}
+		
+	}
 </script>
 
 </head>
 
-<body>
+<body onload="hiddenBox();">
 
   <section id="wrapper" class="wrapper">
   
@@ -80,19 +92,22 @@ var user_no = "<%=user_no%>";
           
         </div>
         <div class="btn-groub">
-          <button class="col-3 deep-btn button" onclick="javascript:editConfirm();return false;" >수정</button>
-          <button class="col-3 blue-btn button" onclick="javascript:deleteConfirm();return false;">삭제</button>
-          <button class="col-3 glay-btn button" onclick="location.href='/notice/NoticeList.do';return false;">목록</button>
+          <button class="col-3 deep-btn button" id="editId" onclick="javascript:editConfirm();return false;" >수정</button>
+          <button class="col-3 blue-btn button" id="deleteId" onclick="javascript:deleteConfirm();return false;">삭제</button>
+          <%if(!auth.equals("A")){ %>          
+          <button class="col-3 glay-btn button" id="userButton" style="width:100%" onclick="location.href='/notice/NoticeList.do';return false;">목록</button>
+          <%}else{ %>
+          <button class="col-3 glay-btn button" id="adminButton" onclick="location.href='/notice/NoticeList.do';return false;">목록</button>
+          <%} %>
         </div>
       </div>
     </div>
    
-    <%@include file="/html5/include/footer.jsp"%>
 
   </section>
-  <div id="c-mask" class="c-mask"></div>
-  <script src="/html5/common/js/classie.js"></script>
-  <script src="/html5/common/js/common.js"></script>
+ 
+    <%@include file="/html5/include/footer.jsp"%>
+    
 </body>
 
 </html>

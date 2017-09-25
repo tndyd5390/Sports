@@ -20,7 +20,10 @@ if (nList == null) {
 	nList = new ArrayList<NoticeDTO>();
 }
 
-String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+String auth = CmmUtil.nvl((String)session.getAttribute("ss_auth")); 
+
+
+
 %>
 
 <style type="text/css">
@@ -32,7 +35,9 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
  
 <script type="text/javascript">
 
-		$(function() {
+var auth = "<%=auth%>";
+
+	$(function() {
 			var cnt = 6;
 			var search ="";
 	/*검색 기능*/
@@ -100,6 +105,10 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 			
 		
 	}); 	//검색 이벤트 닫음
+	
+	
+	
+	
 	
 	/* 더보기 시작 */
 	<%if (nList.size() < 6) {%>
@@ -172,7 +181,8 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 	
 	/*  편집 삭제 버튼 숨기기 */
 	function hiddenCheckbox() {
-	
+		
+		
 		
 			
 		var dS = document.getElementsByClassName("checkbox");
@@ -184,27 +194,29 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		document.getElementById("delete").style.display = "none";
 		document.getElementById("all").style.display = "none";
 		document.getElementById("alltext").style.display = "none";
+		//유저는 수정,삭제 기능  display none
 		
+		if( auth != 'A' ){
+		document.getElementById("editId").style.display = "none";
+		document.getElementById("regId").style.display = "none";
+		}
 	}
 	
+		
+		
+		
 	/* 작성하기 유효성검사 */
 	function reg(){
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
-		/* if(user_no != "10000001"){
-		alert("관리자만 가능합니다.");
-		return false;
-		} */
 		
 		location.href="/notice/NoticeReg.do";
 	}
 	
+	
+	
+	
+	
 	/* 체크박스 기능 활성화 비활성화*/
 	function edit(f) {
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
-		/* if(user_no != "10000001"){
-			alert("관리자만 가능합니다.");
-			return false;
-		} */
 		
 		
 		cbox = f.checkbox;
@@ -250,14 +262,12 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		
 	}
 
+	
+	
+	
+	
 	function deleteConfirm() {
 		
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";//관리자만 삭제가능
-		alert("user_no :"+user_no);
-		/* if(user_no != "10000001"){
-			alert("관리자만 가능합니다.");
-			return false;
-		} */
 		
 		if (confirm("선택된 게시글을 삭제하시겠습니까?")) {
 			document.getElementById("f").submit();
@@ -266,6 +276,10 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		}
 
 	}
+	
+	
+	
+	
 
 	function allCheck(f) {
 
@@ -279,6 +293,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 			cbox.checked = f.all.checked;
 		}
 	}
+	
 	
 </script>
 	
@@ -346,23 +361,27 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
           			<div id="searchadd"><button class="add_btn" id="addview">더보기</button></div>
         		</div>
         		
+<<<<<<< HEAD
+        		<div class="btn-groub" style="margin-bottom: 50px;">
+        			<input type="button" class="col-2 blue-btn button" id="editId" onclick="edit(this.form)" value="편집하기"  >
+        			<input type="button" class="col-2 glay-btn button" id="regId" onclick="reg()" value="작성하기"  >
+=======
         		<div class="btn-groub"style="margin-bottom: 50px;">
 					<button class="col-2 blue-btn button" onclick="javascript:edit(this.form);return false;">편집하기</button>
 					<button type="button" class="col-2 glay-btn button" onclick="javascript:reg();return false;">작성하기</button>
+>>>>>>> refs/remotes/origin/psyBranch
 				</div>
 				
 			</div>
 		</div>
 
-	    <%@include file="/html5/include/footer.jsp"%>
 		
 	</form>
 	
 	</section>
 	
-	<div id="c-mask" class="c-mask"></div>
-	<script src="/html5/common/js/classie.js"></script>
-	<script src="/html5/common/js/common.js"></script>
+	    <%@include file="/html5/include/footer.jsp"%>
+
 	
 </body>
 
