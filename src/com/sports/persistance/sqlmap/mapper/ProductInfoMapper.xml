@@ -94,13 +94,13 @@
 		    ) AS DETAIL_SRC,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    )
+		    ) AS MAIN_SRC
 		FROM PRODUCT_INFO P, CATEGORY_INFO C, PROD_FILE F
 	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
 	
-	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
+	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
 		SELECT 
     		C.CODE_NAME, 
   		  	O.OPT_NAME, 
@@ -110,7 +110,7 @@
     		CODE_INFO C, 
     		PROD_OPTION O 
 		WHERE 
-			P.PROD_NO = #{prodNo} 
+			P.#{prodNo} = O.#{prodNo} 
 		AND 
 			C.CODE_NO = O.OPT_KIND;
 	</select>
