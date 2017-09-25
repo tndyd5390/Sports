@@ -9,8 +9,8 @@
 	</select>
 	
 	<select id="getProductList" resultType="ProductInfoDTO">
-		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, F.SRC_FILENAME AS MAIN_SRC 
-		FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE='M' ORDER BY PROD_NO DESC LIMIT 6
+		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, (SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = 21 AND FILE_TYPE = 'M') AS MAIN_SRC 
+		FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO ORDER BY PROD_NO DESC LIMIT 6
 	</select>
 	
 	<select id="getProductSelectList" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
@@ -94,13 +94,13 @@
 		    ) AS DETAIL_SRC,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    ) AS MAIN_SRC
+		    )
 		FROM PRODUCT_INFO P, CATEGORY_INFO C, PROD_FILE F
 	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
 	
-	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
 		SELECT 
     		C.CODE_NAME, 
   		  	O.OPT_NAME, 
@@ -110,7 +110,7 @@
     		CODE_INFO C, 
     		PROD_OPTION O 
 		WHERE 
-			P.#{prodNo} = O.#{prodNo} 
+			P.PROD_NO = #{prodNo} 
 		AND 
 			C.CODE_NO = O.OPT_KIND;
 	</select>

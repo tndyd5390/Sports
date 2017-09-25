@@ -4,7 +4,9 @@ import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.sports.dto.ProdOptionDTO;
 import com.sports.dto.ProductFileDTO;
 import com.sports.dto.ProductInfoDTO;
 import com.sports.service.IProductInfoService;
@@ -231,16 +234,48 @@ public class ProductInfoController {
 	
 	@RequestMapping(value="productDetail")
 	public String productDetail(HttpServletRequest req, Model model) throws Exception{
-		/*log.info(this.getClass() + " productDetail Start!!");
+		log.info(this.getClass() + ".productDetail start!!!");
+		
+		//가져올 제품의 번호
 		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
-		log.info("prodNo : " + prodNo);
+		log.info(this.getClass() + ".productDetail prodNo : " + prodNo);
+		
+		//service를 호출하기 위해 DTO생성
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		pDTO.setProd_no(prodNo);
-		pDTO = productInfoService.getProductDetail(pDTO);
 		
-		model.addAttribute("pDTO", pDTO);
+		//service호출
+		Map<String, Object> pMap = productInfoService.getProductDetail(pDTO);
+		if(pMap == null){
+			pMap = new HashMap<String, Object>();
+		}
+		
+		log.info(((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
+		log.info(((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
+		
+		//model에 올리기
+		model.addAttribute("pDTO", (ProductInfoDTO)pMap.get("prodDetail"));
+		model.addAttribute("pMap", (Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt"));
+		
+		//null 처리
+		prodNo = null;
 		pDTO = null;
-		log.info(this.getClass() + " productDetail End!!");*/
+		pMap = null;
+		log.info(this.getClass() + ".productDetail end!!!");
+		
+		/**
+		 * 기존의 코드
+		 * 	log.info(this.getClass() + " productDetail Start!!");
+		 *	String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
+		 *	log.info("prodNo : " + prodNo);
+		 *	ProductInfoDTO pDTO = new ProductInfoDTO();
+		 *	pDTO.setProd_no(prodNo);
+		 *	pDTO = productInfoService.getProductDetail(pDTO);
+		 *
+		 *	model.addAttribute("pDTO", pDTO);
+		 *	pDTO = null;
+		 *	log.info(this.getClass() + " productDetail End!!");
+		 */
 		return "product/sports_goods_detail";
 	}
 }

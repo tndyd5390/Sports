@@ -6,6 +6,7 @@ import com.sports.config.Mapper;
 import com.sports.dto.ProdOptionDTO;
 import com.sports.dto.ProductFileDTO;
 import com.sports.dto.ProductInfoDTO;
+import com.sports.dto.ProductInfoOptionDTO;
 
 @Mapper("ProductInfoMapper")
 public interface ProductInfoMapper {
@@ -26,10 +27,9 @@ public interface ProductInfoMapper {
 
 	ProductInfoDTO getProductDetail(ProductInfoDTO pDTO) throws Exception;
 
-	ProdOptionDTO getProductOption(String prodNo) throws Exception;
-	
 	List<ProductInfoDTO> getSelectOption() throws Exception;
 
 	int insertProductOption(List<ProductInfoDTO> setList) throws Exception;
-
+	
+	List<ProdOptionDTO> getProductOption(String prodNo) throws Exception;
 }
