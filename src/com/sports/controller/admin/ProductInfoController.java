@@ -234,7 +234,7 @@ public class ProductInfoController {
 	
 	@RequestMapping(value="productDetail")
 	public String productDetail(HttpServletRequest req, Model model) throws Exception{
-log.info(this.getClass() + ".productDetail start!!!");
+		log.info(this.getClass() + ".productDetail start!!!");
 		
 		//가져올 제품의 번호
 		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
