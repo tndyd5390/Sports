@@ -1,51 +1,92 @@
+<%@page import="javax.swing.JComboBox.KeySelectionManager"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="com.sports.dto.ProdOptionDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.TextUtil" %>
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%
 	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
+	if(pDTO == null){
+		pDTO = new ProductInfoDTO();
+	}
+	Map<String, List<ProdOptionDTO>> pMap = (Map<String, List<ProdOptionDTO>>)request.getAttribute("pMap");
+	if(pMap == null){
+		pMap = new HashMap<String, List<ProdOptionDTO>>();
+	}
+	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
+
+	function addComma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function plItemCnt(){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty<99){
+			qty += 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
+		}
+	}
+	function miItemCnt(){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty>1){
+			qty -= 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
+		}
+	}
 	function addBasket(prod_no){
-		$.ajax({
-			url : "customer/addBasket.do",
-			data : {
-				'prod_no' : prod_no,
-				'prod_qty' : document.getElementById('prod_qty').value
-			},
-			method : "post",
-			dataType : "json",
-			success : function(data){
-				if(data == 1){
-					alert("장바구니에 추가되었습니다.");
-				}else if(data == 2){
-					alert("장바구니에 추가 실패했습니다");
-				}else{
-					alert("로그인을 해주세요");
-					location.href="#";
-				}
-			},
-			error:function(x,e){
-				if(x.status==0){
-		            alert('네트워크가 정상적으로 동작하지 않습니다.');
-		            alert('네트워크 상태를 확인 하거나 업체에게 문의해 주세요.')
-		            }else if(x.status==404){
-		            alert('페이지를 찾을수가 없습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
-		            }else if(x.status==500){
-		            alert('서버에서 오류가 발생했습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
-		            }else if(e=='parsererror'){
-		            alert('json파싱에 실패했습니다.');
-		            }else if(e=='timeout'){
-		            alert('응답 요청 시간이 지났습니다.');
-		            }else {
-		            alert('Unknow Error.n'+x.responseText);
-		            }
-		    }
-		});
+		var userNo = '<%=userNo%>';
+		if(userNo == ""){
+			alert("로그인을 해주세요");
+			location.href="login.do";
+		}else{
+			$.ajax({
+				url : "customer/addBasket.do",
+				data : {
+					'prod_no' : prod_no,
+					'prod_qty' : document.getElementById('prod_qty').value
+				},
+				method : "post",
+				dataType : "json",
+				success : function(data){
+					if(data == 1){
+						alert("장바구니에 추가되었습니다.");
+					}else if(data == 2){
+						alert("장바구니에 추가 실패했습니다");
+					}else{
+						alert("로그인을 해주세요");
+						location.href="#";
+					}
+				},
+				error:function(x,e){
+					if(x.status==0){
+			            alert('네트워크가 정상적으로 동작하지 않습니다.');
+			            alert('네트워크 상태를 확인 하거나 업체에게 문의해 주세요.')
+			            }else if(x.status==404){
+			            alert('페이지를 찾을수가 없습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+			            }else if(x.status==500){
+			            alert('서버에서 오류가 발생했습니다. 지금은 주문을 받을 수 없습니다. 업체에게 문의하세요.');
+			            }else if(e=='parsererror'){
+			            alert('json파싱에 실패했습니다.');
+			            }else if(e=='timeout'){
+			            alert('응답 요청 시간이 지났습니다.');
+			            }else {
+			            alert('Unknow Error.n'+x.responseText);
+			            }
+			    }
+			});
+		}
 	}
 </script>
 </head>
@@ -67,8 +108,6 @@
     </header>
 <%@include file="/html5/include/navBar.jsp" %>
 
-
-
     <div class="container detail">
       <div class="wrap btn-wrap">
 
@@ -83,25 +122,41 @@
             </div>
           </div>
           <div class="goods_option">
+          <%
+          	if(pMap.size() != 0){
+          %>
             <p class="blue_text">옵션 선택</p>
             <div class="select_wrap">
-              <select class="col-2">
-              <option value="색상선택">색상선택</option>
-              <option value="빨강">빨강</option>
-              </select>
-              <select class="col-2">
-                <option value="선택">사이즈선택</option>
-                <option value="사이즈">사이즈1</option>
-              </select>
+            <select class="col-2">
+                       <%
+              Iterator<String> keys = pMap.keySet().iterator();
+              while(keys.hasNext()){
+				String key = keys.next();            	  
+            %>
+                <option value="<%=key%>"><%=key + "선택" %></option>
+            <%
+            	List<ProdOptionDTO> pList = pMap.get(key);
+            	for(ProdOptionDTO p : pList){
+            %>
+              	<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
+            <%
+            	}
+            %>
+            <%
+              }
+            %>      
+            </select>
             </div>
-
+          <%
+          }
+          %>
             <p class="blue_text">수량</p>
             <div class="count_input">
-              <a class="incr-btn">–</a>
+              <a class="incr-btn" onclick='miItemCnt(); return false;'>–</a>
               <input class="quantity" id="prod_qty" type="text" value="1" readonly="true">
-              <a class="incr-btn">+</a>
+              <a class="incr-btn" onclick='plItemCnt(); return false;'>+</a>
             </div>
-            <div class="price_wrap">총금액<span class="price">33,000</span><span class="won">원</span></div>
+            <div class="price_wrap">총금액<span class="price" id="prod_price"><%=CmmUtil.nvl(TextUtil.addComma(pDTO.getProd_price())) %></span><span class="won">원</span></div>
           </div>
         </div>
 
@@ -111,8 +166,7 @@
             <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>" alt="thumb">
             <dl>
               <dt>제품특징</dt>
-              <dd>훈련을 위한 기본 장비로써 가볍고 터칭감이 뛰어나 다양한 훈련에 적합한 제품입니다.
-            내구성이 뛰어난 소재로 제작이 되어 더욱 실용적입니다.</dd>
+              <dd><%=CmmUtil.nvl(pDTO.getProd_contents()) %></dd>
               <dt>상품규격정보</dt>
               <dd>- 재질 : 폴리에스테르 65% + 면 35%<br>
             - 색상 : 검정/노랑/주황/빨강/파랑/밤색/보라</dd>
@@ -125,6 +179,11 @@
           <button class="col-2 blue-btn button">바로 구매</button>
           <button class="col-2 glay-btn button" onclick="addBasket('<%=CmmUtil.nvl(pDTO.getProd_no()) %>');">장바구니 담기</button>
         </div>
+        <div class="btn-groub">
+          <button class="col-2 blue-btn button">수정</button>
+          <button class="col-2 glay-btn button">삭제</button>
+        </div>
+        
       </div>
     </div>
  <%@include file="/html5/include/footer.jsp" %>

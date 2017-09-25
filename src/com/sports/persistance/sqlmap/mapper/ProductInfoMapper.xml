@@ -9,17 +9,20 @@
 	</select>
 	
 	<select id="getProductList" resultType="ProductInfoDTO">
-		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, (SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = 21 AND FILE_TYPE = 'M') AS MAIN_SRC 
-		FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO ORDER BY PROD_NO DESC LIMIT 6
+		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, F.SRC_FILENAME AS MAIN_SRC
+		FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE = 'M' ORDER BY PROD_NO DESC LIMIT 6
 	</select>
 	
 	<select id="getProductSelectList" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
-		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, F.SRC_FILENAME AS SRC_FILENAME
+		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE,  F.SRC_FILENAME AS MAIN_SRC 
 		FROM PRODUCT_INFO P, PROD_FILE F, CATEGORY_INFO C
-		WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND C.PARENTS_NO = #{parents_no}
+		WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE='M' AND P.CATEGORY_NO = C.CATEGORY_NO AND C.PARENTS_NO = #{parents_no}
 		ORDER BY P.PROD_NO DESC
 	</select>
 	
+	<select id="getSelectOption" resultType="ProductInfoDTO">
+		SELECT CODE_NO, CODE_NAME FROM CODE_INFO
+	</select>
 	<insert id="insertProduct" parameterType="ProductInfoDTO">
 		INSERT INTO PRODUCT_INFO (
 				PROD_NAME,
@@ -77,17 +80,34 @@
 			)
 	</insert>
 	
+	<insert id="insertProductOption" parameterType="ProductInfoDTO">
+		INSERT INTO PROD_OPTION (PROD_NO, OPT_NAME, OPT_KIND, OPT_PRICE, REG_USER_NO, REG_DT) VALUES
+		<foreach collection="list" item='item' separator=" , ">
+			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, #{item.opt_price}, '5', NOW())
+		</foreach>
+	</insert>
+	
 	<select id="getProductDetail" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
 		SELECT DISTINCT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, P.PROD_CONTENTS, C.CATEGORY_NO, C.CATEGORY_NAME,
 		    (
-		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = 21 AND FILE_TYPE = 'D'
+		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
 		    ) AS DETAIL_SRC,
 		    (
-		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = 21 AND FILE_TYPE = 'M'
+		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
 		    ) AS MAIN_SRC
 		FROM PRODUCT_INFO P, CATEGORY_INFO C, PROD_FILE F
-	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = 21
+	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
-	
+	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+		SELECT 
+    		C.CODE_NAME, 
+  		  	O.OPT_NAME, 
+    		O.OPT_PRICE 
+		FROM 
+			PROD_OPTION O,
+		    CODE_INFO C
+		WHERE
+			O.PROD_NO = #{prodNo} AND C.CODE_NO = O.OPT_KIND;
+	</select>
 </mapper>

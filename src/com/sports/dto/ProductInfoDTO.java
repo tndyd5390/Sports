@@ -1,5 +1,4 @@
 package com.sports.dto;
-
 public class ProductInfoDTO {
 
 	private String prod_no;
@@ -19,24 +18,35 @@ public class ProductInfoDTO {
 	private String depth;
 	private String url;
 	private int read_more;
-	private String option;
-	private String opt_grp;
+	private String code_no;
+	private String code_name;
+	private String opt_name;
+	private String opt_kind;
+	private String opt_price;
 	
-	
-	public String getOpt_grp() {
-		return opt_grp;
+
+	public String getOpt_price() {
+		return opt_price;
 	}
 
-	public void setOpt_grp(String opt_grp) {
-		this.opt_grp = opt_grp;
+	public void setOpt_price(String opt_price) {
+		this.opt_price = opt_price;
 	}
 
-	public String getOption() {
-		return option;
+	public String getCode_no() {
+		return code_no;
 	}
 
-	public void setOption(String option) {
-		this.option = option;
+	public void setCode_no(String code_no) {
+		this.code_no = code_no;
+	}
+
+	public String getCode_name() {
+		return code_name;
+	}
+
+	public void setCode_name(String code_name) {
+		this.code_name = code_name;
 	}
 
 	public int getRead_more() {
@@ -106,6 +116,22 @@ public class ProductInfoDTO {
 		return chg_dt;
 	}
 	
+	public String getOpt_name() {
+		return opt_name;
+	}
+
+	public void setOpt_name(String opt_name) {
+		this.opt_name = opt_name;
+	}
+
+	public String getOpt_kind() {
+		return opt_kind;
+	}
+
+	public void setOpt_kind(String opt_kind) {
+		this.opt_kind = opt_kind;
+	}
+
 	public void setChg_dt(String chg_dt) {
 		this.chg_dt = chg_dt;
 	}

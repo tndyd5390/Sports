@@ -63,12 +63,9 @@ public class NoticeController {
 		String title = CmmUtil.nvl(nDTO.getTitle());//제목이 14자 이상이면 ...붙여주기
 		if (title.length() >= 14) {
 			title = title.substring(0, 14) + "...";
+			}
 		}
-		
-		nDTO.setUser_name(AES256Util.strDecode(CmmUtil.nvl(nDTO.getUser_name())));//암호화된 유저이름 풀기
-		
-		}
-
+				
 		model.addAttribute("nList",nList);
 		
 		nList = null;
@@ -109,11 +106,7 @@ public class NoticeController {
 				title = title.substring(0, 14) + "...";
 			}
 			
-			
-			nDT.setUser_name(AES256Util.strDecode(CmmUtil.nvl(nDT.getUser_name())));//암호화된 유저이름 풀기
-			
-			
-			}
+		}
 		
 		System.out.println("겟 리드모어 : " + nDTO.getRead_more());
 		
@@ -153,10 +146,7 @@ public class NoticeController {
 			String title = CmmUtil.nvl(nDT.getTitle());//제목이 14자 이상이면 ...붙여주기
 			if (title.length() >= 14) {
 				title = title.substring(0, 14) + "...";
-			}
-			
-			
-			nDT.setUser_name(AES256Util.strDecode(CmmUtil.nvl(nDT.getUser_name())));//암호화된 유저이름 풀기
+				}
 			}
 		
 		for(NoticeDTO n : ndTO){
@@ -180,8 +170,6 @@ public class NoticeController {
 		nDTO.setNotice_no(notice_no);
 		
 		NoticeDTO rDTO = noticeService.getNoticeDetailInfo(nDTO);
-		
-		rDTO.setUser_name(AES256Util.strDecode(CmmUtil.nvl(rDTO.getUser_name())));//암호화된 유저이름 풀기
 		
 		model.addAttribute("rDTO",rDTO);
 		
@@ -211,7 +199,7 @@ public class NoticeController {
 			ModelMap model) throws Exception{
 		log.info("welcome /NoticeInsert");
 		
-		String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+		String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		String title = CmmUtil.nvl(request.getParameter("title"));
 		String contents = CmmUtil.nvl(request.getParameter("contents"));
 		String notice_yn = CmmUtil.nvl(request.getParameter("notice_yn"));
