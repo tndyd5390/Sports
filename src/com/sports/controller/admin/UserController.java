@@ -73,6 +73,7 @@ public class UserController {
 			session.setAttribute("ss_user_id", uDTO.getUser_id());
 			session.setAttribute("ss_user_name", uDTO.getUser_name());
 			session.setAttribute("ss_auth", uDTO.getAuth());
+			log.info("auth : "+uDTO.getAuth());
 			uDTO = null;
 			log.info(this.getClass() + " loginProc End!!");
 			return "redirect:main.do";
