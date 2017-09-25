@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="com.sports.util.CmmUtil" %>
+<%@ page import="com.sports.util.TextUtil" %>
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%
 	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
@@ -24,6 +25,26 @@
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
+
+	function addComma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function plItemCnt(){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty<99){
+			qty += 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
+		}
+	}
+	function miItemCnt(){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty>1){
+			qty -= 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
+		}
+	}
 	function addBasket(prod_no){
 		var userNo = '<%=userNo%>';
 		if(userNo == ""){
@@ -129,15 +150,13 @@
           <%
           }
           %>
-          	
-         
             <p class="blue_text">수량</p>
             <div class="count_input">
-              <a class="incr-btn">–</a>
+              <a class="incr-btn" onclick='miItemCnt(); return false;'>–</a>
               <input class="quantity" id="prod_qty" type="text" value="1" readonly="true">
-              <a class="incr-btn">+</a>
+              <a class="incr-btn" onclick='plItemCnt(); return false;'>+</a>
             </div>
-            <div class="price_wrap">총금액<span class="price">33,000</span><span class="won">원</span></div>
+            <div class="price_wrap">총금액<span class="price" id="prod_price"><%=CmmUtil.nvl(TextUtil.addComma(pDTO.getProd_price())) %></span><span class="won">원</span></div>
           </div>
         </div>
 
@@ -160,6 +179,11 @@
           <button class="col-2 blue-btn button">바로 구매</button>
           <button class="col-2 glay-btn button" onclick="addBasket('<%=CmmUtil.nvl(pDTO.getProd_no()) %>');">장바구니 담기</button>
         </div>
+        <div class="btn-groub">
+          <button class="col-2 blue-btn button">수정</button>
+          <button class="col-2 glay-btn button">삭제</button>
+        </div>
+        
       </div>
     </div>
  <%@include file="/html5/include/footer.jsp" %>
