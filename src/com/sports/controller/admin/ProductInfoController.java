@@ -276,6 +276,6 @@ public class ProductInfoController {
 		 *	pDTO = null;
 		 *	log.info(this.getClass() + " productDetail End!!");
 		 */
-		return "product/sports_goods_detail";
-	}
+		return "product/sports_goods_detail";	
+		}
 }
