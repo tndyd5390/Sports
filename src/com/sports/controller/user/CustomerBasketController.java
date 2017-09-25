@@ -1,6 +1,8 @@
 package com.sports.controller.user;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sports.dto.BasketDTO;
+import com.sports.dto.Basket_OptionDTO;
 import com.sports.service.IBasketService;
 import com.sports.service.impl.BasketService;
 import com.sports.util.CmmUtil;
@@ -28,60 +32,61 @@ public class CustomerBasketController {
 	@RequestMapping(value="customer/userBasket", method=RequestMethod.GET)
 	public String customerBasketList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customerBasketList start!!!");
-		
-		
-		
-		
 		log.info(this.getClass() + ".customerBassketList end!!!");
 		return "basket/userBasket";
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @throws Exception
+	 * 장바구니 추가 로직을 만들거다 제품 번호와 갯수, 가격, 옵션 번호는 파라미터로 받고 회원 번호는  session에서 가져와서 장바구니에 넣어보자
+	 */
 	@RequestMapping(value="customer/addBasket", method=RequestMethod.POST)
-	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam(value="opt_no[]") List<String> optNo) throws Exception{
 		log.info(this.getClass() + ".customerAddBasket start!!!");
-		
+		//장바구니 insert에 필요한 여러가지 정보들을 파라미터와 세션에서 가져온다.
 		String prodNo = CmmUtil.nvl(req.getParameter("prod_no"));
-		log.info(this.getClass() + ".customerAddBasket prod_no : " + prodNo);
+		log.info(this.getClass() + ".customerAddBasket prodNo : " + prodNo);
 		String prodQty = CmmUtil.nvl(req.getParameter("prod_qty"));
-		log.info(this.getClass() + ".customerAddBasket prod_qty : " + prodQty);
+		log.info(this.getClass() + ".customerAddBasket prodQty : " + prodQty);
+		String bskPrice = CmmUtil.nvl(req.getParameter("bsk_price"));
+		log.info(this.getClass() + ".customerAddBasket prod_price : " + bskPrice);
 		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
-		log.info(this.getClass() + ".customerAddBasket user_no : " + userNo);
-
-		PrintWriter out = resp.getWriter();
-		if("".equals(userNo)){//만약 로그인을 하지 않았다면 3보내고 함수 종료
-			out.println("3");
-			out.flush();
-			out.close();
-			return;
-		}
-		/**
-		 * 로그인을 한 상태라면 디비에 값 넣고 
-		 */
+		log.info(this.getClass() + ".customerAddBasket userNO : " + userNo);
+		
+		
+		//가져온 정보들로 DTO를 생성한다.
 		BasketDTO bDTO = new BasketDTO();
 		bDTO.setUser_no(userNo);
 		bDTO.setProd_no(prodNo);
-		bDTO.setProd_qty(prodQty);
 		bDTO.setReg_user_no(userNo);
+		bDTO.setBsk_price(bskPrice);
+		bDTO.setProd_qty(prodQty);
 		
+		//insert를 하고 결과에 따라 return해줄 문자열을 세팅한다.
 		int result = 0;
-		result = basketService.insertCustomerAddBasket(bDTO);
-		
-		if(result != 0){//값이 제대로 들어갓다면
-			out.println("1");
-		}else{//값이 제대로 들어가지 않았다면
-			out.println("2");
+		String resultChar;
+		result = basketService.insertCustomerAddBasket(bDTO, optNo, userNo);
+		if(result != 0){
+			resultChar = "1";
+		}else{
+			resultChar = "0";
 		}
-		out.flush();
-		out.close();//stream 닫고!!!!!!!이거 꼭!!!
-		
-		/**
-		 * null 처리 
-		 */
+
+		//문자열을 아작스로 보내준다.
+		resp.getWriter().println(resultChar);
+		//null처리
 		prodNo = null;
 		prodQty = null;
+		optNo = null;
+		bskPrice = null;
 		userNo = null;
-		out = null;
 		bDTO = null;
+		resultChar = null;
 		log.info(this.getClass() + ".customerAddBasekt end!!!");
 	}
 }
