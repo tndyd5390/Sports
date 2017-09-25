@@ -11,16 +11,36 @@
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <style>
-
+div.col-2-group{
+	margin-top :10px;
+	width : 100%;
+	height: 40px;
+}
+div.col-2-group a{
+	display: inline-block;
+ 	width : 50%;
+ 	height: 100%;
+ 	font-size : 20px;
+ 	text-align : center;
+ 	line-height: 42px;
+}
+div.col-2-group a:nth-child(1){
+	border-right : 2px solid #F5F5F5;
+	background-color : #1777CB;
+	color : #fff;
+}
+div.col-2-group a:nth-child(2){
+	border-left : 2px solid #F5F5F5;
+	background-color : #9E9E9E;
+	color : #fff;
+}
 
 </style>
-<script src="/html5/common/js/productList.js"></script>
 <script type="text/javascript">
 	$(function(){
 		prodList();
 		
 	});
-
 	function prodReg(){
 		location.href="productReg.do";
 	}

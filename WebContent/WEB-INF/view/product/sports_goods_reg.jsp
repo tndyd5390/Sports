@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.sports.dto.ProductInfoDTO"%>
-<%@ page import="com.sports.util.CmmUtil"%>
+<%@ page import="java.util.List" %>
+<%@ page import="com.sports.dto.ProductInfoDTO" %>
+<%@ page import="com.sports.util.CmmUtil" %>
 <%
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 %>
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-
 <script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
 	$(function() {
@@ -17,7 +16,6 @@
 		selected(parents);
 		selectDepth();
 		inputFile();
-		optList();
 	});
 </script>
 </head>
@@ -39,64 +37,46 @@
 		</header>
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
-			<form name="f" id="f" action="productRegProc.do" method="post"
-				enctype="multipart/form-data">
-				<div class="wrap search-wrap btn-wrap">
-					<div class="select_wrap">
-						<select class="col-2" id="parents_depth">
-							<%
-								for (ProductInfoDTO pDTO : pList) {
-							%>
-							<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name())%></option>
-							<%
-								}
-							%>
-						</select> <select class="col-2" id="child_depth" name="category_no">
-						</select>
-					</div>
+		<form name="f" id="f" action="productRegProc.do" method="post" enctype="multipart/form-data" >
+			<div class="wrap search-wrap btn-wrap">
+				<div class="select_wrap">
+					<select class="col-2" id="parents_depth">
+					<%for(ProductInfoDTO pDTO : pList){%>
+						<option value="<%=CmmUtil.nvl(pDTO.getCategory_no())%>"><%=CmmUtil.nvl(pDTO.getCategory_name()) %></option>					
+					<%}%>
+					</select> 
+					<select class="col-2" id="child_depth" name="category_no">
+					</select>
+				</div>
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
 								<p class="blue_text">제품사진</p>
 								<div class="filebox bs3-primary">
-									<input class="upload-name" value="파일선택" disabled="disabled"
-										id="main_label"> <label for="main_file">업로드</label> <input
-										type="file" name="files" id="main_file" class="upload-hidden">
+									<input class="upload-name" value="파일선택" disabled="disabled" id="main_label">
+									<label for="main_file">업로드</label> <input type="file" name="files" id="main_file" class="upload-hidden">
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">제품명</p> <input type="text"
-								name="product_name">
+								<p class="blue_text">제품명</p> <input type="text" name="product_name">
 							</li>
 							<li>
-								<p class="blue_text">제품 가격</p> <input type="text"
-								name="product_price">
+								<p class="blue_text">제품 가격</p> <input type="text" name="product_price">
 							</li>
 							<li>
 								<p class="blue_text">제품 상세</p> <textarea name="product_contents"></textarea>
 								<div class="filebox bs3-primary">
-									<input class="upload-name" value="파일선택" disabled="disabled"
-										id="detail_label"> <label for="detail_file">업로드</label>
-									<input type="file" id="detail_file" name="files"
-										class="upload-hidden">
+									<input class="upload-name" value="파일선택" disabled="disabled" id="detail_label">
+									<label for="detail_file">업로드</label> <input type="file"
+										id="detail_file" name="files" class="upload-hidden">
 								</div>
 							</li>
 							<li>
 								<p class="blue_text">옵션</p>
-								<div class="select_wrap">
-									<select class="select-80" id="optParents" name="code_no">
-										<option value="0" selected>선택하세요</option>
-									</select>
-									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
-								</div> 
-								<div id="opt_list">
-									
-									
-								</div>
-								<!-- <div class="input_btn_wrap">
+								<div class="input_btn_wrap">
 									<input type="text" placeholder="옵션을 추가하세요">
 									<button type="button" class="line-btn">등록</button>
-								</div> -->
+								</div>
 							</li>
 						</ul>
 
@@ -105,10 +85,10 @@
 						<button type="submit" class="col-2 blue-btn button">등록</button>
 						<button type="button" class="col-2 glay-btn button">수정</button>
 					</div>
-				</div>
-			</form>
+			</div>
+		</form>	
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
-	</section>
+		</section>
 </body>
 </html>
