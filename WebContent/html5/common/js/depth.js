@@ -21,6 +21,25 @@
 		});
 	};
 	
+	function UpSelected(parents , select){
+		var contents = '';
+		$.ajax({
+			url : 'selectParents.do',
+			method : 'post',
+			data : {'parents' : parents},
+			success : function(data){
+				$.each(data, function(key,value){
+					if(value.category_no == select){
+						contents += "<option value='"+value.category_no+"' selected>"+value.category_name+"</option>";
+					}else{
+						contents += "<option value='"+value.category_no+"'>"+value.category_name+"</option>";
+					}
+				});
+			$('#child_depth').html(contents);
+			}
+		});
+	};
+	
 	function selected(parents){
 		var contents = '';
 		$.ajax({
@@ -74,7 +93,32 @@
 			return true;
 		}
 	}
+
 	function optDel(obj){
 		var index = $('#opt_list [name=btn]').index(obj);
 		$('#opt_list [name=opt_child]').eq(index).remove();
 	}
+	
+	function optAlert(){
+		alert("옵션은 추가 및 삭제만 가능합니다.");		
+	}
+	
+	function delOptAjax(obj){
+		if(confirm("삭제 하시겠습니까?")){
+			var index = $('#opt_list [name=btn]').index(obj);
+			$.ajax({
+				url : 'deleteOpt.do',
+				method : 'post',
+				data : {'optNo' : $('#opt_no').eq(index).val()},
+				success : function(data){
+					console.log(data);
+					$('#opt_list [name=opt_child]').eq(index).remove();
+				}
+			});
+			return true;
+		}else{
+			return false;			
+		}
+	}
+
+	

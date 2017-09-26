@@ -10,74 +10,25 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
-<style>
-
-
-</style>
-<script src="/html5/common/js/productList.js"></script>
 <script type="text/javascript">
+	var readMore = 6;
+	var parents_no = '';
 	$(function(){
 		prodList();
 		
+		$.ajax({
+			url:'delivery.do',
+			method:'get',
+			success : function(data){
+				console.log(data)
+			}
+			
+		})
 	});
-
-	function prodReg(){
-		location.href="productReg.do";
-	}
-	function prodDetail(pNo){
-		location.href="productDetail.do?pNo="+pNo
-	}
 	
-	function prodList(){
-		var contents = "";
-		$.ajax({
-			url : 'productAll.do',
-			method : 'post',
-			success : function(data){
-				$.each(data, function(key, value){
-					contents += "<li>";
-					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
-					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.main_src+"' alt='thumb'>";
-					contents += "</div>";
-					contents += "<div class='info'>";
-					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
-					contents += "</div>"
-					contents += "</a>";
-					contents += "</li>";
-				});
-				$('#goods_list').html(contents);
-			}
-		});
-	}
 	
-	function prodSelect(pNo){
-		var contents = "";
-		$.ajax({
-			url : 'productSelect.do',
-			method : 'post',
-			data : {'pNo' : pNo},
-			success : function(data){
-				$.each(data, function(key, value){
-					contents += "<li>";
-					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
-					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.main_src+"' alt='thumb'>";
-					contents += "</div>";
-					contents += "<div class='info'>";
-					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
-					contents += "</div>"
-					contents += "</a>";
-					contents += "</li>";
-				});
-				$('#goods_list').html(contents);
-			}
-		});
-	}
 </script>
-
+<script src="html5/common/js/productList.js"></script>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -87,7 +38,7 @@
           <img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="#"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 
@@ -139,8 +90,8 @@
  -->         
  			</ul>
           <div id ="more-div">
-          	<div class="more-type">
-				<a href="#" class="moremore">더보기</a>
+          	<div class="more-type" id="moremore">
+				<a href="#" class="moremore" onclick="prodMore();">더보기</a>
 			</div>
 			<div class="col-2-group">
 				<a href="#" onclick="prodReg(); return false;">등록</a>
