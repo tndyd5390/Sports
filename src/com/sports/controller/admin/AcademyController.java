@@ -1,5 +1,8 @@
 package com.sports.controller.admin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,6 +22,19 @@ public class AcademyController {
 	@Resource(name="AcademyService")
 	private IAcademyService academyService;
 	
+
+	@RequestMapping(value="accountmanagement")
+	public String accountmanagement(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + "deliverytracking Start!!");
+		List<AcademyDTO> aList = academyService.getAcademyList();
+		if(aList == null){
+			aList = new ArrayList<>();
+		}
+		model.addAttribute("aList", aList);
+		log.info(this.getClass() + "deliverytracking End!!");
+		return "account/accountmanagement";
+	}
+	
 	@RequestMapping(value="accountReg")
 	public String accountReg(HttpSession session) throws Exception{
 		log.info(this.getClass() + "accountReg Start!!");
@@ -30,33 +46,31 @@ public class AcademyController {
 	@RequestMapping(value="accountRegProc")
 	public String accountRegProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + "accountRegProc Start!!");
-		String accountName = CmmUtil.nvl(req.getParameter("accountName"));
-		String upstream = CmmUtil.nvl(req.getParameter("upstream"));
-		/*String representative = CmmUtil.nvl(req.getParameter("representative"));*/
+		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
+		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
+		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
+		String aca_area2 = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
 		String tel = CmmUtil.nvl(req.getParameter("tel"));
-		String postcode = CmmUtil.nvl(req.getParameter("postcode"));
-		String address1 = CmmUtil.nvl(req.getParameter("address1"));
-		String address2 = CmmUtil.nvl(req.getParameter("address2"));
-		String dealDate = CmmUtil.nvl(req.getParameter("dealDate"));
+		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
 		
-		log.info("accountName : " + accountName);
-		log.info("upstream : " + upstream);
-		/*log.info("representative : " + representative);*/
+		log.info("aca_name : " + aca_name);
+		log.info("aca_ceo : " + aca_ceo);
+		log.info("aca_area1 : " + aca_area1);
+		log.info("aca_area2 : " + aca_area2);
+		log.info("aca_event1 : " + aca_event1);
 		log.info("tel : " + tel);
-		log.info("postcode : " + postcode);
-		log.info("address1 : " + address1);
-		log.info("address2 : " + address2);
-		log.info("dealDate : " + dealDate);
+		log.info("aca_comment : " + aca_comment);
 		
 		AcademyDTO aDTO = new AcademyDTO();
 		
-		aDTO.setAca_name(accountName);
-		aDTO.setAca_event1(upstream);
+		aDTO.setAca_name(aca_name);
+		aDTO.setAca_ceo(aca_ceo);
+		aDTO.setAca_area1(aca_area1);
+		aDTO.setAca_area2(aca_area2);
+		aDTO.setAca_event1(aca_event1);
 		aDTO.setTel(tel);
-		aDTO.setAca_area1(postcode);
-		aDTO.setAca_area2(address1);
-		aDTO.setAca_area3(address2);
-		aDTO.setAca_comment(dealDate);
+		aDTO.setAca_comment(aca_comment);
 		
 		log.info("test!!!!!!!!!");
 		

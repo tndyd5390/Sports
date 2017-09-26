@@ -1,5 +1,7 @@
 package com.sports.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -16,5 +18,10 @@ public class AcademyService implements IAcademyService {
 	@Override
 	public void insertAcademy(AcademyDTO aDTO) throws Exception {
 		academyMapper.insertAcademy(aDTO);
+	}
+
+	@Override
+	public List<AcademyDTO> getAcademyList() throws Exception {
+		return academyMapper.getAcademyList();
 	}
 }

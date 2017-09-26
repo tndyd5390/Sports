@@ -67,12 +67,4 @@ public class DeliveryController {
 		log.info(this.getClass() + "deliverytracking End!!");
 		return "delivery/deliverytracking";
 	}
-	
-	@RequestMapping(value="accountmanagement")
-	public String accountmanagement() throws Exception{
-		log.info(this.getClass() + "deliverytracking Start!!");
-		
-		log.info(this.getClass() + "deliverytracking End!!");
-		return "account/accountmanagement";
-	}
 }
