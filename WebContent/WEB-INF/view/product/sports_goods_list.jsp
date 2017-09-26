@@ -15,7 +15,18 @@
 	var parents_no = '';
 	$(function(){
 		prodList();
+		
+		$.ajax({
+			url:'delivery.do',
+			method:'get',
+			success : function(data){
+				console.log(data)
+			}
+			
+		})
 	});
+	
+	
 </script>
 <script src="html5/common/js/productList.js"></script>
 </head>
