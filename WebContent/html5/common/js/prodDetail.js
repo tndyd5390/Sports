@@ -1,6 +1,24 @@
 /**
  * 
  */
+
+	function plItemCnt(price){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty<99){
+			qty += 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * price));
+		}
+	}
+	
+	function miItemCnt(price){
+		var qty = parseInt($('#prod_qty').val());
+		if(qty>1){
+			qty -= 1;
+			$('#prod_qty').val(qty);
+			$('#prod_price').text(addComma(qty * price));
+		}
+	}
 	function addComma(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
@@ -63,5 +81,18 @@
 			            }
 			    }
 			});
+		}
+	}
+
+	function updateProd(pNo){
+		location.href="productUpdate.do?pNo="+pNo;
+	}
+	
+	function deleteProd(pNo){
+		if(confirm("삭제 하시겠습니까?")){
+			location.href="productDelete.do?pNo="+pNo;
+			return true;
+		}else{
+			return false;
 		}
 	}

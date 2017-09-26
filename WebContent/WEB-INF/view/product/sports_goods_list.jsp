@@ -15,7 +15,6 @@
 	var parents_no = '';
 	$(function(){
 		prodList();
-		
 	});
 </script>
 <script src="html5/common/js/productList.js"></script>

@@ -25,38 +25,6 @@
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <script src="html5/common/js/prodDetail.js"></script>
-<script>
-	function plItemCnt(){
-		var qty = parseInt($('#prod_qty').val());
-		if(qty<99){
-			qty += 1;
-			$('#prod_qty').val(qty);
-			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
-		}
-	}
-	
-	function miItemCnt(){
-		var qty = parseInt($('#prod_qty').val());
-		if(qty>1){
-			qty -= 1;
-			$('#prod_qty').val(qty);
-			$('#prod_price').text(addComma(qty * <%=CmmUtil.nvl(pDTO.getProd_price())%>));
-		}
-	}
-	
-	function updateProd(){
-		location.href="productUpdate.do?pNo=<%=pDTO.getProd_no()%>";
-	}
-	
-	function deleteProd(){
-		if(confirm("삭제 하시겠습니까?")){
-			location.href="productDelete.do?pNo=<%=pDTO.getProd_no()%>";
-			return true;
-		}else{
-			return false;
-		}
-	}
-</script>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -120,9 +88,9 @@
           %>
             <p class="blue_text">수량</p>
             <div class="count_input">
-              <a class="incr-btn" onclick='miItemCnt(); return false;'>–</a>
+              <a class="incr-btn" onclick='miItemCnt(<%=CmmUtil.nvl(pDTO.getProd_price())%>); return false;'>–</a>
               <input class="quantity" id="prod_qty" type="text" value="1" readonly="true">
-              <a class="incr-btn" onclick='plItemCnt(); return false;'>+</a>
+              <a class="incr-btn" onclick='plItemCnt(<%=CmmUtil.nvl(pDTO.getProd_price())%>); return false;'>+</a>
             </div>
             <div class="price_wrap">총금액<span class="price" id="prod_price"><%=CmmUtil.nvl(TextUtil.addComma(pDTO.getProd_price())) %></span><span class="won">원</span></div>
           </div>
@@ -148,8 +116,8 @@
           <button class="col-2 glay-btn button" onclick="addBasket();">장바구니 담기</button>
         </div>
         <div class="btn-groub">
-          <button class="col-2 blue-btn button" onclick="updateProd();">수정</button>
-          <button class="col-2 glay-btn button" onclick="return deleteProd();">삭제</button>
+          <button class="col-2 blue-btn button" onclick="updateProd(<%=CmmUtil.nvl(pDTO.getProd_no())%>);">수정</button>
+          <button class="col-2 glay-btn button" onclick="return deleteProd(<%=CmmUtil.nvl(pDTO.getProd_no())%>);">삭제</button>
         </div>
       </div>
     </div>
