@@ -44,14 +44,14 @@
 				<li><a href="#"><img src="/html5/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
 				<li><a href="#"><img src="/html5/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
 				<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">펌프</a></li>
-        <li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
+        		<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
 			</ul>
 		</li>
 		<li>
-			<a href="#">고객센터 관리</a>
+			<a href="#">고객센터</a>
 			<ul class="col-2">
-				<li><a href="/notice/NoticeList.do">공지사항 관리</a></li>
-				<li><a href="/admin/QA/QAList.do">Q&amp;A 관리</a></li>
+				<li><a href="/notice/NoticeList.do">공지사항</a></li>
+				<li><a href="/customer/QA/QAList.do">Q&amp;A</a></li>
 			</ul>
 		</li>
 	</ul>
