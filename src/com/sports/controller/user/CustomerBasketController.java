@@ -46,7 +46,8 @@ public class CustomerBasketController {
 	 * 장바구니 추가 로직을 만들거다 제품 번호와 갯수, 가격, 옵션 번호는 파라미터로 받고 회원 번호는  session에서 가져와서 장바구니에 넣어보자
 	 */
 	@RequestMapping(value="customer/addBasket", method=RequestMethod.POST)
-	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam(value="opt_no[]") List<String> optNo) throws Exception{
+	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam(value="opt_no[]") List<String> optNos,
+			@RequestParam(value="opt_name[]") List<String> optNames) throws Exception{
 		log.info(this.getClass() + ".customerAddBasket start!!!");
 		//장바구니 insert에 필요한 여러가지 정보들을 파라미터와 세션에서 가져온다.
 		String prodNo = CmmUtil.nvl(req.getParameter("prod_no"));
@@ -70,7 +71,7 @@ public class CustomerBasketController {
 		//insert를 하고 결과에 따라 return해줄 문자열을 세팅한다.
 		int result = 0;
 		String resultChar;
-		result = basketService.insertCustomerAddBasket(bDTO, optNo, userNo);
+		result = basketService.insertCustomerAddBasket(bDTO, optNos, optNames, userNo);
 		if(result != 0){
 			resultChar = "1";
 		}else{
@@ -82,7 +83,7 @@ public class CustomerBasketController {
 		//null처리
 		prodNo = null;
 		prodQty = null;
-		optNo = null;
+		optNos = null;
 		bskPrice = null;
 		userNo = null;
 		bDTO = null;
@@ -133,9 +134,12 @@ public class CustomerBasketController {
 		log.info(this.getClass() + ".customerAddBasketNoOption end!!!");
 	}
 	
-	@RequestMapping(value="customer/customerBasket", method=RequestMethod.GET)
+	@RequestMapping(value="customer/customerBasketList", method=RequestMethod.GET)
 	public String customerBasket(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + ".customerBasket start!!!");
+		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info(this.getClass() + ".customerBasket userNo : " + userNo);
+		
 		
 		log.info(this.getClass() + ".customerbasekt end!!!");
 		return null;
