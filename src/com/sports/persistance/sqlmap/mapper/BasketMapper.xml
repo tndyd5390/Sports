@@ -28,12 +28,13 @@
 		(
 			BSK_NO,
 			OPT_NO,
+			OPT_NAME,
 			REG_USER_NO,
 			REG_DT
 		)
 		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-			((SELECT MAX(BSK_NO) FROM BASKET_INFO), #{item.opt_no}, #{item.reg_user_no}, NOW())
+			((SELECT MAX(BSK_NO) FROM BASKET_INFO), #{item.opt_no}, #{item.opt_name}, #{item.reg_user_no}, NOW())
 		</foreach>
 	</insert>
 	<insert id="insertCustomerAddBasketNoOption" parameterType="BasketDTO">

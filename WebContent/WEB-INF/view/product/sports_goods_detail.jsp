@@ -61,7 +61,8 @@
 			location.href="login.do";
 		}else{
 			var sel = document.getElementsByName('optSelect');
-			var selectedItemArray = [];
+			var selectedItemNoArray = [];
+			var selectedItemNameArray = [];
 			for(var i = 0 ;i< sel.length; i++){
 				for(var j = 0; j < sel[i].options.length; j++){
 					if(sel[i].options[j].selected == true){
@@ -69,7 +70,11 @@
 							alert("옵션을 선택해 주세요");
 							return;
 						}
-						selectedItemArray.push(sel[i].options[j].value);
+						var optInfo = sel[i].options[j].value.split(";");
+						var optNo = optInfo[0];
+						var optName = optInfo[1];
+						selectedItemNoArray.push(optNo);
+						selectedItemNameArray.push(optName);
 					}
 				}
 			}
@@ -78,7 +83,8 @@
 				data : {
 					'prod_no' : prod_no,
 					'prod_qty' : document.getElementById('prod_qty').value,
-					'opt_no' : selectedItemArray,
+					'opt_no' : selectedItemNoArray,
+					'opt_name' : selectedItemNameArray,
 					'bsk_price' : unComma(price)
 				},
 				method : "post",
@@ -214,7 +220,7 @@
             	List<ProdOptionDTO> pList = pMap.get(key);
             	for(ProdOptionDTO p : pList){
             %>
-              		<option value="<%=p.getOpt_no() %>"><%=p.getOpt_name() %></option>
+              		<option value="<%=p.getOpt_no() + ";" + p.getOpt_name() %>"><%=p.getOpt_name() %></option>
             <%
             	}
             %>
