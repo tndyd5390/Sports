@@ -25,9 +25,9 @@ String ss_user_auth =  CmmUtil.nvl((String)session.getAttribute("ss_user_auth"))
 
 System.out.println("ss_user_no: " + ss_user_no);
 
-if (!ss_user_no.equals("5")) {
+/*if (!ss_user_no.equals("5")) {
 	response.sendRedirect("/main.do");
-}
+}*/
 
 int access = 1;
 
@@ -459,7 +459,13 @@ function doReg() {
 					<a href="#">고객센터 관리</a>
 					<ul class="col-2">
 						<li><a href="/admin/notice/NoticeList.do">공지사항 관리</a></li>
-						<li><a href="/admin/QA/QAList.do">Q&amp;A 관리</a></li>
+						<li>
+						<% if (ss_user_no.equals("5")) {%>
+							<a href="/admin/QA/QAList.do">Q&amp;A 관리</a>
+						<%} else {%>
+							<a href="/customer/QA/QAList.do">Q&amp;A</a>
+						<%} %>
+						</li>
 					</ul>
 				</li>
 			</ul>
@@ -469,7 +475,7 @@ function doReg() {
 				<div class="wrap search-wrap btn-wrap">
 
 					<div class="search type hj-search">
-						<input type="text" placeholder="제목 입력" id="searchbox"
+						<input type="text" placeholder="글 제목을 입력해주세요." id="searchbox"
 							style="width: 100%" />
 					</div>
 

@@ -19,7 +19,9 @@ if (rList==null) {
 }
 
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+String ss_user_id =  CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
 String ss_user_name =  CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
+String ss_user_auth =  CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 
 System.out.println("ss_user_no: " + ss_user_no);
 
@@ -337,7 +339,13 @@ function doReg() {
 					<a href="#">고객센터 관리</a>
 					<ul class="col-2">
 						<li><a href="/customer/notice/NoticeList.do">공지사항 관리</a></li>
-						<li><a href="/customer/QA/QAList.do">Q&amp;A 관리</a></li>
+						<li>
+						<% if (ss_user_no.equals("5")) {%>
+							<a href="/admin/QA/QAList.do">Q&amp;A 관리</a>
+						<%} else {%>
+							<a href="/customer/QA/QAList.do">Q&amp;A</a>
+						<%} %>
+						</li>
 					</ul>
 				</li>
 			</ul>
@@ -347,7 +355,7 @@ function doReg() {
 			<div class="wrap search-wrap btn-wrap">
 			
 				<div class="search type hj-search">
-					<input type="text" placeholder="제목 입력" id="searchbox" style="width:100%" />
+					<input type="text" placeholder="글 제목을 입력해주세요." id="searchbox" style="width:100%" />
 				</div>
 	
 				<div class="list_wrap">

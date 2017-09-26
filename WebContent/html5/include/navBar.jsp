@@ -59,7 +59,13 @@
 			<a href="#">고객센터 관리</a>
 			<ul class="col-2">
 				<li><a href="/notice/NoticeList.do">공지사항 관리</a></li>
-				<li><a href="/admin/QA/QAList.do">Q&amp;A 관리</a></li>
+				<li>
+				<% if (ss_user_no.equals("5")) {%>
+					<a href="/admin/QA/QAList.do">Q&amp;A 관리</a>
+				<%} else {%>
+					<a href="/customer/QA/QAList.do">Q&amp;A</a>
+				<%} %>
+				</li>
 			</ul>
 		</li>
 	</ul>
