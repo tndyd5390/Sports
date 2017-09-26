@@ -36,4 +36,26 @@
 			((SELECT MAX(BSK_NO) FROM BASKET_INFO), #{item.opt_no}, #{item.reg_user_no}, NOW())
 		</foreach>
 	</insert>
+	<insert id="insertCustomerAddBasketNoOption" parameterType="BasketDTO">
+		INSERT INTO BASKET_INFO
+		(
+			USER_NO,
+			PROD_NO,
+			PROD_QTY,
+			REG_USER_NO,
+			REG_DT,
+			STATUS,
+			BSK_PRICE
+		)
+		VALUES
+		(
+			#{user_no},
+			#{prod_no},
+			#{prod_qty},
+			#{user_no},
+			NOW(),
+			'Y',
+			#{bsk_price}
+		)
+	</insert>
 </mapper>
