@@ -73,8 +73,6 @@ public class ProductInfoService implements IProductInfoService{
 		if(pList == null){
 			pList = new ArrayList<ProdOptionDTO>();
 		}
-		System.out.println("pList.size() : " + pList.size());
-		
 		Map<String, List<ProdOptionDTO>> pMap = new HashMap<String, List<ProdOptionDTO>>();
 		if(pList.size() != 0){
 			for(ProdOptionDTO optDTO : pList){
@@ -89,7 +87,6 @@ public class ProductInfoService implements IProductInfoService{
 				}
 			}
 		}
-		System.out.println("pMap.size : " + pMap.size());
 		//return할 객체에 담는다.
 		resultMap.put("prodDetail", prodDTO);
 		resultMap.put("prodOpt", pMap);

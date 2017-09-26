@@ -279,8 +279,8 @@ public class ProductInfoController {
 			pMap = new HashMap<String, Object>();
 		}
 		
-		log.info(((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
-		log.info(((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
+		log.info("pMap.size : "+((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
+		log.info("pMap.prodName : "+((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
 		
 		//model에 올리기
 		model.addAttribute("pDTO", (ProductInfoDTO)pMap.get("prodDetail"));
@@ -335,8 +335,8 @@ public class ProductInfoController {
 			pMap = new HashMap<String, Object>();
 		}
 		
-		log.info(((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
-		log.info(((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
+		log.info("pMap.size : "+((Map<String, List<ProdOptionDTO>>)pMap.get("prodOpt")).size());
+		log.info("pMap.prodName : "+((ProductInfoDTO)pMap.get("prodDetail")).getProd_name());
 		
 		//model에 올리기
 		model.addAttribute("pDTO", (ProductInfoDTO)pMap.get("prodDetail"));

@@ -99,7 +99,7 @@
         <div class="list_wrap">
           <h4 class="goods_detail_title">제품 상세정보</h4>
           <div class="detail_contents">
-            <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>" alt="thumb">
+            <img src="<%=CmmUtil.nvl(pDTO.getDetail_src())%>">
             <dl>
               <dt>제품특징</dt>
               <dd><%=CmmUtil.nvl(pDTO.getProd_contents()) %></dd>
