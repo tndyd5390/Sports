@@ -10,94 +10,14 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
-<style>
-div.col-2-group{
-	margin-top :10px;
-	width : 100%;
-	height: 40px;
-}
-div.col-2-group a{
-	display: inline-block;
- 	width : 50%;
- 	height: 100%;
- 	font-size : 20px;
- 	text-align : center;
- 	line-height: 42px;
-}
-div.col-2-group a:nth-child(1){
-	border-right : 2px solid #F5F5F5;
-	background-color : #1777CB;
-	color : #fff;
-}
-div.col-2-group a:nth-child(2){
-	border-left : 2px solid #F5F5F5;
-	background-color : #9E9E9E;
-	color : #fff;
-}
-
-</style>
 <script type="text/javascript">
+	var readMore = 6;
+	var parents_no = '';
 	$(function(){
 		prodList();
-		
 	});
-	function prodReg(){
-		location.href="productReg.do";
-	}
-	function prodDetail(pNo){
-		location.href="productDetail.do?pNo="+pNo
-	}
-	
-	function prodList(){
-		var contents = "";
-		$.ajax({
-			url : 'productAll.do',
-			method : 'post',
-			success : function(data){
-				$.each(data, function(key, value){
-					contents += "<li>";
-					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
-					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.main_src+"' alt='thumb'>";
-					contents += "</div>";
-					contents += "<div class='info'>";
-					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
-					contents += "</div>"
-					contents += "</a>";
-					contents += "</li>";
-				});
-				$('#goods_list').html(contents);
-			}
-		});
-	}
-	
-	function prodSelect(pNo){
-		var contents = "";
-		$.ajax({
-			url : 'productSelect.do',
-			method : 'post',
-			data : {'pNo' : pNo},
-			success : function(data){
-				$.each(data, function(key, value){
-					contents += "<li>";
-					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
-					contents += "<div class='thumb'>";
-					contents += "<img src='"+value.main_src+"' alt='thumb'>";
-					contents += "</div>";
-					contents += "<div class='info'>";
-					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
-					contents += "</div>"
-					contents += "</a>";
-					contents += "</li>";
-				});
-				$('#goods_list').html(contents);
-			}
-		});
-	}
 </script>
-
+<script src="html5/common/js/productList.js"></script>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -107,7 +27,7 @@ div.col-2-group a:nth-child(2){
           <img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="#"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 
@@ -159,8 +79,8 @@ div.col-2-group a:nth-child(2){
  -->         
  			</ul>
           <div id ="more-div">
-          	<div class="more-type">
-				<a href="#" class="moremore">더보기</a>
+          	<div class="more-type" id="moremore">
+				<a href="#" class="moremore" onclick="prodMore();">더보기</a>
 			</div>
 			<div class="col-2-group">
 				<a href="#" onclick="prodReg(); return false;">등록</a>

@@ -39,4 +39,16 @@ public interface ProductInfoMapper {
 
 	void deleteFile(ProductFileDTO pDTO) throws Exception;
 
+	void deleteProduct(String prodNo) throws Exception;
+
+	void deleteOptProdNo(String prodNo) throws Exception;
+
+	List<ProductFileDTO> getFileInfo(String prodNo) throws Exception;
+
+	void deleteFileProdNo(String prodNo) throws Exception;
+
+	List<ProductInfoDTO> getMoreProdList(int readMore) throws Exception;
+
+	List<ProductInfoDTO> getSelectMoreProdList(ProductInfoDTO pDTO) throws Exception;
+
 }

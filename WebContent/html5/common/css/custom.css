@@ -223,6 +223,53 @@ div.user-detail-cell2 {
 .filebox.bs3-primary {
 	width: 100%;
 }
+
+.select-80{
+	width : 80%;
+}
+.select-btn{
+	display: inline-block;
+	background-color : #1777cb;
+	color : #ffffff;
+	margin-left : 10px;
+	height : 40px;
+	width : 15%;
+	font-size: 14px;
+ 	border-radius: 5px;
+}
+.input_btn_wrap .opt-line-btn {
+  position: absolute;
+  right: 0;
+  background: #fff;
+  height: 40px;
+  border: 1px solid #bcbcbc;
+  border-radius: 4px;
+  width: 72px;
+}
+div.col-2-group{
+	margin-top :10px;
+	width : 100%;
+	height: 40px;
+}
+div.col-2-group a{
+	display: inline-block;
+ 	width : 50%;
+ 	height: 100%;
+ 	font-size : 20px;
+ 	text-align : center;
+ 	line-height: 42px;
+}
+div.col-2-group a:nth-child(1){
+	border-right : 2px solid #F5F5F5;
+	background-color : #1777CB;
+	color : #fff;
+}
+div.col-2-group a:nth-child(2){
+	border-left : 2px solid #F5F5F5;
+	background-color : #9E9E9E;
+	color : #fff;
+}
+
 /*  
  	프로덕트 CSS 끝
  */

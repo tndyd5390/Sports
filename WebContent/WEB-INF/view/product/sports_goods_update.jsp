@@ -34,29 +34,6 @@
 		inputFile();
 		optList();
 	});
-	function optAlert(){
-		alert("옵션은 추가 및 삭제만 가능합니다.");		
-	}
-	
-	function delOptAjax(obj){
-		if(confirm("삭제 하시겠습니까?")){
-			var index = $('#opt_list [name=btn]').index(obj);
-			$.ajax({
-				url : 'deleteOpt.do',
-				method : 'post',
-				data : {'optNo' : $('#opt_no').eq(index).val()},
-				success : function(data){
-					console.log(data);
-					$('#opt_list [name=opt_child]').eq(index).remove();
-				}
-			});
-			return true;
-		}else{
-			return false;			
-		}
-	}
-
-	
 </script>
 </head>
 <body>
@@ -68,7 +45,7 @@
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 			<div class="page_title">
@@ -125,13 +102,13 @@
 								</div>
 							</li>
 							<li>
-									<p class="blue_text">옵션</p>
-									<div class="select_wrap">
-										<select class="select-80" id="optParents" name="code_no">
-											<option value="0" selected>선택하세요</option>
-										</select>
-										<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
-									</div> 
+								<p class="blue_text">옵션</p>
+								<div class="select_wrap">
+									<select class="select-80" id="optParents" name="code_no">
+										<option value="0" selected>선택하세요</option>
+									</select>
+									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
+								</div> 
 								<%
 									if(pMap.size() == 0){
 										
@@ -153,7 +130,6 @@
 												<input type="text" name="opt_name" value="<%=CmmUtil.nvl(p.getOpt_name())%>" onclick="optAlert()" readonly>
 												<input type="text" name="opt_price" value="<%=CmmUtil.zero(p.getOpt_price()) %>" onclick="optAlert()" readonly><button type="button" class='opt-line-btn' name='btn' onclick='return delOptAjax(this)'>제거</button>
 												<input type="hidden" name="opt_no" id="opt_no" value="<%=CmmUtil.nvl(p.getOpt_no())%>">
-												
 											</div>
 									<%	}
 						              }
@@ -162,7 +138,6 @@
 								<%
 									}
 								%>				
-							
 							</li>
 						</ul>
 					</div>
