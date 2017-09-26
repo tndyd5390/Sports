@@ -13,6 +13,11 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sports.dto.DeliveryDTO;
+
 
 @Controller
 public class DeliveryController {
@@ -74,5 +79,21 @@ public class DeliveryController {
 		
 		log.info(this.getClass() + "deliverytracking End!!");
 		return "account/accountmanagement";
+	}
+	@RequestMapping(value="delivery")
+	public @ResponseBody DeliveryDTO delivery() throws Exception{
+		String url = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";
+		String key = "g1KSViceIkKV0hWrnB6rgQ";
+		String t_code = "01";
+		String t_invoice = "7416005013697";
+		String final_url = url + "t_key="+key+"&t_code="+t_code+"&t_invoice="+t_invoice;
+		
+		URL connUrl = new URL(final_url);
+		
+		ObjectMapper objMapper = new ObjectMapper();
+		DeliveryDTO dDTO = new DeliveryDTO();
+		dDTO = objMapper.readValue(connUrl, DeliveryDTO.class);
+		
+		return dDTO; 
 	}
 }
