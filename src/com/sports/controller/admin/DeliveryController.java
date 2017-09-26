@@ -81,19 +81,46 @@ public class DeliveryController {
 		return "account/accountmanagement";
 	}
 	@RequestMapping(value="delivery")
-	public @ResponseBody DeliveryDTO delivery() throws Exception{
+	public @ResponseBody String delivery() throws Exception{
 		String url = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";
 		String key = "g1KSViceIkKV0hWrnB6rgQ";
 		String t_code = "01";
 		String t_invoice = "7416005013697";
 		String final_url = url + "t_key="+key+"&t_code="+t_code+"&t_invoice="+t_invoice;
-		
+/*		
 		URL connUrl = new URL(final_url);
 		
 		ObjectMapper objMapper = new ObjectMapper();
 		DeliveryDTO dDTO = new DeliveryDTO();
 		dDTO = objMapper.readValue(connUrl, DeliveryDTO.class);
 		
-		return dDTO; 
+		return dDTO; */
+        URL obj = new URL("http://tracking.sweettracker.net/tracking?t_key=SWEETTRACKER&t_code=04&t_invoice=0000000000");
+        HttpURLConnection httpConn  = (HttpURLConnection) obj.openConnection();
+
+        // 전송방식 GET 지정
+        httpConn.setRequestMethod("GET");
+
+        // 요청헤더 추가
+        httpConn.setRequestProperty("User-Agent", "Mozilla/5.0");
+        httpConn.setRequestProperty("Accept", "application/json");
+      
+        int responseCode = httpConn.getResponseCode();
+        // 응답코드 확인(정상호출시 200)
+        System.out.println("Response Code : " + responseCode);
+        
+        
+        
+        BufferedReader in = new BufferedReader(new InputStreamReader(httpConn.getInputStream(),"UTF-8"));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        
+        //결과 확인
+        System.out.println(response.toString());        
+        return response.toString();
 	}
 }
