@@ -125,13 +125,13 @@
 								</div>
 							</li>
 							<li>
-									<p class="blue_text">옵션</p>
-									<div class="select_wrap">
-										<select class="select-80" id="optParents" name="code_no">
-											<option value="0" selected>선택하세요</option>
-										</select>
-										<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
-									</div> 
+								<p class="blue_text">옵션</p>
+								<div class="select_wrap">
+									<select class="select-80" id="optParents" name="code_no">
+										<option value="0" selected>선택하세요</option>
+									</select>
+									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
+								</div> 
 								<%
 									if(pMap.size() == 0){
 										
@@ -153,7 +153,6 @@
 												<input type="text" name="opt_name" value="<%=CmmUtil.nvl(p.getOpt_name())%>" onclick="optAlert()" readonly>
 												<input type="text" name="opt_price" value="<%=CmmUtil.zero(p.getOpt_price()) %>" onclick="optAlert()" readonly><button type="button" class='opt-line-btn' name='btn' onclick='return delOptAjax(this)'>제거</button>
 												<input type="hidden" name="opt_no" id="opt_no" value="<%=CmmUtil.nvl(p.getOpt_no())%>">
-												
 											</div>
 									<%	}
 						              }
@@ -162,7 +161,6 @@
 								<%
 									}
 								%>				
-							
 							</li>
 						</ul>
 					</div>

@@ -73,9 +73,13 @@
 							</li>
 							<li>
 								<p class="blue_text">옵션</p>
-								<div class="input_btn_wrap">
-									<input type="text" placeholder="옵션을 추가하세요">
-									<button type="button" class="line-btn">등록</button>
+								<div class="select_wrap">
+									<select class="select-80" id="optParents" name="code_no">
+										<option value="0" selected>선택하세요</option>
+									</select>
+									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>
+								</div> 
+								<div id="opt_list">
 								</div>
 							</li>
 						</ul>
