@@ -6,4 +6,5 @@ import com.sports.dto.BasketDTO;
 
 public interface IBasketService {
 	public int insertCustomerAddBasket(BasketDTO bDTO, List<String> optNo, String userNo) throws Exception;
+	public int insertCustomerAddBasketNoOption(BasketDTO bDTO) throws Exception;
 }
