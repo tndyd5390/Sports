@@ -43,4 +43,8 @@ public interface IProductInfoService {
 
 	void deleteProduct(String prodNo) throws Exception;
 
+	List<ProductInfoDTO> getMoreProdList(int readMore) throws Exception;
+
+	List<ProductInfoDTO> getSelectMoreProdList(ProductInfoDTO pDTO) throws Exception;
+
 }

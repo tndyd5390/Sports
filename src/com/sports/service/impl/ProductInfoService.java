@@ -218,4 +218,14 @@ public class ProductInfoService implements IProductInfoService{
 		}
 		productInfoMapper.deleteFileProdNo(prodNo);
 	}
+
+	@Override
+	public List<ProductInfoDTO> getMoreProdList(int readMore) throws Exception {
+		return productInfoMapper.getMoreProdList(readMore);
+	}
+
+	@Override
+	public List<ProductInfoDTO> getSelectMoreProdList(ProductInfoDTO pDTO) throws Exception {
+		return productInfoMapper.getSelectMoreProdList(pDTO);
+	}
 }

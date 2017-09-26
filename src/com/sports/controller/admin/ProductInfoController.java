@@ -540,4 +540,30 @@ public class ProductInfoController {
 		return "alert/alert";
 	}
 	
+	@RequestMapping(value="moreProdList")
+	public @ResponseBody List<ProductInfoDTO> moreProdList(@RequestParam(value="readMore") int readMore) throws Exception{
+		log.info(this.getClass() + " moreProdList Start!!");
+		
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
+		
+		pList = productInfoService.getMoreProdList(readMore);
+		
+		log.info(this.getClass() + " moreProdList End!!");
+		return pList;
+	}
+	
+	@RequestMapping(value="selectMoreProdList")
+	public @ResponseBody List<ProductInfoDTO> selectMoreProdList(@RequestParam(value="readMore") int readMore, @RequestParam(value="parents_no") String parents_no) throws Exception{
+		log.info(this.getClass() + " selectMoreProdList Start!!");
+
+		List<ProductInfoDTO> pList = new ArrayList<ProductInfoDTO>();
+		ProductInfoDTO pDTO = new ProductInfoDTO();
+		pDTO.setParents_no(parents_no);
+		pDTO.setRead_more(readMore);
+		
+		pList = productInfoService.getSelectMoreProdList(pDTO);
+		
+		log.info(this.getClass() + " selectMoreProdList End!!");
+		return pList;
+	}
 }

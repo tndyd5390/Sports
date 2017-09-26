@@ -47,4 +47,8 @@ public interface ProductInfoMapper {
 
 	void deleteFileProdNo(String prodNo) throws Exception;
 
+	List<ProductInfoDTO> getMoreProdList(int readMore) throws Exception;
+
+	List<ProductInfoDTO> getSelectMoreProdList(ProductInfoDTO pDTO) throws Exception;
+
 }
