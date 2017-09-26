@@ -19,7 +19,9 @@ if (rList==null) {
 }
 
 String ss_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+String ss_user_id =  CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
 String ss_user_name =  CmmUtil.nvl((String)session.getAttribute("ss_user_name"));
+String ss_user_auth =  CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 
 System.out.println("ss_user_no: " + ss_user_no);
 
@@ -280,7 +282,7 @@ function doReg() {
 	    <header class="header">
 			<div class="wrap">
 				<div class="left_menu"><img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button"></div>
-				<div class="logo"><a href="/main.do"><h2 class="title">모두의 스포츠</h2></a></div>
+				<div class="logo"><a href="/customerMain.do"><h2 class="title">모두의 스포츠</h2></a></div>
 			</div>
 			<div class="page_title"><p>Q&amp;A</p></div>
 		</header>
@@ -298,24 +300,16 @@ function doReg() {
 			<%} %>
 			</div>
 			<ul class="menu_list">
-				<li><a href="#">주문관리</a></li>
+				<li><a href="#">회원 정보</a></li>
 				<li>
-					<a href="#">학원관리</a>
+					<a href="#">마이페이지</a>
 					<ul class="col-2">
-						<li><a href="#">학원 밀집도 정보</a></li>
-						<li><a href="#">거래처 관리</a></li>
+						<li><a href="#">주문정보</a></li>
+						<li><a href="customer/customerBasket.do">장바구니</a></li>
 					</ul>
 				</li>
 				<li>
-					<a href="#">매출 분석 정보</a>
-					<ul class="col-3">
-						<li><a href="/admin/sale/list.do"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
-						<li><a href="#"><img src="/html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
-						<li><a href="#"><img src="/html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
-					</ul>
-				</li>
-				<li>
-					<a href="#">스포츠 용품 리스트 관리</a>
+					<a href="#">스포츠 용품 리스트</a>
 					<ul class="col-2 more">
 						<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
 						<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
@@ -334,10 +328,10 @@ function doReg() {
 					</ul>
 				</li>
 				<li>
-					<a href="#">고객센터 관리</a>
+					<a href="#">고객센터</a>
 					<ul class="col-2">
-						<li><a href="/customer/notice/NoticeList.do">공지사항 관리</a></li>
-						<li><a href="/customer/QA/QAList.do">Q&amp;A 관리</a></li>
+						<li><a href="/notice/NoticeList.do">공지사항</a></li>
+						<li><a href="/customer/QA/QAList.do">Q&amp;A</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -347,7 +341,7 @@ function doReg() {
 			<div class="wrap search-wrap btn-wrap">
 			
 				<div class="search type hj-search">
-					<input type="text" placeholder="제목 입력" id="searchbox" style="width:100%" />
+					<input type="text" placeholder="글 제목을 입력해주세요." id="searchbox" style="width:100%" />
 				</div>
 	
 				<div class="list_wrap">
