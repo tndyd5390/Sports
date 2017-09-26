@@ -34,29 +34,6 @@
 		inputFile();
 		optList();
 	});
-	function optAlert(){
-		alert("옵션은 추가 및 삭제만 가능합니다.");		
-	}
-	
-	function delOptAjax(obj){
-		if(confirm("삭제 하시겠습니까?")){
-			var index = $('#opt_list [name=btn]').index(obj);
-			$.ajax({
-				url : 'deleteOpt.do',
-				method : 'post',
-				data : {'optNo' : $('#opt_no').eq(index).val()},
-				success : function(data){
-					console.log(data);
-					$('#opt_list [name=opt_child]').eq(index).remove();
-				}
-			});
-			return true;
-		}else{
-			return false;			
-		}
-	}
-
-	
 </script>
 </head>
 <body>
@@ -68,7 +45,7 @@
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 			<div class="page_title">
