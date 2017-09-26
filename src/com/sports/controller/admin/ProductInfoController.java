@@ -524,4 +524,20 @@ public class ProductInfoController {
 		log.info(this.getClass() + " deleteOpt End!!");
 		return "success";
 	}
+	
+	@RequestMapping(value="productDelete")
+	public String deleteProduct(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + " deleteProduct Start!!");
+		String prodNo = CmmUtil.nvl(req.getParameter("pNo"));
+		
+		productInfoService.deleteProduct(prodNo);
+		
+		prodNo = null;
+		
+		model.addAttribute("msg", "삭제완료");
+		model.addAttribute("url", "productList.do");
+		log.info(this.getClass() + " deleteProduct End!!");
+		return "alert/alert";
+	}
+	
 }

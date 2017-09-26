@@ -111,6 +111,15 @@
 function updateProd(){
 	location.href="productUpdate.do?pNo=<%=pDTO.getProd_no()%>";
 }
+
+function deleteProd(){
+	if(confirm("삭제 하시겠습니까?")){
+		location.href="productDelete.do?pNo=<%=pDTO.getProd_no()%>";
+		return true;
+	}else{
+		return false;
+	}
+}
 </script>
 </head>
 <body>
@@ -204,7 +213,7 @@ function updateProd(){
         </div>
         <div class="btn-groub">
           <button class="col-2 blue-btn button" onclick="updateProd();">수정</button>
-          <button class="col-2 glay-btn button">삭제</button>
+          <button class="col-2 glay-btn button" onclick="return deleteProd();">삭제</button>
         </div>
       </div>
     </div>

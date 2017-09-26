@@ -41,4 +41,6 @@ public interface IProductInfoService {
 
 	void deleteFile(ProductFileDTO pDTO) throws Exception;
 
+	void deleteProduct(String prodNo) throws Exception;
+
 }

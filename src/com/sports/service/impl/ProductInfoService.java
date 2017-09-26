@@ -1,5 +1,6 @@
 package com.sports.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.sports.controller.admin.ProductInfoController;
 import com.sports.dto.ProdOptionDTO;
 import com.sports.dto.ProductFileDTO;
 import com.sports.dto.ProductInfoDTO;
@@ -198,5 +200,22 @@ public class ProductInfoService implements IProductInfoService{
 	@Override
 	public void deleteFile(ProductFileDTO pDTO) throws Exception {
 		productInfoMapper.deleteFile(pDTO);
+	}
+
+	@Override
+	public void deleteProduct(String prodNo) throws Exception {
+		productInfoMapper.deleteProduct(prodNo);
+		productInfoMapper.deleteOptProdNo(prodNo);
+		List<ProductFileDTO> fList = new ArrayList<ProductFileDTO>();
+		fList = productInfoMapper.getFileInfo(prodNo);
+		
+		for(ProductFileDTO fDTO : fList){
+			String fileSrc = "C:\\sportspace\\Sports\\WebContent\\"+fDTO.getSrc_filename();
+			File file = new File(fileSrc);
+			if(file.exists()==true){
+				file.delete();
+			}
+		}
+		productInfoMapper.deleteFileProdNo(prodNo);
 	}
 }

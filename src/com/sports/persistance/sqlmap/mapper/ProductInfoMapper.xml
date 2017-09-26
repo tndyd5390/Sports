@@ -139,4 +139,20 @@
 	<delete id="deleteFile" parameterType="ProductFileDTO">
 		DELETE FROM PROD_FILE WHERE FILE_NO = #{file_no}
 	</delete>
+	
+	<delete id="deleteProduct" parameterType="String">
+		DELETE FROM PRODUCT_INFO WHERE PROD_NO = #{prodNo}
+	</delete>
+	
+	<delete id="deleteOptProdNo" parameterType="String">
+		DELETE FROM PROD_OPTION WHERE PROD_NO = #{prodNo}
+	</delete>
+	
+	<select id="getFileInfo" parameterType="String" resultType="ProductFileDTO">
+		SELECT * FROM PROD_FILE WHERE PROD_NO = #{prodNo}
+	</select>
+	
+	<delete id="deleteFileProdNo" parameterType="String">
+		DELETE FROM PROD_FILE WHERE PROD_NO = #{prodNo}
+	</delete>
 </mapper>
