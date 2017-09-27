@@ -32,4 +32,23 @@ public interface ProductInfoMapper {
 	int insertProductOption(List<ProductInfoDTO> setList) throws Exception;
 	
 	List<ProdOptionDTO> getProductOption(String prodNo) throws Exception;
+
+	void deleteOpt(ProdOptionDTO poDTO) throws Exception;
+
+	void updateProduct(ProductInfoDTO pDTO) throws Exception;
+
+	void deleteFile(ProductFileDTO pDTO) throws Exception;
+
+	void deleteProduct(String prodNo) throws Exception;
+
+	void deleteOptProdNo(String prodNo) throws Exception;
+
+	List<ProductFileDTO> getFileInfo(String prodNo) throws Exception;
+
+	void deleteFileProdNo(String prodNo) throws Exception;
+
+	List<ProductInfoDTO> getMoreProdList(int readMore) throws Exception;
+
+	List<ProductInfoDTO> getSelectMoreProdList(ProductInfoDTO pDTO) throws Exception;
+
 }
