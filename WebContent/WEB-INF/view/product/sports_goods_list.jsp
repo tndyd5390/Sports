@@ -16,14 +16,6 @@
 	$(function(){
 		prodList();
 		
-		$.ajax({
-			url:'delivery.do',
-			method:'get',
-			success : function(data){
-				console.log(data)
-			}
-			
-		})
 	});
 	
 	
@@ -91,7 +83,7 @@
  			</ul>
           <div id ="more-div">
           	<div class="more-type" id="moremore">
-				<a href="#" class="moremore" onclick="prodMore();">더보기</a>
+				<a href="#" class="moremore" onclick="prodMore(); return false;">더보기</a>
 			</div>
 			<div class="col-2-group">
 				<a href="#" onclick="prodReg(); return false;">등록</a>

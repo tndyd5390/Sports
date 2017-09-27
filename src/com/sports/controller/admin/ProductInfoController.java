@@ -123,18 +123,20 @@ public class ProductInfoController {
 	 * @throws Exception
 	 */
 	@RequestMapping(value="productRegProc")
-	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("files") MultipartFile[] files ) throws Exception{
+	public String productRegProc(HttpServletRequest req, Model model, @RequestParam("files") MultipartFile[] files, HttpSession session) throws Exception{
 		log.info(this.getClass() + " productRegProc Start!!");
 		
 		String prodName = CmmUtil.nvl(req.getParameter("product_name"));
 		String prodPrice = CmmUtil.nvl(req.getParameter("product_price"));
 		String prodContents = CmmUtil.nvl(req.getParameter("product_contents"));
 		String categoryNo = CmmUtil.nvl(req.getParameter("category_no"));
+		String regUserNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		log.info("--------product---------");
 		log.info("prodName : " +prodName);
 		log.info("prodPrice : " +prodPrice);
 		log.info("prodContents : " +prodContents);
 		log.info("categoryNo : " +categoryNo);
+		log.info("regUserNo : " +regUserNo);
 		log.info("--------product---------");
 		// 프로덕트 파라미터
 		String optParents[] = req.getParameterValues("opt_parents");
@@ -162,9 +164,11 @@ public class ProductInfoController {
 		pDTO.setProd_price(prodPrice);
 		pDTO.setProd_contents(prodContents);
 		pDTO.setCategory_no(categoryNo);
+		pDTO.setReg_user_no(regUserNo);
 		fDTO.setOrg_filename(orgName);
 		fDTO.setFile_path(filePath);
 		fDTO.setSrc_filename(newName);
+		fDTO.setReg_user_no(regUserNo);
 		int res = -1;
 		// Insert 성공시 1 반환이기 때문에 성공 여부를 판단 하기 위해 res 값을 int로 설정
 		if(files[1].getSize()!=0){
@@ -185,6 +189,7 @@ public class ProductInfoController {
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);
+			fdDTO.setReg_user_no(regUserNo);
 			// 디테일 파일 등록
 			if(optParents[0].equals("0")){
 				// optParents 첫 번째 값이 0이면 옵션을 등록하지 않은 것임
@@ -205,6 +210,7 @@ public class ProductInfoController {
 					optDTO.setOpt_name(optName[i]);
 					optDTO.setOpt_kind(optParents[i]);
 					optDTO.setOpt_price(optPrice[i]);
+					optDTO.setReg_user_no(regUserNo);
 					optList.add(optDTO);
 					// 미리 생성해 둔 리스트에 생성 한 DTO를 넣어 줌
 					log.info("optName : "+optName[i]);
@@ -234,6 +240,7 @@ public class ProductInfoController {
 					optDTO.setOpt_name(optName[i]);
 					optDTO.setOpt_kind(optParents[i]);
 					optDTO.setOpt_price(optPrice[i]);
+					optDTO.setReg_user_no(regUserNo);
 					optList.add(optDTO);
 					log.info("optName : "+optName[i]);
 					log.info("optKind : "+optParents[i]);
@@ -357,7 +364,7 @@ public class ProductInfoController {
 	 *  여기서는 옵션과 파일은 수정 = (삭제 + 생성) 라는 공식으로 구현 하였음
 	 *  파일과 옵션을 수정할 때 기존의 것을 지우고 새롭게 insert 하는 형식으로 구현
 	 * @param req
-	 * @param session
+	 * @param session1
 	 * @param files
 	 * @return
 	 * @throws Exception
@@ -370,11 +377,13 @@ public class ProductInfoController {
 		String prodPrice = CmmUtil.nvl(req.getParameter("product_price"));
 		String prodContents = CmmUtil.nvl(req.getParameter("product_contents"));
 		String categoryNo = CmmUtil.nvl(req.getParameter("category_no"));
+		String chgUserNo = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
 		log.info("--------product---------");
 		log.info("prodName : " +prodName);
 		log.info("prodPrice : " +prodPrice);
 		log.info("prodContents : " +prodContents);
 		log.info("categoryNo : " +categoryNo);
+		log.info("chgUserNo : " +chgUserNo);
 		log.info("--------product---------");
 		String optParents[] = req.getParameterValues("opt_parents");
 		ProductInfoDTO pDTO = new ProductInfoDTO();
@@ -383,6 +392,7 @@ public class ProductInfoController {
 		pDTO.setProd_price(prodPrice);
 		pDTO.setProd_contents(prodContents);
 		pDTO.setCategory_no(categoryNo);
+		pDTO.setChg_user_no(chgUserNo);
 		// 위는 생성 컨트롤러와 동일 한 내용
 		
 		String mainFileNo = CmmUtil.nvl(req.getParameter("mainFileNo"));
@@ -394,10 +404,10 @@ public class ProductInfoController {
 		
 		if(optParents==null){
 			// 옵션 수정이 없을 때
-			fileUpdate(files, prodNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
+			fileUpdate(files, prodNo, chgUserNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
 		}else{
 			// 옵션 수정이 있을때 (옵션을 새로 생성 할 때)
-			fileUpdate(files, prodNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
+			fileUpdate(files, prodNo, chgUserNo, mainFileNo, detailFileNo, mainSrc, detailSrc);
 			String optName[] = req.getParameterValues("opt_name");
 			String optPrice[] = req.getParameterValues("opt_price");
 			List<ProductInfoDTO> optList = new ArrayList<ProductInfoDTO>();
@@ -408,6 +418,7 @@ public class ProductInfoController {
 				optDTO.setOpt_name(optName[i]);
 				optDTO.setOpt_kind(optParents[i]);
 				optDTO.setOpt_price(optPrice[i]);
+				optDTO.setReg_user_no(chgUserNo);
 				optList.add(optDTO);
 				log.info("optName : "+optName[i]);
 				log.info("optKind : "+optParents[i]);
@@ -453,7 +464,7 @@ public class ProductInfoController {
 	 * @param detailSrc
 	 * @throws Exception
 	 */
-	public void fileUpdate(MultipartFile files[], String prodNo, String mainFileNo, String detailFileNo, String mainSrc, String detailSrc) throws Exception{
+	public void fileUpdate(MultipartFile files[], String prodNo, String regUserNo,String mainFileNo, String detailFileNo, String mainSrc, String detailSrc) throws Exception{
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		
 		if(files[0].getSize() != 0){
@@ -478,6 +489,7 @@ public class ProductInfoController {
 			fDTO.setFile_path(filePath);
 			fDTO.setSrc_filename(newName);
 			fDTO.setProd_no(prodNo);
+			fDTO.setReg_user_no(regUserNo);
 			productInfoService.insertMainFile(fDTO);
 		}
 		if(files[1].getSize() != 0){
@@ -500,6 +512,7 @@ public class ProductInfoController {
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);
 			fdDTO.setProd_no(prodNo);
+			fdDTO.setReg_user_no(regUserNo);
 			productInfoService.insertDetailFile(fdDTO);
 		}
 	}

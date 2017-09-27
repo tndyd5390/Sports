@@ -9,7 +9,7 @@
 		$('#moremore').show();
 		readMore = 6;
 		var contents = "";
-		var btn = '<a href="#" class="moremore" onclick="prodMore();">더보기</a>'
+		var btn = '<a href="#" class="moremore" onclick="prodMore(); return false;">더보기</a>'
 		$('#moremore').html(btn);
 		$.ajax({
 			url : 'productAll.do',
@@ -99,7 +99,7 @@
 		readMore = 6;
 		var contents = "";
 		var count = 0;
-		var btn = '<a href="#" class="moremore" onclick="selectProdMore();">더보기</a>'
+		var btn = '<a href="#" class="moremore" onclick="selectProdMore(); return false;">더보기</a>'
 		$('#moremore').html(btn);
 		parents_no = pNo;
 		$.ajax({

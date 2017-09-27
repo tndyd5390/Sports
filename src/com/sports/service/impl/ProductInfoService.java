@@ -10,11 +10,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import com.sports.controller.admin.ProductInfoController;
 import com.sports.dto.ProdOptionDTO;
 import com.sports.dto.ProductFileDTO;
 import com.sports.dto.ProductInfoDTO;
-import com.sports.dto.ProductInfoOptionDTO;
 import com.sports.persistance.mapper.ProductInfoMapper;
 import com.sports.service.IProductInfoService;
 import com.sports.util.CmmUtil;
@@ -133,6 +131,7 @@ public class ProductInfoService implements IProductInfoService{
 			setDTO.setOpt_name(optDTO.getOpt_name());
 			setDTO.setOpt_price(optDTO.getOpt_price());
 			setDTO.setProd_no(pDTO.getProd_no());
+			setDTO.setReg_user_no(optDTO.getReg_user_no());
 			// 받아온 prod_no를 담아 줌
 			setList.add(setDTO);
 			// setList에 prod_no를 담은 DTO를 넣어 줌
@@ -160,6 +159,7 @@ public class ProductInfoService implements IProductInfoService{
 			setDTO.setOpt_name(optDTO.getOpt_name());
 			setDTO.setOpt_price(optDTO.getOpt_price());
 			setDTO.setProd_no(pDTO.getProd_no());
+			setDTO.setReg_user_no(optDTO.getReg_user_no());
 			// 받아온 prod_no를 담아 줌
 			setList.add(setDTO);
 			// setList에 prod_no를 담은 DTO를 넣어 줌
