@@ -11,4 +11,6 @@ public interface BasketMapper {
 	public int insertCustomerAddBasekt(BasketDTO bDTO) throws Exception;
 	public int insertCustormerBasketOption(List<Basket_OptionDTO> oList) throws Exception;
 	public int insertCustomerAddBasketNoOption(BasketDTO bDTO) throws Exception;
+	public BasketDTO getCustomerBasketList(String userNo) throws Exception;
+	public Basket_OptionDTO getCustomerBasketOptionList(String userNo) throws Exception;
 }

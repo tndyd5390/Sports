@@ -9,10 +9,5 @@ import com.sports.dto.AcademyDTO;
 public interface AcademyMapper {
 
 	public void insertAcademy(AcademyDTO aDTO) throws Exception;
-
-<<<<<<< HEAD
-}
-=======
 	public List<AcademyDTO> getAcademyList() throws Exception;
 }
->>>>>>> refs/heads/LEMBranch
