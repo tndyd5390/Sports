@@ -5,6 +5,7 @@ public class AcademyDTO {
 
 	private String aca_no;
 	private String aca_name;
+	private String aca_ceo;
 	private String aca_area1;
 	private String aca_area2;
 	private String aca_area3;
@@ -32,6 +33,12 @@ public class AcademyDTO {
 	}
 	public void setAca_name(String aca_name) {
 		this.aca_name = aca_name;
+	}
+	public String getAca_ceo() {
+		return aca_ceo;
+	}
+	public void setAca_ceo(String aca_ceo) {
+		this.aca_ceo = aca_ceo;
 	}
 	public String getAca_area1() {
 		return aca_area1;

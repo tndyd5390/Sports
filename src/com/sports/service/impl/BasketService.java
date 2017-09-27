@@ -19,16 +19,19 @@ public class BasketService implements IBasketService{
 	private BasketMapper basketMapper;
 
 	@Override
-	public int insertCustomerAddBasket(BasketDTO bDTO, List<String> optNo, String userNo) throws Exception{
+	public int insertCustomerAddBasket(BasketDTO bDTO, List<String> optNos, List<String> optNames, List<String> optKinds, String userNo) throws Exception{
 		List<Basket_OptionDTO> oList = new ArrayList<>();
-		for(String opt : optNo){
+		if(optNos.size() != optNames.size() || optNos.size() != optKinds.size() || optNames.size() != optKinds.size()) throw new IndexOutOfBoundsException("제품의 인덱스가 맞지 않습니다.");
+		for(int i = 0; i < optNos.size(); i++){
 			Basket_OptionDTO oDTO = new Basket_OptionDTO();
-			oDTO.setOpt_no(opt);
+			oDTO.setOpt_no(optNos.get(i));
 			oDTO.setReg_user_no(userNo);
+			oDTO.setOpt_name(optNames.get(i));
+			oDTO.setOpt_kind(optKinds.get(i));
 			oList.add(oDTO);
 		}
 		int insertBaseket = basketMapper.insertCustomerAddBasekt(bDTO);
-		int insertBasketOption = basketMapper.insertCustormerBaksetOption(oList); 
+		int insertBasketOption = basketMapper.insertCustormerBasketOption(oList); 
 		if(insertBaseket != 0 && insertBasketOption != 0){
 			return 1;
 		}else{
@@ -38,8 +41,7 @@ public class BasketService implements IBasketService{
 
 	@Override
 	public int insertCustomerAddBasketNoOption(BasketDTO bDTO) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return basketMapper.insertCustomerAddBasketNoOption(bDTO);
 	}
 
 }

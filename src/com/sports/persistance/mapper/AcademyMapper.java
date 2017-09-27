@@ -1,11 +1,18 @@
 package com.sports.persistance.mapper;
 
+import java.util.List;
+
 import com.sports.config.Mapper;
 import com.sports.dto.AcademyDTO;
 
 @Mapper("AcademyMapper")
 public interface AcademyMapper {
 
-	void insertAcademy(AcademyDTO aDTO);
+	public void insertAcademy(AcademyDTO aDTO) throws Exception;
 
+<<<<<<< HEAD
 }
+=======
+	public List<AcademyDTO> getAcademyList() throws Exception;
+}
+>>>>>>> refs/heads/LEMBranch

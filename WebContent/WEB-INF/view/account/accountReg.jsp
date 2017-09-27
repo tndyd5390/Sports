@@ -10,27 +10,28 @@
 	}
 
 	function doJoin() {
-		var accountName = $('#accountName');
-		var upstream = $('#upstream');
-		/* var representative = $('#representative'); */
-		var postcode = $('#postcode');
-		var address1 = $('#address1');
+		var aca_name = $('#aca_name');
+		var aca_ceo = $('#aca_ceo');
+		var aca_area1 = $('#aca_area1');
+		var aca_area2 = $('#aca_area2');
+		var aca_event1 = $('#aca_event1');
 		var tel = $('#tel');
+		var aca_comment = $('#aca_comment');
 
-		if (accountName.val() == "") {
+		if (aca_name.val() == "") {
 			alert("거래처명을 입력하세요")
-			accountName.focus();
+			aca_name.focus();
 			return false;
-		} else if (upstream.val() == "") {
-			alert("업종을 입력하세요.");
-			upstream.focus();
-			return false;
-		}/*  else if (representative.val() == "") {
+		} else if (aca_ceo.val() == "") {
 			alert("대표자명을 입력하세요.");
-			representative.focus();
+			aca_ceo.focus();
 			return false;
-		}*/ else if (postcode.val() == "" || address1.val() == "") {
+		}  else if (aca_area1.val() == "" || aca_area2.val() == "") {
 			alert("주소를 입력하세요.");
+			aca_area1.focus();
+			return false;
+		} else if (aca_event1.val() == "") {
+			alert("업종을 입력하세요.");
 			return false;
 		} else if (tel.val() == "") {
 			alert("연락처를 입력하세요.");
@@ -71,19 +72,11 @@
 						<ul class="register_list">
 							<li>
 								<p class="blue_text">거래처명</p> <input type="text"
-								id="accountName" name="accountName">
+								id="aca_name" name="aca_name">
 							</li>
 							<li>
-								<p class="blue_text">업종</p> <input type="text" id="upstream"
-								name="upstream">
-							</li>
-							<!-- <li>
-								<p class="blue_text">대표자명</p> <input type="text" id="representative"
-								name="representative">
-							</li> -->
-							<li>
-								<p class="blue_text">전화번호</p> <input type="text" id="tel"
-								name="tel">
+								<p class="blue_text">대표자명</p> <input type="text" id="aca_ceo"
+								name="aca_ceo">
 							</li>
 							<li>
 								<p class="blue_text">우편번호</p>
@@ -123,10 +116,10 @@
 															document
 																	.getElementById('postcode').value = data.zonecode;
 															document
-																	.getElementById('address1').value = fullAddr;
+																	.getElementById('aca_area1').value = fullAddr;
 															document
 																	.getElementById(
-																			'address2')
+																			'aca_area2')
 																	.focus();
 														}
 													}).open();
@@ -135,15 +128,23 @@
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">주소</p> <input type="text" id="address1"
-								name="address1" onclick="daumPostcode()">
+								<p class="blue_text">주소</p> <input type="text" id="aca_area1"
+								name="aca_area1" onclick="daumPostcode()">
 							</li>
 							<li>
-								<p class="blue_text">상세주소</p> <input type="text" id="address2"
-								name="address2">
+								<p class="blue_text">상세주소</p>
+								<input type="text" id="aca_area2" name="aca_area2">
 							</li>
 							<li>
-								<p class="blue_text">거래발생일</p> <textarea id="dealDate" name="dealDate"></textarea>
+								<p class="blue_text">업종</p>
+								<input type="text" id="aca_event1" name="aca_event1">
+							</li>
+							<li>
+								<p class="blue_text">전화번호</p> <input type="text" id="tel"
+								name="tel">
+							</li>
+							<li>
+								<p class="blue_text">거래발생일</p> <textarea id="aca_comment" name="aca_comment"></textarea>
 							</li>
 						</ul>
 					</div>
