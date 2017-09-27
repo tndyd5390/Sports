@@ -18,8 +18,15 @@ public class DataAnalysisController {
 	@Resource(name="AnalysisService")
 	private IAnalysisService analysisService;
 	
-	@RequestMapping(value="userDataAnalysis")
+	@RequestMapping(value="dataAnalysis")
 	public String userDataAnaysis(HttpServletRequest req,HttpServletResponse resp,Model model)throws Exception{
-		return "dataAnalysis/DataAnalysis";
+		log.info(this.getClass());
+		return "dataAnalysis/dataAnalysis";
+	}
+	
+	@RequestMapping(value="basketAnalysis")
+	public String basketAnalysis()throws Exception{
+		
+		return "dataAnalysis/basketAnalysis";
 	}
 }
