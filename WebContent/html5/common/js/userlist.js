@@ -2,6 +2,7 @@
  * 
  */
 function userList(){
+	var count = 0;
 	var contents ="";
 	var more = "";
 	$.ajax({
