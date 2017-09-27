@@ -9,5 +9,8 @@ import com.sports.dto.Basket_OptionDTO;
 @Mapper("BasketMapper")
 public interface BasketMapper {
 	public int insertCustomerAddBasekt(BasketDTO bDTO) throws Exception;
-	public int insertCustormerBaksetOption(List<Basket_OptionDTO> oList) throws Exception;
+	public int insertCustormerBasketOption(List<Basket_OptionDTO> oList) throws Exception;
+	public int insertCustomerAddBasketNoOption(BasketDTO bDTO) throws Exception;
+	public BasketDTO getCustomerBasketList(String userNo) throws Exception;
+	public Basket_OptionDTO getCustomerBasketOptionList(String userNo) throws Exception;
 }

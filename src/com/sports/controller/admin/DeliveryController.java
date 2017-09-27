@@ -73,13 +73,13 @@ public class DeliveryController {
 		return "delivery/deliverytracking";
 	}
 	
-	@RequestMapping(value="accountmanagement")
+	/*@RequestMapping(value="accountmanagement")
 	public String accountmanagement() throws Exception{
 		log.info(this.getClass() + "deliverytracking Start!!");
 		
 		log.info(this.getClass() + "deliverytracking End!!");
 		return "account/accountmanagement";
-	}
+	}*/
 	@RequestMapping(value="delivery")
 	public @ResponseBody String delivery() throws Exception{
 		String url = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";
