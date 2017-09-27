@@ -49,7 +49,6 @@ $(function() {
 			if ($('#chy-count').text() != "4")
 				$('#chy-count').text(parseInt($('#chy-count').text()) + 1);
 		})
-	
 		$('#datepicker1').on("change",function(){
 			$('#chy-headerWeek').text($('#datepicker1').val());
 			$('#datepicker1').val("날짜선택");
