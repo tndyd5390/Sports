@@ -89,4 +89,55 @@ public class CustomerBasketController {
 		resultChar = null;
 		log.info(this.getClass() + ".customerAddBasekt end!!!");
 	}
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 옵션이 없는 제품을 장바구니에 담을때 사용할 컨트롤러
+	 */
+	@RequestMapping(value="customer/addBasketNoOption", method=RequestMethod.POST)
+	public void addBasketNoOption(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".customerAddBasketNoOption start!!!");
+		//전달 받은 파라이터 로그찍기
+		String prodNo = CmmUtil.nvl(req.getParameter("prod_no"));
+		log.info(this.getClass() + ".customerAddBasketNoOption prodNo : " + prodNo);
+		String prodQty = CmmUtil.nvl(req.getParameter("prod_qty"));
+		log.info(this.getClass() + ".customerAddBaksetNoOption prodQty : " + prodQty);
+		String bskPrice = CmmUtil.nvl(req.getParameter("bsk_price"));
+		log.info(this.getClass() + ".customerAddBasketNoOption bskPrice : " + bskPrice);
+		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info(this.getClass() + ".customerAddBasketNoOption userNo : " + userNo);
+		
+		//데이터베이스에 입력할 DTO 만들기
+		BasketDTO bDTO = new BasketDTO();
+		bDTO.setProd_no(prodNo);
+		bDTO.setProd_qty(prodQty);
+		bDTO.setBsk_price(bskPrice);
+		bDTO.setUser_no(userNo);
+		
+		//DB에 인서트 시키기
+		int result = 0;
+		result = basketService.insertCustomerAddBasketNoOption(bDTO);
+		
+		//
+		if(result != 0){
+			resp.getWriter().println("1");
+		}else{
+			resp.getWriter().println("0");
+		}
+		
+		log.info(this.getClass() + ".customerAddBasketNoOption end!!!");
+	}
+	
+	@RequestMapping(value="customer/customerBasket", method=RequestMethod.GET)
+	public String customerBasket(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".customerBasket start!!!");
+		
+		log.info(this.getClass() + ".customerbasekt end!!!");
+		return null;
+	}
 }

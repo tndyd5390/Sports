@@ -413,12 +413,12 @@ function doReg() {
 				<p><img src="/html5/common/images/menu/user.png" class="photo">로그인을 해주세요</p>
 				<button class="c-menu__close"><img src="/html5/common/images/menu/cancel.png" alt="닫기"></button>
 				<div class="login_wrap"><a href="/login.do">로그인</a><a href="/userReg.do">회원가입</a></div>
+			</div>
 			<%} else {%>
 				<p><img src="/html5/common/images/menu/user.png" class="photo"><%=ss_user_name %>님 안녕하세요.</p>
 				<button class="c-menu__close"><img src="/html5/common/images/menu/cancel.png" alt="닫기"></button>
 				<div class="logout_wrap"><a href="/logout.do">로그아웃</a></div>
 			<%} %>
-			</div>
 			<ul class="menu_list">
 				<li><a href="#">주문관리</a></li>
 				<li>
@@ -469,7 +469,7 @@ function doReg() {
 				<div class="wrap search-wrap btn-wrap">
 
 					<div class="search type hj-search">
-						<input type="text" placeholder="제목 입력" id="searchbox"
+						<input type="text" placeholder="글 제목을 입력해주세요." id="searchbox"
 							style="width: 100%" />
 					</div>
 
