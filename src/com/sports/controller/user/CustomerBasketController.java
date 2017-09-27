@@ -47,7 +47,7 @@ public class CustomerBasketController {
 	 */
 	@RequestMapping(value="customer/addBasket", method=RequestMethod.POST)
 	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam(value="opt_no[]") List<String> optNos,
-			@RequestParam(value="opt_name[]") List<String> optNames) throws Exception{
+			@RequestParam(value="opt_name[]") List<String> optNames, @RequestParam(value="opt_kind[]") List<String> optKinds) throws Exception{
 		log.info(this.getClass() + ".customerAddBasket start!!!");
 		//장바구니 insert에 필요한 여러가지 정보들을 파라미터와 세션에서 가져온다.
 		String prodNo = CmmUtil.nvl(req.getParameter("prod_no"));
@@ -71,7 +71,7 @@ public class CustomerBasketController {
 		//insert를 하고 결과에 따라 return해줄 문자열을 세팅한다.
 		int result = 0;
 		String resultChar;
-		result = basketService.insertCustomerAddBasket(bDTO, optNos, optNames, userNo);
+		result = basketService.insertCustomerAddBasket(bDTO, optNos, optNames, optKinds, userNo);
 		if(result != 0){
 			resultChar = "1";
 		}else{
