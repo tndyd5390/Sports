@@ -60,4 +60,39 @@
 			#{bsk_price}
 		)
 	</insert>
+	<select id="getCustomerBasketList" parameterType="string" resultType="BasketDTO">
+		SELECT 
+		    PI.PROD_NO,
+		    PI.PROD_NAME,
+		    BI.BSK_PRICE,
+		    BI.BSK_NO,
+		    BI.USER_NO,
+		    BI.PROD_QTY
+		FROM 
+		   PRODUCT_INFO PI, 
+		    BASKET_INFO BI
+		WHERE
+		   BI.USER_NO = #{userNo} AND BI.STATUS = 'Y' AND BI.PROD_NO = PI.PROD_NO;
+	</select>
+	<select id="getCustomerBasketOptionList" parameterType="string" resultType="Basket_OptionDTO">
+		SELECT
+		    BI.USER_NO,
+		    BO.OPT_NO,
+		    BO.OPT_NAME,
+		    BO.OPT_KIND,
+		    BI.STATUS
+		FROM
+		   BASKET_OPTION BO,
+		    BASKET_INFO BI
+		WHERE
+		   BI.USER_NO = #{userNo} AND BI.STATUS = 'Y' AND BO.BSK_NO = #{bskNo} AND BO.BSK_NO = BI.BSK_NO;
+	</select>
+	<update id="updateCustomerBasketDeleteOne" parameterType="string">
+		UPDATE 
+			BASKET_INFO
+		SET
+			STATUS = 'N'
+		WHERE
+			BSK_NO = #{bskNo}
+	</update>
 </mapper>

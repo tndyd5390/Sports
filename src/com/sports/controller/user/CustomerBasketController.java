@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sports.dto.BasketDTO;
 import com.sports.dto.Basket_OptionDTO;
@@ -134,14 +135,69 @@ public class CustomerBasketController {
 		log.info(this.getClass() + ".customerAddBasketNoOption end!!!");
 	}
 	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param session
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 * 장바구니 목록을 가져올 메소드
+	 */
 	@RequestMapping(value="customer/customerBasketList", method=RequestMethod.GET)
 	public String customerBasket(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + ".customerBasket start!!!");
+		
+		//장바구니 목록에는 사용자의 회원 번호만 필요하다
 		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		log.info(this.getClass() + ".customerBasket userNo : " + userNo);
 		
+		//장바구니 목록을 가져온다.
+		List<BasketDTO> bList = basketService.getCustomerBasketList(userNo);
+		if(bList == null){
+			bList = new ArrayList<BasketDTO>();
+		}
+		
+		//모델에 올린다.
+		model.addAttribute("bList", bList);
+		
+		//null처리 한다.
+		userNo = null;
+		bList =  null;
 		
 		log.info(this.getClass() + ".customerbasekt end!!!");
-		return null;
+		return "basket/userBasket";
+	}
+	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * 장바구니 리스트 화면에서 하나를 삭제버튼을 눌렀을때 사용할 메소드
+	 */
+	@RequestMapping(value="customer/customerBasketDeleteOne", method=RequestMethod.POST)
+	public @ResponseBody List<BasketDTO> customerBasketDeleteOne(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".customerBasketDeleteOne start!!!");
+		
+		//장바구니에서 삭제는 status컬럼을 N으로 업데이트 해야하기 때문에 bskNo를 하나 받는다.
+		String bskNo = CmmUtil.nvl(req.getParameter("bskNo"));
+		log.info(this.getClass() + ".customerBasketDeleteOne bskNo : " + bskNo);
+		
+		//사용자장바구니 리스트를 다시 불러와야 하기때문에 사용자의 번호도 하나 가져온다.
+		String userNo  = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info(this.getClass() + ".customerBasketDeleteOne userNo : " + userNo);
+		
+		List<BasketDTO> bList = basketService.updateCustomerBasketOne(bskNo, userNo);
+		if(bList == null){
+			bList = new ArrayList<>();
+		}
+		
+		log.info(this.getClass() + ".customerBasketDeleteOne end!!!");
+		return bList;
 	}
 }

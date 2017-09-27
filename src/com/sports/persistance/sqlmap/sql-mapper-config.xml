@@ -17,6 +17,7 @@
 		<typeAlias type="com.sports.dto.ProductFileDTO" alias="ProductFileDTO"/>
 		<typeAlias type="com.sports.dto.Prod_test_jcmDTO" alias="Prod_test_jcmDTO"/>
 		<typeAlias type="com.sports.dto.BasketDTO" alias="BasketDTO"/>
+		<typeAlias type="com.sports.dto.Basket_OptionDTO" alias="Basket_OptionDTO"/>
 		<typeAlias type="com.sports.dto.ProdOptionDTO" alias="ProdOptionDTO"/>
     </typeAliases>
 </configuration>
