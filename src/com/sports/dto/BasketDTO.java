@@ -1,7 +1,9 @@
 package com.sports.dto;
 
+import java.util.List;
+
 public class BasketDTO {
-	
+	private String bsk_no;
 	private String user_no;
 	private String prod_qty;
 	private String prod_no;
@@ -15,7 +17,23 @@ public class BasketDTO {
 	private String chg_user_no;
 	private String chg_dt;
 	private String bsk_price;
+	private String prod_name;
+	private String prod_price;
+	private String prod_contents;
+	private List<Basket_OptionDTO> bskOptList;
 	
+	public String getBsk_no() {
+		return bsk_no;
+	}
+	public void setBsk_no(String bsk_no) {
+		this.bsk_no = bsk_no;
+	}
+	public List<Basket_OptionDTO> getBskOptList() {
+		return bskOptList;
+	}
+	public void setBskOptList(List<Basket_OptionDTO> bskOptList) {
+		this.bskOptList = bskOptList;
+	}
 	public String getBsk_price() {
 		return bsk_price;
 	}
@@ -112,7 +130,5 @@ public class BasketDTO {
 	public void setProd_contents(String prod_contents) {
 		this.prod_contents = prod_contents;
 	}
-	private String prod_name;
-	private String prod_price;
-	private String prod_contents;
+
 }
