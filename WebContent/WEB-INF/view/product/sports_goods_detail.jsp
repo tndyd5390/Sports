@@ -63,6 +63,7 @@
 			var sel = document.getElementsByName('optSelect');
 			var selectedItemNoArray = [];
 			var selectedItemNameArray = [];
+			var selectedItemCodeArray = [];
 			for(var i = 0 ;i< sel.length; i++){
 				for(var j = 0; j < sel[i].options.length; j++){
 					if(sel[i].options[j].selected == true){
@@ -73,8 +74,10 @@
 						var optInfo = sel[i].options[j].value.split(";");
 						var optNo = optInfo[0];
 						var optName = optInfo[1];
+						var optKind = optInfo[2];
 						selectedItemNoArray.push(optNo);
 						selectedItemNameArray.push(optName);
+						selectedItemCodeArray.push(optKind);
 					}
 				}
 			}
@@ -85,6 +88,7 @@
 					'prod_qty' : document.getElementById('prod_qty').value,
 					'opt_no' : selectedItemNoArray,
 					'opt_name' : selectedItemNameArray,
+					'opt_kind' : selectedItemCodeArray,
 					'bsk_price' : unComma(price)
 				},
 				method : "post",
@@ -220,7 +224,7 @@
             	List<ProdOptionDTO> pList = pMap.get(key);
             	for(ProdOptionDTO p : pList){
             %>
-              		<option value="<%=p.getOpt_no() + ";" + p.getOpt_name() %>"><%=p.getOpt_name() %></option>
+              		<option value="<%=p.getOpt_no() + ";" + p.getOpt_name()  + ";" + key%>"><%=p.getOpt_name() %></option>
             <%
             	}
             %>
