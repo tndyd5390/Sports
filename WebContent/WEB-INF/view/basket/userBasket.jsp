@@ -1,5 +1,17 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@page import="com.sports.util.TextUtil"%>
+<%@page import="com.sports.dto.Basket_OptionDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.sports.dto.BasketDTO"%>
+<%@page import="java.util.List"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	List<BasketDTO> bList = (List<BasketDTO>)request.getAttribute("bList");
+	int totalProdPrice = 0;
+	if(bList == null){
+		bList = new ArrayList<BasketDTO>();
+	}
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -97,7 +109,56 @@ span.chy-plus2{
 }
 </style>
 <%@include file="/html5/include/head.jsp" %>
-
+<script type="text/javascript">
+	function addComma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+	function unComma(str) {
+	    str = String(str);
+	    return str.replace(/[^\d]+/g, '');
+	}
+	function customerBasketDeleteOne(bskNo){
+		var totalProdPrice = 0;
+		$.ajax({
+			url : "customerBasketDeleteOne.do",
+			data : {
+				'bskNo' : bskNo
+			},
+			method : "post",
+			success : function(data){
+				console.log(data);
+				var contents = "";
+				$.each(data, function(key, value){
+					totalProdPrice += parseInt(value.bsk_price);
+					contents += "<li class='notice psyNotice'>";
+					contents += "<p class='title chy-title'>" + value.prod_name + "</p>"; 
+					var optionString = "옵션 : ";
+					if(value.bskOptList.length > 0){
+						if(value.bskOptList.length == 1){
+							optionString = value.bskOptList[0].opt_kind + "&nbsp;&nbsp;" + value.bskOptList[0].opt_name;
+						}else{
+							optionString = value.bskOptList[0].opt_kind + "&nbsp;&nbsp;" + value.bskOptList[0].opt_name;
+							for(var i = 1; i< value.bskOptList.length; i++){
+								optionString = optionString + "&nbsp;,&nbsp;" + value.bskOptList[i].opt_kind + "&nbsp;&nbsp;" + value.bskOptList[i].opt_name; 
+							}
+						}
+					}
+					contents += "<p class='sub_text'>" + optionString + "<span class='chy-price'>" + value.bsk_price + "</span></p>";
+					contents += "<a class='btn btn-default chy-btn' style='display: inline;' onclick='customerBasketDeleteOne(" + value.bsk_no + ");'>삭제</a>";
+					contents += "<p class='chy-count'>수량 : " + value.prod_qty;
+					contents += "</div>";
+					contents += "</li>";
+					contents += "<li class='chy-bottom'>";
+					contents += "<p class='chy-totalPrice'>총 상품가격<span class='chy-totalPrice2'>" + addComma(totalProdPrice) + "원</span></p>";
+					contents += "<p class='chy-totalPrice'>총 배송비<span class='chy-totalPrice2'><span class='glyphicon-plus chy-plus2'></span>3,000원</span></p>";
+					contents += "<p class='chy-payPrice'>총 결제 예상금액 <span class='chy-payPrice2'>" + addComma(totalProdPrice + 3000) + "원</span></p>";
+					contents += "</li>";
+				})
+				$('#forAjax').html(contents);
+			}
+		})
+	}
+</script>
 </head>
 <body>
   <section id="wrapper" class="wrapper">
@@ -121,53 +182,39 @@ span.chy-plus2{
     <div class="container detail">
       <div class="wrap chy-wrap2 search-wrap btn-wrap">
         <div class="list_wrap chy-wrap">
-          <ul class="list-groub">
-          	<li class="chy-head">
-          		<input type="checkbox" class="checkbox">
-          		<div class="chy-margin">
-          		<a class="btn btn-primary chy-btn" style="display:inline;">선택 삭제</a>
-          		</div>
-          	</li>
+          <ul class="list-groub" id="forAjax">
+          	<%
+          	for(BasketDTO bDTO : bList){
+          		String optionString = "";
+          		totalProdPrice += Integer.parseInt(bDTO.getBsk_price());
+          	%>
             <li class="notice psyNotice">
-              	<input type="checkbox" class="checkbox">
               	<div class="chy-margin">
-                	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
-                	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
-            		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 
+                	<p class="title chy-title"><%=bDTO.getProd_name() %></p>
+                	<%
+                	if(bDTO.getBskOptList().size() > 0){
+                		optionString += "옵션 : ";
+                		if(bDTO.getBskOptList().size() ==1){
+		                	optionString += bDTO.getBskOptList().get(0).getOpt_kind() + "&nbsp;&nbsp;" + bDTO.getBskOptList().get(0).getOpt_name();
+                		}else{
+                			List<Basket_OptionDTO> boList = bDTO.getBskOptList();
+                			optionString += boList.get(0).getOpt_kind() + "&nbsp;&nbsp;" + boList.get(0).getOpt_name();
+                			for(int i = 1 ; i< boList.size() ; i++){
+                				optionString = optionString + "&nbsp;,&nbsp;" + boList.get(i).getOpt_kind() + "&nbsp;&nbsp;" + boList.get(i).getOpt_name();
+                			}
+                		}
+                	}
+                	%>
+                	<p class="sub_text"><%=optionString %><span class="chy-price"><%=bDTO.getBsk_price() %></span></p>
+            		<a class="btn btn-default chy-btn" style="display: inline;" onclick="customerBasketDeleteOne(<%=bDTO.getBsk_no()%>);">삭제</a>
+            		<p class="chy-count">수량 : <%=bDTO.getProd_qty() %> 
             	</div>	
             </li>
-            <li class="notice psyNotice">
-              	<input type="checkbox" class="checkbox">
-              	<div class="chy-margin">
-                	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
-                	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
-            		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 
-            	</div>	
-            </li>
-            <li class="notice psyNotice">
-              	<input type="checkbox" class="checkbox">
-              	<div class="chy-margin">
-                	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
-                	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
-            		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 
-            	</div>	
-            </li>
-            <li class="notice psyNotice">
-              	<input type="checkbox" class="checkbox">
-              	<div class="chy-margin">
-                	<p class="title chy-title">태권도띠 도복띠/합기도띠/무술띠</p>
-                	<p class="sub_text">옵션 : 색상 빨강 / 사이즈 M<span class="chy-price">3,500원</span></p>
-            		<a class="btn btn-default chy-btn" style="display: inline;">삭제</a>
-            		<p class="chy-count">수량 : 3 
-            	</div>	
-            </li>
+            <%} %>
             <li class="chy-bottom">
-            	<p class="chy-totalPrice">총 상품가격<span class="chy-totalPrice2">12,000원</span></p>
+            	<p class="chy-totalPrice">총 상품가격<span class="chy-totalPrice2"><%=TextUtil.addComma(totalProdPrice) %>원</span></p>
             	<p class="chy-totalPrice">총 배송비<span class="chy-totalPrice2"><span class="glyphicon-plus chy-plus2"></span>3,000원</span></p>
-            	<p class="chy-payPrice">총 결제 예상금액 <span class="chy-payPrice2">15,000원</span></p>
+            	<p class="chy-payPrice">총 결제 예상금액 <span class="chy-payPrice2"><%=TextUtil.addComma(totalProdPrice + 3000) %>원</span></p>
             </li>
           </ul>
         </div>
