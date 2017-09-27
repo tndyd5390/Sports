@@ -15,9 +15,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sports.dto.DeliveryDTO;
-
 
 @Controller
 public class DeliveryController {
@@ -73,7 +70,7 @@ public class DeliveryController {
 		return "delivery/deliverytracking";
 	}
 	
-	@RequestMapping(value="accountmanagement")
+	@RequestMapping(value="change")
 	public String accountmanagement() throws Exception{
 		log.info(this.getClass() + "deliverytracking Start!!");
 		
