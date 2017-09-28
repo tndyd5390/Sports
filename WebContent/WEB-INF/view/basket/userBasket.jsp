@@ -47,11 +47,12 @@ a.chy-btn{
 	width: 70px;
 	font-size: 11px;
 	border-radius: 0px;
+	float: right;
 }
 
 p.chy-count{
 	float:right;
-	display:inline;
+	display:grid;
 	clear:right;
 }
 
@@ -110,13 +111,39 @@ span.chy-plus2{
 </style>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript">
+	function doSettlement(){
+		var totalProdPrice = $('#totalProdPrice').text();
+		totalProdPrice = unComma(totalProdPrice.slice(0, -1));
+
+		var params = {
+			'userNo' : '<%=(String)session.getAttribute("ss_user_no")%>',
+			'totalProdPrice' : totalProdPrice
+		};
+
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "customerOrderView.do");
+		
+		for(var key in params){
+			var hiddenField = document.createElement("input");
+			hiddenField.setAttribute("type", "hidden");
+			hiddenField.setAttribute("name", key);
+			hiddenField.setAttribute("value", params[key]);
+			form.appendChild(hiddenField);
+		}
+		document.body.appendChild(form);
+		form.submit();
+	}
+	
 	function addComma(x) {
 		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 	}
+	
 	function unComma(str) {
 	    str = String(str);
 	    return str.replace(/[^\d]+/g, '');
 	}
+	
 	function customerBasketDeleteOne(bskNo){
 		var totalProdPrice = 0;
 		$.ajax({
@@ -144,16 +171,16 @@ span.chy-plus2{
 						}
 					}
 					contents += "<p class='sub_text'>" + optionString + "<span class='chy-price'>" + value.bsk_price + "</span></p>";
-					contents += "<a class='btn btn-default chy-btn' style='display: inline;' onclick='customerBasketDeleteOne(" + value.bsk_no + ");'>삭제</a>";
 					contents += "<p class='chy-count'>수량 : " + value.prod_qty;
+					contents += "<a class='btn btn-default chy-btn' style='display: inline;' onclick='customerBasketDeleteOne(" + value.bsk_no + ");'>삭제</a>";
 					contents += "</div>";
 					contents += "</li>";
-					contents += "<li class='chy-bottom'>";
-					contents += "<p class='chy-totalPrice'>총 상품가격<span class='chy-totalPrice2'>" + addComma(totalProdPrice) + "원</span></p>";
-					contents += "<p class='chy-totalPrice'>총 배송비<span class='chy-totalPrice2'><span class='glyphicon-plus chy-plus2'></span>3,000원</span></p>";
-					contents += "<p class='chy-payPrice'>총 결제 예상금액 <span class='chy-payPrice2'>" + addComma(totalProdPrice + 3000) + "원</span></p>";
-					contents += "</li>";
 				})
+				contents += "<li class='chy-bottom'>";
+				contents += "<p class='chy-totalPrice'>총 상품가격<span class='chy-totalPrice2'>" + addComma(totalProdPrice) + "원</span></p>";
+				contents += "<p class='chy-totalPrice'>총 배송비<span class='chy-totalPrice2'><span class='glyphicon-plus chy-plus2'></span>3,000원</span></p>";
+				contents += "<p class='chy-payPrice'>총 결제 예상금액 <span class='chy-payPrice2' id='totalProdPrice'>" + addComma(totalProdPrice + 3000) + "원</span></p>";
+				contents += "</li>";
 				$('#forAjax').html(contents);
 			}
 		})
@@ -206,20 +233,22 @@ span.chy-plus2{
                 	}
                 	%>
                 	<p class="sub_text"><%=optionString %><span class="chy-price"><%=bDTO.getBsk_price() %></span></p>
-            		<a class="btn btn-default chy-btn" style="display: inline;" onclick="customerBasketDeleteOne(<%=bDTO.getBsk_no()%>);">삭제</a>
             		<p class="chy-count">수량 : <%=bDTO.getProd_qty() %> 
+            		<a class="btn btn-default chy-btn" style="display: inline;" onclick="customerBasketDeleteOne(<%=bDTO.getBsk_no()%>);">삭제</a>
             	</div>	
             </li>
             <%} %>
             <li class="chy-bottom">
             	<p class="chy-totalPrice">총 상품가격<span class="chy-totalPrice2"><%=TextUtil.addComma(totalProdPrice) %>원</span></p>
             	<p class="chy-totalPrice">총 배송비<span class="chy-totalPrice2"><span class="glyphicon-plus chy-plus2"></span>3,000원</span></p>
-            	<p class="chy-payPrice">총 결제 예상금액 <span class="chy-payPrice2"><%=TextUtil.addComma(totalProdPrice + 3000) %>원</span></p>
+            	<p class="chy-payPrice">총 결제 예상금액 <span class="chy-payPrice2" id="totalProdPrice"><%=TextUtil.addComma(totalProdPrice + 3000) %>원</span></p>
             </li>
           </ul>
         </div>
         <div class="btn-groub">
-          <button class="blue-btn button" style="width:100%">구매하기</button>
+        <%if(bList.size() != 0){ %>
+          <button class="blue-btn button" style="width:100%" onclick="doSettlement();">구매하기</button>
+        <%} %>
         </div>
       </div>
     </div>

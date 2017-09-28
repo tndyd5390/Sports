@@ -82,7 +82,7 @@
 				}
 			}
 			$.ajax({
-				url : "customer/addBasket.do",
+				url : "customerAddBasket.do",
 				data : {
 					'prod_no' : prod_no,
 					'prod_qty' : document.getElementById('prod_qty').value,
@@ -129,7 +129,7 @@
 			location.href="login.do";
 		}else{
 			$.ajax({
-				url : "customer/addBasketNoOption.do",
+				url : "customerAddBasketNoOption.do",
 				data : {
 					'prod_no' : prod_no,
 					'prod_qty' : document.getElementById('prod_qty').value,
