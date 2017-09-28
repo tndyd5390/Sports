@@ -29,24 +29,20 @@ public class CustomerBasketController {
 	
 	@Resource(name="BasketService")
 	private IBasketService basketService;
-	
-	@RequestMapping(value="customer/userBasket", method=RequestMethod.GET)
-	public String customerBasketList(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
-		log.info(this.getClass() + ".customerBasketList start!!!");
-		log.info(this.getClass() + ".customerBassketList end!!!");
-		return "basket/userBasket";
-	}
-	
+
 	/**
-	 * 
 	 * @param req
 	 * @param resp
 	 * @param model
 	 * @param session
 	 * @throws Exception
-	 * 장바구니 추가 로직을 만들거다 제품 번호와 갯수, 가격, 옵션 번호는 파라미터로 받고 회원 번호는  session에서 가져와서 장바구니에 넣어보자
+	 * ###################################################################################################
+	 * # 
+	 * # 장바구니 추가 로직을 만들거다 제품 번호와 갯수, 가격, 옵션 번호는 파라미터로 받고 회원 번호는  session에서 가져와서 장바구니에 넣어보자
+	 * #
+	 * ###################################################################################################
 	 */
-	@RequestMapping(value="customer/addBasket", method=RequestMethod.POST)
+	@RequestMapping(value="customerAddBasket", method=RequestMethod.POST)
 	public void customerAddBasket(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session, @RequestParam(value="opt_no[]") List<String> optNos,
 			@RequestParam(value="opt_name[]") List<String> optNames, @RequestParam(value="opt_kind[]") List<String> optKinds) throws Exception{
 		log.info(this.getClass() + ".customerAddBasket start!!!");
@@ -99,9 +95,13 @@ public class CustomerBasketController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 옵션이 없는 제품을 장바구니에 담을때 사용할 컨트롤러
+	 * ###################################################################################################
+	 * # 
+	 * # 옵션이 없는 제품을 장바구니에 담을때 사용할 컨트롤러
+	 * #
+	 * ###################################################################################################
 	 */
-	@RequestMapping(value="customer/addBasketNoOption", method=RequestMethod.POST)
+	@RequestMapping(value="customerAddBasketNoOption", method=RequestMethod.POST)
 	public void addBasketNoOption(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customerAddBasketNoOption start!!!");
 		//전달 받은 파라이터 로그찍기
@@ -131,7 +131,12 @@ public class CustomerBasketController {
 		}else{
 			resp.getWriter().println("0");
 		}
-		
+		//null 처리
+		prodNo = null;
+		prodQty = null;
+		bskPrice = null;
+		userNo = null;
+		bDTO =null;
 		log.info(this.getClass() + ".customerAddBasketNoOption end!!!");
 	}
 	
@@ -143,9 +148,13 @@ public class CustomerBasketController {
 	 * @param model
 	 * @return
 	 * @throws Exception
-	 * 장바구니 목록을 가져올 메소드
+	 * ###################################################################################################
+	 * # 
+	 * # 장바구니 목록을 가져올 메소드
+	 * #
+	 * ###################################################################################################
 	 */
-	@RequestMapping(value="customer/customerBasketList", method=RequestMethod.GET)
+	@RequestMapping(value="customerBasketList", method=RequestMethod.GET)
 	public String customerBasket(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + ".customerBasket start!!!");
 		
@@ -178,9 +187,13 @@ public class CustomerBasketController {
 	 * @param session
 	 * @return
 	 * @throws Exception
-	 * 장바구니 리스트 화면에서 하나를 삭제버튼을 눌렀을때 사용할 메소드
+	 * ###################################################################################################
+	 * # 
+	 * # 장바구니 리스트 화면에서 하나를 삭제버튼을 눌렀을때 사용할 메소드
+	 * #
+	 * ###################################################################################################
 	 */
-	@RequestMapping(value="customer/customerBasketDeleteOne", method=RequestMethod.POST)
+	@RequestMapping(value="customerBasketDeleteOne", method=RequestMethod.POST)
 	public @ResponseBody List<BasketDTO> customerBasketDeleteOne(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".customerBasketDeleteOne start!!!");
 		
@@ -196,8 +209,67 @@ public class CustomerBasketController {
 		if(bList == null){
 			bList = new ArrayList<>();
 		}
-		
+		bskNo = null;
+		userNo = null;
 		log.info(this.getClass() + ".customerBasketDeleteOne end!!!");
 		return bList;
+	}
+	
+	/**
+	 * 
+	 * @param req
+	 * @param resp
+	 * @param model
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * ###################################################################################################
+	 * # 
+	 * # 장바구니 리스트에서 주문 화면으로 이동할 메소드 사용자 번호를 가져오고 장바구니의 최종 결제 번호를 가져오고
+	 * # 사용자 번호로 DB에 장바구니를 불러와서 최종 결제 금액을 비교후 일치하면 결제 진행 일치 하지 않으면 결제 불가
+	 * #
+	 * ###################################################################################################
+	 */
+	@RequestMapping(value="customerOrderView", method=RequestMethod.POST)
+	public String customerOrderView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		log.info(this.getClass() + ".customerOrderView start!!!");
+		
+		//장바구니 목록의 금액을 다 더할 변수
+		int totalProdPrice = 0;
+		String returnURL = "";
+		//파라미터 가져오기
+		String userNo = CmmUtil.nvl(req.getParameter("userNo"));
+		log.info(this.getClass() + ".custoemrOrderView userNo : " + userNo);
+		int totalProdPriceFromView = Integer.parseInt(CmmUtil.nvl(req.getParameter("totalProdPrice")));
+		log.info(this.getClass() + ".customerOrderView totalProdPriceFromView : " + totalProdPriceFromView);
+		
+		//장바구니 목록을 가져온다
+		List<BasketDTO> bList = basketService.getCustomerBasketList(userNo);
+		if(bList == null){
+			bList = new ArrayList<BasketDTO>();
+		}
+		
+		//장바구니 목록의 금액을 다 더한다.
+		for(BasketDTO bDTO : bList){
+			totalProdPrice += Integer.parseInt(CmmUtil.nvl(bDTO.getBsk_price()));
+		}
+		log.info(this.getClass() + ".customerOrderView totalProdPrice : " + totalProdPrice);
+		
+		if((totalProdPrice + 3000) != totalProdPriceFromView){//만약 최종 결제금액이 같지 않다면(3000원은 배송비)결제를 진행 하면 안된다.
+			model.addAttribute("msg", "시스템에 에러가 발생했습니다. 다시 시도해 주세요.");
+			model.addAttribute("url", "customerBasketList.do");
+			returnURL = "alert/alert";
+		}else{//최종 결제 금액이 같다면 그대로 결제 진행!!~~
+			model.addAttribute("bList", bList);
+			model.addAttribute("totalProdPriceFromView", totalProdPriceFromView);
+			returnURL = "customer/orderView";
+		}
+		
+		//null 처리ㅣ
+		userNo = null;
+		bList = null;
+		
+		log.info(this.getClass() + ".customerOrderView end!!!");
+		return returnURL;
 	}
 }
