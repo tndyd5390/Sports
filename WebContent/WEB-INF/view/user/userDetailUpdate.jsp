@@ -5,14 +5,21 @@
 <%@ page import="com.sports.dto.UserDTO" %>
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+	String auth = (String) session.getAttribute("ss_user_auth");
 %>
 <html lang="ko">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/html5/include/head.jsp"%>
 <script>
-	function doCancle() {
-		location.href = 'userList.do';
+	function doCancle(){
+		var auth = '<%=auth%>';
+		console.log(auth);
+		if(auth=='A'){
+			location.href = "userList.do";
+		}else{
+			location.href = "main.do";
+		}
 	}
 
 	function doUpdate() {

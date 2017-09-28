@@ -5,15 +5,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/html5/common/css/analysis.css" type="text/css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <title>유저 장바구니 분석</title>
 <%@include file="/html5/include/head.jsp"%>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	  $( "#datepicker1" ).datepicker({
+	  $("#datepicker1").datepicker({
 	    dateFormat: 'yy-mm-dd',
 	    prevText: '이전 달',
 	    nextText: '다음 달',
@@ -51,9 +54,39 @@ $(function() {
 		})
 		$('#datepicker1').on("change",function(){
 			$('#chy-headerWeek').text($('#datepicker1').val());
+			basketDay();
 			$('#datepicker1').val("날짜선택");
 		})
 	});
+	
+	
+	function basketDay(){
+		var date = $('#datepicker1').val();
+		$.ajax({
+			url : 'basketDay.do',
+			method : 'post',
+			data : {'date' : date},
+			success : function(rs){
+				var dt = "";
+				var arr = new Array();
+				$.each(rs, function(key, value){
+					dt = {'x' : value.prod_name, 'y' : value.sum};
+					arr.push(dt);
+				});
+				console.log(arr);
+				Morris.Bar({
+					element : 'chart',
+					data : arr,
+					xkey : 'x',
+					ykey : 'y',
+					label : '상품명',
+					hideHover : 'auto',
+					resize : true
+				});
+			}
+		})
+	}
+	
 </script>
 </head>
 <body>
@@ -98,9 +131,9 @@ $(function() {
 					aria-labelledby="home-tab">
 					<h2 class="chy-chartHeader" style="margin-top:30px;">
 						<span class="chy-headerWeek" id="chy-headerWeek"></span>
-						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="날짜선택">
+						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="DATE">
 					</h2>
-					<div class="chy-chartBody">
+					<div class="chy-chartBody" id="chart">
 						<!-- 여기에 차트 -->
 					</div>
 					<!--  테이블시작 -->

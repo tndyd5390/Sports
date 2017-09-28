@@ -11,7 +11,7 @@ function userList(){
 		success : function(data){
 			$.each(data, function(key, value){
 				contents += "<ul class='col-5'>";
-				contents += "<li><p><input type='checkbox' class='chkbox'></p></li>";
+				contents += "<li><p><input type='checkbox' class='chkbox' id='chk_item'></p></li>";
 				contents += "<li><p>"+value.user_no+"</p></li>";
 				contents += "<li><p><a href='userDetail.do?uNo="+value.user_no+"'>"+value.user_id+"</a></p></li>";
 				contents += "<li><p>"+value.user_name+"</p></li>";

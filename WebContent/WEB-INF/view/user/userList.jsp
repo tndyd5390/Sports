@@ -13,7 +13,18 @@ var readMore = 10;
 
 $(function(){
 	userList();
+	allCheck();
 })
+function allCheck(){
+	$('#allChk').on('click', function(){
+		var status = $(this).is(":checked");
+		if(status==true){
+			$('.chkbox').attr('checked', true);
+		}else{
+			$('.chkbox').attr("checked", false);
+		}
+	});
+}
 
 </script>
 </head>
@@ -49,7 +60,7 @@ $(function(){
 							<ul class="theader">
 								<li>
 									<p>
-										<input type="checkbox" class="chkbox">
+										<input type="checkbox" class="chkbox" id="allChk">
 									</p>
 								</li>
 								<li><p>번호</p></li>

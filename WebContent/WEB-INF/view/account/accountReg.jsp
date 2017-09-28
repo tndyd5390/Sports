@@ -12,8 +12,9 @@
 	function doJoin() {
 		var aca_name = $('#aca_name');
 		var aca_ceo = $('#aca_ceo');
-		var aca_area1 = $('#aca_area1');
+		var aca_area1 = $('#aca_area1')
 		var aca_area2 = $('#aca_area2');
+		var aca_area3 = $('#aca_area3');
 		var aca_event1 = $('#aca_event1');
 		var tel = $('#tel');
 		var aca_comment = $('#aca_comment');
@@ -81,7 +82,7 @@
 							<li>
 								<p class="blue_text">우편번호</p>
 								<div class="input_btn_wrap">
-									<input type="text" id="postcode" name="postcode"
+									<input type="text" id="aca_area1" name="aca_area1"
 										onclick="daumPostcode()">
 									<input type="button" class="line-btn" onclick="daumPostcode()" value="주소찾기">
 									<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
@@ -114,12 +115,12 @@
 																		: '');
 															}
 															document
-																	.getElementById('postcode').value = data.zonecode;
+																	.getElementById('aca_area1').value = data.zonecode;
 															document
-																	.getElementById('aca_area1').value = fullAddr;
+																	.getElementById('aca_area2').value = fullAddr;
 															document
 																	.getElementById(
-																			'aca_area2')
+																			'aca_area3')
 																	.focus();
 														}
 													}).open();
@@ -128,12 +129,12 @@
 								</div>
 							</li>
 							<li>
-								<p class="blue_text">주소</p> <input type="text" id="aca_area1"
-								name="aca_area1" onclick="daumPostcode()">
+								<p class="blue_text">주소</p> <input type="text" id="aca_area2"
+								name="aca_area2" onclick="daumPostcode()">
 							</li>
 							<li>
 								<p class="blue_text">상세주소</p>
-								<input type="text" id="aca_area2" name="aca_area2">
+								<input type="text" id="aca_area3" name="aca_area3">
 							</li>
 							<li>
 								<p class="blue_text">업종</p>
