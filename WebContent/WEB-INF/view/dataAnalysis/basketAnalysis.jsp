@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -9,11 +8,10 @@
 <title>유저 장바구니 분석</title>
 <%@include file="/html5/include/head.jsp"%>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
 $(function() {
 	  $("#datepicker1").datepicker({
@@ -30,6 +28,7 @@ $(function() {
 	    changeYear: true,
 	    yearSuffix: '년'
 	  });
+	  
 		$('#chy-monthsLeft').click(function() {
 			if ($('#chy-month').text() != "1")
 				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
@@ -55,34 +54,56 @@ $(function() {
 		$('#datepicker1').on("change",function(){
 			$('#chy-headerWeek').text($('#datepicker1').val());
 			basketDay();
-			$('#datepicker1').val("날짜선택");
+		//	$('#datepicker1').val("날짜선택");
 		})
 	});
-	
-	
 	function basketDay(){
+		$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
 		var date = $('#datepicker1').val();
+		var ctx = $('#myChart').get(0).getContext('2d');
 		$.ajax({
 			url : 'basketDay.do',
 			method : 'post',
 			data : {'date' : date},
 			success : function(rs){
 				var dt = "";
+				var d1 = "";
 				var arr = new Array();
+				var arr1 = new Array();
 				$.each(rs, function(key, value){
-					dt = {'x' : value.prod_name, 'y' : value.sum};
+					dt = value.prod_name;
+					dt1 = value.sum;
 					arr.push(dt);
+					arr1.push(dt1);
 				});
-				console.log(arr);
-				Morris.Bar({
-					element : 'chart',
-					data : arr,
-					xkey : 'x',
-					ykey : 'y',
-					label : '상품명',
-					hideHover : 'auto',
-					resize : true
-				});
+				if(rs.length!=0){
+					var myChart = new Chart(ctx, {
+					    type: 'bar',
+					    data: {
+					        labels: arr,
+					        datasets: [{
+					            label: '갯수',
+					            data: arr1,
+					            backgroundColor: 'rgb(23, 119, 203)',
+					            borderColor: 'rgb(23, 119, 203)',
+					            borderWidth : 1
+					        }]
+					    },
+					    options: {
+	                        responsive: true,
+					    	maintainAspectRatio: false,
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero:true
+					                }
+					            }]
+					        }
+					    }
+					});
+				}else{
+					$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
+				}
 			}
 		})
 	}
@@ -133,7 +154,8 @@ $(function() {
 						<span class="chy-headerWeek" id="chy-headerWeek"></span>
 						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="DATE">
 					</h2>
-					<div class="chy-chartBody" id="chart">
+					<div class="chy-chartBody">
+						<canvas id="myChart"></canvas>
 						<!-- 여기에 차트 -->
 					</div>
 					<!--  테이블시작 -->
@@ -211,7 +233,9 @@ $(function() {
 						<a href="#" id="chy-countLeft">&#60;</a><span class="chy-year"><span
 							id="chy-count">1</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
 					</h2>
-					<div class="chy-chartBody"><!-- 차트넣으면됨 --></div>
+					<div class="chy-chartBody"><!-- 차트넣으면됨 -->
+						<canvas id="myChart" width="400" height="400"></canvas>
+					</div>
 						<!--  테이블 시작 -->
 						<div class="chy-Table">
 						<div class="chy-TableHead">
