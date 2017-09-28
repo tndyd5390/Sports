@@ -49,7 +49,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="#">스포츠 용품 리스트</a>
+				<a href="productList.do">스포츠 용품 리스트</a>
 				<ul class="col-2 more">
 					<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
 					<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
@@ -108,7 +108,7 @@
 			</ul>
 		</li>
 		<li>
-			<a href="#">스포츠 용품 리스트 관리</a>
+			<a href="productList.do">스포츠 용품 리스트 관리</a>
 			<ul class="col-2 more">
 				<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
 				<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>

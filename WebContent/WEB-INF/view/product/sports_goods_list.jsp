@@ -17,8 +17,6 @@
 		prodList();
 		
 	});
-	
-	
 </script>
 <script src="html5/common/js/productList.js"></script>
 </head>
@@ -85,10 +83,12 @@
           	<div class="more-type" id="moremore">
 				<a href="#" class="moremore" onclick="prodMore(); return false;">더보기</a>
 			</div>
+			<%if(ss_user_auth.equals("A")){ %>
 			<div class="col-2-group">
 				<a href="#" onclick="prodReg(); return false;">등록</a>
 				<a href="#" >삭제</a>
 			</div>
+			<%} %>
           </div>
         </div>
         </div>

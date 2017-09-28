@@ -15,6 +15,7 @@
 			url : 'productAll.do',
 			method : 'post',
 			success : function(data){
+				console.log(data);
 				$.each(data, function(key, value){
 					contents += "<li>";
 					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
