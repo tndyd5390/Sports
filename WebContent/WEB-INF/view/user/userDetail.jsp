@@ -5,6 +5,7 @@
 <%@ page import="com.sports.util.TextUtil"%>
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
+	String auth = CmmUtil.nvl((String) session.getAttribute("ss_user_auth"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -15,7 +16,13 @@
 		location.href = "userDetailUpdate.do?uNo="+uNo;
 	}
 	function goBack(){
-		location.href = "userList.do";
+		var auth = '<%=auth%>';
+		console.log(auth);
+		if(auth=='A'){
+			location.href = "userList.do";
+		}else{
+			location.href = "main.do";
+		}
 	}
 	function doDelete(uNo){
 		if(confirm("해당 유저를 삭제 하시겠습니까?")){
@@ -25,9 +32,7 @@
 		}else{
 			return false;
 		}
-		
 	}
-	
 </script>
 </head>
 <body>
@@ -121,16 +126,16 @@
 						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
 					<input type="button" class="col-3 blue-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="탈퇴"
-						onclick="return doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
+						value="탈퇴" onclick="return doDelete(<%=CmmUtil.nvl(uDTO.getUser_no())%>)">
+					<%if(ss_user_auth.equals("A")){ %>
 					<input type="button" class="col-3 glay-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 						value="목록" onclick="goBack()">
+					<%} %>
 				</div>
 			</div>
 		</div>
 		<%@include file="/html5/include/footer.jsp"%>
 	</section>
 </body>
-
 </html>
