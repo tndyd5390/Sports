@@ -96,10 +96,10 @@ if(aList == null){
                     %>
                     <li>
                     	<ul>
-                    		<li><%=CmmUtil.nvl(aDTO.getAca_name()) %></li>
+                    		<li><a href="accountDetail.jsp?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>"><%=CmmUtil.nvl(aDTO.getAca_name()) %></a></li>
                     		<li><%=CmmUtil.nvl(aDTO.getAca_ceo()) %></li>
                     		<li><%=CmmUtil.nvl(aDTO.getTel()) %></li>
-                    		<li><%=CmmUtil.nvl(aDTO.getAca_area1()) %></li>
+                    		<li><%=CmmUtil.nvl(aDTO.getAca_area2()) %></li>
                     	</ul>
                     </li>
                     <%} %>
@@ -109,9 +109,9 @@ if(aList == null){
         </div>
     <button class="add_btn" id="addview">더보기</button>
     </div>
-			<div class="col-2-group">
-				<a href="#" onclick="prodReg(); return false;">등록</a>
-			</div>
+	<div align="center">
+		<a href="accountReg.do"><button class="btn btn-primary width100">등록</button></a>
+	</div>
     </div>
     
     </section>

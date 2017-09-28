@@ -43,7 +43,7 @@
 				#{prod_price},
 				#{prod_contents},
 				#{category_no},
-				#{reg_user_no},
+				'5',
 				NOW()
 			)<selectKey resultType="String" keyProperty="prod_no" order="AFTER">
 				SELECT LAST_INSERT_ID()
@@ -64,7 +64,7 @@
 				#{org_filename},
 				#{src_filename},
 				'M',
-				#{reg_user_no},
+				'5',
 				NOW()
 			)
 	</insert>
@@ -82,7 +82,7 @@
 				#{org_filename},
 				#{src_filename},
 				'D',
-				#{reg_user_no},
+				'5',
 				NOW()
 			)
 	</insert>
@@ -90,7 +90,7 @@
 	<insert id="insertProductOption" parameterType="ProductInfoDTO">
 		INSERT INTO PROD_OPTION (PROD_NO, OPT_NAME, OPT_KIND, OPT_PRICE, REG_USER_NO, REG_DT) VALUES
 		<foreach collection="list" item='item' separator=" , ">
-			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, #{item.opt_price}, #{reg_user_no}, NOW())
+			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, #{item.opt_price}, '5', NOW())
 		</foreach>
 	</insert>
 	
@@ -139,9 +139,7 @@
 	
 	<update id="updateProduct" parameterType="ProductInfoDTO">
 		UPDATE PRODUCT_INFO SET 
-		PROD_NAME = #{prod_name}, PROD_PRICE = #{prod_price},
-		PROD_CONTENTS = #{prod_contents}, CATEGORY_NO = #{category_no},
-		CHG_USER_NO = #{chg_user_no}, CHG_DT = NOW()
+		PROD_NAME = #{prod_name}, PROD_PRICE = #{prod_price}, PROD_CONTENTS = #{prod_contents}, CATEGORY_NO = #{category_no}
 		WHERE PROD_NO = #{prod_no}
 	</update>
 	

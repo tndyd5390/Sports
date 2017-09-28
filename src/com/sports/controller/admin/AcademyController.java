@@ -51,6 +51,7 @@ public class AcademyController {
 		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
 		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
 		String aca_area2 = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area3 = CmmUtil.nvl(req.getParameter("aca_area3"));
 		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
 		String tel = CmmUtil.nvl(req.getParameter("tel"));
 		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
@@ -59,6 +60,7 @@ public class AcademyController {
 		log.info("aca_ceo : " + aca_ceo);
 		log.info("aca_area1 : " + aca_area1);
 		log.info("aca_area2 : " + aca_area2);
+		log.info("aca_area3 : " + aca_area3);
 		log.info("aca_event1 : " + aca_event1);
 		log.info("tel : " + tel);
 		log.info("aca_comment : " + aca_comment);
@@ -69,6 +71,7 @@ public class AcademyController {
 		aDTO.setAca_ceo(aca_ceo);
 		aDTO.setAca_area1(aca_area1);
 		aDTO.setAca_area2(aca_area2);
+		aDTO.setAca_area3(aca_area3);
 		aDTO.setAca_event1(aca_event1);
 		aDTO.setTel(tel);
 		aDTO.setAca_comment(aca_comment);
@@ -86,5 +89,13 @@ public class AcademyController {
 		
 		log.info(this.getClass() + "accountRegProc End!!");
 		return "alert/alert";
+	}
+	
+	@RequestMapping(value="accountDetail")
+	public String accountDetail(HttpSession session) throws Exception{
+		log.info(this.getClass() + "accountDetail Start!!");
+		
+		log.info(this.getClass() + "accountDetail End!!");
+		return "account/accountDetail";
 	}
 }
