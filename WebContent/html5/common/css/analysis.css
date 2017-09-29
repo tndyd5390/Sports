@@ -40,6 +40,9 @@ div.chy-bottom {
 	div.chy-TableBody{
 		font-size: 12px;
 	}
+	h2.chy-chartHeader input{
+		width : 290px;
+	}
 }
 
 @media screen and (min-width:321px) and (max-width:375px){
@@ -49,6 +52,9 @@ div.chy-bottom {
 	
 	div.chy-TableBody{
 		font-size: 14px;
+	}
+	h2.chy-chartHeader input{
+		width : 290px;
 	}
 	
 	div.chy-TableCell:first-child{

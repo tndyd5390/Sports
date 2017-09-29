@@ -4,7 +4,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/html5/common/css/analysis.css" type="text/css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <title>유저 장바구니 분석</title>
 <%@include file="/html5/include/head.jsp"%>
 <script	src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
@@ -14,22 +13,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
 $(function() {
-	if($('datepicker1').prop('type')!='date'){
-	  $("#datepicker1").datepicker({
-	    dateFormat: 'yy-mm-dd',
-	    prevText: '이전 달',
-	    nextText: '다음 달',
-	    monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-	    dayNames: ['일','월','화','수','목','금','토'],
-	    dayNamesShort: ['일','월','화','수','목','금','토'],
-	    dayNamesMin: ['일','월','화','수','목','금','토'],
-	    showMonthAfterYear: true,
-	    changeMonth: true,
-	    changeYear: true,
-	    yearSuffix: '년'
-	  });
-	}
 		$('#chy-monthsLeft').click(function() {
 			if ($('#chy-month').text() != "1")
 				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
@@ -54,11 +37,8 @@ $(function() {
 		})
 		$('#datepicker1').on("change",function(){
 			var day = $('#datepicker1').val();
-			day = day.substring(5,day.length);
-			$('#chy-headerWeek').text($('#datepicker1').val());
+			$('#thead_date').html("qwewqe");
 			basketDay();
-			$('#thead_date').text(day);
-			$('#datepicker1').val("DATE");
 		})
 	});
 	function basketDay(){
@@ -109,14 +89,17 @@ $(function() {
 				tbodyData(arr);
 				}else{
 					$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
+					$('#thead').html("");
+					$('#tbody').html("");
 				}
 			}
 		})
 	}
 	
 	function tbodyData(dt){
+		var day = $('#datepicker1').val();
 		var contents = "<div class='chy-TableCell'>품목</div>"
-		var thead = "<div class='chy-TableCell' id='thead_date'></div>"
+		var thead = "<div class='chy-TableCell' id='thead_date'>"+day.substring(5,day.length)+"</div>"
 		for(var i =0; i<3;i++){
 			if(dt[i]!=null){
 				contents += "<div class='chy-TableCell'>";
@@ -174,10 +157,11 @@ $(function() {
 			<div id="myTabContent" class="tab-content">
 				<div role="tabpanel" class="tab-pane fade active in" id="home"
 					aria-labelledby="home-tab">
-					<h2 class="chy-chartHeader" style="margin-top:30px;">
-						<span class="chy-headerWeek" id="chy-headerWeek"></span>
+					<h2 class="chy-chartHeader" style="margin-top:30px; margin-bottom:20px;">
+						<input type="date" class="chy-headerWeek" id="datepicker1">				
+<!-- 						<span class="chy-headerWeek" id="chy-headerWeek">DATE</span>
 						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="DATE">
-					</h2>
+ -->					</h2>
 					<div class="chy-chartBody">
 						<canvas id="myChart"></canvas>
 						<!-- 여기에 차트 -->
@@ -198,48 +182,8 @@ $(function() {
 						<!-- 테이블 바디 -->
 						<div class="chy-TableBody">
 							<div class="chy-TableRow" id="tbody">
-								<!-- <div class="chy-TableCell">
-									품목
-								</div>
-								<div class="chy-TableCell">
-									기
-								</div>
-								<div class="chy-TableCell">
-									모
-								</div>
-								<div class="chy-TableCell">
-									띠
-								</div> -->
 							</div>						
-<!-- 							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									2
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									3
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
- -->						</div>
+						</div>
 					</div>				
 				
 				</div>
