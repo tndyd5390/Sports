@@ -1,16 +1,25 @@
 package com.sports.controller.user;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.sports.dto.BasketDTO;
 import com.sports.service.IOrderService;
 import com.sports.util.CmmUtil;
 
@@ -107,6 +116,25 @@ public class CustomerOrderController {
 	    	/**
 	    	 * 결제 성공
 	    	 */
+	    	JSONParser jsonParser = new JSONParser();
+	    	JSONObject jsonObject = (JSONObject)jsonParser.parse(etc_data1);
+	    	String recipient = (String)jsonObject.get("recipient");
+	    	String tel = (String)jsonObject.get("tel");
+	    	String message = (String)jsonObject.get("message");
+	    	String postCode = (String)jsonObject.get("postCode");
+	    	String address = (String)jsonObject.get("address");
+	    	String addressDetail = (String)jsonObject.get("addressDetail");
+	    	if(!"".equals(etc_data2)){
+		    	jsonObject = (JSONObject)jsonParser.parse(etc_data2);
+		    	List<BasketDTO> bList = new ArrayList<BasketDTO>();
+		    	Iterator<String> keys = jsonObject.keySet().iterator();
+		    	while(keys.hasNext()){
+		    		String key = keys.next();
+		    		BasketDTO bDTO = new BasketDTO();
+		    		bDTO.setBsk_no((String)jsonObject.get(key));
+		    		bList.add(bDTO);
+		    	}
+	    	}
 	    }else{
 	    	/**
 	    	 * 결제 실패
@@ -163,6 +191,20 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".noticeOfPayment start!!!");
 		
 		log.info(this.getClass() + ".noticeOfPayment end!!!");
+		return null;
+	}
+	@RequestMapping(value="test")
+	public String test(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		
+		JSONParser jsonParser = new JSONParser();
+		String jsonData = req.getParameter("jsondata");
+    	JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonData);
+		Iterator<String> keys = jsonObject.keySet().iterator();
+		while(keys.hasNext()){
+			String key = keys.next();
+			System.out.println("key : " + key);
+			System.out.println("value : " + (String)jsonObject.get(key));
+		}
 		return null;
 	}
 }

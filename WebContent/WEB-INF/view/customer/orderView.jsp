@@ -138,7 +138,7 @@ ul > li > textarea.psyTermsTextarea{
 	            }
 	
 	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	            document.getElementById('postNumber').value = data.zonecode; //5자리 새우편번호 사용
+	            document.getElementById('postCode').value = data.zonecode; //5자리 새우편번호 사용
 	            document.getElementById('address').value = fullAddr;
 	
 	            // 커서를 상세주소 필드로 이동한다.
@@ -237,9 +237,59 @@ ul > li > textarea.psyTermsTextarea{
 			return;
 		}
 		
+		//json을 만드어 여분의 데이터를 전달 한다.
+		var etcInfo1 = new Object();
+		etcInfo1.recipient = form.recipient.value;
+		etcInfo1.tel = form.tel.value;
+		etcInfo1.message = form.message.value;
+		etcInfo1.postCode = form.postCode.value;
+		etcInfo1.address = form.address.value;
+		etcInfo1.addressDetail = form.addressDetail.value;
+		var etcJSON1 = JSON.stringify(etcInfo1);
+		form.ETC_DATA1.value = etcJSON1;
+		
+		
+		var etcInfo2 = new Object();
+		<%
+		for(int i = 0 ; i< bList.size(); i++){
+		%>
+			etcInfo2.['<%=bList.get(i).getBsk_no()%>'] = '<%=bList.get(i).getBsk_no()%>';					
+		<%
+		}
+		%>
+		var etcJSON2 = JSON.stringify(etcInfo2);
+		form.ETC_DATA2.value = etcJSON2;
 		if(confirm('화면의 정보대로 결제가 진행 됩니다. 결제 하시겠습니까???')){
 			form.submit();
 		}
+	}
+	
+	function testSubmit(f){
+		/* var infoObject = new Object();
+		infoObject.recipient = "박수용";
+		infoObject.tel = "01057907883";
+		infoObject.address = "불정로 362";
+		var jsonInfo = JSON.stringify(infoObject);
+		console.log(jsonInfo);
+		f.jsondata.value = jsonInfo;
+		f.submit(); */
+		var etcInfo2 = new Object();
+		etcInfo2['0'] = '0';
+		console.log(etcInfo2['0']);
+		var test = new Object();
+		<%
+		for(int i = 0; i< 5; i++){
+		%>
+			test['<%=i%>'] = '<%=i%>';
+		<%
+		}
+		%>
+		var jsonInfo = JSON.stringify(etcInfo2);
+		console.log(jsonInfo);
+		f.jsondata.value = jsonInfo;
+		//f.submit();
+		return true;
+		
 	}
 </script>
 </head>
@@ -248,7 +298,7 @@ ul > li > textarea.psyTermsTextarea{
        <header class="header">
       <div class="wrap">
         <div class="left_menu">
-          <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
+          <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--sl ide-left" class="c-button">
         </div>
         <div class="logo">
           <a href="#"><h2 class="title">모두의 스포츠</h2></a>
@@ -306,11 +356,11 @@ ul > li > textarea.psyTermsTextarea{
 		            </li>
 		            <li class="psyLi">
 		            <p class="psyOrderView blue_text">연락처</p>
-						<input type="text" name="contactNumber">
+						<input type="text" name="tel">
 					</li>
 		           <li class="psyLi">
 		            <p class="psyOrderView blue_text">주소</p>
-						<input type="text" name="postNumber" id="postNumber" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
+						<input type="text" name="postCode" id="postCode" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
 					</li>
 					<li class="psyLi">
 						<input type="text" name="address" id="address" placeholder="주소" readonly="readonly">
@@ -390,6 +440,10 @@ ul > li > textarea.psyTermsTextarea{
         </div>
       </div>
     </div>
+    <form action="test.do" method="post" onsubmit="return testSubmit(this);">
+    	<input type="hidden" name="jsondata">
+    	<input type="submit" value="전송">
+    </form>
  <%@include file="/html5/include/footer.jsp" %>
 </body>
 
