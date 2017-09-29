@@ -14,6 +14,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
 $(function() {
+	if($('datepicker1').prop('type')!='date'){
 	  $("#datepicker1").datepicker({
 	    dateFormat: 'yy-mm-dd',
 	    prevText: '이전 달',
@@ -28,7 +29,7 @@ $(function() {
 	    changeYear: true,
 	    yearSuffix: '년'
 	  });
-	  
+	}
 		$('#chy-monthsLeft').click(function() {
 			if ($('#chy-month').text() != "1")
 				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
@@ -52,9 +53,12 @@ $(function() {
 				$('#chy-count').text(parseInt($('#chy-count').text()) + 1);
 		})
 		$('#datepicker1').on("change",function(){
+			var day = $('#datepicker1').val();
+			day = day.substring(5,day.length);
 			$('#chy-headerWeek').text($('#datepicker1').val());
 			basketDay();
-		//	$('#datepicker1').val("날짜선택");
+			$('#thead_date').text(day);
+			$('#datepicker1').val("DATE");
 		})
 	});
 	function basketDay(){
@@ -66,6 +70,7 @@ $(function() {
 			method : 'post',
 			data : {'date' : date},
 			success : function(rs){
+				var contents = "";
 				var dt = "";
 				var d1 = "";
 				var arr = new Array();
@@ -101,6 +106,7 @@ $(function() {
 					        }
 					    }
 					});
+				tbodyData(arr);
 				}else{
 					$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
 				}
@@ -108,6 +114,24 @@ $(function() {
 		})
 	}
 	
+	function tbodyData(dt){
+		var contents = "<div class='chy-TableCell'>품목</div>"
+		var thead = "<div class='chy-TableCell' id='thead_date'></div>"
+		for(var i =0; i<3;i++){
+			if(dt[i]!=null){
+				contents += "<div class='chy-TableCell'>";
+				contents += dt[i];
+				contents += "</div>";
+			}else{
+				contents += "<div class='chy-TableCell'>";
+				contents += "없음";
+				contents += "</div>";
+			}
+			thead += "<div class='chy-TableCell'>"+(i+1)+"위</div>"
+		}
+		$('#thead').html(thead);
+		$('#tbody').html(contents);
+	}
 </script>
 </head>
 <body>
@@ -163,39 +187,31 @@ $(function() {
 						<!-- 테이블헤드 -->
 						<div class="chy-TableHead">
 							<!-- tr -->
-							<div class="chy-TableRow">
-								<!-- td -->
-								<div class="chy-TableCell">
-									 
-								</div>
-								<div class="chy-TableCell">
-									태권도복
-								</div>
-								<div class="chy-TableCell">
-									태권도화
-								</div>
-								<div class="chy-TableCell">
-									운동매트
-								</div>
+							<div class="chy-TableRow" id="thead">
+								<!-- td --><!-- 
+								<div class="chy-TableCell" id="thead_date"></div>
+								<div class="chy-TableCell">1위</div>
+								<div class="chy-TableCell">2위</div>
+								<div class="chy-TableCell">3위</div> -->
 							</div>	
 						</div>	
 						<!-- 테이블 바디 -->
 						<div class="chy-TableBody">
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									1
+							<div class="chy-TableRow" id="tbody">
+								<!-- <div class="chy-TableCell">
+									품목
 								</div>
 								<div class="chy-TableCell">
-									태권도띠(85%)
+									기
 								</div>
 								<div class="chy-TableCell">
-									태권도복(78%)
+									모
 								</div>
 								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
+									띠
+								</div> -->
 							</div>						
-							<div class="chy-TableRow">
+<!-- 							<div class="chy-TableRow">
 								<div class="chy-TableCell">
 									2
 								</div>
@@ -223,7 +239,7 @@ $(function() {
 									격파운송판(33%)
 								</div>
 							</div>						
-						</div>
+ -->						</div>
 					</div>				
 				
 				</div>

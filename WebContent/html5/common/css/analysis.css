@@ -99,7 +99,7 @@ div.chy-bottom {
 	display:table-cell;
 	border-right:1px solid white;
 	border-radius: 4px;
-	width:28.%;
+	width:25%;
 }
 .chy-TableRow:nth-child(even) {
 	background-color: #E1E1E1;
