@@ -172,12 +172,12 @@ $(function() {
 						<div class="chy-TableHead">
 							<!-- tr -->
 							<div class="chy-TableRow" id="thead">
-								<!-- td --><!-- 
-								<div class="chy-TableCell" id="thead_date"></div>
+								<!-- td -->
+								<!-- <div class="chy-TableCell" id="thead_date"></div>
 								<div class="chy-TableCell">1위</div>
 								<div class="chy-TableCell">2위</div>
-								<div class="chy-TableCell">3위</div> -->
-							</div>	
+								<div class="chy-TableCell">3위</div> --> 
+							</div>
 						</div>	
 						<!-- 테이블 바디 -->
 						<div class="chy-TableBody">
