@@ -138,13 +138,13 @@ $(function() {
 	<section>
 		<div class="container detail chy-bottom">
 			<ul id="myTab" class="nav nav-tabs" role="tablist">
-				<li role="presentation" class="active"><a data-target="#home"
+				<li role="presentation" class="active"><a href="#home"
 					id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
 					aria-expanded="true">일별</a></li>
-				<li role="presentation" class=""><a data-target="#profile"
+				<li role="presentation" class=""><a href="#profile"
 					role="tab" id="profile-tab" data-toggle="tab"
 					aria-controls="profile" aria-expanded="false">분기별</a></li>
-				<li role="presentation" class=""><a data-target="#year"
+				<li role="presentation" class=""><a href="#year"
 					role="tab" id="year-tab" data-toggle="tab" aria-controls="year"
 					aria-expanded="false">연별</a></li>
 			</ul>
