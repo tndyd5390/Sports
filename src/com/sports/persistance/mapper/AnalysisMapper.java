@@ -10,4 +10,6 @@ public interface AnalysisMapper {
 
 	List<AnalysisDTO> getBasketDay(AnalysisDTO aDTO) throws Exception;
 
+	List<AnalysisDTO> getBasketQuarter(AnalysisDTO aDTO) throws Exception;
+
 }

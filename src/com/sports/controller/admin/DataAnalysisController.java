@@ -52,4 +52,18 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " basketDay End!!");
 		return aList;
 	}
+	
+	@RequestMapping(value="basketQuarter")
+	public @ResponseBody List<AnalysisDTO> basketQuater(@RequestParam(value="quarter") String quarter) throws Exception{
+		log.info(this.getClass() + " basketQuarter Start!!");
+		
+		log.info("quarter : " +quarter);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setQuarter(quarter);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketQuarter(aDTO);
+		
+		log.info(this.getClass() + " basketQuarter End!!");
+		return aList;
+	}
 }

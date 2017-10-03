@@ -5,7 +5,14 @@ public class AnalysisDTO {
 	private String category_name;
 	private String sum;
 	private String reg_dt;
+	private String quarter;
 	
+	public String getQuarter() {
+		return quarter;
+	}
+	public void setQuarter(String quarter) {
+		this.quarter = quarter;
+	}
 	public String getProd_name() {
 		return prod_name;
 	}

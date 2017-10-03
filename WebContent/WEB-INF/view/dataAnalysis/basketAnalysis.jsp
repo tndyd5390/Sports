@@ -13,6 +13,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script type="text/javascript">
 $(function() {
+		basketQuarter();
 		$('#chy-monthsLeft').click(function() {
 			if ($('#chy-month').text() != "1")
 				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
@@ -30,10 +31,14 @@ $(function() {
 		$('#chy-countLeft').click(function() {
 			if ($('#chy-count').text() != "1")
 				$('#chy-count').text(parseInt($('#chy-count').text()) - 1);
+			basketQuarter();
+			return false;
 		})
 		$('#chy-countRight').click(function() {
 			if ($('#chy-count').text() != "4")
 				$('#chy-count').text(parseInt($('#chy-count').text()) + 1);
+			basketQuarter();
+			return false;
 		})
 		$('#datepicker1').on("change",function(){
 			var day = $('#datepicker1').val();
@@ -42,9 +47,10 @@ $(function() {
 		})
 	});
 	function basketDay(){
-		$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
+		$('#dayBody').html("<canvas id='myChart'></canvas>");
 		var date = $('#datepicker1').val();
 		var ctx = $('#myChart').get(0).getContext('2d');
+		console.log(ctx);
 		$.ajax({
 			url : 'basketDay.do',
 			method : 'post',
@@ -86,9 +92,64 @@ $(function() {
 					        }
 					    }
 					});
-				tbodyData(arr);
+				tbodyDate(arr);
 				}else{
-					$('.chy-chartBody').html("<canvas id='myChart'></canvas>");
+					$('#dayBody').html("<canvas id='myChart'></canvas>");
+					$('#thead').html("");
+					$('#tbody').html("");
+				}
+			}
+		})
+	}
+	function basketQuarter(){
+		$('#qtBody').html("<canvas id='quarterChart'></canvas>");
+		var quarter = $('#chy-count').text();
+		var ctx = $('#quarterChart').get(0).getContext('2d');
+		console.log(ctx);
+		$.ajax({
+			url : 'basketQuarter.do',
+			method : 'post',
+			data : {'quarter' : quarter},
+			success : function(rs){
+				var contents = "";
+				var dt = "";
+				var d1 = "";
+				var arr = new Array();
+				var arr1 = new Array();
+				$.each(rs, function(key, value){
+					dt = value.prod_name;
+					dt1 = value.sum;
+					arr.push(dt);
+					arr1.push(dt1);
+				});
+				if(rs.length!=0){
+					var myChart = new Chart(ctx, {
+					    type: 'bar',
+					    data: {
+					        labels: arr,
+					        datasets: [{
+					            label: '갯수',
+					            data: arr1,
+					            backgroundColor: 'rgb(23, 119, 203)',
+					            borderColor: 'rgb(23, 119, 203)',
+					            borderWidth : 1
+					        }]
+					    },
+					    options: {
+	                        responsive: true,
+					    	maintainAspectRatio: false,
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero:true 
+					                }
+					            }]
+					        }
+					    }
+					});
+				tbodyQuarter(arr);
+				}else{
+					$('#qtBody').html("<canvas id='quarterChart'></canvas>");
 					$('#thead').html("");
 					$('#tbody').html("");
 				}
@@ -96,7 +157,8 @@ $(function() {
 		})
 	}
 	
-	function tbodyData(dt){
+	
+	function tbodyDate(dt){
 		var day = $('#datepicker1').val();
 		var contents = "<div class='chy-TableCell'>품목</div>"
 		var thead = "<div class='chy-TableCell' id='thead_date'>"+day.substring(5,day.length)+"</div>"
@@ -112,8 +174,28 @@ $(function() {
 			}
 			thead += "<div class='chy-TableCell'>"+(i+1)+"위</div>"
 		}
-		$('#thead').html(thead);
-		$('#tbody').html(contents);
+		$('#thead-date').html(thead);
+		$('#tbody-date').html(contents);
+	}
+	function tbodyQuarter(dt){
+		var quarter = $('#chy-count').text();
+		var thead = "<div class='chy-TableCell' id='thead_date'>"+quarter+"분기</div>"
+		var contents = "<div class='chy-TableCell'>품목</div>"
+			for(var i =0; i<3;i++){
+				if(dt[i]!=null){
+					contents += "<div class='chy-TableCell'>";
+					contents += dt[i];
+					contents += "</div>";
+				}else{
+					contents += "<div class='chy-TableCell'>";
+					contents += "없음";
+					contents += "</div>";
+				}
+				thead += "<div class='chy-TableCell'>"+(i+1)+"위</div>"
+			}
+			$('#thead-quarter').html(thead);
+			$('#tbody-quarter').html(contents);
+
 	}
 </script>
 </head>
@@ -162,7 +244,7 @@ $(function() {
 <!-- 						<span class="chy-headerWeek" id="chy-headerWeek">DATE</span>
 						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="DATE">
  -->					</h2>
-					<div class="chy-chartBody">
+					<div class="chy-chartBody" id="dayBody">
 						<canvas id="myChart"></canvas>
 						<!-- 여기에 차트 -->
 					</div>
@@ -171,7 +253,7 @@ $(function() {
 						<!-- 테이블헤드 -->
 						<div class="chy-TableHead">
 							<!-- tr -->
-							<div class="chy-TableRow" id="thead">
+							<div class="chy-TableRow" id="thead-date">
 								<!-- td -->
 								<!-- <div class="chy-TableCell" id="thead_date"></div>
 								<div class="chy-TableCell">1위</div>
@@ -181,7 +263,7 @@ $(function() {
 						</div>	
 						<!-- 테이블 바디 -->
 						<div class="chy-TableBody">
-							<div class="chy-TableRow" id="tbody">
+							<div class="chy-TableRow" id="tbody-date">
 							</div>						
 						</div>
 					</div>				
@@ -193,70 +275,16 @@ $(function() {
 						<a href="#" id="chy-countLeft">&#60;</a><span class="chy-year"><span
 							id="chy-count">1</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
 					</h2>
-					<div class="chy-chartBody"><!-- 차트넣으면됨 -->
-						<canvas id="myChart" width="400" height="400"></canvas>
+					<div class="chy-chartBody" id='qtBody'><!-- 차트넣으면됨 -->
+						<canvas id="quarterChart"></canvas>
 					</div>
 						<!--  테이블 시작 -->
 						<div class="chy-Table">
-						<div class="chy-TableHead">
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									1분기
-								</div>
-								<div class="chy-TableCell">
-									태권도복
-								</div>
-								<div class="chy-TableCell">
-									태권도화
-								</div>
-								<div class="chy-TableCell">
-									운동매트
-								</div>
-							</div>	
+						<div class="chy-TableHead" id="thead-quarter">
+
 						</div>	
-						<div class="chy-TableBody">
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									1
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									2
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									3
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
+						<div class="chy-TableBody" id="tbody-quarter">
+							
 						</div>
 					</div>			
 				</div>

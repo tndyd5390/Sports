@@ -8,4 +8,6 @@ public interface IAnalysisService {
 
 	List<AnalysisDTO> getBasketDay(AnalysisDTO aDTO) throws Exception;
 
+	List<AnalysisDTO> getBasketQuarter(AnalysisDTO aDTO) throws Exception;
+
 }

@@ -20,4 +20,9 @@ public class AnalysisService implements IAnalysisService{
 		return analysisMapper.getBasketDay(aDTO);
 	}
 
+	@Override
+	public List<AnalysisDTO> getBasketQuarter(AnalysisDTO aDTO) throws Exception {
+		return analysisMapper.getBasketQuarter(aDTO);
+	}
+
 }
