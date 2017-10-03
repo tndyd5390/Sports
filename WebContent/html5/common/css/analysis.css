@@ -82,8 +82,7 @@ div.chy-bottom {
 }
 .chy-TableHead {
 	display:table-header-group;
-	background-color: #1777CB;
-	font-weight: bold;
+	background-color: #1777	font-weight: bold;
 	font-size: 18px;
 	text-align: center;
 	color: white;
