@@ -23,7 +23,7 @@ public class BasketService implements IBasketService{
 	@Override
 	public int insertCustomerAddBasket(BasketDTO bDTO, List<String> optNos, List<String> optNames, List<String> optKinds, String userNo) throws Exception{
 		List<Basket_OptionDTO> oList = new ArrayList<>();
-		if(optNos.size() != optNames.size() || optNos.size() != optKinds.size() || optNames.size() != optKinds.size()) throw new IndexOutOfBoundsException("ÀÎµ¦½º°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
+		if(optNos.size() != optNames.size() || optNos.size() != optKinds.size() || optNames.size() != optKinds.size()) throw new IndexOutOfBoundsException("ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ê½ï¿½ï¿½Ï´ï¿½.");
 		for(int i = 0; i < optNos.size(); i++){
 			Basket_OptionDTO oDTO = new Basket_OptionDTO();
 			oDTO.setOpt_no(optNos.get(i));
