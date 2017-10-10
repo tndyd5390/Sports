@@ -6,7 +6,14 @@ public class AnalysisDTO {
 	private String sum;
 	private String reg_dt;
 	private String quarter;
+	private String year;
 	
+	public String getYear() {
+		return year;
+	}
+	public void setYear(String year) {
+		this.year = year;
+	}
 	public String getQuarter() {
 		return quarter;
 	}

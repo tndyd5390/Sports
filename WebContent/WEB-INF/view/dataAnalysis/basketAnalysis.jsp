@@ -14,19 +14,16 @@
 <script type="text/javascript">
 $(function() {
 		basketQuarter();
-		$('#chy-monthsLeft').click(function() {
-			if ($('#chy-month').text() != "1")
-				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
-		})
-		$('#chy-monthsRight').click(function() {
-			if ($('#chy-month').text() != "12")
-				$('#chy-month').text(parseInt($('#chy-month').text()) + 1);
-		})
+		basketYear();
 		$('#chy-yearLeft').click(function() {
 			$('#chy-years').text(parseInt($('#chy-years').text()) - 1);
+			basketYear();
+			return false;
 		})
 		$('#chy-yearRight').click(function() {
 			$('#chy-years').text(parseInt($('#chy-years').text()) + 1);
+			basketYear();
+			return false;
 		})
 		$('#chy-countLeft').click(function() {
 			if ($('#chy-count').text() != "1")
@@ -105,7 +102,6 @@ $(function() {
 		$('#qtBody').html("<canvas id='quarterChart'></canvas>");
 		var quarter = $('#chy-count').text();
 		var ctx = $('#quarterChart').get(0).getContext('2d');
-		console.log(ctx);
 		$.ajax({
 			url : 'basketQuarter.do',
 			method : 'post',
@@ -156,7 +152,61 @@ $(function() {
 			}
 		})
 	}
-	
+	function basketYear(){
+		$('#yrBody').html("<canvas id='yearChart'></canvas>");
+		var year = $('#chy-years').text();
+		var ctx = $('#yearChart').get(0).getContext('2d');
+		$.ajax({
+			url : 'basketYear.do',
+			method : 'post',
+			data : {'year' : year},
+			success : function(rs){
+				var contents = "";
+				var dt = "";
+				var d1 = "";
+				var arr = new Array();
+				var arr1 = new Array();
+				$.each(rs, function(key, value){
+					dt = value.prod_name;
+					dt1 = value.sum;
+					arr.push(dt);
+					arr1.push(dt1);
+				});
+				if(rs.length!=0){
+					var myChart = new Chart(ctx, {
+					    type: 'bar',
+					    data: {
+					        labels: arr,
+					        datasets: [{
+					            label: '갯수',
+					            data: arr1,
+					            backgroundColor: 'rgb(23, 119, 203)',
+					            borderColor: 'rgb(23, 119, 203)',
+					            borderWidth : 1
+					        }]
+					    },
+					    options: {
+	                        responsive: true,
+					    	maintainAspectRatio: false,
+					        scales: {
+					            yAxes: [{
+					                ticks: {
+					                    beginAtZero:true 
+					                }
+					            }]
+					        }
+					    }
+					});
+				tbodyYear(arr);
+				}else{
+					$('#yrBody').html("<canvas id='yearChart'></canvas>");
+					$('#thead-year').html("");
+					$('#tbody-year').html("");
+				}
+			}
+		})
+	}
+
 	
 	function tbodyDate(dt){
 		var day = $('#datepicker1').val();
@@ -179,7 +229,7 @@ $(function() {
 	}
 	function tbodyQuarter(dt){
 		var quarter = $('#chy-count').text();
-		var thead = "<div class='chy-TableCell' id='thead_date'>"+quarter+"분기</div>"
+		var thead = "<div class='chy-TableCell' id='thead_quarter'>"+quarter+"분기</div>"
 		var contents = "<div class='chy-TableCell'>품목</div>"
 			for(var i =0; i<3;i++){
 				if(dt[i]!=null){
@@ -197,6 +247,26 @@ $(function() {
 			$('#tbody-quarter').html(contents);
 
 	}
+	function tbodyYear(dt){
+		var year = $('#chy-years').text();
+		var thead = "<div class='chy-TableCell' id='thead_year'>"+year+"</div>"
+		var contents = "<div class='chy-TableCell'>품목</div>"
+			for(var i =0; i<3;i++){
+				if(dt[i]!=null){
+					contents += "<div class='chy-TableCell'>";
+					contents += dt[i];
+					contents += "</div>";
+				}else{
+					contents += "<div class='chy-TableCell'>";
+					contents += "없음";
+					contents += "</div>";
+				}
+				thead += "<div class='chy-TableCell'>"+(i+1)+"위</div>"
+			}
+			$('#thead-year').html(thead);
+			$('#tbody-year').html(contents);
+	}
+
 </script>
 </head>
 <body>
@@ -294,26 +364,15 @@ $(function() {
 						<a id="chy-yearLeft" href="#">&#60;</a><span class="chy-year"><span
 							id="chy-years">2017</span>년</span><a id="chy-yearRight" href="#">&#62;</a>
 					</h2>
-					<div class="chy-chartBody"></div>
-						<div class="chy-Table">
-						<div class="chy-TableHead">
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									2017년
-								</div>
-								<div class="chy-TableCell">
-									태권도복
-								</div>
-								<div class="chy-TableCell">
-									태권도화
-								</div>
-								<div class="chy-TableCell">
-									운동매트
-								</div>
-							</div>	
+					<div class="chy-chartBody" id="yrBody">
+					
+					</div>
+					<div class="chy-Table">
+						<div class="chy-TableHead" id="thead-year">
+
 						</div>	
-						<div class="chy-TableBody">
-							<div class="chy-TableRow">
+						<div class="chy-TableBody" id="tbody-year">
+							<!-- <div class="chy-TableRow">
 								<div class="chy-TableCell">
 									1
 								</div>
@@ -326,35 +385,7 @@ $(function() {
 								<div class="chy-TableCell">
 									격파운송판(33%)
 								</div>
-							</div>						
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									2
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
-							<div class="chy-TableRow">
-								<div class="chy-TableCell">
-									3
-								</div>
-								<div class="chy-TableCell">
-									태권도띠(85%)
-								</div>
-								<div class="chy-TableCell">
-									태권도복(78%)
-								</div>
-								<div class="chy-TableCell">
-									격파운송판(33%)
-								</div>
-							</div>						
+							</div>-->	
 						</div>
 					</div>			
 				</div>

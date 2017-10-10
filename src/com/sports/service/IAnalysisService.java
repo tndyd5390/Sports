@@ -10,4 +10,6 @@ public interface IAnalysisService {
 
 	List<AnalysisDTO> getBasketQuarter(AnalysisDTO aDTO) throws Exception;
 
+	List<AnalysisDTO> getBasketYear(AnalysisDTO aDTO) throws Exception;
+
 }

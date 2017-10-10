@@ -66,4 +66,17 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " basketQuarter End!!");
 		return aList;
 	}
+	@RequestMapping(value="basketYear")
+	public @ResponseBody List<AnalysisDTO> basketYear(@RequestParam(value="year") String year) throws Exception{
+		log.info(" basketYear Start!!");
+		
+		log.info(" year :" +year);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setYear(year);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketYear(aDTO);
+		
+		log.info(" basketYear End!!");
+		return aList;
+	}
 }
