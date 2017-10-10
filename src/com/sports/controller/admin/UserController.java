@@ -58,7 +58,7 @@ public class UserController {
 		
 		if(uDTO ==null){
 			msg = "아이디, 비밀번호를 확인해주세요.";
-			url = "user/login.do";
+			url = "login.do";
 			model.addAttribute("msg", msg);
 			model.addAttribute("url", url);
 			return "alert/alert";
@@ -72,7 +72,7 @@ public class UserController {
 			session.setAttribute("ss_user_no", uDTO.getUser_no());
 			session.setAttribute("ss_user_id", uDTO.getUser_id());
 			session.setAttribute("ss_user_name", uDTO.getUser_name());
-			session.setAttribute("ss_auth", uDTO.getAuth());
+			session.setAttribute("ss_user_auth", uDTO.getAuth());
 			log.info("auth : "+uDTO.getAuth());
 			uDTO = null;
 			log.info(this.getClass() + " loginProc End!!");

@@ -1,4 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.AnalysisMapper">
+	<select id="getBasketDay" parameterType="AnalysisDTO" resultType="AnalysisDTO">
+		SELECT 
+			P.PROD_NAME AS PROD_NAME, C.CATEGORY_NAME AS CATEGORY_NAME, 
+			SUM(B.PROD_QTY) AS SUM, DATE_FORMAT(B.REG_DT, '%Y-%m-%d') AS REG_DT
+		FROM PRODUCT_INFO P, BASKET_INFO B, CATEGORY_INFO C
+		WHERE P.PROD_NO = B.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND DATE_FORMAT(B.REG_DT, '%Y-%m-%d') = #{reg_dt}
+		GROUP BY P.PROD_NAME, C.CATEGORY_NAME, DATE_FORMAT(B.REG_DT, '%Y-%m-%d')
+		ORDER BY SUM DESC
+	</select>
+	
+	<select id="getBasketQuarter" parameterType="AnalysisDTO" resultType="AnalysisDTO">
+		SELECT 
+			P.PROD_NAME AS PROD_NAME, C.CATEGORY_NAME AS CATEGORY_NAME, 
+			SUM(B.PROD_QTY) AS SUM, DATE_FORMAT(B.REG_DT, '%Y-%m-%d') AS REG_DT
+		FROM PRODUCT_INFO P, BASKET_INFO B, CATEGORY_INFO C
+		WHERE P.PROD_NO = B.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND CEIL(DATE_FORMAT(B.REG_DT,'%m')/3) = #{quarter}
+		GROUP BY P.PROD_NAME, C.CATEGORY_NAME, DATE_FORMAT(B.REG_DT, '%Y-%m-%d')
+		ORDER BY SUM DESC
+	</select>
+	
+	<select id="getBasketYear" parameterType="AnalysisDTO" resultType="AnalysisDTO">
+		SELECT 
+			P.PROD_NAME AS PROD_NAME, C.CATEGORY_NAME AS CATEGORY_NAME, 
+			SUM(B.PROD_QTY) AS SUM, DATE_FORMAT(B.REG_DT, '%Y-%m-%d') AS REG_DT
+		FROM PRODUCT_INFO P, BASKET_INFO B, CATEGORY_INFO C
+		WHERE P.PROD_NO = B.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND CEIL(DATE_FORMAT(B.REG_DT,'%Y')) = #{year}
+		GROUP BY P.PROD_NAME, C.CATEGORY_NAME, DATE_FORMAT(B.REG_DT, '%Y-%m-%d')
+		ORDER BY SUM DESC;
+	</select>
 </mapper>
