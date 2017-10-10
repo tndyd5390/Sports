@@ -1,5 +1,7 @@
 package com.sports.dto;
 
+import java.util.List;
+
 public class Order_infoDTO {
 	private String tran_no;
 	private String recipient;
@@ -7,6 +9,8 @@ public class Order_infoDTO {
 	private String postCode;
 	private String ord_price;
 	private String ord_dn;
+	private String address;
+	private String addressDetail;
 	private String ord_stat;
 	private String ord_cancel;
 	private String ord_message;
@@ -16,6 +20,33 @@ public class Order_infoDTO {
 	private String chg_dt;
 	private String tranType;
 	private String tid;
+	private String prod_no;
+	private List<OrdProductDTO> ordProductList;
+	
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public String getAddressDetail() {
+		return addressDetail;
+	}
+	public void setAddressDetail(String addressDetail) {
+		this.addressDetail = addressDetail;
+	}
+	public List<OrdProductDTO> getOrdProductList() {
+		return ordProductList;
+	}
+	public void setOrdProductList(List<OrdProductDTO> ordProductList) {
+		this.ordProductList = ordProductList;
+	}
+	public String getProd_no() {
+		return prod_no;
+	}
+	public void setProd_no(String prod_no) {
+		this.prod_no = prod_no;
+	}
 	public String getTran_no() {
 		return tran_no;
 	}

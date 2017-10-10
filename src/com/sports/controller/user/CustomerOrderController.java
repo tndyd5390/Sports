@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.sports.dto.BasketDTO;
+import com.sports.dto.OrdProdOptionDTO;
+import com.sports.dto.Order_infoDTO;
 import com.sports.service.IOrderService;
 import com.sports.util.CmmUtil;
 
@@ -118,22 +120,31 @@ public class CustomerOrderController {
 	    	 */
 	    	JSONParser jsonParser = new JSONParser();
 	    	JSONObject jsonObject = (JSONObject)jsonParser.parse(etc_data1);
-	    	String recipient = (String)jsonObject.get("recipient");
-	    	String tel = (String)jsonObject.get("tel");
-	    	String message = (String)jsonObject.get("message");
-	    	String postCode = (String)jsonObject.get("postCode");
-	    	String address = (String)jsonObject.get("address");
-	    	String addressDetail = (String)jsonObject.get("addressDetail");
-	    	if(!"".equals(etc_data2)){
-		    	jsonObject = (JSONObject)jsonParser.parse(etc_data2);
-		    	List<BasketDTO> bList = new ArrayList<BasketDTO>();
-		    	Iterator<String> keys = jsonObject.keySet().iterator();
-		    	while(keys.hasNext()){
-		    		String key = keys.next();
-		    		BasketDTO bDTO = new BasketDTO();
-		    		bDTO.setBsk_no((String)jsonObject.get(key));
-		    		bList.add(bDTO);
-		    	}
+	    	String recipient = CmmUtil.nvl((String)jsonObject.get("recipient"));
+	    	String tel = CmmUtil.nvl((String)jsonObject.get("tel"));
+	    	String message = CmmUtil.nvl((String)jsonObject.get("message"));
+	    	String postCode = CmmUtil.nvl((String)jsonObject.get("postCode"));
+	    	String address = CmmUtil.nvl((String)jsonObject.get("address"));
+	    	String addressDetail = CmmUtil.nvl((String)jsonObject.get("addressDetail"));
+	    	String userNo = CmmUtil.nvl((String)jsonObject.get("regUserNo"));
+	    	Order_infoDTO oDTO = new Order_infoDTO();
+	    	oDTO.setRecipient(recipient);
+	    	oDTO.setTel(tel);
+	    	oDTO.setOrd_message(message);
+	    	oDTO.setPostCode(postCode);
+	    	oDTO.setAddress(address);
+	    	oDTO.setAddressDetail(addressDetail);
+	    	oDTO.setTran_no(tran_no);
+	    	oDTO.setOrd_price(amt);
+	    	oDTO.setOrd_stat("C");
+	    	oDTO.setOrd_cancel("N");
+	    	oDTO.setReg_user_no(userNo);
+	    	jsonObject = (JSONObject)jsonParser.parse(etc_data2);
+	    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_no");
+	    	List<String> bskNoList = new ArrayList<>();
+	    	for(int i = 0; i< jsonArray.size(); i++){
+	    		JSONObject bskNoObject = (JSONObject)jsonArray.get(i);
+	    		bskNoList.add(CmmUtil.nvl((String)bskNoObject.get("bsk_no")));
 	    	}
 	    }else{
 	    	/**
@@ -197,14 +208,14 @@ public class CustomerOrderController {
 	public String test(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		
 		JSONParser jsonParser = new JSONParser();
-		String jsonData = req.getParameter("jsondata");
+		String jsonData = req.getParameter("ETC_DATA2");
     	JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonData);
-		Iterator<String> keys = jsonObject.keySet().iterator();
-		while(keys.hasNext()){
-			String key = keys.next();
-			System.out.println("key : " + key);
-			System.out.println("value : " + (String)jsonObject.get(key));
-		}
+    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_option");
+    	for(int i = 0; i< jsonArray.size(); i++){
+    		JSONObject object = (JSONObject) jsonArray.get(i);
+    		System.out.println("bsk_no : " + object.get("bsk_no"));
+    		System.out.println("opt_kind" + i + " : " + CmmUtil.nvl((String)object.get("opt_kind" + i)));
+    	}
 		return null;
 	}
 }

@@ -1,4 +1,5 @@
- <%@page import="com.sports.util.TextUtil"%>
+ <%@page import="com.sports.dto.Basket_OptionDTO"%>
+<%@page import="com.sports.util.TextUtil"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sports.dto.BasketDTO"%>
@@ -10,15 +11,21 @@
 	if(bList == null){
 		bList = new ArrayList<BasketDTO>();
 	}
+	for(BasketDTO bDTO : bList){
+		if(bDTO.getBskOptList() == null){
+			bDTO.setBskOptList(new ArrayList());
+		}
+	}
 	int totalProdPrice = (Integer)request.getAttribute("totalProdPriceFromView");
 	//파라미터로 보낼 상품명
 	String prodName = "";
-	if(bList.size() == 1){
-		prodName = bList.get(0).getOpt_name();
-	}else{
-		prodName = bList.get(0).getOpt_name() + "외" + (bList.size()-1) + "건";
+	if(bList.size() != 0){
+		if(bList.size() == 1){
+			prodName = bList.get(0).getOpt_name();
+		}else{
+			prodName = bList.get(0).getOpt_name() + "외" + (bList.size()-1) + "건";
+		}
 	}
-	
 	//파라미터로 보낼 상품 수량
 	int qty = 0;
 	for(BasketDTO bDTO : bList){
@@ -27,6 +34,7 @@
 	
 	//파라미터로 보낼 고객 이름
 	String userName = CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
+	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -226,18 +234,28 @@ ul > li > textarea.psyTermsTextarea{
 			return;
 		}
 		
-		if(form.contactNumber.value == ""){
+		if(form.tel.value == ""){
 			alert('연락처를 입력해주세요');
 			form.contactNumber.focus();
 			return;
 		}
 		
-		if(form.postNumber.value == "" || form.address.value == "" || form.addressDetail.value == ""){
-			alert('주소를 입력해 주세요');
+		if(form.postCode.value == ""){
+			alert('우편번호를 입력해 주세요');
 			return;
 		}
 		
-		//json을 만드어 여분의 데이터를 전달 한다.
+		if(form.address.value == ""){
+			alert('주소를 입력해 주세요.');
+			return;
+		}
+		
+		if(form.addressDetail.value == ""){
+			alert("상세 주소를 입력해 주세요");
+			return;
+		}
+		
+		//etc_data1에는 수령할 사람의 정보를 전달 한다.json을 만드어 여분의 데이터를 전달 한다.
 		var etcInfo1 = new Object();
 		etcInfo1.recipient = form.recipient.value;
 		etcInfo1.tel = form.tel.value;
@@ -245,20 +263,57 @@ ul > li > textarea.psyTermsTextarea{
 		etcInfo1.postCode = form.postCode.value;
 		etcInfo1.address = form.address.value;
 		etcInfo1.addressDetail = form.addressDetail.value;
+		etcInfo1.regUserNo = '<%=userNo%>'
 		var etcJSON1 = JSON.stringify(etcInfo1);
 		form.ETC_DATA1.value = etcJSON1;
-		
-		
-		var etcInfo2 = new Object();
+		console.log(form.ETC_DATA1.value);
+		//etc_data2 에는 물품의 정보를 전달 한다.
+		var etcArray2 = new Array();
 		<%
-		for(int i = 0 ; i< bList.size(); i++){
+		for(BasketDTO bDTO : bList){
 		%>
-			etcInfo2.['<%=bList.get(i).getBsk_no()%>'] = '<%=bList.get(i).getBsk_no()%>';					
+		var etcInfo2 = new Object();
+		etcInfo2['bsk_no'] = '<%=bDTO.getBsk_no()%>';
+		etcArray2.push(etcInfo2);
 		<%
 		}
 		%>
-		var etcJSON2 = JSON.stringify(etcInfo2);
-		form.ETC_DATA2.value = etcJSON2;
+		var etcJSON2 = new Object();
+		etcJSON2.bsk_no = etcArray2;
+		form.ETC_DATA2.value = JSON.stringify(etcJSON2);
+		console.log(form.ETC_DATA2.value);
+		<%-- var optObject;
+		var optArray;
+		var etcArray2 = new Array();
+		<%
+		for(BasketDTO bDTO : bList){
+		%>
+			var etcInfo2 = new Object();
+			optArray = new Array();
+			etcInfo2['bsk_no'] = '<%=bDTO.getBsk_no()%>';
+			etcInfo2['prod_no'] = '<%=bDTO.getProd_no()%>';
+			etcInfo2['prod_name'] = '<%=bDTO.getProd_name()%>';
+			<%
+			for(int i = 0; i < bDTO.getBskOptList().size(); i++){
+				Basket_OptionDTO bOptDTO = bDTO.getBskOptList().get(i);
+			%>
+				optObject = new Object();
+				optObject['opt_kind'] = '<%=bOptDTO.getOpt_kind()%>';
+				optObject['opt_name'] = '<%=bOptDTO.getOpt_name()%>';
+				optObject['opt_no'] = '<%=bOptDTO.getOpt_no()%>';
+				optArray.push(optObject);
+			<%
+			}
+			%>
+			etcInfo2['ord_option'] = optArray;
+			etcArray2.push(etcInfo2);
+		<%
+		}
+		%>
+		var etcJSON2 = new Object();
+		etcJSON2.bsk_option = etcArray2;
+		form.ETC_DATA2.value = JSON.stringify(etcJSON2);
+		console.log(form.ETC_DATA2.value); --%>
 		if(confirm('화면의 정보대로 결제가 진행 됩니다. 결제 하시겠습니까???')){
 			form.submit();
 		}
@@ -315,6 +370,7 @@ ul > li > textarea.psyTermsTextarea{
     <div class="container detail">
       <div class="wrap search-wrap btn-wrap">
         <div class="list_wrap">
+        <!-- https://pg.paynuri.com/paymentgateway/mobile/reqPay.do -->
         	<form action="https://pg.paynuri.com/paymentgateway/mobile/reqPay.do" method="post" accept-charset="euc-kr" id="orderForm">
         		<!-- 모든 결제의 공통 파라미터 작성 ==============================================================================================================-->
         		<!-- 가맹점 번호       	-->	<input type="hidden" id="STOREID" name="STOREID" value="1500000088"/>
