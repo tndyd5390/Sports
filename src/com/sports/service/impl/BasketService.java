@@ -1,7 +1,9 @@
 package com.sports.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -21,7 +23,7 @@ public class BasketService implements IBasketService{
 	@Override
 	public int insertCustomerAddBasket(BasketDTO bDTO, List<String> optNos, List<String> optNames, List<String> optKinds, String userNo) throws Exception{
 		List<Basket_OptionDTO> oList = new ArrayList<>();
-		if(optNos.size() != optNames.size() || optNos.size() != optKinds.size() || optNames.size() != optKinds.size()) throw new IndexOutOfBoundsException("제품의 인덱스가 맞지 않습니다.");
+		if(optNos.size() != optNames.size() || optNos.size() != optKinds.size() || optNames.size() != optKinds.size()) throw new IndexOutOfBoundsException("ÀÎµ¦½º°¡ ¸ÂÁö ¾Ê½À´Ï´Ù.");
 		for(int i = 0; i < optNos.size(); i++){
 			Basket_OptionDTO oDTO = new Basket_OptionDTO();
 			oDTO.setOpt_no(optNos.get(i));
@@ -45,7 +47,28 @@ public class BasketService implements IBasketService{
 	}
 
 	@Override
-	public BasketDTO getCustomerBasket(String userNo) throws Exception {
-		return null;
+	public List<BasketDTO> getCustomerBasketList(String userNo) throws Exception {
+		
+		List<BasketDTO> bList = basketMapper.getCustomerBasketList(userNo);
+		for(int i = 0; i < bList.size(); i++){
+			Map<String, String> parameterMap = new HashMap<String, String>();
+			parameterMap.put("userNo", bList.get(i).getUser_no());
+			parameterMap.put("bskNo", bList.get(i).getBsk_no());
+			List<Basket_OptionDTO> bOptList = basketMapper.getCustomerBasketOptionList(parameterMap);
+			bList.get(i).setBskOptList(bOptList);
+		}
+		
+		return bList;
+	}
+
+	@Override
+	public List<BasketDTO> updateCustomerBasketOne(String bskNo, String userNo) throws Exception {
+		int updateResult = 0;
+		updateResult = basketMapper.updateCustomerBasketDeleteOne(bskNo);
+		List<BasketDTO> bList = getCustomerBasketList(userNo);
+		if(bList == null){
+			bList = new ArrayList<>();
+		}
+		return bList;
 	}
 }
