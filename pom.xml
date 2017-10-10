@@ -208,7 +208,12 @@
          <artifactId>jstl</artifactId>
          <version>1.2</version>
       </dependency>
-
+      <!-- GeoCoder -->
+	<dependency>
+		<groupId>com.google.code.geocoder-java</groupId>
+		<artifactId>geocoder-java</artifactId>
+		<version>0.16</version>
+	</dependency>
       <!-- Test -->
       <dependency>
          <groupId>junit</groupId>
