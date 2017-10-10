@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -92,8 +93,19 @@ public class AcademyController {
 	}
 	
 	@RequestMapping(value="accountDetail")
-	public String accountDetail(HttpSession session) throws Exception{
+	public String accountDetail(HttpServletRequest req, HttpServletResponse res, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + "accountDetail Start!!");
+		
+		String aca_no = req.getParameter("aca_no");
+		
+		AcademyDTO aDTO = new AcademyDTO();
+		aDTO.setAca_no(aca_no);
+		
+		AcademyDTO cDTO = academyService.getAcademyDetailInfo(aDTO);
+		
+		model.addAttribute("cDTO", cDTO);
+		
+		aDTO = null;
 		
 		log.info(this.getClass() + "accountDetail End!!");
 		return "account/accountDetail";

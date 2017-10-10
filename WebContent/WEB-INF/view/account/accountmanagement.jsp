@@ -96,7 +96,7 @@ if(aList == null){
                     %>
                     <li>
                     	<ul>
-                    		<li><a href="accountDetail.jsp?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>"><%=CmmUtil.nvl(aDTO.getAca_name()) %></a></li>
+                    		<li><a href="accountDetail.do?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>"><%=CmmUtil.nvl(aDTO.getAca_name()) %></a></li>
                     		<li><%=CmmUtil.nvl(aDTO.getAca_ceo()) %></li>
                     		<li><%=CmmUtil.nvl(aDTO.getTel()) %></li>
                     		<li><%=CmmUtil.nvl(aDTO.getAca_area2()) %></li>

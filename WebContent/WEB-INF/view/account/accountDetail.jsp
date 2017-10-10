@@ -9,16 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/html5/include/head.jsp"%>
 <script>
-	function goUpdate(uNo){
+	function goUpdate(aNo){
 		location.href = "accountUpdate.do?aca_no="+aca_no;
 	}
 	function goBack(){
 		location.href = "accountList.do";
 	}
-	function doDelete(uNo){
-		if(confirm("해당 유저를 삭제 하시겠습니까?")){
+	function doDelete(aNo){
+		if(confirm("해당 거래처를 삭제 하시겠습니까?")){
 			alert("삭제되었습니다.");
-			location.href = "userDelete.do?uNo="+uNo;
+			location.href = "accountList.do";
 			return true;		
 		}else{
 			return false;
@@ -51,8 +51,8 @@
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
-								<p class="blue_text">거래처명</p> <input type="text"
-								id="aca_name" name="aca_name">
+								<p class="blue_text">거래처명</p> <input type="text" readonly
+								value=<%=CmmUtil.nvl(aDTO.getAca_name())%>>
 							</li>
 							<li>
 								<p class="blue_text">대표자명</p> <input type="text" id="aca_ceo"

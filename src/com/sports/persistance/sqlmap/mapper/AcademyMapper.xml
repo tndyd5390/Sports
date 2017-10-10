@@ -14,4 +14,8 @@
 	<select id="getAcademyList" resultType="AcademyDTO">
 		SELECT ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
 	</select>
+	<select id="getAcademyDetailInfo" resultType="AcademyDTO" parameterType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2, ACA_AREA3,
+		ACA_EVENT1, TEL, ACA_COMMENT
+	</select>
 </mapper>
