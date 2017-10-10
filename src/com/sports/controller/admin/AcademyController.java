@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sports.dto.AcademyDTO;
 import com.sports.service.IAcademyService;
 import com.sports.util.CmmUtil;
+import com.sports.util.GeoCodeUtil;
 
 @Controller
 public class AcademyController {
@@ -56,6 +57,10 @@ public class AcademyController {
 		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
 		String tel = CmmUtil.nvl(req.getParameter("tel"));
 		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
+		Float[] locs = GeoCodeUtil.geoCoding(aca_area2);
+		String x = CmmUtil.nvl(locs[0].toString());
+		String y = CmmUtil.nvl(locs[1].toString());
+		
 		
 		log.info("aca_name : " + aca_name);
 		log.info("aca_ceo : " + aca_ceo);
@@ -65,6 +70,8 @@ public class AcademyController {
 		log.info("aca_event1 : " + aca_event1);
 		log.info("tel : " + tel);
 		log.info("aca_comment : " + aca_comment);
+		log.info("x : " + x);
+		log.info("y : " + y);
 		
 		AcademyDTO aDTO = new AcademyDTO();
 		
@@ -76,6 +83,8 @@ public class AcademyController {
 		aDTO.setAca_event1(aca_event1);
 		aDTO.setTel(tel);
 		aDTO.setAca_comment(aca_comment);
+		aDTO.setAca_lat(x);
+		aDTO.setAca_lng(y);
 		
 		log.info("test!!!!!!!!!");
 		
@@ -98,16 +107,73 @@ public class AcademyController {
 		
 		String aca_no = req.getParameter("aca_no");
 		
-		AcademyDTO aDTO = new AcademyDTO();
-		aDTO.setAca_no(aca_no);
+		AcademyDTO cDTO = new AcademyDTO();
+		cDTO.setAca_no(aca_no);
 		
-		AcademyDTO cDTO = academyService.getAcademyDetailInfo(aDTO);
+		AcademyDTO aDTO = academyService.getAcademyDetailInfo(cDTO);
 		
-		model.addAttribute("cDTO", cDTO);
+		model.addAttribute("aDTO", aDTO);
 		
-		aDTO = null;
+		cDTO = null;
 		
 		log.info(this.getClass() + "accountDetail End!!");
 		return "account/accountDetail";
+	}
+	@RequestMapping(value="accountUpdate")
+	public String accountUpdate(HttpServletRequest req, HttpServletResponse res, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + "accountUpdate Start!!");
+		String aca_no = req.getParameter("aca_no");
+		AcademyDTO cDTO = new AcademyDTO();
+		cDTO.setAca_no(aca_no);
+
+		AcademyDTO aDTO = academyService.getAcademyDetailInfo(cDTO);
+
+		model.addAttribute("aDTO", aDTO);
+
+		cDTO = null;
+		log.info(this.getClass() + "accountUpdate End!!");
+		return "account/accountUpdate";
+	}
+	@RequestMapping(value="accountUpdateProc")
+	public String accountUpdateProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
+		log.info(this.getClass() + "accountUpdateProc Start!!");
+		
+		String aca_no = CmmUtil.nvl(req.getParameter("aca_no"));
+		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
+		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
+		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
+		String aca_area2 = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area3 = CmmUtil.nvl(req.getParameter("aca_area3"));
+		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
+		String tel = CmmUtil.nvl(req.getParameter("tel"));
+		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
+		
+		log.info("aca_no : " + aca_no);
+		log.info("aca_name : " + aca_name);
+		log.info("aca_ceo : " + aca_ceo);
+		log.info("aca_area1 : " + aca_area1);
+		log.info("aca_area2 : " + aca_area2);
+		log.info("aca_area3 : " + aca_area3);
+		log.info("aca_event1 : " + aca_event1);
+		log.info("tel : " + tel);
+		log.info("aca_comment : " + aca_comment);
+		
+		AcademyDTO aDTO = new AcademyDTO();
+		aDTO.setAca_no(aca_no);
+		aDTO.setAca_name(aca_name);
+		aDTO.setAca_ceo(aca_ceo);
+		aDTO.setAca_area1(aca_area1);
+		aDTO.setAca_area2(aca_area2);
+		aDTO.setAca_area3(aca_area3);
+		aDTO.setAca_event1(aca_event1);
+		aDTO.setTel(tel);
+		aDTO.setAca_comment(aca_comment);
+		
+		academyService.updateAcademyDetail(aDTO);
+		
+		aDTO = null;
+		
+		log.info(this.getClass() + "accountUpdateProc End!!");
+		return "redirect:accountDetail.do?aca_no="+aca_no;
 	}
 }

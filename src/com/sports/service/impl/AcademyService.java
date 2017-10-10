@@ -26,7 +26,12 @@ public class AcademyService implements IAcademyService {
 	}
 
 	@Override
-	public AcademyDTO getAcademyDetailInfo(AcademyDTO aDTO) throws Exception {
-		return academyMapper.getAcademyDetailInfo(aDTO);
+	public AcademyDTO getAcademyDetailInfo(AcademyDTO cDTO) throws Exception {
+		return academyMapper.getAcademyDetailInfo(cDTO);
+	}
+
+	@Override
+	public void updateAcademyDetail(AcademyDTO aDTO) throws Exception {
+		academyMapper.updateAcademyDetail(aDTO);
 	}
 }
