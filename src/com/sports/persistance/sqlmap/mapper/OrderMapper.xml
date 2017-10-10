@@ -1,4 +1,81 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.OrderMapper">
+	<insert id="insertOrderProdFromBasket" parameterType="BasketDTO">
+		INSERT INTO ORD_PRODUCT
+		(
+			TRAN_NO,
+			PROD_NO,
+			PROD_QTY,
+			REG_USER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{tranNo},
+			#{prod_no},
+			#{prod_qty},
+			#{reg_user_no},
+			SYSDATE
+		)
+	</insert>
+	
+	<insert id="insertOrderProdOptFromBasket" parameterType="list">
+		INSERT INTO ORD_PRODUCT_OPTION
+		(
+			ORD_PROD_NO,
+			TRAN_NO,
+			ORD_PRODUCT_NAME,
+			ORD_PRODUCT_KIND,
+			REG_USER_NO,
+			REG_DT
+		)
+		<foreach collection="list" item="item" index="index" separator=",">
+			((SELECT MAX(ORD_PROD_NO) FROM ORD_PRODUCT), #{item.tranNo}, #{item.opt_name},#{item.opt_kind},#{item.reg_user_no}, SYSDATE)
+		</foreach>
+	</insert>
+	
+	<update id="updateOrderProdStatusFromBasket" parameterType="list">
+		<foreach collection="list" item="item" index="index" separator=";">
+			UPDATE BASKET_INFO SET STATUS = 'C' WHERE BSK_NO = #{item.bsk_no}
+		</foreach>
+		;
+	</update>
+	
+	<insert id="insertOrderInfoFromBasket" parameterType="Order_infoDTO">
+		INSERT INTO ORDER_INFO
+		(
+			TRAN_NO,
+			RECIPIENT,
+			TEL,
+			POSTCODE,
+			ORD_PRICE,
+			ADDRESS,
+			ADDRESSDETAIL
+			ORD_STAT,
+			ORD_CANCEL,
+			ORD_MESSAGE,
+			REG_USER_NO,
+			REG_DT,
+			TRANTYPE,
+			TID
+		)
+		VALUES
+		(	
+			#{tranNo},
+			#{recipient},
+			#{tel},
+			#{postCode},
+			#{ord_price},
+			#{address},
+			#{addressDetail},
+			#{ord_stat},
+			#{ord_cancel},
+			#{ord_message},
+			#{reg_user_no},
+			SYSDATE,
+			#{tranType},
+			#{tid}
+		)
+	</insert>
 </mapper>

@@ -24,9 +24,7 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
-<script>/**
- * 
- */
+<script>
 
 	function plItemCnt(price){
 		var qty = parseInt($('#prod_qty').val());
@@ -176,6 +174,38 @@
 			return false;
 		}
 	}
+
+	function orderDirect(){
+		var form = document.createElement("form");
+		form.setAttribute("method", "post");
+		form.setAttribute("action", "#");
+		
+		var prodNo = document.createElement("input");
+		prodNo.setAttribute("type", "hidden");
+		prodNo.setAttribute("name", "prodNo");
+		prodNo.setAttribute("value", "<%=CmmUtil.nvl(pDTO.getProd_no())%>");
+		form.addendChild(prodNo);
+		
+		var prodName = document.createElement("input");
+		prodName.setAttribute("type", "hidden");
+		prodName.setAttribute("name", "prodName");
+		prodName.setAttribute("value", "<%=CmmUtil.nvl(pDTO.getProd_name())%>");
+		form.appendChild(prodName);
+		
+		var prodQty = document.createElement("input");
+		prodQty.setAttribute("type", "hidden");
+		prodQty.setAttribute("name", "prodQty");
+		prodQty.setAttribute("value", document.getElementById("prod_qty").value);
+		form.appendChild(prodQty);
+		
+		<%if(pMap.size() != 0){%>
+			var optionArray = new Array();
+			var optionObject = new Object();
+			
+			
+			
+		<%}%>
+	}
 </script>
 </head>
 <body>
@@ -262,7 +292,7 @@
         </div>
 
         <div class="btn-groub">
-          <button class="col-2 blue-btn button">바로 구매</button>
+          <button class="col-2 blue-btn button" onclick="orderDirect();">바로 구매</button>
           <%if(pMap.size() != 0){ %>
           <button class="col-2 glay-btn button" onclick="addBasket();">장바구니 담기</button>
           <%}else{ %>

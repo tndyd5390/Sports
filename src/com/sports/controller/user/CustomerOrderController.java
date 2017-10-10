@@ -139,13 +139,15 @@ public class CustomerOrderController {
 	    	oDTO.setOrd_stat("C");
 	    	oDTO.setOrd_cancel("N");
 	    	oDTO.setReg_user_no(userNo);
+	    	oDTO.setTran_no(tran_type);
+	    	oDTO.setTid(tid);
 	    	jsonObject = (JSONObject)jsonParser.parse(etc_data2);
 	    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_no");
-	    	List<String> bskNoList = new ArrayList<>();
+	    	/*List<String> bskNoList = new ArrayList<>();
 	    	for(int i = 0; i< jsonArray.size(); i++){
 	    		JSONObject bskNoObject = (JSONObject)jsonArray.get(i);
 	    		bskNoList.add(CmmUtil.nvl((String)bskNoObject.get("bsk_no")));
-	    	}
+	    	}*/
 	    }else{
 	    	/**
 	    	 * 결제 실패
