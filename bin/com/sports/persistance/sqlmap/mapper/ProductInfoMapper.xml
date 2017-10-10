@@ -17,14 +17,7 @@
 		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE,  F.SRC_FILENAME AS MAIN_SRC 
 		FROM PRODUCT_INFO P, PROD_FILE F, CATEGORY_INFO C
 		WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE='M' AND P.CATEGORY_NO = C.CATEGORY_NO AND C.PARENTS_NO = #{parents_no}
-		ORDER BY P.PROD_NO DESC LIMIT 6
-	</select>
-	
-	<select id="getSelectMoreProdList" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
-		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE,  F.SRC_FILENAME AS MAIN_SRC 
-		FROM PRODUCT_INFO P, PROD_FILE F, CATEGORY_INFO C
-		WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE='M' AND P.CATEGORY_NO = C.CATEGORY_NO AND C.PARENTS_NO = #{parents_no}
-		ORDER BY P.PROD_NO DESC LIMIT 6 OFFSET #{read_more}
+		ORDER BY P.PROD_NO DESC
 	</select>
 	
 	<select id="getSelectOption" resultType="ProductInfoDTO">
@@ -43,7 +36,7 @@
 				#{prod_price},
 				#{prod_contents},
 				#{category_no},
-				#{reg_user_no},
+				'5',
 				NOW()
 			)<selectKey resultType="String" keyProperty="prod_no" order="AFTER">
 				SELECT LAST_INSERT_ID()
@@ -64,7 +57,7 @@
 				#{org_filename},
 				#{src_filename},
 				'M',
-				#{reg_user_no},
+				'5',
 				NOW()
 			)
 	</insert>
@@ -82,7 +75,7 @@
 				#{org_filename},
 				#{src_filename},
 				'D',
-				#{reg_user_no},
+				'5',
 				NOW()
 			)
 	</insert>
@@ -90,83 +83,31 @@
 	<insert id="insertProductOption" parameterType="ProductInfoDTO">
 		INSERT INTO PROD_OPTION (PROD_NO, OPT_NAME, OPT_KIND, OPT_PRICE, REG_USER_NO, REG_DT) VALUES
 		<foreach collection="list" item='item' separator=" , ">
-			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, #{item.opt_price}, #{reg_user_no}, NOW())
+			(#{item.prod_no} , #{item.opt_name}, #{item.opt_kind}, #{item.opt_price}, '5', NOW())
 		</foreach>
 	</insert>
 	
 	<select id="getProductDetail" parameterType="ProductInfoDTO" resultType="ProductInfoDTO">
-		SELECT DISTINCT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, P.PROD_CONTENTS, C.CATEGORY_NO, C.CATEGORY_NAME, C.PARENTS_NO AS PARENTS_NO,
+		SELECT DISTINCT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, P.PROD_CONTENTS, C.CATEGORY_NO, C.CATEGORY_NAME,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
 		    ) AS DETAIL_SRC,
 		    (
 		    SELECT SRC_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    ) AS MAIN_SRC,
-		    (
-			SELECT ORG_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
-		    ) AS DETAIL_ORG_NAME,
-		    (
-			SELECT ORG_FILENAME FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    ) AS MAIN_ORG_NAME,
-		    (
-		    SELECT FILE_NO FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'D'
-		    ) AS DETAIL_FILE_NO,
-		    (
-		    SELECT FILE_NO FROM PROD_FILE WHERE PROD_NO = #{prod_no} AND FILE_TYPE = 'M'
-		    ) AS MAIN_FILE_NO
+		    ) AS MAIN_SRC
 		FROM PRODUCT_INFO P, CATEGORY_INFO C, PROD_FILE F
 	    WHERE P.PROD_NO = F.PROD_NO AND P.CATEGORY_NO = C.CATEGORY_NO AND P.PROD_NO = #{prod_no}
 	    GROUP BY P.PROD_NO, P.PROD_NAME	
     </select>
-	<select id="getProductOption" parameterType="string" resultType="ProdOptionDTO">
-		SELECT
-			O.OPT_NO,
-			O.PROD_NO,
-		    O.OPT_NAME,
-		    O.OPT_KIND,
-		    O.OPT_PRICE,
-		    C.CODE_NAME
+	<select id="getProductOption" parameterType="string" resultType="ProductOptionDTO">
+		SELECT 
+    		C.CODE_NAME, 
+  		  	O.OPT_NAME, 
+    		O.OPT_PRICE 
 		FROM 
 			PROD_OPTION O,
 		    CODE_INFO C
 		WHERE
 			O.PROD_NO = #{prodNo} AND C.CODE_NO = O.OPT_KIND;
-	</select>
-	
-	<delete id="deleteOpt" parameterType="ProdOptionDTO">
-		DELETE FROM PROD_OPTION WHERE OPT_NO = #{opt_no}
-	</delete>
-	
-	<update id="updateProduct" parameterType="ProductInfoDTO">
-		UPDATE PRODUCT_INFO SET 
-		PROD_NAME = #{prod_name}, PROD_PRICE = #{prod_price},
-		PROD_CONTENTS = #{prod_contents}, CATEGORY_NO = #{category_no},
-		CHG_USER_NO = #{chg_user_no}, CHG_DT = NOW()
-		WHERE PROD_NO = #{prod_no}
-	</update>
-	
-	<delete id="deleteFile" parameterType="ProductFileDTO">
-		DELETE FROM PROD_FILE WHERE FILE_NO = #{file_no}
-	</delete>
-	
-	<delete id="deleteProduct" parameterType="String">
-		DELETE FROM PRODUCT_INFO WHERE PROD_NO = #{prodNo}
-	</delete>
-	
-	<delete id="deleteOptProdNo" parameterType="String">
-		DELETE FROM PROD_OPTION WHERE PROD_NO = #{prodNo}
-	</delete>
-	
-	<select id="getFileInfo" parameterType="String" resultType="ProductFileDTO">
-		SELECT * FROM PROD_FILE WHERE PROD_NO = #{prodNo}
-	</select>
-	
-	<delete id="deleteFileProdNo" parameterType="String">
-		DELETE FROM PROD_FILE WHERE PROD_NO = #{prodNo}
-	</delete>
-	
-	<select id="getMoreProdList" resultType="ProductInfoDTO" parameterType="int">
-		SELECT P.PROD_NO, P.PROD_NAME, P.PROD_PRICE, F.SRC_FILENAME AS MAIN_SRC
-		FROM PRODUCT_INFO P, PROD_FILE F WHERE P.PROD_NO = F.PROD_NO AND F.FILE_TYPE = 'M' ORDER BY PROD_NO DESC LIMIT 6 OFFSET #{readMore}
 	</select>
 </mapper>
