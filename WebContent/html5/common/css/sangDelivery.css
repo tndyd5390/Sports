@@ -11,6 +11,19 @@
 		margin-top: 60px;
 		margin-bottom: 10px;
 	}
+	
+	@media screen and (max-width:360px) {
+		.shCTitle{
+		display: inline-block;
+		width: 25%;
+		color: #7F7F7F;
+		font-weight: bold;
+		display: table-cell;
+		vertical-align: middle;
+		text-align: center;
+		}
+	}
+	
 	.shCTitle{
 		display: inline-block;
 		width: 21%;
@@ -87,10 +100,22 @@
         font-size:9pt;
         border-bottom:1px solid silver;
         vertical-align:baseline;
-	}    
-    #ulTable > li > ul > li:first-child               {width:44%;}
-    #ulTable > li > ul > li:first-child +li           {width:28%;}
-    #ulTable > li > ul > li:first-child +li+li        {width:28%;}
+	}
+	
+	@media screen and (max-width:414px) {
+    #ulTable > li > ul > li:first-child               {width:23%;}
+    #ulTable > li > ul > li:first-child +li           {width:34%;}
+    #ulTable > li > ul > li:first-child +li+li        {width:40%;}
+	}
+	@media screen and (max-width:320px) {
+	#ulTable > li > ul > li:first-child               {width:26%;}
+    #ulTable > li > ul > li:first-child +li           {width:34%;}
+    #ulTable > li > ul > li:first-child +li+li        {width:40%;}	
+	}
+	
+	#ulTable > li > ul > li:first-child               {width:16%;}
+    #ulTable > li > ul > li:first-child +li           {width:42%;}
+    #ulTable > li > ul > li:first-child +li+li        {width:42%;}
 
 	#ulTable > li:nth-child(odd) {
 	background-color: #E1E1E1;
