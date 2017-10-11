@@ -12,6 +12,7 @@
 <script src="/html5/common/js/depth.js"></script>
 <script type="text/javascript">
 	$(function() {
+		optList();
 		var parents = $('#parents_depth option:selected').val();
 		selected(parents);
 		selectDepth();
@@ -74,7 +75,7 @@
 							<li>
 								<p class="blue_text">옵션</p>
 								<div class="select_wrap">
-									<select class="select-80" id="optParents" name="code_no">
+									<select class="select-80" id="optParents" name="opt_parents">
 										<option value="0" selected>선택하세요</option>
 									</select>
 									<button type="button" class="select-btn" onclick='return optAdd()'>추가</button>

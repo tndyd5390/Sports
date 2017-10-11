@@ -9,16 +9,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/html5/include/head.jsp"%>
 <script>
-	function goUpdate(uNo){
-		location.href = "accountUpdate.do?aca_no="+aca_no;
+	function goUpdate(aNo){
+		location.href = "accountUpdate.do?aca_no="+aNo;
 	}
 	function goBack(){
-		location.href = "accountList.do";
+		location.href = "accountmanagement.do";
 	}
-	function doDelete(uNo){
-		if(confirm("해당 유저를 삭제 하시겠습니까?")){
+	function doDelete(aNo){
+		if(confirm("해당 거래처를 삭제 하시겠습니까?")){
 			alert("삭제되었습니다.");
-			location.href = "userDelete.do?uNo="+uNo;
+			location.href = "accountDelete.do";
 			return true;		
 		}else{
 			return false;
@@ -51,35 +51,36 @@
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
-								<p class="blue_text">거래처명</p> <input type="text"
-								id="aca_name" name="aca_name">
+								<p class="blue_text">거래처명</p>
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_name())%>>
 							</li>
 							<li>
-								<p class="blue_text">대표자명</p> <input type="text" id="aca_ceo"
-								name="aca_ceo">
+								<p class="blue_text">대표자명</p>
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_ceo())%>>
 							</li>
 							<li>
 								<p class="blue_text">우편번호</p>
-									<input type="text" id="aca_area1" name="aca_area1">
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area1())%>>
 							</li>
 							<li>
-								<p class="blue_text">주소</p> <input type="text" id="aca_area2"
-								name="aca_area2" onclick="daumPostcode()">
+								<p class="blue_text">주소</p>
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area2())%>>
 							</li>
 							<li>
 								<p class="blue_text">상세주소</p>
-								<input type="text" id="aca_area3" name="aca_area3">
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area3())%>>
 							</li>
 							<li>
 								<p class="blue_text">업종</p>
-								<input type="text" id="aca_event1" name="aca_event1">
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_event1())%>>
 							</li>
 							<li>
-								<p class="blue_text">전화번호</p> <input type="text" id="tel"
-								name="tel">
+								<p class="blue_text">전화번호</p>
+								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getTel())%>>
 							</li>
 							<li>
-								<p class="blue_text">거래발생일</p> <textarea id="aca_comment" name="aca_comment"></textarea>
+								<p class="blue_text">거래발생일</p>
+								<textarea readonly><%=CmmUtil.nvl(aDTO.getAca_comment()) %></textarea>
 							</li>
 						</ul>
 					</div>

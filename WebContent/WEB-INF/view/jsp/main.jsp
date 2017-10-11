@@ -101,7 +101,7 @@ function myPage(){
           </a>
         </li>
         <li>
-          <a href="/admin/sale/list.do"><img src="html5/common/images/ic_menu_05sale.png" alt="매출분석정보">
+          <a href="basketAnalysis.do"><img src="html5/common/images/ic_menu_05sale.png" alt="매출분석정보">
             <p>매출분석정보</p>
           </a>
         </li>
@@ -111,7 +111,7 @@ function myPage(){
           </a>
         </li>
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_07community.png" alt="커뮤니티관리">
+          <a href="customer/QA/QAList.do"><img src="html5/common/images/ic_menu_07community.png" alt="커뮤니티관리">
             <p>커뮤니티관리</p>
           </a>
         </li>

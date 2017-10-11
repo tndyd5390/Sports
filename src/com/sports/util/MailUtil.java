@@ -37,7 +37,7 @@ public class MailUtil {
 		});
 		session.setDebug(true);
 		Message mimeMessage = new MimeMessage(session);
-		mimeMessage.setFrom(new InternetAddress("portfolio_jg@naver.com"));
+		mimeMessage.setFrom(new InternetAddress("kangseokopo@gmail.com"));
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 		mimeMessage.setSubject(subject);
 		mimeMessage.setText(body);

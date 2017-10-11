@@ -4,14 +4,24 @@
 
 	<insert id="insertAcademy" parameterType="AcademyDTO">
 		INSERT INTO ACADEMY (
-			ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2, ACA_AREA3,
-			ACA_EVENT1, TEL, ACA_COMMENT, REG_USER_NO, REG_DT
+			ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2, ACA_AREA3, ACA_EVENT1,
+			TEL, ACA_COMMENT, ACA_VISIT, ACA_LAT, ACA_LNG, REG_USER_NO, REG_DT
 		) VALUES (
-			#{aca_name}, #{aca_ceo}, #{aca_area1}, #{aca_area2}, #{aca_area3},
-			 #{aca_event1}, #{tel}, #{aca_comment}, '1111111', now()
+			#{aca_name}, #{aca_ceo}, #{aca_area1}, #{aca_area2}, #{aca_area3}, #{aca_event1},
+			#{tel}, #{aca_comment}, 'n', #{aca_lat}, #{aca_lng}, '1111111', now()
 		)
 	</insert>
 	<select id="getAcademyList" resultType="AcademyDTO">
-		SELECT ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
 	</select>
+	<select id="getAcademyDetailInfo" resultType="AcademyDTO" parameterType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2,
+		ACA_AREA3, ACA_EVENT1, TEL, ACA_COMMENT FROM ACADEMY
+		WHERE ACA_NO = #{aca_no}
+	</select>
+	<update id="updateAcademyDetail" parameterType="AcademyDTO">
+		UPDATE ACADEMY SET ACA_NAME = #{aca_name},
+		 ACA_CEO, ACA_AREA1, ACA_AREA2, ACA_AREA3, ACA_EVENT1,
+			TEL, ACA_COMMENT, ACA_VISIT, ACA_LAT, ACA_LNG, CHG_USER_NO, CHG_DT
+	</update>
 </mapper>

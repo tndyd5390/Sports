@@ -7,7 +7,14 @@ public class AnalysisDTO {
 	private String reg_dt;
 	private String quarter;
 	private String year;
+	private String percent;
 	
+	public String getPercent() {
+		return percent;
+	}
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
 	public String getYear() {
 		return year;
 	}

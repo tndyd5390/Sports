@@ -427,6 +427,7 @@ public class ProductInfoController {
 			log.info("-----option-----");
 			productInfoService.insertOption(optList);
 		}
+		productInfoService.updateProduct(pDTO);
 		log.info(this.getClass() + " productUpdateProc End!!");
 		return "redirect:productDetail.do?pNo="+prodNo;
 	}

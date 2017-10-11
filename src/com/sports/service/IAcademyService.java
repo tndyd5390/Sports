@@ -10,4 +10,8 @@ public interface IAcademyService {
 
 	public List<AcademyDTO> getAcademyList() throws Exception;
 
+	public AcademyDTO getAcademyDetailInfo(AcademyDTO cDTO) throws Exception;
+
+	public void updateAcademyDetail(AcademyDTO aDTO) throws Exception;
+
 }
