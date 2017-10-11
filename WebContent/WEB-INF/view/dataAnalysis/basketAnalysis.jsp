@@ -78,8 +78,8 @@ $(function() {
 					        datasets: [{
 					            label: '갯수',
 					            data: arr1,
-					            backgroundColor: 'rgb(23, 119, 203)',
-					            borderColor: 'rgb(23, 119, 203)',
+					            backgroundColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
+					            borderColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
 					            borderWidth : 1
 					        }]
 					    },
@@ -179,8 +179,8 @@ $(function() {
 					        datasets: [{
 					            label: '갯수',
 					            data: arr1,
-					            backgroundColor: 'rgb(23, 119, 203)',
-					            borderColor: 'rgb(23, 119, 203)',
+					            backgroundColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
+					            borderColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
 					            borderWidth : 1
 					        }]
 					    },
@@ -279,8 +279,8 @@ $(function() {
 					        datasets: [{
 					            label: '갯수',
 					            data: arr1,
-					            backgroundColor: 'rgb(23, 119, 203)',
-					            borderColor: 'rgb(23, 119, 203)',
+					            backgroundColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
+					            borderColor: ['rgb(23, 119, 203)','rgb(54, 162, 235)','rgb(96, 191, 255)'],
 					            borderWidth : 1
 					        }]
 					    },
