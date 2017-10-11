@@ -221,6 +221,12 @@
          <version>4.7</version>
          <scope>test</scope>
       </dependency>
+      <!-- jsonParser -->
+     <dependency>
+		<groupId>com.googlecode.json-simple</groupId>
+		<artifactId>json-simple</artifactId>
+		<version>1.1</version>
+	  </dependency>
    </dependencies>
    <repositories>
       <repository>
