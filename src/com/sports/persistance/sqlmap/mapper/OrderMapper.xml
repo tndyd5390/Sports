@@ -16,7 +16,7 @@
 			#{prod_no},
 			#{prod_qty},
 			#{reg_user_no},
-			SYSDATE
+			NOW()
 		)
 	</insert>
 	
@@ -30,14 +30,15 @@
 			REG_USER_NO,
 			REG_DT
 		)
+		VALUES
 		<foreach collection="list" item="item" index="index" separator=",">
-			((SELECT MAX(ORD_PROD_NO) FROM ORD_PRODUCT), #{item.tranNo}, #{item.opt_name},#{item.opt_kind},#{item.reg_user_no}, SYSDATE)
+			((SELECT MAX(ORD_PROD_NO) FROM ORD_PRODUCT), #{item.tranNo}, #{item.opt_name}, #{item.opt_kind}, #{item.reg_user_no}, NOW())
 		</foreach>
 	</insert>
 	
 	<update id="updateOrderProdStatusFromBasket" parameterType="list">
 		<foreach collection="list" item="item" index="index" separator=";">
-			UPDATE BASKET_INFO SET STATUS = 'C' WHERE BSK_NO = #{item.bsk_no}
+			UPDATE BASKET_INFO SET STATUS = 'Y' WHERE BSK_NO = #{item.bsk_no}
 		</foreach>
 		;
 	</update>
@@ -51,7 +52,7 @@
 			POSTCODE,
 			ORD_PRICE,
 			ADDRESS,
-			ADDRESSDETAIL
+			ADDRESSDETAIL,
 			ORD_STAT,
 			ORD_CANCEL,
 			ORD_MESSAGE,
@@ -62,7 +63,7 @@
 		)
 		VALUES
 		(	
-			#{tranNo},
+			#{tran_no},
 			#{recipient},
 			#{tel},
 			#{postCode},
@@ -73,7 +74,7 @@
 			#{ord_cancel},
 			#{ord_message},
 			#{reg_user_no},
-			SYSDATE,
+			NOW(),
 			#{tranType},
 			#{tid}
 		)
