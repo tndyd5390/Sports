@@ -25,8 +25,8 @@
 		(
 			ORD_PROD_NO,
 			TRAN_NO,
-			ORD_PRODUCT_NAME,
-			ORD_PRODUCT_KIND,
+			ORD_PRODOPT_NAME,
+			ORD_PRODOPT_KIND,
 			REG_USER_NO,
 			REG_DT
 		)
@@ -38,7 +38,7 @@
 	
 	<update id="updateOrderProdStatusFromBasket" parameterType="list">
 		<foreach collection="list" item="item" index="index" separator=";">
-			UPDATE BASKET_INFO SET STATUS = 'Y' WHERE BSK_NO = #{item.bsk_no}
+			UPDATE BASKET_INFO SET STATUS = 'N' WHERE BSK_NO = #{item.bsk_no}
 		</foreach>
 		;
 	</update>
