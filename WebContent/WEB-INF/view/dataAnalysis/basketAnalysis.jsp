@@ -14,40 +14,46 @@
 <script type="text/javascript">
 $(function() {
 		basketQuarter();
+		bQD();
 		basketYear();
+		bYD();
 		$('#chy-yearLeft').click(function() {
 			$('#chy-years').text(parseInt($('#chy-years').text()) - 1);
 			basketYear();
+			bYD();
 			return false;
 		})
 		$('#chy-yearRight').click(function() {
 			$('#chy-years').text(parseInt($('#chy-years').text()) + 1);
 			basketYear();
+			bYD();
 			return false;
 		})
 		$('#chy-countLeft').click(function() {
 			if ($('#chy-count').text() != "1")
 				$('#chy-count').text(parseInt($('#chy-count').text()) - 1);
 			basketQuarter();
+			bQD();
 			return false;
 		})
 		$('#chy-countRight').click(function() {
 			if ($('#chy-count').text() != "4")
 				$('#chy-count').text(parseInt($('#chy-count').text()) + 1);
 			basketQuarter();
+			bQD();
 			return false;
 		})
 		$('#datepicker1').on("change",function(){
 			var day = $('#datepicker1').val();
 			$('#thead_date').html("qwewqe");
 			basketDay();
+			bDD();
 		})
 	});
 	function basketDay(){
 		$('#dayBody').html("<canvas id='myChart'></canvas>");
 		var date = $('#datepicker1').val();
 		var ctx = $('#myChart').get(0).getContext('2d');
-		console.log(ctx);
 		$.ajax({
 			url : 'basketDay.do',
 			method : 'post',
@@ -98,6 +104,53 @@ $(function() {
 			}
 		})
 	}
+	function bDD(){
+		$('#bDBody').html("<center><canvas id='dayDoughnut' style='max-width:300px; max-height:295px;'></canvas></center>");
+		var date = $('#datepicker1').val();
+		var ctx1 = $('#dayDoughnut').get(0).getContext('2d');
+		$.ajax({
+			url : 'basketDayDoughnut.do',
+			method : 'post',
+			data : {'date' : date},
+			success : function(data){
+				var arr1 = new Array();
+				var arr2 = new Array();
+				var arr3 = new Array();
+				$.each(data, function(key,value){
+					arr1.push(value.percent);
+					arr2.push(value.category_name);
+					arr3.push(value.sum);
+				});
+				
+				var myPieChart = new Chart(ctx1,{
+				    type: 'doughnut',
+				    data: {
+			            datasets: [{
+			                data: arr1,
+			                backgroundColor: [
+			                	'rgb(54, 162, 235)',
+			                	'rgb(75, 192, 192)',
+			                	'rgb(255, 99, 132)',
+			                	'rgb(255, 205, 86)'
+			                ]
+			            },
+			            {
+			                data: arr3,
+			                backgroundColor: [
+			                	'rgb(70, 150, 210)',
+			                	'rgb(90, 180, 185)',
+			                	'rgb(255, 120, 115)',
+			                	'rgb(255, 230, 80)'
+			                ]
+			            }
+			            ],
+			            labels: arr2
+			        }
+				});
+			}
+		})			
+	}
+
 	function basketQuarter(){
 		$('#qtBody').html("<canvas id='quarterChart'></canvas>");
 		var quarter = $('#chy-count').text();
@@ -152,6 +205,52 @@ $(function() {
 			}
 		})
 	}
+	function bQD(){
+		$('#bQDBody').html("<center><canvas id='quarterDoughnut' style='max-width:300px; max-height:295px;'></canvas></center>");
+		var quarter = $('#chy-count').text();
+		var ctx1 = $('#quarterDoughnut').get(0).getContext('2d');
+		$.ajax({
+			url : 'basketQuarterDoughnut.do',
+			method : 'post',
+			data : {'quarter' : quarter},
+			success : function(data){
+				var arr1 = new Array();
+				var arr2 = new Array();
+				var arr3 = new Array();
+				$.each(data, function(key,value){
+					arr1.push(value.percent);
+					arr2.push(value.category_name);
+					arr3.push(value.sum);
+				});
+				
+				var myPieChart = new Chart(ctx1,{
+				    type: 'doughnut',
+				    data: {
+			            datasets: [{
+			                data: arr1,
+			                backgroundColor: [
+			                	'rgb(54, 162, 235)',
+			                	'rgb(75, 192, 192)',
+			                	'rgb(255, 99, 132)',
+			                	'rgb(255, 205, 86)'
+			                ]
+			            },
+			            {
+			                data: arr3,
+			                backgroundColor: [
+			                	'rgb(70, 150, 210)',
+			                	'rgb(90, 180, 185)',
+			                	'rgb(255, 120, 115)',
+			                	'rgb(255, 230, 80)'
+			                ]
+			            }
+			            ],
+			            labels: arr2
+			        }
+				});
+			}
+		})			
+	}
 	function basketYear(){
 		$('#yrBody').html("<canvas id='yearChart'></canvas>");
 		var year = $('#chy-years').text();
@@ -205,6 +304,52 @@ $(function() {
 				}
 			}
 		})
+	}
+	
+	function bYD(){
+		$('#yDBody').html("<center><canvas id='yearDoughnut' style='max-width:300px; max-height:295px;'></canvas></center>");
+		var year = $('#chy-years').text();
+		var ctx1 = $('#yearDoughnut').get(0).getContext('2d');
+		$.ajax({
+			url : 'basketYearDoughnut.do',
+			method : 'post',
+			data : {'year' : year},
+			success : function(data){
+				var arr1 = new Array();
+				var arr2 = new Array();
+				var arr3 = new Array();
+				$.each(data, function(key,value){
+					arr1.push(value.percent);
+					arr2.push(value.category_name);
+					arr3.push(value.sum);
+				});
+				var myPieChart = new Chart(ctx1,{
+				    type: 'doughnut',
+				    data: {
+			            datasets: [{
+			                data: arr1,
+			                backgroundColor: [
+			                	'rgb(54, 162, 235)',
+			                	'rgb(75, 192, 192)',
+			                	'rgb(255, 99, 132)',
+			                	'rgb(255, 205, 86)'
+			                ]
+			            },
+			            {
+			                data: arr3,
+			                backgroundColor: [
+			                	'rgb(70, 150, 210)',
+			                	'rgb(90, 180, 185)',
+			                	'rgb(255, 120, 115)',
+			                	'rgb(255, 230, 80)'
+			                ]
+			            }
+			            ],
+			            labels: arr2
+			        }
+				});
+			}
+		})			
 	}
 
 	
@@ -278,7 +423,7 @@ $(function() {
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 			<div class="page_title">
@@ -315,9 +460,12 @@ $(function() {
 						<input type="button" class="btn btn-success chy-btnSuccess" id="datepicker1" value="DATE">
  -->					</h2>
 					<div class="chy-chartBody" id="dayBody">
-						<canvas id="myChart"></canvas>
 						<!-- 여기에 차트 -->
 					</div>
+					<div class="chy-chartBody" id='bDBody'><!-- 차트넣으면됨 -->
+					
+					</div>
+					
 					<!--  테이블시작 -->
 					<div class="chy-Table">
 						<!-- 테이블헤드 -->
@@ -346,7 +494,10 @@ $(function() {
 							id="chy-count">1</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
 					</h2>
 					<div class="chy-chartBody" id='qtBody'><!-- 차트넣으면됨 -->
-						<canvas id="quarterChart"></canvas>
+				
+					</div>
+					<div class="chy-chartBody" id='bQDBody'><!-- 차트넣으면됨 -->
+					
 					</div>
 						<!--  테이블 시작 -->
 						<div class="chy-Table">
@@ -367,6 +518,10 @@ $(function() {
 					<div class="chy-chartBody" id="yrBody">
 					
 					</div>
+					<div class="chy-chartBody" id='yDBody'><!-- 차트넣으면됨 -->
+
+					</div>
+					
 					<div class="chy-Table">
 						<div class="chy-TableHead" id="thead-year">
 

@@ -260,7 +260,8 @@
 
           </div>
         </div>
-
+		
+		<%if(!ss_user_auth.equals("A")){%>
         <div class="btn-groub">
           <button class="col-2 blue-btn button">바로 구매</button>
           <%if(pMap.size() != 0){ %>
@@ -269,10 +270,12 @@
           <button class="col-2 glay-btn button" onclick="addBasketNoOption();">장바구니 담기</button>
           <%} %>
         </div>
-        <%-- <div class="btn-groub">
+		<%}else{ %>
+        <div class="btn-groub">
           <button class="col-2 blue-btn button" onclick="updateProd(<%=CmmUtil.nvl(pDTO.getProd_no())%>);">수정</button>
           <button class="col-2 glay-btn button" onclick="return deleteProd(<%=CmmUtil.nvl(pDTO.getProd_no())%>);">삭제</button>
-        </div> --%>
+        </div>
+        <%} %>
       </div>
     </div>
  <%@include file="/html5/include/footer.jsp" %>

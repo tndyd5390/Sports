@@ -52,6 +52,22 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " basketDay End!!");
 		return aList;
 	}
+	@RequestMapping(value="basketDayDoughnut")
+	public @ResponseBody List<AnalysisDTO> bDD(@RequestParam(value="date") String date) throws Exception{
+		log.info(this.getClass() + "bDD Start!!");
+		
+		log.info("date : "+date);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setReg_dt(date);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		
+		aList = analysisService.getBasketDayDoughnut(aDTO);
+		
+		aDTO = null;
+		
+		log.info(this.getClass() + "bDD End!!");
+		return aList;
+	}
 	
 	@RequestMapping(value="basketQuarter")
 	public @ResponseBody List<AnalysisDTO> basketQuater(@RequestParam(value="quarter") String quarter) throws Exception{
@@ -66,6 +82,21 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " basketQuarter End!!");
 		return aList;
 	}
+	
+	@RequestMapping(value="basketQuarterDoughnut")
+	public @ResponseBody List<AnalysisDTO> bQD(@RequestParam(value="quarter") String quarter) throws Exception{
+		log.info(this.getClass() + " bQD Start!!");
+		
+		log.info("quarter : " +quarter);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setQuarter(quarter);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketQuarterDoughnut(aDTO);
+		
+		log.info(this.getClass() + " bQD End!!");
+		return aList;
+	}
+	
 	@RequestMapping(value="basketYear")
 	public @ResponseBody List<AnalysisDTO> basketYear(@RequestParam(value="year") String year) throws Exception{
 		log.info(this.getClass() + " basketYear Start!!");
@@ -77,6 +108,21 @@ public class DataAnalysisController {
 		aList = analysisService.getBasketYear(aDTO);
 		
 		log.info(this.getClass() + " basketYear End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="basketYearDoughnut")
+	public @ResponseBody List<AnalysisDTO> bYD(@RequestParam(value="year") String year) throws Exception{
+		log.info(this.getClass() + " bYD Start!!");
+		
+		log.info("year : " + year);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setYear(year);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketYearDoughnut(aDTO);
+
+		
+		log.info(this.getClass() + " bYD End!!");
 		return aList;
 	}
 	
