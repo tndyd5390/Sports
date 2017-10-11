@@ -79,4 +79,12 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " basketYear End!!");
 		return aList;
 	}
+	
+	@RequestMapping(value="mapTest")
+	public String mapTest() throws Exception{
+		log.info("testMap Start!");
+		
+		log.info("testMap End!");
+		return "account/accountMap";
+	}
 }

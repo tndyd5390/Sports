@@ -13,22 +13,8 @@ if(aList == null){
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp" %>
-
-<!-- Styles : CSS & SASS Sorcemap -->
-<link rel="stylesheet" href="/html5/common/css/style.css">
 <!-- Styles : sanghoon Kim-->
 <link rel="stylesheet" href="/html5/common/css/sangAccount.css">
-<!-- JavaScirpt Sorcemap -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-<script src="/html5/common/js/jquery-ui.js"></script>
-<!-- 
-<script src="/common/js/placeholders.min.js"></script> -->
-<!--[if lte IE 9]>
-<script src="/html5/common/js/placeholders.min.js"></script>
-<![endif]-->
-<!--[if lt IE 9]>
-<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-<![endif]-->
 
 </head>
 
