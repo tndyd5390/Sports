@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	AcademyDTO aDTO = (AcademyDTO) request.getAttribute("aDTO");
+	String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -10,7 +11,7 @@
 <%@include file="/html5/include/head.jsp"%>
 <script>
 
-	function goBack() {
+	function doBack() {
 		if (confirm("이전 페이지로 이동하시겠습니까?")) {
 			location.href = "accountmanagement.do";
 			return true;
@@ -77,22 +78,22 @@
 		<%@include file="/html5/include/navBar.jsp"%>
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
-				<form name="f" id="f" action="accountUpdateProc.do" method="post" onsubmit='return doJoin();'>
+				<form name="f" id="f" action="accountUpdateProc.do?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>" method="post" onsubmit='return doJoin();'>
 					<div class="list_wrap">
 						<ul class="register_list">
 							<li>
 								<p class="blue_text">거래처명</p>
-								<input type="text" id="aca_name" name="aca_name" value=<%=CmmUtil.nvl(aDTO.getAca_name())%>>
+								<input type="text" id="aca_name" name="aca_name" value="<%=CmmUtil.nvl(aDTO.getAca_name())%>">
 							</li>
 							<li>
 								<p class="blue_text">대표자명</p>
-								<input type="text" id="aca_ceo" name="aca_ceo" value=<%=CmmUtil.nvl(aDTO.getAca_ceo())%>>
+								<input type="text" id="aca_ceo" name="aca_ceo" value="<%=CmmUtil.nvl(aDTO.getAca_ceo())%>">
 							</li>
 							<li>
 								<p class="blue_text">우편번호</p>
 								<div class="input_btn_wrap">
 									<input type="text" id="aca_area1" name="aca_area1"
-										onclick="daumPostcode()" value=<%=CmmUtil.nvl(aDTO.getAca_area1())%>>
+										onclick="daumPostcode()" value="<%=CmmUtil.nvl(aDTO.getAca_area1())%>">
 									<input type="button" class="line-btn" onclick="daumPostcode()" value="주소찾기">
 									<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 									<script>
@@ -139,19 +140,19 @@
 							</li>
 							<li>
 								<p class="blue_text">주소</p> <input type="text" id="aca_area2"
-								name="aca_area2" onclick="daumPostcode()" value=<%=CmmUtil.nvl(aDTO.getAca_area2())%>>
+								name="aca_area2" onclick="daumPostcode()" value="<%=CmmUtil.nvl(aDTO.getAca_area2())%>">
 							</li>
 							<li>
 								<p class="blue_text">상세주소</p>
-								<input type="text" id="aca_area3" name="aca_area3" value=<%=CmmUtil.nvl(aDTO.getAca_area3())%>>
+								<input type="text" id="aca_area3" name="aca_area3" value="<%=CmmUtil.nvl(aDTO.getAca_area3())%>">
 							</li>
 							<li>
 								<p class="blue_text">업종</p>
-								<input type="text" id="aca_event1" name="aca_event1" value=<%=CmmUtil.nvl(aDTO.getAca_event1())%>>
+								<input type="text" id="aca_event1" name="aca_event1" value="<%=CmmUtil.nvl(aDTO.getAca_event1())%>">
 							</li>
 							<li>
 								<p class="blue_text">전화번호</p>
-								<input type="text" id="tel" name="tel" value=<%=CmmUtil.nvl(aDTO.getTel())%>>
+								<input type="text" id="tel" name="tel" value="<%=CmmUtil.nvl(aDTO.getTel())%>">
 							</li>
 							<li>
 								<p class="blue_text">거래발생일</p>

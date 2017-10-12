@@ -20,8 +20,22 @@ public class AcademyDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
+	private String search;
+	private String read_more;
 	
 	
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
+	public String getRead_more() {
+		return read_more;
+	}
+	public void setRead_more(String read_more) {
+		this.read_more = read_more;
+	}
 	public String getAca_no() {
 		return aca_no;
 	}

@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	AcademyDTO aDTO = (AcademyDTO) request.getAttribute("aDTO");
+System.out.println(aDTO.getAca_area2());
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -17,8 +18,7 @@
 	}
 	function doDelete(aNo){
 		if(confirm("해당 거래처를 삭제 하시겠습니까?")){
-			alert("삭제되었습니다.");
-			location.href = "accountDelete.do";
+			location.href = "accountDelete.do?aca_no="+aNo;
 			return true;		
 		}else{
 			return false;
@@ -52,31 +52,31 @@
 						<ul class="register_list">
 							<li>
 								<p class="blue_text">거래처명</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_name())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_name())%>">
 							</li>
 							<li>
 								<p class="blue_text">대표자명</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_ceo())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_ceo())%>">
 							</li>
 							<li>
 								<p class="blue_text">우편번호</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area1())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_area1())%>">
 							</li>
 							<li>
 								<p class="blue_text">주소</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area2())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_area2())%>">
 							</li>
 							<li>
 								<p class="blue_text">상세주소</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_area3())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_area3())%>">
 							</li>
 							<li>
 								<p class="blue_text">업종</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getAca_event1())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getAca_event1())%>">
 							</li>
 							<li>
 								<p class="blue_text">전화번호</p>
-								<input type="text" readonly value=<%=CmmUtil.nvl(aDTO.getTel())%>>
+								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getTel())%>">
 							</li>
 							<li>
 								<p class="blue_text">거래발생일</p>
@@ -85,13 +85,10 @@
 						</ul>
 					</div>
 					<div class="btn-groub">
-					<input type="button" class="col-3 blue-btn"
-						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
+					<input type="button" class="col-3 blue-btn" style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 						value="수정" onclick="goUpdate(<%=CmmUtil.nvl(aDTO.getAca_no())%>)">
 					<input type="button" class="col-3 blue-btn"
-						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
-						value="삭제"
-						onclick="return doDelete(<%=CmmUtil.nvl(aDTO.getAca_no())%>)">
+						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;" value="삭제" onclick="return doDelete(<%=CmmUtil.nvl(aDTO.getAca_no())%>)">
 					<input type="button" class="col-3 glay-btn"
 						style="height: 51px; font-size: 17px; font-weight: 600; cursor: pointer;"
 						value="목록" onclick="goBack()">

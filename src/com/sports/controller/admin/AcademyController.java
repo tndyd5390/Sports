@@ -12,11 +12,14 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sports.dto.AcademyDTO;
 import com.sports.service.IAcademyService;
 import com.sports.util.CmmUtil;
 import com.sports.util.GeoCodeUtil;
+import com.sports.util.TextUtil;
 
 @Controller
 public class AcademyController {
@@ -49,10 +52,12 @@ public class AcademyController {
 	@RequestMapping(value="accountRegProc")
 	public String accountRegProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + "accountRegProc Start!!");
+		String reg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
 		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
 		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
-		String aca_area2 = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area2 = TextUtil.exchangeEscapeNvl(aca_area);
 		String aca_area3 = CmmUtil.nvl(req.getParameter("aca_area3"));
 		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
 		String tel = CmmUtil.nvl(req.getParameter("tel"));
@@ -61,7 +66,7 @@ public class AcademyController {
 		String x = CmmUtil.nvl(locs[0].toString());
 		String y = CmmUtil.nvl(locs[1].toString());
 		
-		
+		log.info("reg_user_no : "+ reg_user_no);
 		log.info("aca_name : " + aca_name);
 		log.info("aca_ceo : " + aca_ceo);
 		log.info("aca_area1 : " + aca_area1);
@@ -85,6 +90,7 @@ public class AcademyController {
 		aDTO.setAca_comment(aca_comment);
 		aDTO.setAca_lat(x);
 		aDTO.setAca_lng(y);
+		aDTO.setReg_user_no(reg_user_no);
 		
 		log.info("test!!!!!!!!!");
 		
@@ -138,16 +144,22 @@ public class AcademyController {
 	public String accountUpdateProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + "accountUpdateProc Start!!");
 		
+		String chg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		String aca_no = CmmUtil.nvl(req.getParameter("aca_no"));
 		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
 		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
 		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
-		String aca_area2 = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area = CmmUtil.nvl(req.getParameter("aca_area2"));
+		String aca_area2 = TextUtil.exchangeEscapeNvl(aca_area);
 		String aca_area3 = CmmUtil.nvl(req.getParameter("aca_area3"));
 		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
 		String tel = CmmUtil.nvl(req.getParameter("tel"));
 		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
+		Float[] locs = GeoCodeUtil.geoCoding(aca_area2);
+		String x = CmmUtil.nvl(locs[0].toString());
+		String y = CmmUtil.nvl(locs[1].toString());
 		
+		log.info("chg_user_no : "+ chg_user_no);
 		log.info("aca_no : " + aca_no);
 		log.info("aca_name : " + aca_name);
 		log.info("aca_ceo : " + aca_ceo);
@@ -157,6 +169,8 @@ public class AcademyController {
 		log.info("aca_event1 : " + aca_event1);
 		log.info("tel : " + tel);
 		log.info("aca_comment : " + aca_comment);
+		log.info("x : " + x);
+		log.info("y : " + y);
 		
 		AcademyDTO aDTO = new AcademyDTO();
 		aDTO.setAca_no(aca_no);
@@ -168,12 +182,61 @@ public class AcademyController {
 		aDTO.setAca_event1(aca_event1);
 		aDTO.setTel(tel);
 		aDTO.setAca_comment(aca_comment);
+		aDTO.setAca_lat(x);
+		aDTO.setAca_lng(y);
+		aDTO.setChg_user_no(chg_user_no);
 		
 		academyService.updateAcademyDetail(aDTO);
 		
 		aDTO = null;
 		
+		model.addAttribute("msg", "수정되었습니다.");
+		model.addAttribute("url", "accountDetail.do?aca_no="+aca_no);
+		
 		log.info(this.getClass() + "accountUpdateProc End!!");
-		return "redirect:accountDetail.do?aca_no="+aca_no;
+		return "alert/alert";
+	}
+	@RequestMapping(value="accountDelete")
+	public String accountDelete(HttpServletRequest req, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + "accountDelte start!!");
+		
+		String aca_no = CmmUtil.nvl(req.getParameter("aca_no"));
+		log.info("aca_no : " + aca_no);
+		academyService.academyDelete(aca_no);
+		
+		model.addAttribute("msg", "삭제되었습니다.");
+		model.addAttribute("url", "accountmanagement.do");
+		
+		log.info(this.getClass() + "accountDelte end!!");
+		return "alert/alert";
+	}
+	@RequestMapping(value="readMore")
+	public @ResponseBody List<AcademyDTO> AcademyMoreView(@RequestParam(value = "cnt") String cnt,
+			@RequestParam(value = "search") String search) throws Exception{
+		AcademyDTO aDTO = new AcademyDTO();
+		
+		aDTO.setRead_more(cnt);
+		log.info("cnt : " + cnt);
+		aDTO.setSearch(search);
+		log.info("search : " + search);
+		
+		List <AcademyDTO> MoreList = academyService.AcademyMoreList(aDTO);
+		
+		return MoreList;
+	}
+	@RequestMapping(value="search")
+	public @ResponseBody List<AcademyDTO> searchAcademyList(@RequestParam(value="search") String search) throws Exception {
+		log.info("search : " + search);
+		
+		AcademyDTO aDTO = new AcademyDTO();
+		aDTO.setSearch(search);
+		
+		List<AcademyDTO> adTO = academyService.searchAcademyList(aDTO);
+		
+		for(AcademyDTO a : adTO){
+			log.info(a.getAca_name());
+		}
+		
+		return adTO;
 	}
 }
