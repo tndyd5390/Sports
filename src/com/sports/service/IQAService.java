@@ -1,6 +1,9 @@
 package com.sports.service;
 
 import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sports.dto.QADTO;
 
 public interface IQAService {
@@ -21,7 +24,7 @@ public interface IQAService {
 	
 	QADTO getQAAnswerDetail(QADTO qaDTO) throws Exception;
 	
-	void updateQAAnswerDetail(QADTO qaDTO) throws Exception;
+	void updateQAAnswerDetail(QADTO qaDTO, MultipartFile file, String filePath) throws Exception;
 	
 	void deleteQAAnswerDetail(QADTO qaDTO) throws Exception;
 	

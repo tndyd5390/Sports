@@ -80,7 +80,7 @@ function doDelete() {
 	} else {
 		
 		if (confirm("작성한 게시글을 삭제하시겠습니까?")) {
-			location.href="/admin/QA/QADelete.do?q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
+			location.href="/admin/QA/QADelete.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>&q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
 		}
 		
 	}
@@ -177,7 +177,8 @@ function doList() {
 					</div>
           			<div class="content">
           				<%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %>
-          				<img alt="" src="<%="/upload/qa_file/" + rDTO.getFile_name() %>" style="width:300px; height:300px">
+          				<br />
+          				<img alt="" src="<%="/upload/qa_file/" + rDTO.getFile_name() %>" style="width:100%; height:100%">
           			</div>          			
 				</div>
         		<div class="btn-groub">
