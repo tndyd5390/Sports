@@ -129,8 +129,8 @@ NoticeDTO rDTO = (NoticeDTO) request.getAttribute("rDTO");
 						String contents = rDTO.getContents();
 						contents = contents.replace("<br>", "\r\n");//줄바꿈 변환
 						%>
-              			<p class="blue_text">내용</p>
-              			<textarea name="contents" maxlenghth="2000" wrap="physical"><%=contents%></textarea>
+              			<p class="blue_text" >내용</p>
+              			<textarea name="contents" maxlenghth="2000" wrap="physical" style="height: 350px;"><%=contents%></textarea>
             		</li>
           		</ul>
         	</div>

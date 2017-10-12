@@ -20,7 +20,8 @@ if (nList == null) {
 	nList = new ArrayList<NoticeDTO>();
 }
 
-String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
+String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+String auth = CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 %>
 
 <script type="text/javascript">
@@ -114,7 +115,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 																contents += "<li>";
 													            contents += "<div style='float:left' ><input type='checkbox' name='checkbox' class='checkbox' value='"+value.notice_no+"'/></div>";
 													            contents += "<a href='/notice/NoticeInfo.do?notice_no="+value.notice_no+"'>";
-													            contents += "<p class='title'>";
+													            contents += "<p class='title' style='margin : unset;'>";
 													      
 													    	if (yn  == '1') {
 													            contents += "<span class='blue_text'>"+value.title+"</span>";
@@ -127,7 +128,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 													         } 
 													            
 													        	contents += "</p>";
-													            contents += "<p class='sub_text'>"+value.user_name;
+													            contents += "<p class='sub_text' style='margin : unset;'>"+value.user_name;
 													            contents += "<span>"+value.reg_dt.substring(0, 10)+"</span></p>";
 													            contents += "</a>";
 													            contents += "</li>";
@@ -169,7 +170,8 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		
 			
 		var dS = document.getElementsByClassName("checkbox");
-
+		var auth = '<%=auth%>';
+		
 		for (var i = 0; i < dS.length; i++) {
 			dS[i].style.display = "none";
 		}
@@ -178,26 +180,21 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		document.getElementById("all").style.display = "none";
 		document.getElementById("alltext").style.display = "none";
 		
+		if(auth != 'A' ){
+		document.getElementById("editId").style.display = "none";
+		document.getElementById("regId").style.display = "none";
+		}
+		
 	}
 	
 	/* 작성하기 유효성검사 */
 	function reg(){
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
-		/* if(user_no != "10000001"){
-		alert("관리자만 가능합니다.");
-		return false;
-		} */
 		
 		location.href="/notice/NoticeReg.do";
 	}
 	
 	/* 체크박스 기능 활성화 비활성화*/
 	function edit(f) {
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";
-		/* if(user_no != "10000001"){
-			alert("관리자만 가능합니다.");
-			return false;
-		} */
 		
 		
 		cbox = f.checkbox;
@@ -245,13 +242,6 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 
 	function deleteConfirm() {
 		
-		var user_no =	"<%=CmmUtil.nvl(user_no)%>";//관리자만 삭제가능
-		alert("user_no :"+user_no);
-		/* if(user_no != "10000001"){
-			alert("관리자만 가능합니다.");
-			return false;
-		} */
-		
 		if (confirm("선택된 게시글을 삭제하시겠습니까?")) {
 			document.getElementById("f").submit();
 		} else {
@@ -274,7 +264,29 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 	}
 	
 </script>
-	
+
+<style>
+.list-groub li {
+    position: relative;
+    padding: 10px 24px 10px 30px;
+    border-bottom: 1px solid #bcbcbc;
+}
+.search-wrap .search.type {
+    padding-left: 0px;
+}
+.list_wrap .all_select {
+    position: absolute;
+    bottom: 94px;
+    left: 25px;
+    margin-bottom:0px;
+}
+.list-groub li .checkbox {
+    position: relative; 
+    top: 0; 
+    left: 0;
+    margin-right: 7px;
+}
+</style>	
 </head>
 
 <body onload="javascript:hiddenCheckbox();">
@@ -298,10 +310,11 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
     	<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 			
-				<div class="search type"><input type="text" placeholder="제목 입력" id="searchbox" style="width:200px" /></div>
+				<div class="search type pw-search">
+				<input type="text" placeholder="글 제목을 입력해 주세요" id="searchbox" /></div>
         		
         		<div class="list_wrap" >
-          			<ul class="list-groub" id="list_more">
+          			<ul class="list-groub" id="list_more" style="margin-bottom : 0;">
 						<%
 							for (NoticeDTO nDTO : nList) {
 						%>
@@ -310,12 +323,12 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
               				
               				<a href="/notice/NoticeInfo.do?notice_no=<%=CmmUtil.nvl(nDTO.getNotice_no())%>">
               				
-              				<p class="title">
+              				<p class="title" style="margin : unset;">
               				
               				<% if (CmmUtil.nvl(nDTO.getNotice_yn()).equals("1")) {%>
-                				<span class="blue_text"><%=nDTO.getTitle()%></span>
+                				<span class="blue_text" ><%=nDTO.getTitle()%></span>
                 			<%} else {%>
-                				<span><%=nDTO.getTitle()%></span>
+                				<span style="margin : unset;"><%=nDTO.getTitle()%></span>
                 			<%} %>
                 			
                 			<% if (CmmUtil.nvl(nDTO.getNew_yn()).equals("Y")) {%>
@@ -326,19 +339,19 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
                 			
                 			</a>
                 
-                			<p class="sub_text"><%=CmmUtil.nvl(nDTO.getUser_name())%><span><%=CmmUtil.nvl(nDTO.getReg_dt().substring(0, 10))%></span></p>
+                			<p class="sub_text" style="margin : unset;"><%=CmmUtil.nvl(nDTO.getUser_name())%><span><%=CmmUtil.nvl(nDTO.getReg_dt().substring(0, 10))%></span></p>
             			</li>
           				<%
 						}
           				%>
 					</ul>
-          			<label class="all_select" id="alltext" ><input type="checkbox" name="all" id="all" onclick="allCheck(this.form);" />모두 선택하기</label>
+          			<label class="all_select" id="alltext" ><input type="checkbox" name="all" id="all" onclick="allCheck(this.form);" />전체 선택</label>
           			<div id="searchadd"><button class="add_btn" id="addview">더보기</button></div>
         		</div>
         		
-        		<div class="btn-groub" style="margin-bottom: 50px;">
-        			<input type="button" class="col-2 blue-btn button" id="editId" onclick="edit(this.form)" value="편집하기"  >
-        			<input type="button" class="col-2 glay-btn button" id="regId" onclick="reg()" value="작성하기"  >
+        		<div class="btn-groub" >
+        			<button type="button" class="col-2 blue-btn button" id="editId" onclick="edit(this.form)"  >편집하기</button>
+        			<button type="button" class="col-2 glay-btn button" id="regId" onclick="reg()" >작성하기</button>
 
 				</div>
 				
