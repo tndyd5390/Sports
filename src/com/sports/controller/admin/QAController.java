@@ -1,19 +1,15 @@
 package com.sports.controller.admin;
 
-import java.util.List;
-import java.util.Map;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -23,13 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.sports.dto.QADTO;
 import com.sports.service.IQAService;
-import com.sports.util.AES256Util;
 import com.sports.util.CmmUtil;
-import com.sports.util.DateUtil;
 
 @Controller
 public class QAController {
@@ -37,6 +30,8 @@ public class QAController {
 	
 	@Resource(name = "QAService") 
 	private IQAService qaService;
+	
+	String filePath="C:\\Users\\Data3811-36\\git\\Sports\\WebContent\\upload\\qa_file\\";
 	
 	@RequestMapping(value="admin/QA/QAList", method=RequestMethod.GET)
 	public String QAList(HttpServletRequest request, HttpServletResponse response, 
@@ -97,7 +92,7 @@ public class QAController {
 	
 	@RequestMapping(value="admin/QA/QAInsert", method=RequestMethod.POST)
 	public String QAInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, @RequestParam("qa_file") MultipartFile file) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QAInsert start!");
 		
@@ -116,7 +111,7 @@ public class QAController {
 			log.info("reg_user_no: " + reg_user_no);
 			log.info("secret_yn: " + secret_yn);
 			log.info("title: " + title);
-			log.info("contents: " + contents);		
+			log.info("contents: " + contents);	
 			
 			QADTO qaDTO = new QADTO();
 			
@@ -125,11 +120,33 @@ public class QAController {
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
 
+			if (file.getSize()!=0) {
+				
+				String reFileName = "";
+				String fileOrgName = file.getOriginalFilename();
+				
+				log.info(".file.getOriginalFilename() : " + file.getOriginalFilename());
+				
+				String extended = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length());
+				String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+				
+				filePath = CmmUtil.nvl(filePath);
+				reFileName = filePath + now + extended;
+				
+				File newFile = new File(reFileName);
+				file.transferTo(newFile);
+				
+				qaDTO.setFile_org_name(fileOrgName);
+				qaDTO.setFile_name(now + extended);
+				qaDTO.setFile_path(filePath);
+				
+			}
+			
 			qaService.insertQADetail(qaDTO);
 
 			msg = "게시글 등록에 성공하였습니다.";
 			url = "/admin/QA/QAList.do";
-			
+
 			qaDTO = null;
 			
 		} catch (Exception e) {

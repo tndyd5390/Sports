@@ -10,7 +10,8 @@ public class QADTO {
 	private String title;	
 	private String contents; 
 	private String file_path;	
-	private String file_name;	
+	private String file_name;
+	private String file_org_name;
 	private String reg_user_no;	
 	private String reg_dt; 
 	private String chg_user_no; 
@@ -100,6 +101,14 @@ public class QADTO {
 		this.file_name = file_name;
 	}
 	
+	public String getFile_org_name() {
+		return file_org_name;
+	}
+
+	public void setFile_org_name(String file_org_name) {
+		this.file_org_name = file_org_name;
+	}
+
 	public String getReg_user_no() {
 		return reg_user_no;
 	}
