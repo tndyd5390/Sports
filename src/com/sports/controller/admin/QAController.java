@@ -141,7 +141,7 @@ public class QAController {
 				qaDTO.setFile_path(filePath);
 				
 			}
-			
+
 			qaService.insertQADetail(qaDTO);
 
 			msg = "게시글 등록에 성공하였습니다.";
@@ -214,12 +214,14 @@ public class QAController {
 		
 		try {
 			
+			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			
 			log.info("q_no: "+ q_no);
 			
 			QADTO qaDTO = new QADTO();
 			
+			qaDTO.setQa_no(qa_no);
 			qaDTO.setQ_no(q_no);
 			
 			qaService.deleteQADetail(qaDTO);
@@ -322,8 +324,8 @@ public class QAController {
 	}
 	
 	@RequestMapping(value="admin/QA/QAAnswerInsert", method=RequestMethod.POST)
-	public String QAAnswerInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			ModelMap model) throws Exception {
+	public String QAAnswerInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model, @RequestParam("qa_file") MultipartFile file) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QAAnswerInsert start!");
 		
@@ -359,6 +361,32 @@ public class QAController {
 			qaDTO.setSecret_yn(secret_yn);
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
+			
+			if (file.getSize()!=0) {
+				
+				String reFileName = "";
+				String fileOrgName = file.getOriginalFilename();
+				
+				log.info(".file.getOriginalFilename() : " + file.getOriginalFilename());
+				
+				String extended = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length());
+				String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+				
+				filePath = CmmUtil.nvl(filePath);
+				reFileName = filePath + now + extended;
+				
+				File newFile = new File(reFileName);
+				file.transferTo(newFile);
+				
+				qaDTO.setFile_org_name(fileOrgName);
+				qaDTO.setFile_name(now + extended);
+				qaDTO.setFile_path(filePath);
+				
+				System.out.println("file_name: " + qaDTO.getFile_name());
+				System.out.println("file_org_name: " + qaDTO.getFile_org_name());
+				System.out.println("file_path: " + qaDTO.getFile_path());
+				
+			}
 				
 			qaService.insertQAAnswerDetail(qaDTO);
 
@@ -456,8 +484,8 @@ public class QAController {
 	}
 	
 	@RequestMapping(value="admin/QA/QAAnswerUpdate", method=RequestMethod.POST)
-	public String QAAnswerUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response,
-			ModelMap model) throws Exception {
+	public String QAAnswerUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
+			ModelMap model, @RequestParam("qa_file") MultipartFile file) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QAAnswerUpdate start!");
 		
@@ -494,7 +522,7 @@ public class QAController {
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
 			
-			qaService.updateQAAnswerDetail(qaDTO);
+			qaService.updateQAAnswerDetail(qaDTO, file, filePath);
 	
 			msg = "답글 수정에 성공하였습니다.";
 			url = "/admin/QA/QAAnswerDetail.do?qa_no=" + qa_no;

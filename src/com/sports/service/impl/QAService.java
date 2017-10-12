@@ -1,15 +1,24 @@
 package com.sports.service.impl;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
 import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.sports.dto.QADTO;
 import com.sports.persistance.mapper.QAMapper;
 import com.sports.service.IQAService;
+import com.sports.util.CmmUtil;
 
 @Service("QAService")
 public class QAService implements IQAService {
+	private Logger log = Logger.getLogger(this.getClass());
 	
 	@Resource(name="QAMapper")
 	private QAMapper qaMapper;
@@ -37,7 +46,19 @@ public class QAService implements IQAService {
 	
 	@Override
 	public void deleteQADetail(QADTO qaDTO) throws Exception {
+
+		qaDTO = qaMapper.getQADetail(qaDTO);
+		
+		File f = new File(qaDTO.getFile_path() + qaDTO.getFile_name());
+		
+		if (f.delete()) {
+			log.info(this.getClass() + ".deleteQADetail file success");
+		} else {
+			log.info(this.getClass() + ".deleteQADetail file fail");
+		}
+		
 		qaMapper.deleteQADetail(qaDTO);
+		
 	}	
 	
 	@Override
@@ -56,13 +77,62 @@ public class QAService implements IQAService {
 	}
 	
 	@Override
-	public void updateQAAnswerDetail(QADTO qaDTO) throws Exception {
-		qaMapper.updateQAAnswerDetail(qaDTO);
+	public void updateQAAnswerDetail(QADTO qaDTO, MultipartFile file, String filePath) throws Exception {
+		
+		if (file.getOriginalFilename().equals("")) {
+			
+			//파일 X
+			qaMapper.updateQAAnswerDetailNoImg(qaDTO);
+			
+		} else {
+			
+			//파일 O
+			QADTO rDTO = qaMapper.getQAAnswerDetail(qaDTO);
+			
+			File f = new File(rDTO.getFile_path() + rDTO.getFile_name());
+			
+			if (f.delete()) {
+				log.info(this.getClass() + ".deleteQAAnswerDetail file success");
+			} else {
+				log.info(this.getClass() + ".deleteQAAnswerDetail file fail");
+			}
+				
+			String reFileName = "";
+			String fileOrgName = file.getOriginalFilename();
+			String extended = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length());
+			String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+			
+			filePath = CmmUtil.nvl(filePath);
+			reFileName = filePath + now + extended;
+			
+			File newFile = new File(reFileName);
+			file.transferTo(newFile);
+			
+			qaDTO.setFile_org_name(fileOrgName);
+			qaDTO.setFile_name(now + extended);
+			qaDTO.setFile_path(filePath);
+			
+			qaMapper.updateQAAnswerDetailImg(qaDTO);
+			
+		}
+		
 	}
 	
 	@Override
 	public void deleteQAAnswerDetail(QADTO qaDTO) throws Exception {
+		
+		qaDTO = qaMapper.getQAAnswerDetail(qaDTO);
+		
+		File f = new File(qaDTO.getFile_path() + qaDTO.getFile_name());
+		
+		if (f.delete()) {
+			log.info(this.getClass() + ".deleteQAAnswerDetail file success");
+		} else {
+			log.info(this.getClass() + ".deleteQAAnswerDetail file fail");
+		}
+		
 		qaMapper.deleteQAAnswerDetail(qaDTO);
+		
 	}
 	
 	@Override
