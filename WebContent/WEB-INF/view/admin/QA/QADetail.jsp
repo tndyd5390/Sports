@@ -175,7 +175,10 @@ function doList() {
 						<p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
 						<p class="sub_text"><%=CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
 					</div>
-          			<div class="content"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %></div>
+          			<div class="content">
+          				<%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %>
+          				<img alt="" src="<%="/upload/qa_file/" + rDTO.getFile_name() %>" style="width:300px; height:300px">
+          			</div>          			
 				</div>
         		<div class="btn-groub">
 					<button class="col-3 deep-btn button" onclick="javascript:doReply();return false;">답글</button>

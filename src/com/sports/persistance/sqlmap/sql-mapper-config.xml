@@ -20,5 +20,6 @@
 		<typeAlias type="com.sports.dto.Basket_OptionDTO" alias="Basket_OptionDTO"/>
 		<typeAlias type="com.sports.dto.ProdOptionDTO" alias="ProdOptionDTO"/>
 		<typeAlias type="com.sports.dto.AnalysisDTO" alias="AnalysisDTO"/>
+		<typeAlias type="com.sports.dto.Order_infoDTO" alias="Order_infoDTO"/>
     </typeAliases>
 </configuration>

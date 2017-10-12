@@ -1,4 +1,5 @@
- <%@page import="com.sports.util.TextUtil"%>
+ <%@page import="com.sports.dto.Basket_OptionDTO"%>
+<%@page import="com.sports.util.TextUtil"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.sports.dto.BasketDTO"%>
@@ -10,15 +11,21 @@
 	if(bList == null){
 		bList = new ArrayList<BasketDTO>();
 	}
+	for(BasketDTO bDTO : bList){
+		if(bDTO.getBskOptList() == null){
+			bDTO.setBskOptList(new ArrayList());
+		}
+	}
 	int totalProdPrice = (Integer)request.getAttribute("totalProdPriceFromView");
 	//파라미터로 보낼 상품명
 	String prodName = "";
-	if(bList.size() == 1){
-		prodName = bList.get(0).getOpt_name();
-	}else{
-		prodName = bList.get(0).getOpt_name() + "외" + (bList.size()-1) + "건";
+	if(bList.size() != 0){
+		if(bList.size() == 1){
+			prodName = bList.get(0).getOpt_name();
+		}else{
+			prodName = bList.get(0).getOpt_name() + "외" + (bList.size()-1) + "건";
+		}
 	}
-	
 	//파라미터로 보낼 상품 수량
 	int qty = 0;
 	for(BasketDTO bDTO : bList){
@@ -27,6 +34,7 @@
 	
 	//파라미터로 보낼 고객 이름
 	String userName = CmmUtil.nvl((String)session.getAttribute("ss_user_id"));
+	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -138,7 +146,7 @@ ul > li > textarea.psyTermsTextarea{
 	            }
 	
 	            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-	            document.getElementById('postNumber').value = data.zonecode; //5자리 새우편번호 사용
+	            document.getElementById('postCode').value = data.zonecode; //5자리 새우편번호 사용
 	            document.getElementById('address').value = fullAddr;
 	
 	            // 커서를 상세주소 필드로 이동한다.
@@ -226,20 +234,117 @@ ul > li > textarea.psyTermsTextarea{
 			return;
 		}
 		
-		if(form.contactNumber.value == ""){
+		if(form.tel.value == ""){
 			alert('연락처를 입력해주세요');
 			form.contactNumber.focus();
 			return;
 		}
 		
-		if(form.postNumber.value == "" || form.address.value == "" || form.addressDetail.value == ""){
-			alert('주소를 입력해 주세요');
+		if(form.postCode.value == ""){
+			alert('우편번호를 입력해 주세요');
 			return;
 		}
 		
+		if(form.address.value == ""){
+			alert('주소를 입력해 주세요.');
+			return;
+		}
+		
+		if(form.addressDetail.value == ""){
+			alert("상세 주소를 입력해 주세요");
+			return;
+		}
+		
+		//etc_data1에는 수령할 사람의 정보를 전달 한다.json을 만드어 여분의 데이터를 전달 한다.
+		var etcInfo1 = new Object();
+		etcInfo1.recipient = form.recipient.value;
+		etcInfo1.tel = form.tel.value;
+		etcInfo1.message = form.message.value;
+		etcInfo1.postCode = form.postCode.value;
+		etcInfo1.address = form.address.value;
+		etcInfo1.addressDetail = form.addressDetail.value;
+		etcInfo1.regUserNo = '<%=userNo%>'
+		var etcJSON1 = JSON.stringify(etcInfo1);
+		form.ETC_DATA1.value = etcJSON1;
+		console.log(form.ETC_DATA1.value);
+		//etc_data2 에는 물품의 정보를 전달 한다.
+		var etcArray2 = new Array();
+		<%
+		for(BasketDTO bDTO : bList){
+		%>
+		var etcInfo2 = new Object();
+		etcInfo2['bsk_no'] = '<%=bDTO.getBsk_no()%>';
+		etcArray2.push(etcInfo2);
+		<%
+		}
+		%>
+		var etcJSON2 = new Object();
+		etcJSON2.bsk_no = etcArray2;
+		form.ETC_DATA2.value = JSON.stringify(etcJSON2);
+		console.log(form.ETC_DATA2.value);
+		<%-- var optObject;
+		var optArray;
+		var etcArray2 = new Array();
+		<%
+		for(BasketDTO bDTO : bList){
+		%>
+			var etcInfo2 = new Object();
+			optArray = new Array();
+			etcInfo2['bsk_no'] = '<%=bDTO.getBsk_no()%>';
+			etcInfo2['prod_no'] = '<%=bDTO.getProd_no()%>';
+			etcInfo2['prod_name'] = '<%=bDTO.getProd_name()%>';
+			<%
+			for(int i = 0; i < bDTO.getBskOptList().size(); i++){
+				Basket_OptionDTO bOptDTO = bDTO.getBskOptList().get(i);
+			%>
+				optObject = new Object();
+				optObject['opt_kind'] = '<%=bOptDTO.getOpt_kind()%>';
+				optObject['opt_name'] = '<%=bOptDTO.getOpt_name()%>';
+				optObject['opt_no'] = '<%=bOptDTO.getOpt_no()%>';
+				optArray.push(optObject);
+			<%
+			}
+			%>
+			etcInfo2['ord_option'] = optArray;
+			etcArray2.push(etcInfo2);
+		<%
+		}
+		%>
+		var etcJSON2 = new Object();
+		etcJSON2.bsk_option = etcArray2;
+		form.ETC_DATA2.value = JSON.stringify(etcJSON2);
+		console.log(form.ETC_DATA2.value); --%>
 		if(confirm('화면의 정보대로 결제가 진행 됩니다. 결제 하시겠습니까???')){
 			form.submit();
 		}
+	}
+	
+	function testSubmit(f){
+		/* var infoObject = new Object();
+		infoObject.recipient = "박수용";
+		infoObject.tel = "01057907883";
+		infoObject.address = "불정로 362";
+		var jsonInfo = JSON.stringify(infoObject);
+		console.log(jsonInfo);
+		f.jsondata.value = jsonInfo;
+		f.submit(); */
+		var etcInfo2 = new Object();
+		etcInfo2['0'] = '0';
+		console.log(etcInfo2['0']);
+		var test = new Object();
+		<%
+		for(int i = 0; i< 5; i++){
+		%>
+			test['<%=i%>'] = '<%=i%>';
+		<%
+		}
+		%>
+		var jsonInfo = JSON.stringify(etcInfo2);
+		console.log(jsonInfo);
+		f.jsondata.value = jsonInfo;
+		//f.submit();
+		return true;
+		
 	}
 </script>
 </head>
@@ -248,7 +353,7 @@ ul > li > textarea.psyTermsTextarea{
        <header class="header">
       <div class="wrap">
         <div class="left_menu">
-          <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
+          <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--sl ide-left" class="c-button">
         </div>
         <div class="logo">
           <a href="#"><h2 class="title">모두의 스포츠</h2></a>
@@ -265,6 +370,7 @@ ul > li > textarea.psyTermsTextarea{
     <div class="container detail">
       <div class="wrap search-wrap btn-wrap">
         <div class="list_wrap">
+        <!-- https://pg.paynuri.com/paymentgateway/mobile/reqPay.do -->
         	<form action="https://pg.paynuri.com/paymentgateway/mobile/reqPay.do" method="post" accept-charset="euc-kr" id="orderForm">
         		<!-- 모든 결제의 공통 파라미터 작성 ==============================================================================================================-->
         		<!-- 가맹점 번호       	-->	<input type="hidden" id="STOREID" name="STOREID" value="1500000088"/>
@@ -295,7 +401,7 @@ ul > li > textarea.psyTermsTextarea{
         		<!-- 가상 계좌에 필요한 파라미터     ==============================================================================================================-->
         		
         		<!-- 휴대폰 결제에 필요한 파라미터     ==============================================================================================================-->
-        		<!-- 상품구분 URL	--> <input type="hidden" id="PRODUCTTYPE" name="PRODUCTTYPE" value="2"/>
+        		<!-- 상품구분 URL	--> <input type="hidden" id="PRODUCTTYPE" name="PRODUCTTYPE" value="1"/>
         		<!-- 휴대폰 결제에 필요한 파라미터     ==============================================================================================================-->
 	        	<h5>&nbsp;&nbsp;주문자 정보 입력</h5>
 	        	<hr>
@@ -306,11 +412,11 @@ ul > li > textarea.psyTermsTextarea{
 		            </li>
 		            <li class="psyLi">
 		            <p class="psyOrderView blue_text">연락처</p>
-						<input type="text" name="contactNumber">
+						<input type="text" name="tel">
 					</li>
 		           <li class="psyLi">
 		            <p class="psyOrderView blue_text">주소</p>
-						<input type="text" name="postNumber" id="postNumber" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
+						<input type="text" name="postCode" id="postCode" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
 					</li>
 					<li class="psyLi">
 						<input type="text" name="address" id="address" placeholder="주소" readonly="readonly">
@@ -390,6 +496,10 @@ ul > li > textarea.psyTermsTextarea{
         </div>
       </div>
     </div>
+    <form action="test.do" method="post" onsubmit="return testSubmit(this);">
+    	<input type="hidden" name="jsondata">
+    	<input type="submit" value="전송">
+    </form>
  <%@include file="/html5/include/footer.jsp" %>
 </body>
 

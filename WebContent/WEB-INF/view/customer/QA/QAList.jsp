@@ -398,7 +398,7 @@ function doReg() {
 								
 							<%} %>
 								
-							<p class="sub_text"><%=CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y")?"관리자":CmmUtil.nvl(rDTO.getUser_name()) %><span><%=CmmUtil.nvl(rDTO.getReg_dt().substring(0, 10)) %></span></p>
+							<p class="sub_text"><%=CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y")?"운영자":CmmUtil.nvl(rDTO.getUser_name()) %><span><%=CmmUtil.nvl(rDTO.getReg_dt().substring(0, 10)) %></span></p>
 			            </li>
 						<%
 						}

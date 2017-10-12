@@ -10,7 +10,13 @@ public class Basket_OptionDTO {
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
-	
+	private String tranNo;
+	public String getTranNo() {
+		return tranNo;
+	}
+	public void setTranNo(String tranNo) {
+		this.tranNo = tranNo;
+	}
 	public String getOpt_kind() {
 		return opt_kind;
 	}
