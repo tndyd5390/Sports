@@ -8,7 +8,8 @@
 <%
 NoticeDTO rDTO = (NoticeDTO) request.getAttribute("rDTO");
 
-String auth = CmmUtil.nvl((String)session.getAttribute("ss_auth")); 
+String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+String auth = CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 
 
 %>
@@ -85,7 +86,7 @@ var auth = "<%=auth%>"
             <p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
             <p class="sub_text"><%=CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
           </div>
-          <div class="content">
+          <div class="content" style="min-height: 400px;">
             <%=CmmUtil.nvl(rDTO.getContents())%>
           </div>
          

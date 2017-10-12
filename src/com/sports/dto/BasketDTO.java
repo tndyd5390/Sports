@@ -21,7 +21,13 @@ public class BasketDTO {
 	private String prod_price;
 	private String prod_contents;
 	private List<Basket_OptionDTO> bskOptList;
-	
+	private String tranNo;
+	public String getTranNo() {
+		return tranNo;
+	}
+	public void setTranNo(String tranNo) {
+		this.tranNo = tranNo;
+	}
 	public String getBsk_no() {
 		return bsk_no;
 	}

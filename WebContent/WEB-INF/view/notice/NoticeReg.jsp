@@ -114,7 +114,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 				<ul class="register_list">
 		            <li>
 						<p class="blue_text">제목</p>
-						<div><input type="text" name="title" maxlength="50" /></div>
+						<div><input type="text" name="title" maxlength="50" placeholder="글 제목을 입력하세요"/></div>
 		            </li>
 		            <li>
 		            	<p class="blue_text">중요 공지글 여부</p>
@@ -125,7 +125,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
 		            </li>
 		            <li>
 						<p class="blue_text">내용</p>
-						<textarea name="contents" maxlength="2000" wrap="physical"></textarea>
+						<textarea name="contents" maxlength="2000" wrap="physical" style="height: 350px;" placeholder="내용을 입력하세요"></textarea>
 					</li>	
 				</ul>
         	</div>

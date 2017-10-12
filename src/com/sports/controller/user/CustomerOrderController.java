@@ -1,16 +1,27 @@
 package com.sports.controller.user;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.sports.dto.BasketDTO;
+import com.sports.dto.OrdProdOptionDTO;
+import com.sports.dto.Order_infoDTO;
 import com.sports.service.IOrderService;
 import com.sports.util.CmmUtil;
 
@@ -107,6 +118,40 @@ public class CustomerOrderController {
 	    	/**
 	    	 * 결제 성공
 	    	 */
+	    	JSONParser jsonParser = new JSONParser();
+	    	JSONObject jsonObject = (JSONObject)jsonParser.parse(etc_data1);
+	    	String recipient = CmmUtil.nvl((String)jsonObject.get("recipient"));
+	    	String tel = CmmUtil.nvl((String)jsonObject.get("tel"));
+	    	String message = CmmUtil.nvl((String)jsonObject.get("message"));
+	    	String postCode = CmmUtil.nvl((String)jsonObject.get("postCode"));
+	    	String address = CmmUtil.nvl((String)jsonObject.get("address"));
+	    	String addressDetail = CmmUtil.nvl((String)jsonObject.get("addressDetail"));
+	    	String userNo = CmmUtil.nvl((String)jsonObject.get("regUserNo"));
+	    	Order_infoDTO oDTO = new Order_infoDTO();
+	    	oDTO.setRecipient(recipient);
+	    	oDTO.setTel(tel);
+	    	oDTO.setOrd_message(message);
+	    	oDTO.setPostCode(postCode);
+	    	oDTO.setAddress(address);
+	    	oDTO.setAddressDetail(addressDetail);
+	    	oDTO.setTran_no(tran_no);
+	    	oDTO.setOrd_price(amt);
+	    	oDTO.setOrd_stat("C");
+	    	oDTO.setOrd_cancel("N");
+	    	oDTO.setReg_user_no(userNo);
+	    	oDTO.setTranType(tran_type);
+	    	oDTO.setTid(tid);
+	    	jsonObject = (JSONObject)jsonParser.parse(etc_data2);
+	    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_no");
+	    	List<String> bskNoList = new ArrayList<>();
+	    	if(jsonArray.size() != 0){
+		    	for(int i = 0; i< jsonArray.size(); i++){
+		    		JSONObject bskNoObject = (JSONObject)jsonArray.get(i);
+		    		bskNoList.add(CmmUtil.nvl((String)bskNoObject.get("bsk_no")));
+		    	}
+	    	}
+	    	orderService.insertOrderFromBasket(bskNoList, oDTO, userNo, tran_no);
+	    	
 	    }else{
 	    	/**
 	    	 * 결제 실패
@@ -163,6 +208,20 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".noticeOfPayment start!!!");
 		
 		log.info(this.getClass() + ".noticeOfPayment end!!!");
+		return null;
+	}
+	@RequestMapping(value="test")
+	public String test(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
+		
+		JSONParser jsonParser = new JSONParser();
+		String jsonData = req.getParameter("ETC_DATA2");
+    	JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonData);
+    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_option");
+    	for(int i = 0; i< jsonArray.size(); i++){
+    		JSONObject object = (JSONObject) jsonArray.get(i);
+    		System.out.println("bsk_no : " + object.get("bsk_no"));
+    		System.out.println("opt_kind" + i + " : " + CmmUtil.nvl((String)object.get("opt_kind" + i)));
+    	}
 		return null;
 	}
 }
