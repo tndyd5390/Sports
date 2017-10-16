@@ -102,20 +102,9 @@
         vertical-align:baseline;
 	}
 	
-	@media screen and (max-width:414px) {
-    #ulTable > li > ul > li:first-child               {width:23%;}
+	#ulTable > li > ul > li:first-child               {width:25%;}
     #ulTable > li > ul > li:first-child +li           {width:34%;}
     #ulTable > li > ul > li:first-child +li+li        {width:40%;}
-	}
-	@media screen and (max-width:320px) {
-	#ulTable > li > ul > li:first-child               {width:26%;}
-    #ulTable > li > ul > li:first-child +li           {width:34%;}
-    #ulTable > li > ul > li:first-child +li+li        {width:40%;}	
-	}
-	
-	#ulTable > li > ul > li:first-child               {width:16%;}
-    #ulTable > li > ul > li:first-child +li           {width:42%;}
-    #ulTable > li > ul > li:first-child +li+li        {width:42%;}
 
 	#ulTable > li:nth-child(odd) {
 	background-color: #E1E1E1;
