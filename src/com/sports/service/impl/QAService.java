@@ -35,20 +35,70 @@ public class QAService implements IQAService {
 	
 	@Override
 	public QADTO getQADetail(QADTO qaDTO) throws Exception {
-		return qaMapper.getQADetail(qaDTO);
+		System.out.println("1: " + qaDTO.getReg_user_no());
+		if (qaDTO.getReg_user_no() == "5") {
+			
+	
+			
+			//관리자일 경우
+			return qaMapper.getAdminQADetail(qaDTO);
+			
+		} else {
+			
+			//사용자일 경우
+			return qaMapper.getCustomerQADetail(qaDTO);
+			
+		}
+
 	}
 	
 	@Override
-	public void updateQADetail(QADTO qaDTO) throws Exception {
-		qaMapper.updateQADetail(qaDTO);
+	public void updateQADetail(QADTO qaDTO, MultipartFile file, String filePath) throws Exception {
+		
+		if (file.getOriginalFilename().equals("")) {
+			
+			//파일 X
+			qaMapper.updateQADetailNoImg(qaDTO);
+			
+		} else {
+ 
+			//파일 O
+			QADTO rDTO = getQADetail(qaDTO);
+			
+			File f = new File(rDTO.getFile_path() + rDTO.getFile_name());
+			
+			if (f.delete()) {
+				log.info(this.getClass() + ".deleteQADetail file success");
+			} else {
+				log.info(this.getClass() + ".deleteQADetail file fail");
+			}
+				
+			String reFileName = "";
+			String fileOrgName = file.getOriginalFilename();
+			String extended = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length());
+			String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+			
+			filePath = CmmUtil.nvl(filePath);
+			reFileName = filePath + now + extended;
+			
+			File newFile = new File(reFileName);
+			file.transferTo(newFile);
+			
+			qaDTO.setFile_org_name(fileOrgName);
+			qaDTO.setFile_name(now + extended);
+			qaDTO.setFile_path(filePath);
+			
+			qaMapper.updateQADetailImg(qaDTO);
+			
+		}
+		
 	}
-	
 	
 	@Override
 	public void deleteQADetail(QADTO qaDTO) throws Exception {
 
-		qaDTO = qaMapper.getQADetail(qaDTO);
-		
+		qaDTO = getQADetail(qaDTO);
+
 		File f = new File(qaDTO.getFile_path() + qaDTO.getFile_name());
 		
 		if (f.delete()) {
@@ -61,7 +111,7 @@ public class QAService implements IQAService {
 		
 	}	
 	
-	@Override
+	@Override 
 	public void deleteQAList(QADTO qaDTO) throws Exception {
 		qaMapper.deleteQAList(qaDTO);
 	}

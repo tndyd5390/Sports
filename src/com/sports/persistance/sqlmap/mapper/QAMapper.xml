@@ -23,18 +23,39 @@
 	</insert>
 	
 	<!-- 게시글 상세 쿼리 -->
-	<select id="getQADetail" resultType="QADTO" parameterType="QADTO">
+	<select id="getAdminQADetail" resultType="QADTO" parameterType="QADTO">
 		SELECT QA.QA_NO, QA.Q_NO, QA.ANSWER_YN, QA.SECRET_YN, QA.TITLE, QA.CONTENTS, QA.FILE_NAME, QA.FILE_ORG_NAME, QA.FILE_PATH, QA.REG_USER_NO, USER.USER_NAME, DATE_FORMAT(QA.REG_DT, '%Y-%m-%d %T') AS REG_DT
 	    FROM QA_INFO QA, USER_INFO USER
 	    WHERE QA.QA_NO = #{qa_no} AND QA.REG_USER_NO = USER.USER_NO
 	</select>
 	
-	<!-- 게시글 수정 쿼리 -->
-	<update id="updateQADetail" parameterType="QADTO">
+	<!-- 게시글 상세 쿼리 -->
+	<select id="getCustomerQADetail" resultType="QADTO" parameterType="QADTO">
+		SELECT QA.QA_NO, QA.Q_NO, QA.ANSWER_YN, QA.SECRET_YN, QA.TITLE, QA.CONTENTS, QA.FILE_NAME, QA.FILE_ORG_NAME, QA.FILE_PATH, QA.REG_USER_NO, USER.USER_NAME, DATE_FORMAT(QA.REG_DT, '%Y-%m-%d %T') AS REG_DT
+	    FROM QA_INFO QA, USER_INFO USER
+	    WHERE QA.Q_NO = #{q_no} AND QA.REG_USER_NO = USER.USER_NO
+	</select>
+	
+	<!-- 게시글 수정 쿼리(파일 X) -->
+	<update id="updateQADetailNoImg" parameterType="QADTO">
 		UPDATE QA_INFO
 		SET SECRET_YN = #{secret_yn},	
 			TITLE = #{title},
 			CONTENTS = #{contents},
+			CHG_USER_NO = #{reg_user_no},
+			CHG_DT = NOW()
+		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'N'
+	</update>
+	
+	<!-- 게시글 수정 쿼리(파일 O) -->
+	<update id="updateQADetailImg" parameterType="QADTO">
+		UPDATE QA_INFO
+		SET SECRET_YN = #{secret_yn},	
+			TITLE = #{title},
+			CONTENTS = #{contents}, 
+			FILE_NAME = #{file_name}, 
+			FILE_ORG_NAME = #{file_org_name}, 
+			FILE_PATH = #{file_path},  
 			CHG_USER_NO = #{reg_user_no},
 			CHG_DT = NOW()
 		WHERE QA_NO = #{qa_no} AND ANSWER_YN = 'N'

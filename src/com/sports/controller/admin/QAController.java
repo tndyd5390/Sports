@@ -171,18 +171,21 @@ public class QAController {
 	}	
 	
 	@RequestMapping(value="admin/QA/QADetail", method=RequestMethod.GET)
-	public String QADetail(HttpServletRequest request, HttpServletResponse response, 
+	public String QADetail(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QADetail start!");
 		
 		String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
+		String reg_user_no = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
 
 		log.info("qa_no: " + qa_no);
+		log.info("reg_user_no: " + reg_user_no);
 		
 		QADTO qaDTO = new QADTO();
 		
 		qaDTO.setQa_no(qa_no);
+		qaDTO.setReg_user_no(reg_user_no);
 		
 		QADTO rDTO = qaService.getQADetail(qaDTO);
 		
@@ -217,7 +220,8 @@ public class QAController {
 			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			
-			log.info("q_no: "+ q_no);
+			log.info("qa_no: " + qa_no);
+			log.info("q_no: " + q_no);
 			
 			QADTO qaDTO = new QADTO();
 			
