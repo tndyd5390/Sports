@@ -1,5 +1,7 @@
 package com.sports.controller.user;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +45,7 @@ public class CustomerOrderController {
 	@RequestMapping(value="orderSuccess")
 	public void orderSuccess(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".orderSuccess start!!!");
+		req.setCharacterEncoding("euc-kr");
 		//결과코드
 	    String rep_code =CmmUtil.nvl(req.getParameter("REP_CODE"));
 	    log.info(this.getClass() + " rep_code : " + rep_code);
@@ -213,7 +216,7 @@ public class CustomerOrderController {
 	@RequestMapping(value="test")
 	public String test(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		
-		JSONParser jsonParser = new JSONParser();
+		/*JSONParser jsonParser = new JSONParser();
 		String jsonData = req.getParameter("ETC_DATA2");
     	JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonData);
     	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_option");
@@ -221,7 +224,40 @@ public class CustomerOrderController {
     		JSONObject object = (JSONObject) jsonArray.get(i);
     		System.out.println("bsk_no : " + object.get("bsk_no"));
     		System.out.println("opt_kind" + i + " : " + CmmUtil.nvl((String)object.get("opt_kind" + i)));
-    	}
+    	}*/
+		/*String data = req.getParameter("ETC_DATA1");
+		String [] charSet = {"utf-8","euc-kr","ksc5601","iso-8859-1","x-windows-949"};
+		  
+		for (int i=0; i<charSet.length; i++) {
+		 for (int j=0; j<charSet.length; j++) {
+		  try {
+		   System.out.println("[" + charSet[i] +"," + charSet[j] +"] = " + new String(data.getBytes(charSet[i]), charSet[j]));
+		  } catch (UnsupportedEncodingException e) {
+		   e.printStackTrace();
+		  }
+		 }
+		}*/
+		req.setCharacterEncoding("euc-kr");
+		String data = req.getParameter("ETC_DATA1");
+		byte[] euckr = data.getBytes(Charset.forName("euc-kr"));
+		System.out.println("aaa" + new String(euckr, "euc-kr"));
+		String [] charSet = {"utf-8","euc-kr","ksc5601","iso-8859-1","x-windows-949"};
+		  
+		for (int i=0; i<charSet.length; i++) {
+		 for (int j=0; j<charSet.length; j++) {
+		  try {
+		   System.out.println("[" + charSet[i] +"," + charSet[j] +"] = " + new String(data.getBytes(charSet[i]), charSet[j]));
+		  } catch (UnsupportedEncodingException e) {
+		   e.printStackTrace(); 
+		  }
+		 }
+		}
+		System.out.println("data : " + data);
+		System.out.println(new String(req.getParameter("COMPLETE_URL").getBytes("euc-kr"), "utf-8"));
+		JSONParser jsonParse = new JSONParser();
+		String jsonData = new String(req.getParameter("ETC_DATA1").getBytes("euc-kr"), "utf-8");
+		JSONObject ob = (JSONObject)jsonParse.parse(jsonData);
+		System.out.println(ob.get("address"));
 		return null;
 	}
 }
