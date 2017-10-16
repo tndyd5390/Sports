@@ -14,4 +14,10 @@ public interface IAcademyService {
 
 	public void updateAcademyDetail(AcademyDTO aDTO) throws Exception;
 
+	public void academyDelete(String aca_no) throws Exception;
+
+	public List<AcademyDTO> searchAcademyList(AcademyDTO aDTO) throws Exception;
+
+	public List<AcademyDTO> AcademyMoreList(AcademyDTO aDTO) throws Exception;
+
 }

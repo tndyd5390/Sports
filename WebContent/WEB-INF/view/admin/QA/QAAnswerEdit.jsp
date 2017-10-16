@@ -109,8 +109,8 @@ function doSubmit(f) {
 		f.contents.focus();
 		return false;
 		
-	}		
-	
+	}
+
 }
 
 function calBytes(str) {
@@ -243,7 +243,7 @@ function calBytes(str) {
 						</li>
 						<li>
 							<p class="blue_text">첨부파일</p>
-							<div><input type="file" name="qa_file" /></div>
+							<div><input type="file" name="qa_file" accept="image/*" value=<%=CmmUtil.nvl(rDTO.getFile_org_name()) %> /></div>
 						</li>
 					</ul>
 				</div>

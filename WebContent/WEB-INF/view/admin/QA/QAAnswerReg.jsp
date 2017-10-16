@@ -225,7 +225,7 @@ function calBytes(str) {
 						</li>
 						<li>
 							<p class="blue_text">첨부파일</p>
-							<div><input type="file" name="qa_file" /></div>
+							<div><input type="file" name="qa_file" accept="image/*" /></div>
 						</li>
 					</ul>
 				</div>

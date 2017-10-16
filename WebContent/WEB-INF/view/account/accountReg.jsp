@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%
+String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>

@@ -24,7 +24,9 @@ public interface QAMapper {
 
 	QADTO getQAAnswerDetail(QADTO qaDTO) throws Exception;
 	
-	void updateQAAnswerDetail(QADTO qaDTO) throws Exception;
+	void updateQAAnswerDetailNoImg(QADTO qaDTO) throws Exception;
+	
+	void updateQAAnswerDetailImg(QADTO qaDTO) throws Exception;
 	
 	void deleteQAAnswerDetail(QADTO qaDTO) throws Exception;
 	
@@ -32,5 +34,4 @@ public interface QAMapper {
 	
 	List<QADTO> getQASearchList(QADTO qaDTO) throws Exception;
 	
-	//public int insertCustomerQA(QADTO qDTO) throws Exception;
 }

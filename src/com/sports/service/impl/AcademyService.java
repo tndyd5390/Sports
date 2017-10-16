@@ -34,4 +34,19 @@ public class AcademyService implements IAcademyService {
 	public void updateAcademyDetail(AcademyDTO aDTO) throws Exception {
 		academyMapper.updateAcademyDetail(aDTO);
 	}
+
+	@Override
+	public void academyDelete(String aca_no) throws Exception {
+		academyMapper.academyDelete(aca_no);
+	}
+
+	@Override
+	public List<AcademyDTO> searchAcademyList(AcademyDTO aDTO) throws Exception {
+		return academyMapper.getSearchList(aDTO);
+	}
+
+	@Override
+	public List<AcademyDTO> AcademyMoreList(AcademyDTO aDTO) throws Exception {
+		return academyMapper.getAcademyMoreView(aDTO);
+	}
 }

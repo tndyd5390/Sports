@@ -11,4 +11,7 @@ public interface AcademyMapper {
 	public List<AcademyDTO> getAcademyList() throws Exception;
 	public AcademyDTO getAcademyDetailInfo(AcademyDTO cDTO) throws Exception;
 	public void updateAcademyDetail(AcademyDTO aDTO) throws Exception;
+	public void academyDelete(String aca_no) throws Exception;
+	public List<AcademyDTO> getSearchList(AcademyDTO aDTO) throws Exception;
+	public List<AcademyDTO> getAcademyMoreView(AcademyDTO aDTO) throws Exception;
 }
