@@ -19,4 +19,6 @@ public interface OrderMapper {
 	public List<OrdProdOptionDTO> getOrderProductOptionList(String ordProdNo) throws Exception;
 	public List<Order_infoDTO> getOrderInfoDate(String userNo) throws Exception;
 	public List<Order_infoDTO> getOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception;
+	public Order_infoDTO getOrderInfoDetail(String tranNo) throws Exception;
+	
 }

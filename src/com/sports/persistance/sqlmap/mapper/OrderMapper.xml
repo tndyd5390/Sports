@@ -143,4 +143,21 @@
 		   AND ORD_STAT = 'C'
 	</select>
 	
+	<select id="getOrderInfoDetail" parameterType="string" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       REG_DT
+		  FROM ORDER_INFO
+		 WHERE TRAN_NO = #{tranNo}
+		   AND ORD_STAT = 'C'
+	</select>
+	
 </mapper>

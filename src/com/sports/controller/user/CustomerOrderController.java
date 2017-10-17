@@ -238,4 +238,19 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".orderListDoToggle end");
 		return oList;
 	}
+	
+	@RequestMapping(value="orderDetail", method=RequestMethod.POST)
+	public String orderDetail(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".orderDetail start!!!");
+		String tranNo = CmmUtil.nvl(req.getParameter("tranNo"));
+		log.info(this.getClass() + ".orderDetail tranNo : " + tranNo);
+		
+		Order_infoDTO oDTO = orderService.getOrderInfoDetail(tranNo);
+		if(oDTO == null) oDTO = new Order_infoDTO();
+		
+		model.addAttribute("oDTO", oDTO);
+		log.info(this.getClass() + ".orderDetail end!!!");
+		
+		return "customer/orderDetail";
+	}
 }

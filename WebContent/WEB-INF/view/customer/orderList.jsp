@@ -159,7 +159,25 @@ a.psyOrderDetailBtn {
 }
 </style>	
 <script type="text/javascript">
+	function orderDetail(tranNo){
+		console.log(tranNo);
+		var form = document.createElement('form');
+		form.setAttribute('action', 'orderDetail.do');
+		form.setAttribute('method', "post");
+		
+		var input = document.createElement('input');
+		input.setAttribute('type', 'input');
+		input.setAttribute('name', "tranNo");
+		input.setAttribute('value', tranNo);
+		form.appendChild(input);
+		
+		document.body.appendChild(form);
+		
+		form.submit();
+	}
+ 
 	function toggleFunc(id){
+		console.log(id);
 		$.ajax({
 			url : 'orderListDoToggle.do',
 			method : 'post',
@@ -175,19 +193,19 @@ a.psyOrderDetailBtn {
 				contents += "</div>\n";
 				$.each(data, function(key, value){
 					var prodName = "";
-					console.log(value.ordProductList.length);
+					console.log("aaa" + value.ordProductList.length);
 					if(value.ordProductList.length > 1){
 						prodName = value.ordProductList[0]['prod_name'] + "외" + (value.ordProductList.length - 1) + "건";
 					}else{
 						prodName = value.ordProductList[0]['prod_name'];
 					}
 					console.log(prodName);
-					contents += "<div class='shDTable' align='left'>";
+					contents += "<div class='shDTable' align='left' onclick='orderDetail(" + value.tran_no + ")'>";
 					contents += "<div class='psyDetail' align='left'>" + value.tran_no + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + prodName + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.ord_price + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.recipient + "</div>";
-					contents += "</div>\n";
+					contents += "</div>";
 				})
 				$('#' + id).html(contents);
 			}
@@ -227,8 +245,7 @@ a.psyOrderDetailBtn {
  		<div id="<%=CmmUtil.nvl(oDTO.getReg_dt())%>" style="display: none;">
  		</div>
  		<%} %>
- 	<a href="#" class="psyOrderDetailBtn" style="float: left;">운송장 번호 수정</a>
- 	<a href="#" class="psyOrderDetailBtn" style="float: right;">목록</a>
+ 	<a href="#" class="psyOrderDetailBtn" >목록</a>
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>

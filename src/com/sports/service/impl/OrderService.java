@@ -90,6 +90,22 @@ public class OrderService implements IOrderService {
 			System.out.println("prodList : " + oProdList.size());
 			oDTO1.setOrdProductList(oProdList);
 		}
+		System.out.println("oInfoList.size() : " + oInfoList.size());
 		return oInfoList;
+	}
+
+	@Override
+	public Order_infoDTO getOrderInfoDetail(String tranNo) throws Exception {
+		Order_infoDTO oDTO = orderMapper.getOrderInfoDetail(tranNo);
+		if(oDTO == null) oDTO = new Order_infoDTO();
+		List<OrdProductDTO> opList = orderMapper.getOrderProductList(oDTO.getTran_no());
+		if(opList == null) opList = new ArrayList<>();
+		for(OrdProductDTO opDTO : opList){
+			List<OrdProdOptionDTO> opOpList = orderMapper.getOrderProductOptionList(opDTO.getOrd_prod_no());
+			if(opOpList == null) opOpList = new ArrayList<>();
+			opDTO.setOrd_prodOpt_list(opOpList);
+		}
+		oDTO.setOrdProductList(opList);
+		return oDTO;
 	}
 }
