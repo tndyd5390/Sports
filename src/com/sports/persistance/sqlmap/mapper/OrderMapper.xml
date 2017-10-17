@@ -79,4 +79,68 @@
 			#{tid}
 		)
 	</insert>
+	<select id="getTotalOrderInfoList" parameterType="string" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{userNo} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	<select id="getOrderProductList" parameterType="string" resultType="OrdProductDTO">
+		SELECT OP.ORD_PROD_NO,
+			   OP.TRAN_NO,
+			   OP.PROD_NO,
+			   PI.PROD_NAME,
+			   OP.PROD_QTY,
+			   OP.REG_USER_NO
+		  FROM ORD_PRODUCT OP 
+		 INNER JOIN PRODUCT_INFO PI 
+			ON OP.PROD_NO = PI.PROD_NO 
+		 WHERE TRAN_NO = #{TRAN_NO}
+	</select>
+	
+	<select id="getOrderProductOptionList" parameterType="string" resultType="OrdProdOptionDTO">
+		SELECT ORD_PRODOPT_NO,
+			   ORD_PROD_NO,
+			   TRAN_NO,
+			   ORD_PRODOPT_NAME,
+			   ORD_PRODOPT_KIND,
+			   REG_USER_NO
+		  FROM ORD_PRODUCT_OPTION
+		 WHERE ORD_PROD_NO = #{ordProdNo}
+	</select>
+	
+	<select id="getOrderInfoDate" parameterType="string" resultType="Order_infoDTO">
+		SELECT DISTINCT(SUBSTRING(REG_DT, 1, 10)) AS REG_DT
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{userNo}
+	</select>
+	
+	<select id="getOrderInfoDateDetailList" parameterType="Order_infoDTO" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       REG_DT
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{reg_user_no}
+		   AND SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
 </mapper>

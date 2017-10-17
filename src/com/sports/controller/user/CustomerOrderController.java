@@ -19,10 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.sports.dto.BasketDTO;
 import com.sports.dto.OrdProdOptionDTO;
+import com.sports.dto.OrdProductDTO;
 import com.sports.dto.Order_infoDTO;
 import com.sports.service.IOrderService;
 import com.sports.util.CmmUtil;
@@ -172,12 +174,19 @@ public class CustomerOrderController {
 	 * @throws Exception
 	 * 결제에 성공한 후 사용자에게 화면을 뿌려줄 메소드
 	 */
-	@RequestMapping(value="orderSuccessView")
+	@RequestMapping(value="orderSuccessView" , method=RequestMethod.GET)
 	public String orderSuccessView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".orderSuccessView start!!!");
+		String userNo = CmmUtil.nvl(req.getParameter("userNo"));
+		log.info(this.getClass() + ".orderSuccessView userNo : " + userNo);
 		
+		List<Order_infoDTO> oList = orderService.getOrderInfoDate(userNo);
+		if(oList == null) oList = new ArrayList<>();
+		
+		
+		model.addAttribute("oList", oList);
 		log.info(this.getClass() + ".orderSuccessView end!!!");
-		return null;
+		return "customer/orderList";
 	}
 	
 	/**
@@ -213,51 +222,20 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".noticeOfPayment end!!!");
 		return null;
 	}
-	@RequestMapping(value="test")
-	public String test(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
-		
-		/*JSONParser jsonParser = new JSONParser();
-		String jsonData = req.getParameter("ETC_DATA2");
-    	JSONObject jsonObject = (JSONObject)jsonParser.parse(jsonData);
-    	JSONArray jsonArray = (JSONArray)jsonObject.get("bsk_option");
-    	for(int i = 0; i< jsonArray.size(); i++){
-    		JSONObject object = (JSONObject) jsonArray.get(i);
-    		System.out.println("bsk_no : " + object.get("bsk_no"));
-    		System.out.println("opt_kind" + i + " : " + CmmUtil.nvl((String)object.get("opt_kind" + i)));
-    	}*/
-		/*String data = req.getParameter("ETC_DATA1");
-		String [] charSet = {"utf-8","euc-kr","ksc5601","iso-8859-1","x-windows-949"};
-		  
-		for (int i=0; i<charSet.length; i++) {
-		 for (int j=0; j<charSet.length; j++) {
-		  try {
-		   System.out.println("[" + charSet[i] +"," + charSet[j] +"] = " + new String(data.getBytes(charSet[i]), charSet[j]));
-		  } catch (UnsupportedEncodingException e) {
-		   e.printStackTrace();
-		  }
-		 }
-		}*/
-		req.setCharacterEncoding("euc-kr");
-		String data = req.getParameter("ETC_DATA1");
-		byte[] euckr = data.getBytes(Charset.forName("euc-kr"));
-		System.out.println("aaa" + new String(euckr, "euc-kr"));
-		String [] charSet = {"utf-8","euc-kr","ksc5601","iso-8859-1","x-windows-949"};
-		  
-		for (int i=0; i<charSet.length; i++) {
-		 for (int j=0; j<charSet.length; j++) {
-		  try {
-		   System.out.println("[" + charSet[i] +"," + charSet[j] +"] = " + new String(data.getBytes(charSet[i]), charSet[j]));
-		  } catch (UnsupportedEncodingException e) {
-		   e.printStackTrace(); 
-		  }
-		 }
-		}
-		System.out.println("data : " + data);
-		System.out.println(new String(req.getParameter("COMPLETE_URL").getBytes("euc-kr"), "utf-8"));
-		JSONParser jsonParse = new JSONParser();
-		String jsonData = new String(req.getParameter("ETC_DATA1").getBytes("euc-kr"), "utf-8");
-		JSONObject ob = (JSONObject)jsonParse.parse(jsonData);
-		System.out.println(ob.get("address"));
-		return null;
+	
+	@RequestMapping(value="orderListDoToggle", method=RequestMethod.POST)
+	public @ResponseBody List<Order_infoDTO> orderListDoToggle(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".orderListDoToggle start!!!");
+		String regDt = CmmUtil.nvl(req.getParameter("reg_dt"));
+		log.info(this.getClass() + ".orderListDoToggle regDt : " + regDt);
+		String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info(this.getClass() + ".orderListDoToggle userNo : " + userNo);
+		Order_infoDTO oDTO = new Order_infoDTO();
+		oDTO.setReg_dt(regDt);
+		oDTO.setReg_user_no(userNo);
+		List<Order_infoDTO> oList = orderService.getOrderInfoDateDatailList(oDTO);
+		if(oList == null) oList = new ArrayList<>();
+		log.info(this.getClass() + ".orderListDoToggle end");
+		return oList;
 	}
 }

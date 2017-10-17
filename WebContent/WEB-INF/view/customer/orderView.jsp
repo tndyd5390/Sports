@@ -386,7 +386,7 @@ ul > li > textarea.psyTermsTextarea{
         		<!-- 거래 일자	 !!	--> <input type="hidden" id="SALE_DATE" name="SALE_DATE" size=8 maxlength=6 />
         		<!-- 고객명	 !! --> <input type="hidden" id="CUSTOMER_NAME" name="CUSTOMER_NAME" value="<%=userName %>" size=30 maxlength=100 />
         		<!-- 리턴 URL	 !! --> <input type="hidden" id="RETURN_URL" name="RETURN_URL" value="http://tmaxxsports.com/orderSuccess.do" size=30 maxlength=100 />
-        		<!-- 결제성공URL !	--> <input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://tmaxxsports.com/orderSuccessView.do?test=한글임" size=30 maxlength=100 />
+        		<!-- 결제성공URL !	--> <input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://tmaxxsports.com/orderSuccessView.do?userNo=<%=CmmUtil.nvl(userNo)%>" size=30 maxlength=100 />
         		<!-- 결제취소URL !	--> <input type="hidden" id="FAIL_URL" name="FAIL_URL" value="http://tmaxxsports.com/orderCancel.do" size=30 maxlength=100 />
         		<!-- 여분의 데이터 1	--> <input type="hidden" id="ETC_DATA1" name="ETC_DATA1"/>
         		<!-- 여분의 데이터 2	--> <input type="hidden" id="ETC_DATA2" name="ETC_DATA2"/>
