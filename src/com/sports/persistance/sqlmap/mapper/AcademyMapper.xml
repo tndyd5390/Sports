@@ -45,7 +45,11 @@
 	
 	
 	<select id="getMapAcaList" resultType="AcademyDTO">
-		SELECT ACA_NO, ACA_NAME, SUBSTR(ACA_AREA2,4,3), ACA_AREA2, TEL, ACA_VISIT, ACA_LAT, ACA_LNG 
+		SELECT ACA_NO, ACA_NAME, SUBSTR(ACA_AREA2,4,3), ACA_AREA2, ACA_AREA3, TEL, ACA_EVENT1,ACA_VISIT, ACA_LAT, ACA_LNG 
 		FROM ACADEMY
 	</select>
+	
+	<update id="updateAcaVisit" parameterType="AcademyDTO">
+		UPDATE ACADEMY SET ACA_VISIT = #{aca_visit}, CHG_DT = NOW() WHERE ACA_NO = #{aca_no}
+	</update>
 </mapper>

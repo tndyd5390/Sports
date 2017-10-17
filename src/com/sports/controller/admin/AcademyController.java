@@ -267,4 +267,22 @@ public class AcademyController {
 		log.info(this.getClass() + " mapAcaList End!!");
 		return aList;
 	}
+	@RequestMapping(value="updateAcaVisit")
+	public @ResponseBody int updateAcaVisit(@RequestParam("aNo") String aNo, @RequestParam("visit") String visit, HttpSession session) throws Exception{
+		log.info(this.getClass() + " updateAcaVisit Start!!");
+		//String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info("aNo : " +aNo);
+		log.info("visit : " +visit);
+		
+		AcademyDTO aDTO = new AcademyDTO();
+		aDTO.setAca_no(CmmUtil.nvl(aNo));
+		aDTO.setAca_visit(CmmUtil.nvl(visit));
+		//aDTO.setChg_user_no(userNo);
+		int rs = academyService.updateAcaVisit(aDTO);
+		
+		aDTO = null;
+		log.info(this.getClass() + " updateAcaVisit End!!");
+		System.out.println(rs);
+		return rs;
+	}
 }

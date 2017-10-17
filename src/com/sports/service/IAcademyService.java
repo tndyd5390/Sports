@@ -22,4 +22,6 @@ public interface IAcademyService {
 
 	public List<AcademyDTO> getMapAcaList() throws Exception;
 
+	public int updateAcaVisit(AcademyDTO aDTO) throws Exception;
+
 }

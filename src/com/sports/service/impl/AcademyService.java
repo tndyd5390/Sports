@@ -54,4 +54,9 @@ public class AcademyService implements IAcademyService {
 	public List<AcademyDTO> getMapAcaList() throws Exception {
 		return academyMapper.getMapAcaList();
 	}
+
+	@Override
+	public int updateAcaVisit(AcademyDTO aDTO) throws Exception {
+		return academyMapper.updateAcaVisit(aDTO);
+	}
 }
