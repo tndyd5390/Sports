@@ -253,4 +253,18 @@ public class AcademyController {
 		
 		return adTO;
 	}
+	
+	
+	
+	@RequestMapping(value="mapAcaList")
+	public @ResponseBody List<AcademyDTO> mapAcaList() throws Exception{
+		log.info(this.getClass() + " mapAcaList Start!!");
+		
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>(); 
+		
+		aList = academyService.getMapAcaList();
+		
+		log.info(this.getClass() + " mapAcaList End!!");
+		return aList;
+	}
 }

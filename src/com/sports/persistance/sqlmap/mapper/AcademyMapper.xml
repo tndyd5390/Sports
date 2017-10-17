@@ -41,4 +41,11 @@
 		ORDER BY ACA_NO
 		LIMIT 6 OFFSET ${read_more};
 	</select>
+	
+	
+	
+	<select id="getMapAcaList" resultType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, SUBSTR(ACA_AREA2,4,3), ACA_AREA2, TEL, ACA_VISIT, ACA_LAT, ACA_LNG 
+		FROM ACADEMY
+	</select>
 </mapper>

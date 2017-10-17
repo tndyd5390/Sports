@@ -31,6 +31,25 @@
 .mainWrapper{
 	margin-top : 30px;
 }
+
+    .wrap_map {position: absolute;left: 0;bottom: 40px;width: 288px;height: 132px;margin-left: -144px;text-align: left;overflow: hidden;font-size: 12px;font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;line-height: 1.5;}
+    .wrap_map * {padding: 0;margin: 0;}
+    .wrap_map .info {width: 286px;height: 120px;border-radius: 5px;border-bottom: 2px solid #ccc;border-right: 1px solid #ccc;overflow: hidden;background: #fff;}
+    .wrap_map .info:nth-child(1) {border: 0;box-shadow: 0px 1px 2px #888;}
+    .info .title {padding: 5px 0 0 10px;height: 30px;background: #eee;border-bottom: 1px solid #ddd;font-size: 18px;font-weight: bold;}
+    .info .close {position: absolute;top: 10px;right: 10px;color: #888;width: 17px;height: 17px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');}
+    .info .close:hover {cursor: pointer;}
+    .info .body {position: relative;overflow: hidden;}
+    .info .desc {position: relative;margin: 13px 0 0 90px;height: 75px;}
+    .desc .ellipsis {overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+    .desc .jibun {font-size: 11px;color: #888;margin-top: -2px;}
+    .info .img {position: absolute;top: 6px;left: 5px;width: 73px;height: 71px;border: 1px solid #ddd;color: #888;overflow: hidden;}
+    .info:after {content: '';position: absolute;margin-left: -12px;left: 50%;bottom: 0;width: 22px;height: 12px;background: url('http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+    .info .link {color: #5085BB;}
+    .ellipssis {width:100%;font-size:11px;}
+
+
+
 </style>
 <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=OtsTFLJcXGVYGVcEbrwy"></script>
 <script>
@@ -82,6 +101,61 @@ var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCo
 			}
 		});
 	}
+	
+	function marker(){
+		$.ajax({
+			url : 'mapAcaList.do',
+			method : 'post',
+			success : function(data){
+				var pos = new Array();
+				var mk = "";
+				$.each(data, function(key,value){
+					var cont = "";
+					cont += "<div class='wrap_map' id='overlay'>";
+					cont += 	"<div class='info'>";
+					cont += 		"<div class='title'>"+value.aca_name;
+					cont += 			"<div class='close' onclick='closeOverlay()' title='닫기'>";
+					cont += 		"</div>";
+					cont += 		"<div class='body'>";
+					cont += 			"<div class='img'>";
+					cont += 				"<img src='http://cfile181.uf.daum.net/image/250649365602043421936D' width='73' height='70'>";
+					cont += 			"</div>";
+					cont += 			"<div class='desc'>";
+					cont += 				"<div class='ellipssis'>"+value.aca_area2;
+					cont += 				"</div>";
+					cont += 			"</div>";
+					cont += 		"</div>";
+					cont += 	"</div>";
+					cont += "</div>";
+					mk = {content : cont, latlng : new daum.maps.LatLng(value.aca_lat, value.aca_lng)};	
+					pos.push(mk);
+				});
+				for (var i = 0; i < pos.length; i ++) {
+					var close = $('#close');
+				    var marker = new daum.maps.Marker({
+				        map: map, 
+				        position: pos[i].latlng // 마커의 위치
+				    });
+				    // 마커에 표시할 인포윈도우를 생성합니다 
+					var overlay = new daum.maps.CustomOverlay({
+					    content: pos[i].content,
+					    map: map,
+					    position: pos[i].latlng,
+					    visible : false
+					});
+				    overlay.setMap(null);
+				    daum.maps.event.addListener(marker, 'click', addOverlay(map, overlay));
+				}
+				function addOverlay(map, overlay){
+					return function(){
+						overlay.setMap(map);
+					}
+				}
+			}
+		});
+	}
+	
+	
 </script>
 </head>
 
@@ -131,14 +205,23 @@ var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCo
 						src="https://lh3.googleusercontent.com/UMB2HRRRAAzXAEaCM9Gg-baCaDx_1RTXHscW5k2Ge3P4KP4mwTt2m6oyEHBWex3c4SxU=w300">
 					<span>거래중</span>
 				</div>
-				<div id="mainWrapper" style="width:100%; height:300px; margin-top:30px; margin-bottom:30px;"></div>
+					<div id="map" style="width:100%; height:350px; margin-top:30px; margin-bottom:30px;"></div>
+					<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=57ab738bf80955cd4ef2006c6dabe851"></script>
 				<script>
-					var mapOptions = {
-						center : new naver.maps.LatLng(37.3595704, 127.105399),
-						zoom : 10
-					};
-					var map = new naver.maps.Map('mainWrapper', mapOptions);
-				</script>
+						var container = document.getElementById('map');
+						var options = {
+							center: new daum.maps.LatLng(37.544167, 126.73377),
+							level: 3
+						};
+				
+						var map = new daum.maps.Map(container, options);
+						
+						marker();
+						function closeOverlay(){
+							$('#overlay').remove();								
+						}
+					</script> 
+					
 			</div>
 		</div>
 

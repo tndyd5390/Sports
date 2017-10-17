@@ -20,4 +20,6 @@ public interface IAcademyService {
 
 	public List<AcademyDTO> AcademyMoreList(AcademyDTO aDTO) throws Exception;
 
+	public List<AcademyDTO> getMapAcaList() throws Exception;
+
 }
