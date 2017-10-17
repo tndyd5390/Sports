@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import com.sports.dto.BasketDTO;
 import com.sports.dto.Basket_OptionDTO;
+import com.sports.dto.OrdProdOptionDTO;
+import com.sports.dto.OrdProductDTO;
 import com.sports.dto.Order_infoDTO;
 import com.sports.persistance.mapper.BasketMapper;
 import com.sports.persistance.mapper.OrderMapper;
@@ -31,7 +33,7 @@ public class OrderService implements IOrderService {
 		}
 		for(BasketDTO bDTO : bList){
 			bDTO.setTranNo(tranNo);
-			bDTO.setUser_no(userNo);
+			bDTO.setReg_user_no(userNo);
 			insertOrdProdResult += orderMapper.insertOrderProdFromBasket(bDTO);
 			if(bDTO.getBskOptList() == null){
 				bDTO.setBskOptList(new ArrayList<Basket_OptionDTO>());
@@ -54,5 +56,56 @@ public class OrderService implements IOrderService {
 		}
 		orderMapper.updateOrderProdStatusFromBasket(bList);
 		orderMapper.insertOrderInfoFromBasket(oDTO);
+	}
+
+	@Override
+	public List<Order_infoDTO> getTotalOrderInfoList(String userNo) throws Exception {
+		List<Order_infoDTO> oInfoList = orderMapper.getTotalOrderInfoList(userNo);
+		if(oInfoList == null) oInfoList = new ArrayList<>();
+		for(Order_infoDTO oDTO : oInfoList){
+			List<OrdProductDTO> oProdList = orderMapper.getOrderProductList(oDTO.getTran_no());
+			if(oProdList == null) new ArrayList<>();
+			for(OrdProductDTO prodDTO : oProdList){
+				List<OrdProdOptionDTO> oProdOptList = orderMapper.getOrderProductOptionList(prodDTO.getOrd_prod_no());
+				if(oProdOptList == null) oProdOptList = new ArrayList<>();
+				prodDTO.setOrd_prodOpt_list(oProdOptList);
+			}
+			oDTO.setOrdProductList(oProdList);
+		}
+		return oInfoList;
+	}
+
+	@Override
+	public List<Order_infoDTO> getOrderInfoDate(String userNo) throws Exception {
+		return orderMapper.getOrderInfoDate(userNo);
+	}
+
+	@Override
+	public List<Order_infoDTO> getOrderInfoDateDatailList(Order_infoDTO oDTO) throws Exception {
+		List<Order_infoDTO> oInfoList = orderMapper.getOrderInfoDateDetailList(oDTO);
+		if(oInfoList == null) oInfoList = new ArrayList<>();
+		for(Order_infoDTO oDTO1 : oInfoList){
+			List<OrdProductDTO> oProdList = orderMapper.getOrderProductList(oDTO1.getTran_no());
+			if(oProdList == null) new ArrayList<>();
+			System.out.println("prodList : " + oProdList.size());
+			oDTO1.setOrdProductList(oProdList);
+		}
+		System.out.println("oInfoList.size() : " + oInfoList.size());
+		return oInfoList;
+	}
+
+	@Override
+	public Order_infoDTO getOrderInfoDetail(String tranNo) throws Exception {
+		Order_infoDTO oDTO = orderMapper.getOrderInfoDetail(tranNo);
+		if(oDTO == null) oDTO = new Order_infoDTO();
+		List<OrdProductDTO> opList = orderMapper.getOrderProductList(oDTO.getTran_no());
+		if(opList == null) opList = new ArrayList<>();
+		for(OrdProductDTO opDTO : opList){
+			List<OrdProdOptionDTO> opOpList = orderMapper.getOrderProductOptionList(opDTO.getOrd_prod_no());
+			if(opOpList == null) opOpList = new ArrayList<>();
+			opDTO.setOrd_prodOpt_list(opOpList);
+		}
+		oDTO.setOrdProductList(opList);
+		return oDTO;
 	}
 }

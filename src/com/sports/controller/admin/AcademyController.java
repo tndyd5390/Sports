@@ -52,15 +52,28 @@ public class AcademyController {
 	@RequestMapping(value="accountRegProc")
 	public String accountRegProc(HttpServletRequest req, HttpSession session, Model model)throws Exception{
 		log.info(this.getClass() + "accountRegProc Start!!");
+		String aca_ceo = "";
+		String tel = "";
 		String reg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
-		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
-		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
+		String acaname = CmmUtil.nvl(req.getParameter("aca_name"));
+		String aca_name = TextUtil.exchangeEscapeNvl(acaname);
+		String acaceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
+		if(acaceo.equals("")){
+			aca_ceo = "정보없음";
+		}else{
+			aca_ceo = acaceo;
+		}
 		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
 		String aca_area = CmmUtil.nvl(req.getParameter("aca_area2"));
 		String aca_area2 = TextUtil.exchangeEscapeNvl(aca_area);
 		String aca_area3 = CmmUtil.nvl(req.getParameter("aca_area3"));
 		String aca_event1 = CmmUtil.nvl(req.getParameter("aca_event1"));
-		String tel = CmmUtil.nvl(req.getParameter("tel"));
+		String Tel = CmmUtil.nvl(req.getParameter("tel"));
+		if(Tel.equals("")){
+			tel = "정보없음";
+		}else{
+			tel = Tel;
+		}
 		String aca_comment = CmmUtil.nvl(req.getParameter("aca_comment"));
 		Float[] locs = GeoCodeUtil.geoCoding(aca_area2);
 		String x = CmmUtil.nvl(locs[0].toString());
@@ -146,7 +159,8 @@ public class AcademyController {
 		
 		String chg_user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 		String aca_no = CmmUtil.nvl(req.getParameter("aca_no"));
-		String aca_name = CmmUtil.nvl(req.getParameter("aca_name"));
+		String acaname = CmmUtil.nvl(req.getParameter("aca_name"));
+		String aca_name = TextUtil.exchangeEscapeNvl(acaname);
 		String aca_ceo = CmmUtil.nvl(req.getParameter("aca_ceo"));
 		String aca_area1 = CmmUtil.nvl(req.getParameter("aca_area1"));
 		String aca_area = CmmUtil.nvl(req.getParameter("aca_area2"));

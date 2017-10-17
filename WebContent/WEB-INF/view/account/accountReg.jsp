@@ -14,32 +14,20 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 
 	function doJoin() {
 		var aca_name = $('#aca_name');
-		var aca_ceo = $('#aca_ceo');
 		var aca_area1 = $('#aca_area1')
 		var aca_area2 = $('#aca_area2');
-		var aca_area3 = $('#aca_area3');
 		var aca_event1 = $('#aca_event1');
-		var tel = $('#tel');
-		var aca_comment = $('#aca_comment');
 
 		if (aca_name.val() == "") {
 			alert("거래처명을 입력하세요")
 			aca_name.focus();
 			return false;
-		} else if (aca_ceo.val() == "") {
-			alert("대표자명을 입력하세요.");
-			aca_ceo.focus();
-			return false;
-		}  else if (aca_area1.val() == "" || aca_area2.val() == "") {
+		} else if (aca_area1.val() == "" || aca_area2.val() == "") {
 			alert("주소를 입력하세요.");
 			aca_area1.focus();
 			return false;
 		} else if (aca_event1.val() == "") {
 			alert("업종을 입력하세요.");
-			return false;
-		} else if (tel.val() == "") {
-			alert("연락처를 입력하세요.");
-			tel.focus();
 			return false;
 		} else {
 			if (confirm("등록하시겠습니까?")) {

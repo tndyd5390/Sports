@@ -52,8 +52,8 @@ if(aList == null){
 	}); */ //검색이벤트 닫음
 	
 	/* 더보기 시작 */
-	function moreview() {
 		var cnt = 6;
+	function moreview() {
 		var search = ""; 
 		
 		$.ajax({
@@ -76,9 +76,12 @@ if(aList == null){
 				});
 				
 				$('#ulTable').append(contents);
+				if ((data).length < 6 ) {
+					$('#addview').remove();
+				}
 				
 			} //성공
-		}) //아작스 닫음
+		}); //아작스 닫음
 		cnt += 6;
 		
 		if (search == "") { //두번 실행 방지
