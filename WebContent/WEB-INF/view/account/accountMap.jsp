@@ -114,7 +114,6 @@ var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCo
 					cont += "<div class='wrap_map' id='overlay'>";
 					cont += 	"<div class='info'>";
 					cont += 		"<div class='title'>"+value.aca_name;
-					cont += 			"<div class='close' onclick='closeOverlay()' title='닫기'>";
 					cont += 		"</div>";
 					cont += 		"<div class='body'>";
 					cont += 			"<div class='img'>";
@@ -141,14 +140,20 @@ var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCo
 					    content: pos[i].content,
 					    map: map,
 					    position: pos[i].latlng,
-					    visible : false
 					});
 				    overlay.setMap(null);
 				    daum.maps.event.addListener(marker, 'click', addOverlay(map, overlay));
+				    
+				    
+				    
 				}
 				function addOverlay(map, overlay){
 					return function(){
-						overlay.setMap(map);
+						if(overlay.getMap()){
+							overlay.setMap(null);							
+						}else{
+							overlay.setMap(map);
+						}
 					}
 				}
 			}
@@ -217,9 +222,6 @@ var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCo
 						var map = new daum.maps.Map(container, options);
 						
 						marker();
-						function closeOverlay(){
-							$('#overlay').remove();								
-						}
 					</script> 
 					
 			</div>
