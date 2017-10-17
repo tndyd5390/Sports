@@ -80,7 +80,7 @@ function doDelete() {
 	if ("<%=access%>"==2) {
 		
 		if (confirm("작성한 게시글을 삭제하시겠습니까?")) {
-			location.href="/customer/QA/QADelete.do?q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
+			location.href="/customer/QA/QADelete.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>&q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
 		}
 		
 	} else if ("<%=access%>"==3) {

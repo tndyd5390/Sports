@@ -319,13 +319,17 @@ public class CustomerQAController {
 		
 		try {
 			
+			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			
+			log.info("qa_no: " + qa_no);
 			log.info("q_no: " + q_no);
 			
 			QADTO qaDTO = new QADTO();
 			
+			qaDTO.setQa_no(qa_no);
 			qaDTO.setQ_no(q_no);
+			
 			
 			qaService.deleteQADetail(qaDTO);
 			

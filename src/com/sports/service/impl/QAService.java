@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
@@ -35,10 +36,8 @@ public class QAService implements IQAService {
 	
 	@Override
 	public QADTO getQADetail(QADTO qaDTO) throws Exception {
-		System.out.println("1: " + qaDTO.getReg_user_no());
-		if (qaDTO.getReg_user_no() == "5") {
-			
-	
+
+		/*if (qaDTO.getReg_user_no() == "5") {
 			
 			//관리자일 경우
 			return qaMapper.getAdminQADetail(qaDTO);
@@ -48,7 +47,9 @@ public class QAService implements IQAService {
 			//사용자일 경우
 			return qaMapper.getCustomerQADetail(qaDTO);
 			
-		}
+		}*/
+		
+		return qaMapper.getQADetail(qaDTO);
 
 	}
 	
@@ -118,6 +119,7 @@ public class QAService implements IQAService {
 	
 	@Override
 	public void insertQAAnswerDetail(QADTO qaDTO) throws Exception {
+		System.out.println("qadto : " + qaDTO.getParent_user_no());
 		qaMapper.insertQAAnswerDetail(qaDTO);
 	}
 	

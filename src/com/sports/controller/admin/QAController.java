@@ -177,15 +177,15 @@ public class QAController {
 		log.info(this.getClass().getName() + ".QADetail start!");
 		
 		String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
-		String reg_user_no = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
+		//String reg_user_no = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
 
 		log.info("qa_no: " + qa_no);
-		log.info("reg_user_no: " + reg_user_no);
+		//log.info("reg_user_no: " + reg_user_no);
 		
 		QADTO qaDTO = new QADTO();
 		
 		qaDTO.setQa_no(qa_no);
-		qaDTO.setReg_user_no(reg_user_no);
+		//qaDTO.setReg_user_no(reg_user_no);
 		
 		QADTO rDTO = qaService.getQADetail(qaDTO);
 		
@@ -345,6 +345,7 @@ public class QAController {
 			String secret_yn = CmmUtil.nvl(request.getParameter("secret_yn"));
 			String title = CmmUtil.nvl(request.getParameter("title"));
 			String contents = CmmUtil.nvl(request.getParameter("contents"));
+			String parent_user_no = CmmUtil.nvl(request.getParameter("reg_user_no"));
 			
 			contents = contents.replace("\r\n", "<br>");
 			
@@ -354,7 +355,8 @@ public class QAController {
 			log.info("answer_yn: " + answer_yn);
 			log.info("secret_yn: " + secret_yn);
 			log.info("title: " + title);
-			log.info("contents: " + contents);		
+			log.info("contents: " + contents);	
+			log.info("parent_user_no: " + parent_user_no);
 			
 			QADTO qaDTO = new QADTO();
 			
@@ -365,6 +367,7 @@ public class QAController {
 			qaDTO.setSecret_yn(secret_yn);
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
+			qaDTO.setParent_user_no(parent_user_no);
 			
 			if (file.getSize()!=0) {
 				
