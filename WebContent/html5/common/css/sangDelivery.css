@@ -106,6 +106,4 @@
     #ulTable > li > ul > li:first-child +li           {width:34%;}
     #ulTable > li > ul > li:first-child +li+li        {width:40%;}
 
-	#ulTable > li:nth-child(odd) {
-	background-color: #E1E1E1;
-	}
+	
