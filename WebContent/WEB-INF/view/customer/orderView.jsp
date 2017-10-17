@@ -21,9 +21,9 @@
 	String prodName = "";
 	if(bList.size() != 0){
 		if(bList.size() == 1){
-			prodName = bList.get(0).getOpt_name();
+			prodName = bList.get(0).getProd_name();
 		}else{
-			prodName = bList.get(0).getOpt_name() + "외" + (bList.size()-1) + "건";
+			prodName = bList.get(0).getProd_name() + "외" + (bList.size()-1) + "건";
 		}
 	}
 	//파라미터로 보낼 상품 수량
@@ -221,7 +221,7 @@ ul > li > textarea.psyTermsTextarea{
 			alert('약관에 동의해 주세요.');
 			return;
 		}
-		var form = document.getElementById('orderForm');
+		var form = document.getElementById('frmPayment');
 		
 		if(form.TRAN_TYPE.value == ""){
 			alert("결제 방식을 선택해 주세요");
@@ -371,7 +371,8 @@ ul > li > textarea.psyTermsTextarea{
       <div class="wrap search-wrap btn-wrap">
         <div class="list_wrap">
         <!-- https://pg.paynuri.com/paymentgateway/mobile/reqPay.do -->
-        	<form action="https://pg.paynuri.com/paymentgateway/mobile/reqPay.do" method="post" accept-charset="euc-kr" id="orderForm">
+        	<!-- <form action="https://pg.paynuri.com/paymentgateway/mobile/reqPay.do" method="post" id="orderForm"> -->
+        	<form method="post" name="frmPayment" id="frmPayment" action="https://pg.paynuri.com/paymentgateway/mobile/reqPay.do" accept-charset="euc-kr" target="_self">
         		<!-- 모든 결제의 공통 파라미터 작성 ==============================================================================================================-->
         		<!-- 가맹점 번호       	-->	<input type="hidden" id="STOREID" name="STOREID" value="1500000088"/>
         		<!-- 가맹점 key   	-->	<input type="hidden" id="CRYPTO_KEY" name="CRYPTO_KEY" value="AF866C9C429290750A6D4255590C0328" />
@@ -385,7 +386,7 @@ ul > li > textarea.psyTermsTextarea{
         		<!-- 거래 일자	 !!	--> <input type="hidden" id="SALE_DATE" name="SALE_DATE" size=8 maxlength=6 />
         		<!-- 고객명	 !! --> <input type="hidden" id="CUSTOMER_NAME" name="CUSTOMER_NAME" value="<%=userName %>" size=30 maxlength=100 />
         		<!-- 리턴 URL	 !! --> <input type="hidden" id="RETURN_URL" name="RETURN_URL" value="http://tmaxxsports.com/orderSuccess.do" size=30 maxlength=100 />
-        		<!-- 결제성공URL !	--> <input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://tmaxxsports.com/orderSuccessView.do" size=30 maxlength=100 />
+        		<!-- 결제성공URL !	--> <input type="hidden" id="COMPLETE_URL" name="COMPLETE_URL" value="http://tmaxxsports.com/orderSuccessView.do?userNo=<%=CmmUtil.nvl(userNo)%>" size=30 maxlength=100 />
         		<!-- 결제취소URL !	--> <input type="hidden" id="FAIL_URL" name="FAIL_URL" value="http://tmaxxsports.com/orderCancel.do" size=30 maxlength=100 />
         		<!-- 여분의 데이터 1	--> <input type="hidden" id="ETC_DATA1" name="ETC_DATA1"/>
         		<!-- 여분의 데이터 2	--> <input type="hidden" id="ETC_DATA2" name="ETC_DATA2"/>
@@ -496,10 +497,6 @@ ul > li > textarea.psyTermsTextarea{
         </div>
       </div>
     </div>
-    <form action="test.do" method="post" onsubmit="return testSubmit(this);">
-    	<input type="hidden" name="jsondata">
-    	<input type="submit" value="전송">
-    </form>
  <%@include file="/html5/include/footer.jsp" %>
 </body>
 

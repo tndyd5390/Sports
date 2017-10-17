@@ -1,13 +1,30 @@
 package com.sports.dto;
 
+import java.util.List;
+
 public class OrdProductDTO {
 	private String ord_prod_no;
 	private String tran_no;
 	private String prod_no;
+	private String prod_name;
 	private String reg_user_no;
 	private String reg_dt;
 	private String chg_user_no;
 	private String chg_dt;
+	private List<OrdProdOptionDTO> ord_prodOpt_list;
+	
+	public String getProd_name() {
+		return prod_name;
+	}
+	public void setProd_name(String prod_name) {
+		this.prod_name = prod_name;
+	}
+	public List<OrdProdOptionDTO> getOrd_prodOpt_list() {
+		return ord_prodOpt_list;
+	}
+	public void setOrd_prodOpt_list(List<OrdProdOptionDTO> ord_prodOpt_list) {
+		this.ord_prodOpt_list = ord_prodOpt_list;
+	}
 	public String getOrd_prod_no() {
 		return ord_prod_no;
 	}
