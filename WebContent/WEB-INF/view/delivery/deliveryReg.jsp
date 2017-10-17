@@ -11,7 +11,18 @@
 <html lang="ko">
 <head>
 <%@include file="/html5/include/head.jsp"%>
-
+<script>
+	function onlyNum(event) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if ((keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105)
+				|| keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39) {
+			return;
+		} else {
+			return false;
+		}
+	}
+</script>
 </head>
 
 <body>
@@ -41,39 +52,37 @@
 			<div class="wrap btn-wrap">
 
 				<div class="list_wrap qna_detail"
-					style="height: 100%;min-height: 350px;padding-right: 11px;padding-left: 8px;">
+					style="height: 100%; min-height: 350px; padding-right: 11px; padding-left: 8px;">
 					<div style="width: 200px; height: 100%; margin: auto;">
 						<img src="/html5/common/images/ic_delivery.png"
 							style="width: 100%; margin-top: 20px">
 					</div>
 					<form>
-					<div>	
-						<center>	
-						<div style="width:90%">
-							<select style="margin-top: 20px;width: 100%;">
-							<option selected>택배사를 선택해주세요</option>
-							<option value="01">우체국 택배</option>
-							<option value="02">이노지스</option>
-							<option value="03">CJ대한통운</option>
-							<option value="05">한진택배</option>
-							<option value="08">현대택배</option>
-							<option value="37">범한판토스</option>
-							<option value="31">스카이로지스</option>
-							<option value="06">로젠택배</option>
-							</select>
-						
-							
-							<input class="search type pw-search" type="text"
-							placeholder="운송장 번호를 입력해 주세요" id="postnum"
-							style="margin-top: 10px; margin-bottom: 10px;width: 100%;">
-							<button class="btn btn-primary width100"
-								style="margin-left: 3px; margin-right: 3px;margin-top:15px">등록</button>
-							<button class="btn gray-primary width100"
-								style="margin-left: 3px; margin-right: 3px;margin-top:15px;margin-bottom:30px;">뒤로</button>	
+						<div>
+							<center>
+								<div style="width: 90%">
+									<select style="margin-top: 20px; width: 100%;">
+										<option selected>택배사를 선택해주세요</option>
+										<option value="01">우체국 택배</option>
+										<option value="02">이노지스</option>
+										<option value="03">CJ대한통운</option>
+										<option value="05">한진택배</option>
+										<option value="08">현대택배</option>
+										<option value="37">범한판토스</option>
+										<option value="31">스카이로지스</option>
+										<option value="06">로젠택배</option>
+									</select> <input class="search type pw-search" type="text"
+										placeholder="운송장 번호를 입력해 주세요 ('-'없이)" id="postnum"
+										style="margin-top: 10px; margin-bottom: 10px; width: 100%;"
+										onkeydown="return onlyNum(event)">
+									<button class="btn btn-primary width100"
+										style="margin-left: 3px; margin-right: 3px; margin-top: 15px">등록</button>
+									<button class="btn gray-primary width100"
+										style="margin-left: 3px; margin-right: 3px; margin-top: 15px; margin-bottom: 30px;">뒤로</button>
+								</div>
+							</center>
 						</div>
-						</center>
-					</div>
-					</form>		
+					</form>
 				</div>
 
 			</div>

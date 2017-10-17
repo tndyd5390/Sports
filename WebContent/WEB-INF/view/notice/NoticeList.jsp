@@ -50,7 +50,7 @@ String auth = CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 					contents += "<li>";
 		            contents += "<div style='float:left' ><input type='checkbox' name='checkbox' class='checkbox' value='"+value.notice_no+"'/></div>";
 		            contents += "<a href='/notice/NoticeInfo.do?notice_no="+value.notice_no+"'>";
-		            contents += "<p class='title'>";
+		            contents += "<p class='title' style='margin : unset;'>";
 		      
 		    	if (yn == '1') {
 		            contents += "<span class='blue_text'>"+value.title+"</span>";
@@ -63,7 +63,7 @@ String auth = CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 		         } 
 		            
 		        	contents += "</p>";
-		            contents += "<p class='sub_text'>"+value.user_name;
+		            contents += "<p class='sub_text' style='margin : unset;'>"+value.user_name;
 		            contents += "<span>"+value.reg_dt.substring(0, 10)+"</span></p>";
 		            contents += "</a>";
 		            contents += "</li>";

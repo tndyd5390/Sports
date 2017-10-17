@@ -22,7 +22,21 @@ public class Order_infoDTO {
 	private String tid;
 	private String prod_no;
 	private List<OrdProductDTO> ordProductList;
+	private String invoice_no;
+	private String deli_co_no;
 	
+	public String getInvoice_no() {
+		return invoice_no;
+	}
+	public void setInvoice_no(String invoice_no) {
+		this.invoice_no = invoice_no;
+	}
+	public String getDeli_co_no() {
+		return deli_co_no;
+	}
+	public void setDeli_co_no(String deli_co_no) {
+		this.deli_co_no = deli_co_no;
+	}
 	public String getAddress() {
 		return address;
 	}

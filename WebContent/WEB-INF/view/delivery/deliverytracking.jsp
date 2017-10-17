@@ -82,22 +82,23 @@
 <script src="/html5/common/js/bootstrap-theme.min.js"></script> -->
 <script src="/html5/common/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-	function func() {
-		window.open("http://nexs.cjgls.com/web/info.jsp?slipno="
-				+ $("#cjInfo").val());
-	}
-	
-	 $(document).ready(function(){
-		   var max_h=0;
-		   $("#ulTable2 li").each(function(){
-		 var h = parseInt($(this).css("height"));
-		    if(max_h<h){ max_h = h; }
-		   });
-		   $("#ulTable2 li").each(function(){
-		 $(this).css({height:max_h});
-		   });
-		  });
+
+$(document).ready(function(){
+	   var max_h=0;
+	   $("#ulTableDetail li").each(function(){
+	 var h = parseInt($(this).css("height"));
+	    if(max_h<h){ max_h = h; }
+	   });
+	   $("#ulTableDetail li").each(function(){
+	 $(this).css({height:max_h});
+	   });
+	  });
+
+
 </script>
+
+
+
 </head>
 
 <body>
@@ -153,9 +154,11 @@
 
 			</div>
 			<button onclick="func();"></button>
-			<div class="wrap search-wrap btn-wrap">
+			<div class="wrap search-wrap btn-wrap" style="margin-bottom: 50px;">
 				<div id="mainWrapper">
-					<ul>
+	
+					
+				 <ul>
 						<li>
 							<ul id="ulTable">
 
@@ -172,8 +175,8 @@
 								%>
 
 								<li>
-									<ul id="ulTable2">
-										<li><%=order.get("timeString")%></li>
+									<ul id="ulTableDetail" style="line-height: 1.2em;">
+										<li ><%=order.get("timeString").toString().substring(0, 10)%></li>
 										<li><%=order.get("where")%></li>
 										<li><%=order.get("kind")%></li>
 									</ul>
@@ -183,10 +186,11 @@
 								%>
 							</ul>
 						</li>
-					</ul>
+					</ul> 
 				</div>
 
 			</div>
+		
 		</div>
 	</section>
 	<%@include file="/html5/include/footer.jsp"%>

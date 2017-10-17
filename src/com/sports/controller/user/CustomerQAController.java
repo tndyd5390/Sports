@@ -33,6 +33,8 @@ public class CustomerQAController {
 	@Resource(name = "QAService") 
 	private IQAService qaService;
 	
+	String filePath="C:\\Users\\Data3811-36\\git\\Sports\\WebContent\\upload\\qa_file\\";
+	
 	@RequestMapping(value="customer/QA/QAList", method=RequestMethod.GET)
 	public String QAList(HttpServletRequest request, HttpServletResponse response, 
 			ModelMap model) throws Exception {
@@ -91,8 +93,8 @@ public class CustomerQAController {
 	}
 	
 	@RequestMapping(value="customer/QA/QAInsert", method=RequestMethod.POST)
-	public String QAInsert(HttpSession session, HttpServletRequest request, @RequestParam("qa_file") MultipartFile file, 
-			ModelMap model) throws Exception {
+	public String QAInsert(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
+			@RequestParam("qa_file") MultipartFile file, ModelMap model) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QAInsert start!");
 		
@@ -119,6 +121,28 @@ public class CustomerQAController {
 			qaDTO.setSecret_yn(secret_yn);
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
+			
+			if (file.getSize()!=0) {
+				
+				String reFileName = "";
+				String fileOrgName = file.getOriginalFilename();
+				
+				log.info(".file.getOriginalFilename() : " + file.getOriginalFilename());
+				
+				String extended = fileOrgName.substring(fileOrgName.indexOf("."), fileOrgName.length());
+				String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
+				
+				filePath = CmmUtil.nvl(filePath);
+				reFileName = filePath + now + extended;
+				
+				File newFile = new File(reFileName);
+				file.transferTo(newFile);
+				
+				qaDTO.setFile_org_name(fileOrgName);
+				qaDTO.setFile_name(now + extended);
+				qaDTO.setFile_path(filePath);
+				
+			}
 			
 			qaService.insertQADetail(qaDTO);
 
@@ -217,7 +241,7 @@ public class CustomerQAController {
 	
 	@RequestMapping(value="customer/QA/QAUpdate", method=RequestMethod.POST)
 	public String QAUpdate(HttpSession session, HttpServletRequest request, HttpServletResponse response, 
-			ModelMap model) throws Exception {
+			ModelMap model, @RequestParam("qa_file") MultipartFile file) throws Exception {
 		
 		log.info(this.getClass().getName() + ".QAUpdate start!");
 		
@@ -253,8 +277,8 @@ public class CustomerQAController {
 			qaDTO.setSecret_yn(secret_yn);
 			qaDTO.setTitle(title);
 			qaDTO.setContents(contents);
-	
-			qaService.updateQADetail(qaDTO);
+			
+			qaService.updateQADetail(qaDTO, file, filePath);
 			
 			msg = "게시글 수정에 성공하였습니다.";
 			url = "/customer/QA/QADetail.do?qa_no=" + qa_no;
@@ -295,13 +319,17 @@ public class CustomerQAController {
 		
 		try {
 			
+			String qa_no = CmmUtil.nvl(request.getParameter("qa_no"));
 			String q_no = CmmUtil.nvl(request.getParameter("q_no"));
 			
-			log.info("q_no: "+ q_no);
+			log.info("qa_no: " + qa_no);
+			log.info("q_no: " + q_no);
 			
 			QADTO qaDTO = new QADTO();
 			
+			qaDTO.setQa_no(qa_no);
 			qaDTO.setQ_no(q_no);
+			
 			
 			qaService.deleteQADetail(qaDTO);
 			

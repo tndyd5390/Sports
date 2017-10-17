@@ -1,9 +1,19 @@
- <%@ page language="java" contentType="text/html; charset=UTF-8"
+ <%@page import="java.util.ArrayList"%>
+<%@page import="com.mysql.fabric.xmlrpc.base.Array"%>
+<%@page import="com.sports.dto.OrdProductDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.sports.dto.Order_infoDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%
+	Order_infoDTO oDTO = (Order_infoDTO)request.getAttribute("oDTO");
+	if(oDTO == null) oDTO = new Order_infoDTO();
+	
+%>
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 
-	이 주석을 보는 개발자여....오늘도 피곤한 하루를 보내었나요???
+	이 주석을 보는 개발자여....지금은 초사이어인으로 변신해야 할때!!!
 -->
 <head>
 <%@include file="/html5/include/head.jsp" %>
@@ -114,27 +124,37 @@ a.psyOrderDetailBtn {
     <div class="container" align="center">
  		<div class="shDTables" align="left">
  			<div class="shCTitle" align="left">주문 번호</div>
- 			<div class="shCDetail" align="left">63249687321</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getTran_no()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">날짜</div>
- 			<div class="shCDetail" align="left">2017/05/22(my birthday)</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getReg_dt()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">수령인</div>
- 			<div class="shCDetail" align="left">장총명</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getRecipient()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">연락처</div>
- 			<div class="shCDetail" align="left">01057907883</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getTel()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">주문 내역</div>
- 			<div class="shCDetail" align="left">태권도복<br> 태권도 띠<br> 매트<br></div>
+ 			<div class="shCDetail" align="left">
+ 			<%
+ 			List<OrdProductDTO> prodList = oDTO.getOrdProductList();
+ 			if(prodList == null) prodList = new ArrayList();
+ 			for(OrdProductDTO pDTO : prodList){
+ 			%>
+ 			<%=CmmUtil.nvl(pDTO.getProd_name()) %><br> 
+ 			<%
+ 			} 
+ 			%>
+ 			</div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">가격</div>
- 			<div class="shCDetail" align="left">79,000</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getOrd_price()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">배송 상태</div>
@@ -142,15 +162,23 @@ a.psyOrderDetailBtn {
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">주소</div>
- 			<div class="shCDetail" align="left">경기도 성남시 분당구 서현동 불정로 362 607동 701호</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail())%></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">배송 메세지</div>
- 			<div class="shCDetail" align="left">도복좀 깨끗한걸로 가져다 주세요</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getOrd_message()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">운송장 번호</div>
- 			<div class="shCDetail" align="left">123456789</div>
+ 			<div class="shCDetail" align="left">
+ 			<%
+ 			if("".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){
+ 				out.println("운송장번호 입력이 필요합니다.");
+ 			}else{
+ 				out.println(oDTO.getInvoice_no());
+ 			}
+ 			%>
+ 			</div>
  		</div>
  	<a href="#" class="psyOrderDetailBtn">운송장 번호 수정</a>
  	<a href="#" class="psyOrderDetailBtn">목록</a>
