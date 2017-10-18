@@ -108,4 +108,9 @@ public class OrderService implements IOrderService {
 		oDTO.setOrdProductList(opList);
 		return oDTO;
 	}
+
+	@Override
+	public void setDelivery(Order_infoDTO oDTO) throws Exception {
+		orderMapper.setDelivery(oDTO);
+	}
 }

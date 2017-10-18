@@ -154,10 +154,21 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
-		       REG_DT
+		       REG_DT,
+		       INVOICE_NO,
+		       DELI_CO_NO
 		  FROM ORDER_INFO
 		 WHERE TRAN_NO = #{tranNo}
 		   AND ORD_STAT = 'C'
 	</select>
+	
+	<update id="setDelivery" parameterType="Order_infoDTO">
+		
+		UPDATE ORDER_INFO SET
+		INVOICE_NO = #{invoice_no},
+		DELI_CO_NO = #{deli_co_no}
+		WHERE TRAN_NO = #{tran_no}
+		
+	</update>
 	
 </mapper>

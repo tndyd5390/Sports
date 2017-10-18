@@ -97,7 +97,35 @@ $(document).ready(function(){
 
 </script>
 
+<style>
 
+a.psyOrderDetailBtn {
+	width: 100%;
+	height: 40px;
+	top: 15px;
+	right: 15px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0;
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 1.8;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	touch-action: manipulation;
+	cursor: pointer;
+	user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	text-decoration: none;
+	color: #fff;
+	background-color: #5bc0de;
+	border-color: #46b8da;
+	margin-bottom: 16px;
+}
+</style>
 
 </head>
 
@@ -142,7 +170,12 @@ $(document).ready(function(){
 					%>
 				</div>
 			</div>
-
+			
+			<div class="shDTable" align="left">
+				<div class="shCTitle" align="left">택배사</div>
+				<div class="shCDetail" align="left"><%=company%></div>
+			</div>
+			
 			<div class="shDTable" align="left">
 				<div class="shCTitle" align="left">송장 번호</div>
 				<div class="shCDetail" align="left"><%=invoiceNo%></div>
@@ -188,9 +221,8 @@ $(document).ready(function(){
 						</li>
 					</ul> 
 				</div>
-
 			</div>
-		
+				<a class="psyOrderDetailBtn" href="/orderDetail.do?tranNo=<%=(String)request.getAttribute("tran_no")%>">돌아가기</a>		
 		</div>
 	</section>
 	<%@include file="/html5/include/footer.jsp"%>
