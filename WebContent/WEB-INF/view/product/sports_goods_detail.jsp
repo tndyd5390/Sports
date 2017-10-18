@@ -176,7 +176,9 @@
 	}
 
 	function orderDirect(){
-		var form = document.createElement("form");
+		alert('바로구매 기능은 준비중입니다. 장바구니를 이용해 주세요.');
+
+		<%-- var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "#");
 		
@@ -204,7 +206,7 @@
 			
 			
 			
-		<%}%>
+		<%}%> --%>
 	}
 </script>
 </head>

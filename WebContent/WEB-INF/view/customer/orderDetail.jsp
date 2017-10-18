@@ -159,7 +159,7 @@ a.psyOrderDetailBtn {
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">주소</div>
- 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail())%></div>
+ 			<div class="shCDetail" align="left"><%=TextUtil.exchangeEscape(CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail()))%></div>
  		</div>
  		<div class="shDTable" align="left">
 
