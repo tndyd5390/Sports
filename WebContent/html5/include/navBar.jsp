@@ -44,7 +44,7 @@
 			<li>
 				<a href="#">마이페이지</a>
 				<ul class="col-2">
-					<li><a href="#">주문정보</a></li>
+					<li><a href="customerOrderList.do?userNo=<%=ss_user_no%>">주문정보</a></li>
 					<li><a href="customerBasketList.do">장바구니</a></li>
 				</ul>
 			</li>
