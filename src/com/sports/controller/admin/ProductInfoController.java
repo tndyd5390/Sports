@@ -30,7 +30,7 @@ import com.sports.util.CmmUtil;
 public class ProductInfoController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	private String filePath = "/www/tmaxxsports_com/upload/product_file/";
+	private String filePath = "/www/tmaxxsports_com/www/upload/product_file/";
 	
 	@Resource(name="ProductInfoService")
 	private IProductInfoService productInfoService;
