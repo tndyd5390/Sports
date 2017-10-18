@@ -30,7 +30,7 @@ import com.sports.util.CmmUtil;
 public class ProductInfoController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	private String filePath = "C:\\sportspace\\Sports\\WebContent\\upload\\product_file\\";
+	private String filePath = "/www/tmaxxsports_com/upload/product_file/";
 	
 	@Resource(name="ProductInfoService")
 	private IProductInfoService productInfoService;
@@ -158,7 +158,7 @@ public class ProductInfoController {
 		// 메인파일 등록
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		ProductFileDTO fDTO = new ProductFileDTO();
-		newName = "upload\\product_file\\MAIN_"+now+extension;
+		newName = filePath+"MAIN_"+now+extension;
 		// WebContents 를 루트로 하는 경로로 DB에 삽입
 		pDTO.setProd_name(prodName);
 		pDTO.setProd_price(prodPrice);
@@ -185,7 +185,7 @@ public class ProductInfoController {
 			log.info("detailName : "+detailName);
 			log.info("--------detailfile---------");
 			ProductFileDTO fdDTO = new ProductFileDTO();
-			detailName = "upload\\product_file\\DETAIL_"+now+detailExtension;
+			detailName = filePath+"DETAIL_"+now+detailExtension;
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);
@@ -397,8 +397,8 @@ public class ProductInfoController {
 		
 		String mainFileNo = CmmUtil.nvl(req.getParameter("mainFileNo"));
 		String detailFileNo = CmmUtil.nvl(req.getParameter("detailFileNo"));
-		String mainSrc = "C:\\sportspace\\Sports\\WebContent\\"+CmmUtil.nvl(req.getParameter("mainFileSrc"));
-		String detailSrc = "C:\\sportspace\\Sports\\WebContent\\"+CmmUtil.nvl(req.getParameter("detailFileSrc"));
+		String mainSrc = "/www/tmaxxsports_com/www/upload/"+CmmUtil.nvl(req.getParameter("mainFileSrc"));
+		String detailSrc = "/www/tmaxxsports_com/www/upload/"+CmmUtil.nvl(req.getParameter("detailFileSrc"));
 		// 파일의 삭제와 생성을 모듈화 했기 때문에 매개변수로 넘길 값을들 설정 해 줌
 		// 필요한 값은 기존에 값이 있다면, 메인파일의 번호와 실제 경로, 디테일파일의 번호와 실제 경로가 필요 함
 		
@@ -485,7 +485,7 @@ public class ProductInfoController {
 			log.info("fullName : "+newName);
 			log.info("--------mainfile---------");
 			ProductFileDTO fDTO = new ProductFileDTO();
-			newName = "upload\\product_file\\MAIN_"+now+extension;
+			newName = filePath+"MAIN_"+now+extension;
 			fDTO.setOrg_filename(orgName);
 			fDTO.setFile_path(filePath);
 			fDTO.setSrc_filename(newName);
@@ -508,7 +508,7 @@ public class ProductInfoController {
 			log.info("detailName : "+detailName);
 			log.info("--------detailfile---------");
 			ProductFileDTO fdDTO = new ProductFileDTO();
-			detailName = "upload\\product_file\\DETAIL_"+now+detailExtension;
+			detailName = filePath+"DETAIL_"+now+detailExtension;
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);

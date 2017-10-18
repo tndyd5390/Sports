@@ -32,14 +32,14 @@ public class ProductInfoService implements IProductInfoService{
 		return productInfoMapper.getCategoryChild(pDTO);
 	}
 	/**
-	 *  ÇÁ·Î´öÆ®, ¸ÞÀÎÆÄÀÏ 2 °¡Áö µî·Ï ½Ã
+	 *  ï¿½ï¿½ï¿½Î´ï¿½Æ®, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 2 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 	 */
 	@Override
 	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO) throws Exception {
 		productInfoMapper.insertProduct(pDTO);
-		// selectkey ¹®¹ýÀ¸·Î ¹æ±Ý insertÇÑ ÇÁ·Î´öÆ®ÀÇ prod_no¸¦ ¹ÝÈ¯ÇØ ÁÜ 
+		// selectkey ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ insertï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½Æ®ï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ 
 		fDTO.setProd_no(pDTO.getProd_no());
-		// ÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		return productInfoMapper.insertProductMainFile(fDTO);
 	}
 
@@ -54,18 +54,18 @@ public class ProductInfoService implements IProductInfoService{
 	}
 	
 	/**
-	 * Á¦Ç° »ó¼¼ µ¥ÀÌÅÍ¸¦ °¡Á®¿Ã ¼­ºñ½º ÀÌ´Ù. ¿É¼ÇÀÌ ¿©·¯°³ÀÏ¼ö ÀÖ±â¶§¹®¿¡ ¸ÊÆÛ¸¦ µÎ¹ø È£ÃâÇÏ¿© MapÀ¸·Î µÎ°³ÀÇ °´Ã¼¸¦ returnÇÑ´Ù.
+	 * ï¿½ï¿½Ç° ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ì´ï¿½. ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ ï¿½Ö±â¶§ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Û¸ï¿½ ï¿½Î¹ï¿½ È£ï¿½ï¿½ï¿½Ï¿ï¿½ Mapï¿½ï¿½ï¿½ï¿½ ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ returnï¿½Ñ´ï¿½.
 	 */
 	@Override
 	public Map<String, Object> getProductDetail(ProductInfoDTO pDTO) throws Exception {
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
-		//Á¦Ç°ÀÇ »ó¼¼¸¦ °¡Á®¿Â´Ù.
+		//ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ó¼¼¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½.
 		ProductInfoDTO prodDTO = productInfoMapper.getProductDetail(pDTO);
 		if(prodDTO == null){
 			prodDTO = new ProductInfoDTO();
 		}
-		//Á¦Ç°ÀÇ ¿É¼ÇÀ» °¡Á®¿Â´Ù. ¿É¼ÇÀº MapÇüÅÂ·Î Á¤Á¦ÇÑ´Ù
+		//ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½É¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½. ï¿½É¼ï¿½ï¿½ï¿½ Mapï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½
 		String prodNo = CmmUtil.nvl(pDTO.getProd_no());
 		List<ProdOptionDTO> pList = productInfoMapper.getProductOption(prodNo);
 		if(pList == null){
@@ -85,24 +85,24 @@ public class ProductInfoService implements IProductInfoService{
 				}
 			}
 		}
-		//returnÇÒ °´Ã¼¿¡ ´ã´Â´Ù.
+		//returnï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½Â´ï¿½.
 		resultMap.put("prodDetail", prodDTO);
 		resultMap.put("prodOpt", pMap);
 		
-		//return ½ÃÅ²´Ù.
+		//return ï¿½ï¿½Å²ï¿½ï¿½.
 		return resultMap;
 	}
 	/**
-	 * ÇÁ·Î´öÆ®, ¸ÞÀÎÆÄÀÏ, µðÅ×ÀÏÆÄÀÏ 3 °¡Áö µî·Ï ½Ã
+	 * ï¿½ï¿½ï¿½Î´ï¿½Æ®, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 3 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 	 */
 	@Override
 	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO) throws Exception {
 		productInfoMapper.insertProduct(pDTO);
-		// selectkey ¹®¹ýÀ¸·Î ¹æ±Ý insertÇÑ ÇÁ·Î´öÆ®ÀÇ prod_no¸¦ ¹ÝÈ¯ÇØ ÁÜ 
+		// selectkey ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ insertï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½Æ®ï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ 
 		fDTO.setProd_no(pDTO.getProd_no());
-		// ÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		fdDTO.setProd_no(pDTO.getProd_no());
-		// µðÅ×ÀÏÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		productInfoMapper.insertProductMainFile(fDTO);
 		return productInfoMapper.insertProductDetailFile(fdDTO);
 	}
@@ -112,60 +112,60 @@ public class ProductInfoService implements IProductInfoService{
 		return productInfoMapper.getSelectOption();
 	}
 	/**
-	 *  ÇÁ·Î´öÆ®, ¸ÞÀÎÆÄÀÏ, µðÅ×ÀÏÆÄÀÏ, ¿É¼Ç 4 °¡Áö µî·Ï ½Ã
+	 *  ï¿½ï¿½ï¿½Î´ï¿½Æ®, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½É¼ï¿½ 4 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 	 */
 	@Override
 	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, ProductFileDTO fdDTO, List<ProductInfoDTO> optList) throws Exception {
 		productInfoMapper.insertProduct(pDTO);
-		// selectkey ¹®¹ýÀ¸·Î ¹æ±Ý insertÇÑ ÇÁ·Î´öÆ®ÀÇ prod_no¸¦ ¹ÝÈ¯ÇØ ÁÜ 
+		// selectkey ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ insertï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½Æ®ï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ 
 		fDTO.setProd_no(pDTO.getProd_no());
-		// ÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		fdDTO.setProd_no(pDTO.getProd_no());
-		// µðÅ×ÀÏÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		List<ProductInfoDTO> setList = new ArrayList<ProductInfoDTO>();
-		// List¿¡ ´ã°ÜÀÖ´Â ¿É¼Çµé¿¡ prod_no¸¦ ¼³Á¤ÇØ¾ß ÇÏ±â ¶§¹®¿¡ ´Ù½Ã ´ãÀ» »õ·Î¿î ¸®½ºÆ®¸¦ »ý¼º
+		// Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½É¼Çµé¿¡ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		for(ProductInfoDTO optDTO : optList){
 			ProductInfoDTO setDTO = new ProductInfoDTO();
-			// prod_no¸¦ °¡Áø »õ·Î¿î DTO¸¦ ¸¸µé±â À§ÇØ DTO °´Ã¼ »ý¼º
+			// prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ DTOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DTO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			setDTO.setOpt_kind(optDTO.getOpt_kind());
 			setDTO.setOpt_name(optDTO.getOpt_name());
 			setDTO.setOpt_price(optDTO.getOpt_price());
 			setDTO.setProd_no(pDTO.getProd_no());
 			setDTO.setReg_user_no(optDTO.getReg_user_no());
-			// ¹Þ¾Æ¿Â prod_no¸¦ ´ã¾Æ ÁÜ
+			// ï¿½Þ¾Æ¿ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 			setList.add(setDTO);
-			// setList¿¡ prod_no¸¦ ´ãÀº DTO¸¦ ³Ö¾î ÁÜ
+			// setListï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DTOï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½ï¿½
 		}
 		productInfoMapper.insertProductMainFile(fDTO);
 		productInfoMapper.insertProductOption(setList);
-		// prod_no¸¦ °¡Áø setList¸¦ ¸ÅÆÛ·Î ³Ñ±è
+		// prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ setListï¿½ï¿½ ï¿½ï¿½ï¿½Û·ï¿½ ï¿½Ñ±ï¿½
 		return productInfoMapper.insertProductDetailFile(fdDTO);
 	}
 	/**
-	 *  ÇÁ·Î´öÆ®, ¸ÞÀÎÆÄÀÏ, ¿É¼Ç 3 °¡Áö µî·Ï ½Ã
+	 *  ï¿½ï¿½ï¿½Î´ï¿½Æ®, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½, ï¿½É¼ï¿½ 3 ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 	 */
 	@Override
 	public int insertProduct(ProductInfoDTO pDTO, ProductFileDTO fDTO, List<ProductInfoDTO> optList) throws Exception {
 		productInfoMapper.insertProduct(pDTO);
-		// selectkey ¹®¹ýÀ¸·Î ¹æ±Ý insertÇÑ ÇÁ·Î´öÆ®ÀÇ prod_no¸¦ ¹ÝÈ¯ÇØ ÁÜ 
+		// selectkey ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ insertï¿½ï¿½ ï¿½ï¿½ï¿½Î´ï¿½Æ®ï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½È¯ï¿½ï¿½ ï¿½ï¿½ 
 		fDTO.setProd_no(pDTO.getProd_no());
-		// ÆÄÀÏ µî·ÏÀ» À§ÇØ fDTO¿¡ ¹Þ¾Æ ¿Â prod_no ¸¦ ¼³Á¤ÇØ ÁÜ
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ fDTOï¿½ï¿½ ï¿½Þ¾ï¿½ ï¿½ï¿½ prod_no ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 		List<ProductInfoDTO> setList = new ArrayList<ProductInfoDTO>();
-		// List¿¡ ´ã°ÜÀÖ´Â ¿É¼Çµé¿¡ prod_no¸¦ ¼³Á¤ÇØ¾ß ÇÏ±â ¶§¹®¿¡ ´Ù½Ã ´ãÀ» »õ·Î¿î ¸®½ºÆ®¸¦ »ý¼º
+		// Listï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½É¼Çµé¿¡ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		for(ProductInfoDTO optDTO : optList){
 			ProductInfoDTO setDTO = new ProductInfoDTO();
-			// prod_no¸¦ °¡Áø »õ·Î¿î DTO¸¦ ¸¸µé±â À§ÇØ DTO °´Ã¼ »ý¼º
+			// prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Î¿ï¿½ DTOï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DTO ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½
 			setDTO.setOpt_kind(optDTO.getOpt_kind());
 			setDTO.setOpt_name(optDTO.getOpt_name());
 			setDTO.setOpt_price(optDTO.getOpt_price());
 			setDTO.setProd_no(pDTO.getProd_no());
 			setDTO.setReg_user_no(optDTO.getReg_user_no());
-			// ¹Þ¾Æ¿Â prod_no¸¦ ´ã¾Æ ÁÜ
+			// ï¿½Þ¾Æ¿ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½
 			setList.add(setDTO);
-			// setList¿¡ prod_no¸¦ ´ãÀº DTO¸¦ ³Ö¾î ÁÜ
+			// setListï¿½ï¿½ prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ DTOï¿½ï¿½ ï¿½Ö¾ï¿½ ï¿½ï¿½
 		}
 		productInfoMapper.insertProductOption(setList);
-		// prod_no¸¦ °¡Áø setList¸¦ ¸ÅÆÛ·Î ³Ñ±è
+		// prod_noï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ setListï¿½ï¿½ ï¿½ï¿½ï¿½Û·ï¿½ ï¿½Ñ±ï¿½
 		return productInfoMapper.insertProductMainFile(fDTO);
 	}
 
@@ -207,7 +207,7 @@ public class ProductInfoService implements IProductInfoService{
 		fList = productInfoMapper.getFileInfo(prodNo);
 		
 		for(ProductFileDTO fDTO : fList){
-			String fileSrc = "C:\\sportspace\\Sports\\WebContent\\"+fDTO.getSrc_filename();
+			String fileSrc = fDTO.getSrc_filename();
 			File file = new File(fileSrc);
 			if(file.exists()==true){
 				file.delete();
