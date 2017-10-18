@@ -22,12 +22,6 @@
 			return false;
 		}
 	}
-	
-	var tran_no = <%=request.getParameter("tran_no")%>
-	
-	function back(){
-		location.href="/orderDetail.do?tranNo="+tran_no;
-	}
 </script>
 </head>
 
@@ -63,11 +57,11 @@
 						<img src="/html5/common/images/ic_delivery.png"
 							style="width: 100%; margin-top: 20px">
 					</div>
-					<form action="/deliveryReg_proc.do" method="post">
+					<form>
 						<div>
 							<center>
 								<div style="width: 90%">
-									<select name="deli_co_no" style="margin-top: 20px; width: 100%;">
+									<select style="margin-top: 20px; width: 100%;">
 										<option selected>택배사를 선택해주세요</option>
 										<option value="01">우체국 택배</option>
 										<option value="02">이노지스</option>
@@ -78,18 +72,16 @@
 										<option value="31">스카이로지스</option>
 										<option value="06">로젠택배</option>
 									</select> <input class="search type pw-search" type="text"
-										placeholder="운송장 번호를 입력해 주세요 ('-'없이)" name="invoice_no" id="postnum"
+										placeholder="운송장 번호를 입력해 주세요 ('-'없이)" id="postnum"
 										style="margin-top: 10px; margin-bottom: 10px; width: 100%;"
 										onkeydown="return onlyNum(event)">
-									<input type="submit" value="등록" class="btn btn-primary width100"
-										style="margin-left: 3px; margin-right: 3px; margin-top: 15px">
-									<input type="button" value="뒤로" class="btn gray-primary width100" onclick='back();'
-										style="margin-left: 3px; margin-right: 3px; margin-top: 15px; margin-bottom: 30px;">
+									<button class="btn btn-primary width100"
+										style="margin-left: 3px; margin-right: 3px; margin-top: 15px">등록</button>
+									<button class="btn gray-primary width100"
+										style="margin-left: 3px; margin-right: 3px; margin-top: 15px; margin-bottom: 30px;">뒤로</button>
 								</div>
 							</center>
 						</div>
-						<input type="hidden" name="tran_no" value="<%=request.getAttribute("tran_no")%>">
-						
 					</form>
 				</div>
 
