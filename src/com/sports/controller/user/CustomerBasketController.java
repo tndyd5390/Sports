@@ -272,4 +272,15 @@ public class CustomerBasketController {
 		log.info(this.getClass() + ".customerOrderView end!!!");
 		return returnURL;
 	}
+	
+	@RequestMapping(value = "noBasketItem")
+	public String noBasketItem(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".noBasketItem start!!!");
+		
+		model.addAttribute("msg", "장바구니에 담긴 상품이 없습니다.");
+		model.addAttribute("url", "main.do");
+		
+		log.info(this.getClass() + ".noBasketItem end");
+		return "redirect";
+	}
 }
