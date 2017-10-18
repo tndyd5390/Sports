@@ -15,10 +15,6 @@ public interface QAMapper {
 	void insertQADetail(QADTO qaDTO) throws Exception;
 	
 	QADTO getQADetail(QADTO qaDTO) throws Exception;
-	
-	QADTO getAdminQADetail(QADTO qaDTO) throws Exception;
-	
-	QADTO getCustomerQADetail(QADTO qaDTO) throws Exception;
 
 	void updateQADetailNoImg(QADTO qaDTO) throws Exception;
 	

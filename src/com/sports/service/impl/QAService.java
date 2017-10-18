@@ -36,21 +36,7 @@ public class QAService implements IQAService {
 	
 	@Override
 	public QADTO getQADetail(QADTO qaDTO) throws Exception {
-
-		/*if (qaDTO.getReg_user_no() == "5") {
-			
-			//관리자일 경우
-			return qaMapper.getAdminQADetail(qaDTO);
-			
-		} else {
-			
-			//사용자일 경우
-			return qaMapper.getCustomerQADetail(qaDTO);
-			
-		}*/
-		
 		return qaMapper.getQADetail(qaDTO);
-
 	}
 	
 	@Override
@@ -119,7 +105,6 @@ public class QAService implements IQAService {
 	
 	@Override
 	public void insertQAAnswerDetail(QADTO qaDTO) throws Exception {
-		System.out.println("qadto : " + qaDTO.getParent_user_no());
 		qaMapper.insertQAAnswerDetail(qaDTO);
 	}
 	

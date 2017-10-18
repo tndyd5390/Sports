@@ -33,7 +33,8 @@ public class CustomerQAController {
 	@Resource(name = "QAService") 
 	private IQAService qaService;
 	
-	String filePath="C:\\Users\\Data3811-36\\git\\Sports\\WebContent\\upload\\qa_file\\";
+	String filePath="/www/tmaxxsports_com/www/upload/qa_file";
+	//String filePath="C:\\Users\\Data3811-36\\git\\Sports\\WebContent\\upload\\qa_file\\";
 	
 	@RequestMapping(value="customer/QA/QAList", method=RequestMethod.GET)
 	public String QAList(HttpServletRequest request, HttpServletResponse response, 

@@ -11,7 +11,11 @@
 	if(bList == null){
 		bList = new ArrayList<BasketDTO>();
 	}
+	if(bList.size() == 0){
+		response.sendRedirect("noBasketItem.do");
+	}
 %>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
