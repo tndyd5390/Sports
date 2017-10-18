@@ -146,7 +146,6 @@ public class ProductInfoController {
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		String extension = orgName.substring(orgName.indexOf("."), orgName.length());
 		newName = filePath + "MAIN_" +now + extension;
-		System.out.println("nN1: "+newName);
 		File newFile = new File(newName);
 		files[0].transferTo(newFile);
 		log.info("--------mainfile---------");
@@ -159,8 +158,7 @@ public class ProductInfoController {
 		// 메인파일 등록
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		ProductFileDTO fDTO = new ProductFileDTO();
-		newName = filePath+"MAIN_"+now+extension;
-		System.out.println("nN2: "+newName);
+		newName = "/upload/product_file/MAIN_"+now+extension;
 		// WebContents 를 루트로 하는 경로로 DB에 삽입
 		pDTO.setProd_name(prodName);
 		pDTO.setProd_price(prodPrice);
@@ -187,7 +185,7 @@ public class ProductInfoController {
 			log.info("detailName : "+detailName);
 			log.info("--------detailfile---------");
 			ProductFileDTO fdDTO = new ProductFileDTO();
-			detailName = filePath+"DETAIL_"+now+detailExtension;
+			detailName = "/upload/product_file/DETAIL_"+now+detailExtension;
 			fdDTO.setFile_path(filePath);
 			fdDTO.setOrg_filename(detailOrgName);
 			fdDTO.setSrc_filename(detailName);

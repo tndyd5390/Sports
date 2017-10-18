@@ -207,7 +207,7 @@ public class ProductInfoService implements IProductInfoService{
 		fList = productInfoMapper.getFileInfo(prodNo);
 		
 		for(ProductFileDTO fDTO : fList){
-			String fileSrc = fDTO.getSrc_filename();
+			String fileSrc = "/www/tmaxxsports_com"+fDTO.getSrc_filename();
 			File file = new File(fileSrc);
 			if(file.exists()==true){
 				file.delete();
