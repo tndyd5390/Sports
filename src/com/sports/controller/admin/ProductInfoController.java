@@ -30,7 +30,7 @@ import com.sports.util.CmmUtil;
 public class ProductInfoController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
-	private String filePath = "/www/tmaxxsports_com/www/upload/product_file/";
+	private String filePath = "/www/tmaxxsports_com/upload/product_file/";
 	
 	@Resource(name="ProductInfoService")
 	private IProductInfoService productInfoService;
@@ -146,6 +146,7 @@ public class ProductInfoController {
 		String now = new SimpleDateFormat("yyyyMMddhmsS").format(new Date());
 		String extension = orgName.substring(orgName.indexOf("."), orgName.length());
 		newName = filePath + "MAIN_" +now + extension;
+		System.out.println("nN1: "+newName);
 		File newFile = new File(newName);
 		files[0].transferTo(newFile);
 		log.info("--------mainfile---------");
@@ -159,6 +160,7 @@ public class ProductInfoController {
 		ProductInfoDTO pDTO = new ProductInfoDTO();
 		ProductFileDTO fDTO = new ProductFileDTO();
 		newName = filePath+"MAIN_"+now+extension;
+		System.out.println("nN2: "+newName);
 		// WebContents 를 루트로 하는 경로로 DB에 삽입
 		pDTO.setProd_name(prodName);
 		pDTO.setProd_price(prodPrice);

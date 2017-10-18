@@ -2,4 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sports.persistance.mapper.AcademyMapper">
 
+	<insert id="insertAcademy" parameterType="AcademyDTO">
+		INSERT INTO ACADEMY (
+			ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2, ACA_AREA3, ACA_EVENT1,
+			TEL, ACA_COMMENT, ACA_VISIT, ACA_LAT, ACA_LNG, REG_USER_NO, REG_DT
+		) VALUES (
+			#{aca_name}, #{aca_ceo}, #{aca_area1}, #{aca_area2}, #{aca_area3}, #{aca_event1},
+			#{tel}, #{aca_comment}, 'n', #{aca_lat}, #{aca_lng}, #{reg_user_no}, NOW()
+		)
+	</insert>
+	<select id="getAcademyList" resultType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		ORDER BY ACA_NO
+		LIMIT 6
+	</select>
+	<select id="getAcademyDetailInfo" resultType="AcademyDTO" parameterType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA1, ACA_AREA2,
+		ACA_AREA3, ACA_EVENT1, TEL, ACA_COMMENT FROM ACADEMY
+		WHERE ACA_NO = #{aca_no}
+	</select>
+	<update id="updateAcademyDetail" parameterType="AcademyDTO">
+		UPDATE ACADEMY SET ACA_NAME = #{aca_name}, ACA_CEO = #{aca_ceo}, ACA_AREA1 = #{aca_area1}, ACA_AREA2 = #{aca_area2},
+		ACA_AREA3 = #{aca_area3}, ACA_EVENT1 = #{aca_event1}, TEL = #{tel}, ACA_COMMENT = #{aca_comment},
+		ACA_LAT = #{aca_lat}, ACA_LNG = #{aca_lng}, CHG_USER_NO = #{chg_user_no}, CHG_DT = NOW()
+		WHERE ACA_NO = #{aca_no}
+	</update>
+	<delete id="academyDelete" parameterType="String">
+		DELETE FROM ACADEMY WHERE ACA_NO = #{aca_no}
+	</delete>
+	<select id="getSearchList" resultType="AcademyDTO" parameterType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		WHERE ACA_NAME LIKE CONCAT('%', #{search}, '%')
+		ORDER BY ACA_NO
+		LIMIT 6
+	</select>
+	<select id="getAcademyMoreView" resultType="AcademyDTO" parameterType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		ORDER BY ACA_NO
+		LIMIT 6 OFFSET ${read_more};
+	</select>
+	
+	
+	
+	<select id="getMapAcaList" resultType="AcademyDTO">
+		SELECT ACA_NO, ACA_NAME, SUBSTR(ACA_AREA2,4,3), ACA_AREA2, ACA_AREA3, TEL, ACA_EVENT1,ACA_VISIT, ACA_LAT, ACA_LNG 
+		FROM ACADEMY
+	</select>
+	
+	<update id="updateAcaVisit" parameterType="AcademyDTO">
+		UPDATE ACADEMY SET ACA_VISIT = #{aca_visit}, CHG_DT = NOW() WHERE ACA_NO = #{aca_no}
+	</update>
+	
+	<select id="getStateDoughnut" parameterType="String" resultType="AcademyDTO">
+		SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',2),' ',-1) AS ACA_AREA2 ,
+				ACA_EVENT1, COUNT(ACA_EVENT1) COUNT, A.TOTAL, TRUNCATE((COUNT(ACA_EVENT1)/A.TOTAL)*100, 2) PERCENT
+		FROM ACADEMY,
+ 		 (SELECT COUNT(ACA_EVENT1) TOTAL FROM ACADEMY WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',2),' ',-1)= #{state}) A
+		WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',2),' ',-1)= #{state}
+		GROUP BY ACA_EVENT1
+		ORDER BY COUNT(ACA_EVENT1) DESC;
+	</select>
+	
+	<select id="getCityDoughnut" parameterType="String" resultType="AcademyDTO">
+	<![CDATA[
+		SELECT SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',1),' ',-1) AS ACA_AREA1,
+				SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',2),' ',-1) AS ACA_AREA2, COUNT(ACA_EVENT1) COUNT, A.TOTAL,
+      		  	TRUNCATE((COUNT(ACA_EVENT1)/A.TOTAL)*100, 2) PERCENT, A.TOTAL/4 AVG,
+   		     	CASE WHEN COUNT(ACA_EVENT1) >  A.TOTAL/4 THEN '높음' WHEN COUNT(ACA_EVENT1) <  A.TOTAL/4 THEN '낮음' END DENSITY
+		FROM ACADEMY,
+ 			 (SELECT COUNT(ACA_EVENT1) TOTAL FROM ACADEMY WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',1),' ',-1) = #{city}) A
+		WHERE SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',1),' ',-1) = #{city}
+		GROUP BY SUBSTRING_INDEX(SUBSTRING_INDEX(ACA_AREA2,' ',2),' ',-1)
+		ORDER BY PERCENT DESC;
+	]]>
+	</select>
 </mapper>
