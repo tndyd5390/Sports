@@ -239,7 +239,7 @@ public class CustomerOrderController {
 		return oList;
 	}
 	
-	@RequestMapping(value="orderDetail", method=RequestMethod.POST)
+	@RequestMapping(value="orderDetail")
 	public String orderDetail(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
 		log.info(this.getClass() + ".orderDetail start!!!");
 		String tranNo = CmmUtil.nvl(req.getParameter("tranNo"));
