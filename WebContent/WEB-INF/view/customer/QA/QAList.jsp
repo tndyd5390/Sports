@@ -234,18 +234,20 @@ function doDetail(qa_no, secret_yn, reg_user_no) {
 }
 
 //답글 상세 이동
-function doAnswerDetail(qa_no, secret_yn, reg_user_no) {
+function doAnswerDetail(qa_no, secret_yn, reg_user_no, parent_user_no) {
 	
 	console.log("1");
-	
 	var ss_user_no = "<%=ss_user_no %>";
+	console.log("ss_user_no : " + ss_user_no);
+	console.log("parent_user_no : " + parent_user_no);
+	var q_no 
 	
 	console.log("2");
 	console.log("reg_user_no: " + reg_user_no);
 	console.log("ss_user_no: " + ss_user_no);
 	console.log("secret_yn: " + secret_yn);
 	
-	if (reg_user_no != ss_user_no && secret_yn == 1) {
+	if (parent_user_no != ss_user_no && secret_yn == 1) {
 		
 		alert('비밀글입니다.');
 		return;
@@ -356,7 +358,7 @@ function doReg() {
 			            <li>
 							<% if (CmmUtil.nvl(rDTO.getAnswer_yn()).equals("Y")) {%>
 							
-								<a href="javascript:doAnswerDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>','<%=CmmUtil.nvl(rDTO.getSecret_yn())%>','<%=CmmUtil.nvl(rDTO.getReg_user_no())%>');">
+								<a href="javascript:doAnswerDetail('<%=CmmUtil.nvl(rDTO.getQa_no())%>','<%=CmmUtil.nvl(rDTO.getSecret_yn())%>','<%=CmmUtil.nvl(rDTO.getReg_user_no())%>','<%=CmmUtil.nvl(rDTO.getParent_user_no())%>');">
 								
 								<p class="title">
 								

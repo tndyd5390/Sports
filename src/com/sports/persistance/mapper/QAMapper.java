@@ -2,6 +2,8 @@ package com.sports.persistance.mapper;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.sports.config.Mapper;
 import com.sports.dto.QADTO;
 
@@ -14,7 +16,9 @@ public interface QAMapper {
 	
 	QADTO getQADetail(QADTO qaDTO) throws Exception;
 
-	void updateQADetail(QADTO qaDTO) throws Exception;
+	void updateQADetailNoImg(QADTO qaDTO) throws Exception;
+	
+	void updateQADetailImg(QADTO qaDTO) throws Exception;
 
 	void deleteQADetail(QADTO qaDTO) throws Exception;
 	

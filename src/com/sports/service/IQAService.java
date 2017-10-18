@@ -14,7 +14,7 @@ public interface IQAService {
 
 	QADTO getQADetail(QADTO qaDTO) throws Exception;
 	
-	void updateQADetail(QADTO qaDTO) throws Exception;
+	void updateQADetail(QADTO qaDTO, MultipartFile file, String filePath) throws Exception;
 	
 	void deleteQADetail(QADTO qaDTO) throws Exception;
 	

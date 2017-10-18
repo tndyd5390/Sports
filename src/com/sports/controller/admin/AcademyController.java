@@ -253,4 +253,67 @@ public class AcademyController {
 		
 		return adTO;
 	}
+	@RequestMapping(value="academyMap")
+	public String academyMap() throws Exception{
+		log.info(this.getClass() + "academyMap Start!");
+		
+		log.info(this.getClass() + "academyMap End!");
+		return "account/accountMap";
+	}
+	
+	@RequestMapping(value="mapAcaList")
+	public @ResponseBody List<AcademyDTO> mapAcaList() throws Exception{
+		log.info(this.getClass() + " mapAcaList Start!!");
+		
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>(); 
+		
+		aList = academyService.getMapAcaList();
+		
+		log.info(this.getClass() + " mapAcaList End!!");
+		return aList;
+	}
+	@RequestMapping(value="updateAcaVisit")
+	public @ResponseBody int updateAcaVisit(@RequestParam("aNo") String aNo, @RequestParam("visit") String visit, HttpSession session) throws Exception{
+		log.info(this.getClass() + " updateAcaVisit Start!!");
+		//String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
+		log.info("aNo : " +aNo);
+		log.info("visit : " +visit);
+		
+		AcademyDTO aDTO = new AcademyDTO();
+		aDTO.setAca_no(CmmUtil.nvl(aNo));
+		aDTO.setAca_visit(CmmUtil.nvl(visit));
+		//aDTO.setChg_user_no(userNo);
+		int rs = academyService.updateAcaVisit(aDTO);
+		
+		aDTO = null;
+		log.info(this.getClass() + " updateAcaVisit End!!");
+		System.out.println(rs);
+		return rs;
+	}
+	@RequestMapping(value="stateDoughnut")
+	public @ResponseBody List<AcademyDTO> stateDoughnut(@RequestParam("state") String state) throws Exception{
+		log.info(this.getClass() + " stateDoughnut Start!!");
+		
+		log.info("state : " + state);
+		
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>();
+		aList = academyService.getStateDoughnut(state);
+		
+		
+		log.info(this.getClass() + " stateDoughnut End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="cityDoughnut")
+	public @ResponseBody List<AcademyDTO> cityDoughnut(@RequestParam("city") String city) throws Exception{
+		log.info(this.getClass() + " cityDoughnut Start!!");
+		
+		log.info("city : " + city);
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>();
+		aList = academyService.getCityDoughnut(city);
+		
+		log.info(this.getClass() + " cityDoughnut End!!");
+		return aList;
+	}
+	
 }

@@ -14,4 +14,11 @@ public interface AcademyMapper {
 	public void academyDelete(String aca_no) throws Exception;
 	public List<AcademyDTO> getSearchList(AcademyDTO aDTO) throws Exception;
 	public List<AcademyDTO> getAcademyMoreView(AcademyDTO aDTO) throws Exception;
+
+	
+	
+	public List<AcademyDTO> getMapAcaList() throws Exception;
+	public int updateAcaVisit(AcademyDTO aDTO) throws Exception;
+	public List<AcademyDTO> getStateDoughnut(String state) throws Exception;
+	public List<AcademyDTO> getCityDoughnut(String city) throws Exception;
 }

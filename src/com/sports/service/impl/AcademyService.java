@@ -49,4 +49,24 @@ public class AcademyService implements IAcademyService {
 	public List<AcademyDTO> AcademyMoreList(AcademyDTO aDTO) throws Exception {
 		return academyMapper.getAcademyMoreView(aDTO);
 	}
+
+	@Override
+	public List<AcademyDTO> getMapAcaList() throws Exception {
+		return academyMapper.getMapAcaList();
+	}
+
+	@Override
+	public int updateAcaVisit(AcademyDTO aDTO) throws Exception {
+		return academyMapper.updateAcaVisit(aDTO);
+	}
+
+	@Override
+	public List<AcademyDTO> getStateDoughnut(String state) throws Exception {
+		return academyMapper.getStateDoughnut(state);
+	}
+
+	@Override
+	public List<AcademyDTO> getCityDoughnut(String city) throws Exception {
+		return academyMapper.getCityDoughnut(city);
+	}
 }

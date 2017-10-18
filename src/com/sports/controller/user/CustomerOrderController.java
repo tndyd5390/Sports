@@ -174,10 +174,10 @@ public class CustomerOrderController {
 	 * @throws Exception
 	 * 결제에 성공한 후 사용자에게 화면을 뿌려줄 메소드
 	 */
-	@RequestMapping(value="orderSuccessView" , method=RequestMethod.GET)
+	@RequestMapping(value="orderSuccessView")
 	public String orderSuccessView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".orderSuccessView start!!!");
-		String userNo = CmmUtil.nvl(req.getParameter("userNo"));
+		String userNo = CmmUtil.nvl(req.getParameter("userNo").split("[?]")[0]);
 		log.info(this.getClass() + ".orderSuccessView userNo : " + userNo);
 		
 		List<Order_infoDTO> oList = orderService.getOrderInfoDate(userNo);

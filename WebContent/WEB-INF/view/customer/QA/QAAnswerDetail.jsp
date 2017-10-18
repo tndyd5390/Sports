@@ -133,7 +133,11 @@ function doList() {
 						<p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
 						<p class="sub_text">관리자<span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
 					</div>
-          			<div class="content"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %></div>
+          			<div class="content">
+          				<%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %>
+          				<br />
+          				<img alt="" src="<%="/upload/qa_file/" + rDTO.getFile_name() %>" style="width:100%; height:100%">
+          			</div>
 				</div>
         		<div class="btn-groub">
 					<button class="col-3 glay-btn button" onclick="javascript:doList();return false;"></button>

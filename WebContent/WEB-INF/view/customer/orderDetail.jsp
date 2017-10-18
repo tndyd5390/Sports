@@ -1,4 +1,5 @@
- <%@page import="java.util.ArrayList"%>
+ <%@page import="com.sports.util.TextUtil"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.mysql.fabric.xmlrpc.base.Array"%>
 <%@page import="com.sports.dto.OrdProductDTO"%>
 <%@page import="java.util.List"%>
@@ -8,7 +9,7 @@
 <%
 	Order_infoDTO oDTO = (Order_infoDTO)request.getAttribute("oDTO");
 	if(oDTO == null) oDTO = new Order_infoDTO();
-	
+	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -127,8 +128,8 @@ a.psyOrderDetailBtn {
  			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getTran_no()) %></div>
  		</div>
  		<div class="shDTable" align="left">
- 			<div class="shCTitle" align="left">날짜</div>
- 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getReg_dt()) %></div>
+ 			<div class="shCTitle" align="left">주문 날짜</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getReg_dt()).substring(0, 10) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">수령인</div>
@@ -161,6 +162,8 @@ a.psyOrderDetailBtn {
  			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail())%></div>
  		</div>
  		<div class="shDTable" align="left">
+
+
  			<div class="shCTitle" align="left">운송장 번호</div>
  			<div class="shCDetail" align="left">
  			<%
@@ -178,7 +181,15 @@ a.psyOrderDetailBtn {
  							+"&tran_no="+CmmUtil.nvl(oDTO.getTran_no());				
  			 %>
  		<a href="<%=url%>" class="psyOrderDetailBtn">배송조회</a>
+ 	
  	<%} %>
+ 		
+ 	<%if(userNo.equals("5")){ %>
+ 	
+ 	<a href="#" class="psyOrderDetailBtn">운송장 번호 수정</a>
+ 	
+ 	<%} %>
+ 	
  	<a href="#" class="psyOrderDetailBtn">목록</a>
  	</div>
     </section>

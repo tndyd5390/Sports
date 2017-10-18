@@ -20,7 +20,16 @@ public class QADTO {
 	private String user_name;
 	private String[] allCheckSeq;
 	private String search; 
+	private String parent_user_no;
 	
+	public String getParent_user_no() {
+		return parent_user_no;
+	}
+
+	public void setParent_user_no(String parent_user_no) {
+		this.parent_user_no = parent_user_no;
+	}
+
 	public String getNew_yn() {
 		return new_yn;
 	}

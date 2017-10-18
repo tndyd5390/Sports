@@ -95,7 +95,7 @@
 		<li>
 			<a href="#">학원관리</a>
 			<ul class="col-2">
-				<li><a href="#">학원 밀집도 정보</a></li>
+				<li><a href="academyMap.do">학원 밀집도 정보</a></li>
 				<li><a href="#">거래처 관리</a></li>
 			</ul>
 		</li>

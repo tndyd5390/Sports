@@ -80,7 +80,7 @@ function doDelete() {
 	if ("<%=access%>"==2) {
 		
 		if (confirm("작성한 게시글을 삭제하시겠습니까?")) {
-			location.href="/customer/QA/QADelete.do?q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
+			location.href="/customer/QA/QADelete.do?qa_no=<%=CmmUtil.nvl(rDTO.getQa_no())%>&q_no=<%=CmmUtil.nvl(rDTO.getQ_no())%>";
 		}
 		
 	} else if ("<%=access%>"==3) {
@@ -183,7 +183,11 @@ function doList() {
 						<p class="title"><%=CmmUtil.nvl(rDTO.getTitle())%></p>
 						<p class="sub_text"><%=CmmUtil.nvl(rDTO.getUser_name())%><span><%=CmmUtil.nvl(rDTO.getReg_dt())%></span></p>
 					</div>
-          			<div class="content"><%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %></div>
+          			<div class="content">
+          				<%=CmmUtil.nvl(rDTO.getContents()).replaceAll("\r\n", "<br>") %>
+          				<br />
+          				<img alt="" src="<%="/upload/qa_file/" + rDTO.getFile_name() %>" style="width:100%; height:100%">
+          			</div>
 				</div>
         		<div class="btn-groub">
         		<% if (ss_user_no.equals(CmmUtil.nvl(rDTO.getReg_user_no()))) {%>
