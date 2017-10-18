@@ -166,7 +166,7 @@ a.psyOrderDetailBtn {
 		form.setAttribute('method', "post");
 		
 		var input = document.createElement('input');
-		input.setAttribute('type', 'input');
+		input.setAttribute('type', 'hidden');
 		input.setAttribute('name', "tranNo");
 		input.setAttribute('value', tranNo);
 		form.appendChild(input);
