@@ -24,4 +24,8 @@ public interface IAcademyService {
 
 	public int updateAcaVisit(AcademyDTO aDTO) throws Exception;
 
+	public List<AcademyDTO> getStateDoughnut(String state) throws Exception;
+
+	public List<AcademyDTO> getCityDoughnut(String city) throws Exception;
+
 }

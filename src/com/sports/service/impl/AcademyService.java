@@ -59,4 +59,14 @@ public class AcademyService implements IAcademyService {
 	public int updateAcaVisit(AcademyDTO aDTO) throws Exception {
 		return academyMapper.updateAcaVisit(aDTO);
 	}
+
+	@Override
+	public List<AcademyDTO> getStateDoughnut(String state) throws Exception {
+		return academyMapper.getStateDoughnut(state);
+	}
+
+	@Override
+	public List<AcademyDTO> getCityDoughnut(String city) throws Exception {
+		return academyMapper.getCityDoughnut(city);
+	}
 }

@@ -126,11 +126,4 @@ public class DataAnalysisController {
 		return aList;
 	}
 	
-	@RequestMapping(value="mapTest")
-	public String mapTest() throws Exception{
-		log.info("testMap Start!");
-		
-		log.info("testMap End!");
-		return "account/accountMap";
-	}
 }

@@ -253,8 +253,13 @@ public class AcademyController {
 		
 		return adTO;
 	}
-	
-	
+	@RequestMapping(value="academyMap")
+	public String academyMap() throws Exception{
+		log.info(this.getClass() + "academyMap Start!");
+		
+		log.info(this.getClass() + "academyMap End!");
+		return "account/accountMap";
+	}
 	
 	@RequestMapping(value="mapAcaList")
 	public @ResponseBody List<AcademyDTO> mapAcaList() throws Exception{
@@ -285,4 +290,30 @@ public class AcademyController {
 		System.out.println(rs);
 		return rs;
 	}
+	@RequestMapping(value="stateDoughnut")
+	public @ResponseBody List<AcademyDTO> stateDoughnut(@RequestParam("state") String state) throws Exception{
+		log.info(this.getClass() + " stateDoughnut Start!!");
+		
+		log.info("state : " + state);
+		
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>();
+		aList = academyService.getStateDoughnut(state);
+		
+		
+		log.info(this.getClass() + " stateDoughnut End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="cityDoughnut")
+	public @ResponseBody List<AcademyDTO> cityDoughnut(@RequestParam("city") String city) throws Exception{
+		log.info(this.getClass() + " cityDoughnut Start!!");
+		
+		log.info("city : " + city);
+		List<AcademyDTO> aList = new ArrayList<AcademyDTO>();
+		aList = academyService.getCityDoughnut(city);
+		
+		log.info(this.getClass() + " cityDoughnut End!!");
+		return aList;
+	}
+	
 }

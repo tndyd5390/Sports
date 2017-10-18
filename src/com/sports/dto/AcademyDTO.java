@@ -22,8 +22,36 @@ public class AcademyDTO {
 	private String chg_dt;
 	private String search;
 	private String read_more;
+	private String count;
+	private String total;
+	private String percent;
+	private String density;
 	
 	
+	public String getDensity() {
+		return density;
+	}
+	public void setDensity(String density) {
+		this.density = density;
+	}
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	public String getTotal() {
+		return total;
+	}
+	public void setTotal(String total) {
+		this.total = total;
+	}
+	public String getPercent() {
+		return percent;
+	}
+	public void setPercent(String percent) {
+		this.percent = percent;
+	}
 	public String getSearch() {
 		return search;
 	}

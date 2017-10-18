@@ -44,3 +44,62 @@
     .ellipssis {width:100%;font-size:11px;}
 	.desc input{height:30px; width:50px;}
 
+.chartLabel{
+	margin-top : 50px;
+	background-color : #1777cb;
+	width : 100%;
+}
+.accLabel{
+	font-size : 15px;
+	font-weight : bold;
+	height : 30px;
+	color : #ffffff;
+	margin : 30px;
+}
+
+.table {
+	display:table;
+	width:100%;
+	margin-top : 30px;
+	margin-bottom : 30px;
+}
+.tableHead {
+	display:table-header-group;
+	background-color: #1777CB;
+	font-weight: bold;
+	text-align: center;
+	color: white;
+}
+.tableBody {
+	display:table-row-group;
+	background-color: white;
+	color:black;
+	text-align: center;
+}
+.tableRow {
+	display:table-row;
+	border-bottom: 1px solid #1777CB;
+}
+.tableRow:nth-child(even) {
+	background-color: #E1E1E1;
+}
+.cTableCell:first-child{
+	width:15%;
+}
+.cTableCell {
+	display:table-cell;
+	border-right:1px solid white;
+	border-radius: 4px;
+	width:21.25%;
+}
+
+.sTableCell:first-child{
+	width:15%;
+}
+.sTableCell {
+	display:table-cell;
+	border-right:1px solid white;
+	border-radius: 4px;
+	width:28.3%;
+}
+
