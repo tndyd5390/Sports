@@ -177,7 +177,7 @@ public class CustomerOrderController {
 	@RequestMapping(value="orderSuccessView")
 	public String orderSuccessView(HttpServletRequest req, HttpServletResponse resp, Model model, HttpSession session) throws Exception{
 		log.info(this.getClass() + ".orderSuccessView start!!!");
-		String userNo = CmmUtil.nvl(req.getParameter("userNo"));
+		String userNo = CmmUtil.nvl(req.getParameter("userNo").split("[?]")[0]);
 		log.info(this.getClass() + ".orderSuccessView userNo : " + userNo);
 		
 		List<Order_infoDTO> oList = orderService.getOrderInfoDate(userNo);
