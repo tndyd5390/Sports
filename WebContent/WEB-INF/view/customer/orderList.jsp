@@ -239,7 +239,7 @@ a.psyOrderDetailBtn {
  		<div id="<%=CmmUtil.nvl(oDTO.getReg_dt())%>" style="display: none;">
  		</div>
  		<%} %>
- 	<a href="#" class="psyOrderDetailBtn" >목록</a>
+ 	<a href="main.do" class="psyOrderDetailBtn" >메인으로</a>
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>
