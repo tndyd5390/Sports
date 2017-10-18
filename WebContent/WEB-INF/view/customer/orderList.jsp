@@ -132,7 +132,7 @@ a.psyOrderListSearchBtn {
 }
 
 a.psyOrderDetailBtn {
-	width: 48%;
+	width: 100%;
 	height: 40px;
 	top: 15px;
 	right: 15px;
@@ -232,12 +232,6 @@ a.psyOrderDetailBtn {
     </header>
 <%@include file="/html5/include/navBar.jsp" %>
     <div class="container detail" align="center">
-   		 	<div class="search type">
-				<select class="search_type" style="width: 100%; margin-bottom: 10px;" id="searchType">
-					<option value="#">주문 일자</option>
-				</select> 
-				<input class="psySearchText" type="text"><a href="#" class="psyOrderListSearchBtn" >검색</a>
-			</div>
 		<%for(Order_infoDTO oDTO : oList){ %>
  		<div class="shDTables" align="left" style="margin-top:10px;">
  			<div class="psyTitle" align="left" onclick="toggleFunc('<%=CmmUtil.nvl(oDTO.getReg_dt())%>');"><%=CmmUtil.nvl(oDTO.getReg_dt())%></div>

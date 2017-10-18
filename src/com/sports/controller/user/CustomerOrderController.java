@@ -188,7 +188,22 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".orderSuccessView end!!!");
 		return "customer/orderList";
 	}
-	
+	@RequestMapping(value="customerOrderList")
+	public String customerOrderList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".customerOrderList start!!!");
+		
+		String userNo = CmmUtil.nvl(req.getParameter("userNo"));
+		log.info(this.getClass() + ".customerOrderList userNo : " + userNo);
+		
+		List<Order_infoDTO> oList = orderService.getOrderInfoDate(userNo);
+		if(oList == null) oList = new ArrayList<>();
+		
+		
+		model.addAttribute("oList", oList);
+		
+		log.info(this.getClass() + ".customerOrderList end!!!");
+		return "customer/orderList";
+	}
 	/**
 	 * @param req
 	 * @param resp

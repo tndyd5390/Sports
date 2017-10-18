@@ -318,34 +318,7 @@ ul > li > textarea.psyTermsTextarea{
 			form.submit();
 		}
 	}
-	
-	function testSubmit(f){
-		/* var infoObject = new Object();
-		infoObject.recipient = "박수용";
-		infoObject.tel = "01057907883";
-		infoObject.address = "불정로 362";
-		var jsonInfo = JSON.stringify(infoObject);
-		console.log(jsonInfo);
-		f.jsondata.value = jsonInfo;
-		f.submit(); */
-		var etcInfo2 = new Object();
-		etcInfo2['0'] = '0';
-		console.log(etcInfo2['0']);
-		var test = new Object();
-		<%
-		for(int i = 0; i< 5; i++){
-		%>
-			test['<%=i%>'] = '<%=i%>';
-		<%
-		}
-		%>
-		var jsonInfo = JSON.stringify(etcInfo2);
-		console.log(jsonInfo);
-		f.jsondata.value = jsonInfo;
-		//f.submit();
-		return true;
-		
-	}
+
 </script>
 </head>
 <body>

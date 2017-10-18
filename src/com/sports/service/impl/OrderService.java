@@ -87,10 +87,8 @@ public class OrderService implements IOrderService {
 		for(Order_infoDTO oDTO1 : oInfoList){
 			List<OrdProductDTO> oProdList = orderMapper.getOrderProductList(oDTO1.getTran_no());
 			if(oProdList == null) new ArrayList<>();
-			System.out.println("prodList : " + oProdList.size());
 			oDTO1.setOrdProductList(oProdList);
 		}
-		System.out.println("oInfoList.size() : " + oInfoList.size());
 		return oInfoList;
 	}
 
