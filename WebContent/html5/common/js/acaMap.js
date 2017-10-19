@@ -103,7 +103,7 @@
 					cont += 		"</div>";
 					cont += 		"<div class='body'>";
 					cont += 			"<div class='img'>";
-					cont += 				"<img src='http://cfile181.uf.daum.net/image/250649365602043421936D' width='73' height='70'>";
+					cont += 				"<img src='/html5/common/images/marker/kakao.png' width='73' height='70'>";
 					cont += 			"</div>";
 					cont += 			"<div class='desc'>";
 					cont += 				"<div class='ellipssis'>"+value.aca_area2+" "+value.aca_area3;

@@ -397,8 +397,8 @@ public class ProductInfoController {
 		
 		String mainFileNo = CmmUtil.nvl(req.getParameter("mainFileNo"));
 		String detailFileNo = CmmUtil.nvl(req.getParameter("detailFileNo"));
-		String mainSrc = "/www/tmaxxsports_com/www/upload/"+CmmUtil.nvl(req.getParameter("mainFileSrc"));
-		String detailSrc = "/www/tmaxxsports_com/www/upload/"+CmmUtil.nvl(req.getParameter("detailFileSrc"));
+		String mainSrc = "/www/tmaxxsports_com"+CmmUtil.nvl(req.getParameter("mainFileSrc"));
+		String detailSrc = "/www/tmaxxsports_com"+CmmUtil.nvl(req.getParameter("detailFileSrc"));
 		// 파일의 삭제와 생성을 모듈화 했기 때문에 매개변수로 넘길 값을들 설정 해 줌
 		// 필요한 값은 기존에 값이 있다면, 메인파일의 번호와 실제 경로, 디테일파일의 번호와 실제 경로가 필요 함
 		
