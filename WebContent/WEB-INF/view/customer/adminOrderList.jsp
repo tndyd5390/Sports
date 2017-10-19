@@ -11,10 +11,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <!-- 
-	이 주석을 보는 개발자여....오늘도 피곤한 하루를 보내었나요???
-	저도 죽을 거 같네요...우리 같이 화이팅 합시다. 제가 피곤함을 어필 힐 수 있는 방법을 배웠어요...
-	모든 변수명앞에 본인의 이니셜을 붙이세요
-	윗사람 중 아무나 보지 않겠습니까???
+	여기는 
 -->
 <head>
 <%@include file="/html5/include/head.jsp" %>
@@ -177,8 +174,9 @@ a.psyOrderDetailBtn {
 	}
  
 	function toggleFunc(id){
+		console.log(id);
 		$.ajax({
-			url : 'orderListDoToggle.do',
+			url : 'adminOrderListDoToggle.do',
 			method : 'post',
 			data : {'reg_dt' : id},
 			success : function(data){
