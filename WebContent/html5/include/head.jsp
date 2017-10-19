@@ -22,7 +22,7 @@
     	$(function(){
     		var url = window.location.href;
     		var a = "http://www.tmaxxsports.com/";
-    		var b = "http://tmaxssports.com/";
+    		var b = "http://tmaxxsports.com/";
     		if(url==a||url==b){
     			window.location.href = "http://www.tmaxxsports.net/";
     		}
