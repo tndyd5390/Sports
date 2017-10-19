@@ -15,3 +15,6 @@
 </footer>
   
   <div id="c-mask" class="c-mask"></div>
+  	<script src="/html5/common/js/classie.js"></script>
+	 <script src="/html5/common/js/common.js"></script>
+    

@@ -10,11 +10,8 @@
     <link rel="stylesheet" href="/html5/common/css/style.css" type="text/css">
     <link rel="stylesheet" href="/html5/common/css/bootstrap.css" type="text/css">
     <!-- JavaScirpt Sorcemap -->
-    <script src="/html5/common/js/jquery-3.2.0.min.js"></script>
+    <script src="/html5/common/js/jquery-3.2.1.min.js"></script>
     <script src="/html5/common/js/jquery-ui.js"></script>
-	 <script src="/html5/common/js/classie.js"></script>
-	 <script src="/html5/common/js/common.js"></script>
-    
     <!--[if lte IE 9]>
     <script src="/html5/common/js/placeholders.min.js"></script>
     <![endif]-->
