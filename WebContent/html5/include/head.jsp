@@ -21,7 +21,9 @@
     <script type="text/javascript">
     	$(function(){
     		var url = window.location.href;
-    		if(url=="http://www.tmaxxsports.com/"||url=="http://tmaxssports.com/"){
+    		var a = "http://www.tmaxxsports.com/";
+    		var b = "http://tmaxssports.com/";
+    		if(url==a||url==b){
     			window.location.href = "http://www.tmaxxsports.net/";
     		}
     	});
