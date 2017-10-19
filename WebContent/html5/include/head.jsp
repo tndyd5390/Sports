@@ -18,3 +18,11 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    	$(function(){
+    		var url = window.location.href;
+    		if(url=="http://www.tmaxxsports.com/"||url=="http://tmaxssports.com/"){
+    			window.location.href = "http://www.tmaxxsports.net/";
+    		}
+    	});
+    </script>

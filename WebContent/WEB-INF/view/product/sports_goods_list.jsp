@@ -22,7 +22,6 @@
 		}else{
 			prodSelect(pNo);
 		};
-		prodList();
 	});
 </script>
 <script src="html5/common/js/productList.js"></script>
