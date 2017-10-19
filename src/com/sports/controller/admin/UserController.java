@@ -409,8 +409,6 @@ public class UserController {
 			auth = "U";
 		}
 		
-		
-		
 		log.info("userNo : "+userNo);
 		log.info("userName : "+userName);
 		log.info("email : "+email);
