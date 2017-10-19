@@ -11,4 +11,6 @@ public interface IOrderService {
 	public List<Order_infoDTO> getOrderInfoDateDatailList(Order_infoDTO oDTO) throws Exception;
 	public Order_infoDTO getOrderInfoDetail(String tranNo) throws Exception;
 	public void setDelivery(Order_infoDTO oDTO)throws Exception;
+	public List<Order_infoDTO> getAllOrderDate() throws Exception;
+	public List<Order_infoDTO> getAdminOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception;
 }

@@ -21,5 +21,6 @@ public interface OrderMapper {
 	public List<Order_infoDTO> getOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception;
 	public Order_infoDTO getOrderInfoDetail(String tranNo) throws Exception;
 	public void setDelivery(Order_infoDTO oDTO)throws Exception;
-	
+	public List<Order_infoDTO> getAllOrderDate() throws Exception;
+	public List<Order_infoDTO> getAdminOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception;
 }

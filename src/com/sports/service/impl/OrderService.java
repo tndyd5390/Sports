@@ -111,4 +111,20 @@ public class OrderService implements IOrderService {
 	public void setDelivery(Order_infoDTO oDTO) throws Exception {
 		orderMapper.setDelivery(oDTO);
 	}
+	public List<Order_infoDTO> getAllOrderDate() throws Exception {
+		return orderMapper.getAllOrderDate();
+	}
+
+	@Override
+	public List<Order_infoDTO> getAdminOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception {
+		List<Order_infoDTO> oInfoList = orderMapper.getAdminOrderInfoDateDetailList(oDTO);
+		if(oInfoList == null) oInfoList = new ArrayList<>();
+		for(Order_infoDTO oDTO1 : oInfoList){
+			List<OrdProductDTO> oProdList = orderMapper.getOrderProductList(oDTO1.getTran_no());
+			System.out.println(oProdList.size());
+			if(oProdList == null) new ArrayList<>();
+			oDTO1.setOrdProductList(oProdList);
+		}
+		return oInfoList;
+	}
 }
