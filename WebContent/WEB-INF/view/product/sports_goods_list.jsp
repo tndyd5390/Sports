@@ -5,6 +5,8 @@
 <%@ page import = "com.sports.dto.ProductInfoDTO" %>
 <%
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
+	String pNo = CmmUtil.nvl(request.getParameter("pNo"));
+
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -14,8 +16,13 @@
 	var readMore = 6;
 	var parents_no = '';
 	$(function(){
+		var pNo = "<%=pNo%>";
+		if(pNo==""){
+			prodList();
+		}else{
+			prodSelect(pNo);
+		};
 		prodList();
-		
 	});
 </script>
 <script src="html5/common/js/productList.js"></script>
