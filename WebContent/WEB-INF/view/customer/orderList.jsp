@@ -4,7 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
-	//if("".equals((String)session.getAttribute("ss_user_no"))) response.sendRedirect("");
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	List<Order_infoDTO> oList = (List<Order_infoDTO>)request.getAttribute("oList");
 	if(oList == null) oList = new ArrayList();
 %>

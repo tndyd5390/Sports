@@ -8,6 +8,7 @@
 <%@ page import="java.util.ArrayList"%>		
 <%@ page import="java.util.List"%>
 <%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 QADTO rDTO = (QADTO)request.getAttribute("rDTO");
 
 if (rDTO==null) {

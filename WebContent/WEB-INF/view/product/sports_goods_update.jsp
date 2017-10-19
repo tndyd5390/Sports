@@ -9,6 +9,7 @@
 <%@ page import="java.util.Map"%>
 
 <%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 	ProductInfoDTO pDTO = (ProductInfoDTO) request.getAttribute("pDTO");
 	if(pDTO == null){

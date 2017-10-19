@@ -8,6 +8,7 @@
 <%@ page import="java.util.ArrayList" %>		
 <%@ page import="java.util.List" %>
 <%
+
 QADTO rDTO = (QADTO)request.getAttribute("rDTO");
 
 if (rDTO==null) {

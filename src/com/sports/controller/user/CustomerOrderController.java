@@ -304,4 +304,15 @@ public class CustomerOrderController {
 		
 		return "customer/orderDetail";
 	}
+	
+	@RequestMapping(value="pleaseLogin")
+	public String pleaseLogin(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".pleaseLogin start!!!");
+		
+		model.addAttribute("msg", "로그인을 해주세요.");
+		model.addAttribute("url", "login.do");
+		
+		log.info(this.getClass() + ".pleaseLogin end!!!");
+		return "redirect";
+	}
 }

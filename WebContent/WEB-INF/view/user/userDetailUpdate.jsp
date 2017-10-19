@@ -6,6 +6,7 @@
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
 	String auth = (String) session.getAttribute("ss_user_auth");
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 %>
 <html lang="ko">
 <head>

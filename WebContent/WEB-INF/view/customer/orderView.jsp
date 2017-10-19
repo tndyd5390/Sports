@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	List<BasketDTO> bList = (List<BasketDTO>)request.getAttribute("bList");
 	if(bList == null){
 		bList = new ArrayList<BasketDTO>();

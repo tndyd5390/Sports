@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	Order_infoDTO oDTO = (Order_infoDTO)request.getAttribute("oDTO");
 	if(oDTO == null) oDTO = new Order_infoDTO();
 	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
