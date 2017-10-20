@@ -27,7 +27,7 @@ public class UserService implements IUserService{
 		userMapper.updateRegUser(uDTO);
 		updateEmailCode(uDTO);
 		uDTO = userMapper.getUserId(uDTO);
-		MailUtil.sendMail(uDTO.getEmail(), "¸ğµÎÀÇ ½ºÆ÷Ã÷ ÀÌ¸ŞÀÏ ÀÎÁõ", "http://localhost:8181/emailCheckProc.do?uNo="+uDTO.getUser_no()+"&code="+uDTO.getEmail_code());
+		MailUtil.sendMail(uDTO.getEmail(), "í‹°ë§¥ìŠ¤ëª° ì¸ì¦ë©”ì¼ì…ë‹ˆë‹¤.", "http://tmaxxsports.com:5023/emailCheckProc.do?uNo="+uDTO.getUser_no()+"&code="+uDTO.getEmail_code());
 	}
 	@Override
 	public UserDTO getLoginInfo(UserDTO uDTO) throws Exception {
