@@ -85,12 +85,7 @@ a.psyOrderListSearchBtn {
 }
 .psyDetail{
 	border: 1px solid #B9B9B9;
-<<<<<<< HEAD
-	width: 25%;
-	background-color: #ffffff;
-=======
 	width: 20%;
->>>>>>> refs/remotes/origin/psyBranch
 	color: #000000;
 	display: table-cell;
 	font-weight: bold;
