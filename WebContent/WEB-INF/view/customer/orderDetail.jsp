@@ -189,8 +189,11 @@ a.psyOrderDetailBtn {
  		<a href="deliveryReg.do?tran_no=<%=CmmUtil.nvl(oDTO.getTran_no())%>" class="psyOrderDetailBtn">운송장 수정</a>
  	
  	<%} %>
- 	
- 	<a href="#" class="psyOrderDetailBtn">목록</a>
+ 	<%if(userNo.equals("5")){ %>
+ 	<a href="orderList.do" class="psyOrderDetailBtn">목록</a>
+ 	<%}else{ %>
+ 	<a href="customerOrderList.do?userNo=<%=userNo%>" class="psyOrderDetailBtn">목록</a>
+ 	<%} %>
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>
