@@ -5,11 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>모두의 스포츠</title>
     <!-- Styles : CSS & SASS Sorcemap -->
+    <link rel='stylesheet' href='/html5/common/css/notosanskr.css'>
     <link rel="stylesheet" href="/html5/common/css/custom.css" type="text/css">
     <link rel="stylesheet" href="/html5/common/css/style.css" type="text/css">
     <link rel="stylesheet" href="/html5/common/css/bootstrap.css" type="text/css">
     <!-- JavaScirpt Sorcemap -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="/html5/common/js/jquery-3.2.1.min.js"></script>
     <script src="/html5/common/js/jquery-ui.js"></script>
     <!--[if lte IE 9]>
     <script src="/html5/common/js/placeholders.min.js"></script>
@@ -17,3 +18,13 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <script type="text/javascript">
+    	$(function(){
+    		var url = window.location.href;
+    		var a = "http://www.tmaxxsports.com/";
+    		var b = "http://tmaxxsports.com/";
+    		if(url==a||url==b){
+    			window.location.href = "http://www.tmaxxsports.net/";
+    		}
+    	});
+    </script>

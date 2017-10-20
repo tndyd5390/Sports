@@ -3,7 +3,9 @@
 <%@page import="org.json.simple.parser.JSONParser"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
-
+<%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
+%>
 <%
 	String result = CmmUtil.nvl((String) request.getAttribute("result"));//컨트롤러에서 받은 json데이터의 String형태
 	String code = CmmUtil.nvl((String) request.getAttribute("code"));//컨트롤러에서 받은 택배사 코드

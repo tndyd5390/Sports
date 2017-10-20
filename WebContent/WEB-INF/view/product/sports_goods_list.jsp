@@ -6,7 +6,11 @@
 <%
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 	String pNo = CmmUtil.nvl(request.getParameter("pNo"));
+<<<<<<< HEAD
 	System.out.println(pNo);
+=======
+
+>>>>>>> refs/remotes/origin/test
 %>
 <!DOCTYPE html>
 <html lang="ko">

@@ -7,6 +7,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	Order_infoDTO oDTO = (Order_infoDTO)request.getAttribute("oDTO");
 	if(oDTO == null) oDTO = new Order_infoDTO();
 	String userNo = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
@@ -181,10 +182,35 @@ a.psyOrderDetailBtn {
  			%>
  			</div>
  		</div>
- 	<%if(userNo.equals("5")){ %>
- 	<a href="#" class="psyOrderDetailBtn">운송장 번호 수정</a>
+<<<<<<< HEAD
+=======
+ 	<%if(!"".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){
+ 			String url = "delivery.do?invoice_no="+CmmUtil.nvl(oDTO.getInvoice_no())+"&deli_co_no="+CmmUtil.nvl(oDTO.getDeli_co_no())
+ 							+"&tran_no="+CmmUtil.nvl(oDTO.getTran_no());				
+ 			 %>
+ 		<a href="<%=url%>" class="psyOrderDetailBtn">배송조회</a>
+ 	
  	<%} %>
+ 		
+>>>>>>> refs/remotes/origin/test
+ 	<%if(userNo.equals("5")){ %>
+<<<<<<< HEAD
+ 	<a href="#" class="psyOrderDetailBtn">운송장 번호 수정</a>
+=======
+ 	
+ 		<a href="deliveryReg.do?tran_no=<%=CmmUtil.nvl(oDTO.getTran_no())%>" class="psyOrderDetailBtn">운송장 수정</a>
+ 	
+>>>>>>> refs/remotes/origin/test
+ 	<%} %>
+<<<<<<< HEAD
  	<a href="#" class="psyOrderDetailBtn">목록</a>
+=======
+ 	<%if(userNo.equals("5")){ %>
+ 	<a href="orderList.do" class="psyOrderDetailBtn">목록</a>
+ 	<%}else{ %>
+ 	<a href="customerOrderList.do?userNo=<%=userNo%>" class="psyOrderDetailBtn">목록</a>
+ 	<%} %>
+>>>>>>> refs/remotes/origin/test
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>

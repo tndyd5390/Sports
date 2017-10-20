@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
 html, body {
   margin: 0;
   padding: 0;
@@ -1529,9 +1528,9 @@ select.col-2 {
   border-bottom: 1px solid #bcbcbc;
 }
 
-.menu_list>li ul.more li:last-child,.menu_list>li ul.more li:nth-child(13) {
+/* .menu_list>li ul.more li:last-child,.menu_list>li ul.more li:nth-child(13) {
   border-bottom: 0;
-}
+} */
 
 .menu_list>li ul.col-3 li {
   width: 33.3333%;

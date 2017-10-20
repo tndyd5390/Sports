@@ -1,6 +1,7 @@
 <%@page import="com.sports.dto.AcademyDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	AcademyDTO aDTO = (AcademyDTO) request.getAttribute("aDTO");
 	String user_no = CmmUtil.nvl((String)session.getAttribute("ss_user_no"));
 %>

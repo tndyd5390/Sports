@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
+	%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -9,7 +12,7 @@
 <script type="text/javascript" src="/html5/common/js/acaMap.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <script>
-var geoUrl = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?serviceKey=jWhVo4MUvN5PI3FRcP4aBaxWF4IyjFcUnas%2FZLsciiLO72jRn3nJ1x%2FqIRkjH8N89ATrj0pw7g9Rnod97MVsCw%3D%3D&numOfRows=10&pageSize=10&pageNo=1&startPage=1&MobileOS=ETC&MobileApp=AppTest";
+var geoUrl = "//api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?serviceKey=jWhVo4MUvN5PI3FRcP4aBaxWF4IyjFcUnas%2FZLsciiLO72jRn3nJ1x%2FqIRkjH8N89ATrj0pw7g9Rnod97MVsCw%3D%3D&numOfRows=10&pageSize=10&pageNo=1&startPage=1&MobileOS=ETC&MobileApp=AppTest";
 	$(function(){
 		geoCode_1();
 		geoCode_2(2);

@@ -125,6 +125,11 @@
 		 WHERE REG_USER_NO = #{userNo}
 	</select>
 	
+	<select id="getAllOrderDate" resultType="Order_infoDTO">
+		SELECT DISTINCT(SUBSTRING(REG_DT, 1, 10)) AS REG_DT
+		  FROM ORDER_INFO
+	</select>
+		
 	<select id="getOrderInfoDateDetailList" parameterType="Order_infoDTO" resultType="Order_infoDTO">
 		SELECT TRAN_NO,
 		       RECIPIENT,
@@ -140,6 +145,23 @@
 		  FROM ORDER_INFO
 		 WHERE REG_USER_NO = #{reg_user_no}
 		   AND SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	<select id="getAdminOrderInfoDateDetailList" parameterType="Order_infoDTO" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       REG_DT
+		  FROM ORDER_INFO
+		 WHERE SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
 		   AND ORD_STAT = 'C'
 	</select>
 	

@@ -28,7 +28,11 @@
  function doMoveGoods(pNo){
 	document.location.href = "/productList.do?pNo="+pNo;
  }
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> refs/remotes/origin/test
  </script>
  
  <% if(ss_user_auth.equals("U")|ss_user_no.equals("")){ %>
@@ -49,7 +53,11 @@
 			<li>
 				<a href="#">마이페이지</a>
 				<ul class="col-2">
+				<%if(ss_user_no.equals("5")){ %>
+					<li><a href="orderList.do">주문정보</a></li>
+				<%}else{ %>
 					<li><a href="customerOrderList.do?userNo=<%=ss_user_no%>">주문정보</a></li>
+				<%} %>
 					<li><a href="customerBasketList.do">장바구니</a></li>
 				</ul>
 			</li>
@@ -103,7 +111,7 @@
 		<div class="logout_wrap"><a href="/logout.do">로그아웃</a></div>
 	<%} %>
 	<ul class="menu_list">
-		<li><a href="#">주문관리</a></li>
+		<li><a href="orderList.do">주문관리</a></li>
 		<li>
 			<a href="#">학원관리</a>
 			<ul class="col-2">
@@ -122,20 +130,27 @@
 		<li>
 			<a href="productList.do">스포츠 용품 리스트 관리</a>
 			<ul class="col-2 more">
-				<li><a href="#"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체상품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_02.png" class="icon">태권도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_03.png" class="icon">합기도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_04.png" class="icon">검도</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_05.png" class="icon">복싱, MMA</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_06.png" class="icon">스포츠의류</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_07.png" class="icon">스포츠용품(구기)</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_08.png" class="icon">네트&amp;골대</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_09.png" class="icon">휘트니스</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_10.png" class="icon">학교체육용품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_11.png" class="icon">체육대회용품</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_12.png" class="icon">측정용품&amp;호각</a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">펌프</a></li>
-        <li><a href="#"><img src="/html5/common/images/menu/ic_13.png" class="icon">정리용품</a></li>
+					<li><a href="javascript:doMoveGoods('');"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체</a></li>
+					<li><a href="javascript:doMoveGoods('1');"><img src="/html5/common/images/menu/ic_02.png" class="icon">검도</a></li>
+					<li><a href="javascript:doMoveGoods('2');"><img src="/html5/common/images/menu/ic_03.png" class="icon">공구</a></li>
+					<li><a href="javascript:doMoveGoods('3');"><img src="/html5/common/images/menu/ic_04.png" class="icon">권투</a></li>
+					<li><a href="javascript:doMoveGoods('4');"><img src="/html5/common/images/menu/ic_05.png" class="icon">기타스포츠용품</a></li>
+					<li><a href="javascript:doMoveGoods('5');"><img src="/html5/common/images/menu/ic_06.png" class="icon">농구</a></li>
+					<li><a href="javascript:doMoveGoods('6');"><img src="/html5/common/images/menu/ic_07.png" class="icon">무술용품</a></li>
+					<li><a href="javascript:doMoveGoods('7');"><img src="/html5/common/images/menu/ic_08.png" class="icon">배구</a></li>
+					<li><a href="javascript:doMoveGoods('8');"><img src="/html5/common/images/menu/ic_09.png" class="icon">배드민턴</a></li>
+					<li><a href="javascript:doMoveGoods('9');"><img src="/html5/common/images/menu/ic_10.png" class="icon">보호용품</a></li>
+					<li><a href="javascript:doMoveGoods('10');"><img src="/html5/common/images/menu/ic_11.png" class="icon">수련용품</a></li>
+					<li><a href="javascript:doMoveGoods('11');"><img src="/html5/common/images/menu/ic_12.png" class="icon">수영</a></li>
+					<li><a href="javascript:doMoveGoods('12');"><img src="/html5/common/images/menu/ic_13.png" class="icon">스포츠악세사리</a></li>
+	        		<li><a href="javascript:doMoveGoods('13');"><img src="/html5/common/images/menu/ic_13.png" class="icon">야구</a></li>
+	        		<li><a href="javascript:doMoveGoods('14');"><img src="/html5/common/images/menu/ic_13.png" class="icon">요가/필라테스</a></li>
+	        		<li><a href="javascript:doMoveGoods('15');"><img src="/html5/common/images/menu/ic_13.png" class="icon">자전거</a></li>
+	        		<li><a href="javascript:doMoveGoods('16');"><img src="/html5/common/images/menu/ic_13.png" class="icon">족구</a></li>
+	        		<li><a href="javascript:doMoveGoods('17');"><img src="/html5/common/images/menu/ic_13.png" class="icon">축구</a></li>
+	        		<li><a href="javascript:doMoveGoods('18');"><img src="/html5/common/images/menu/ic_13.png" class="icon">탁구</a></li>
+	        		<li><a href="javascript:doMoveGoods('19');"><img src="/html5/common/images/menu/ic_13.png" class="icon">테니스</a></li>
+	        		<li><a href="javascript:doMoveGoods('20');"><img src="/html5/common/images/menu/ic_13.png" class="icon">헬스</a></li>
 			</ul>
 		</li>
 		<li>

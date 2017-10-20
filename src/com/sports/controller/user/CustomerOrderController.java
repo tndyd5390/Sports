@@ -185,6 +185,9 @@ public class CustomerOrderController {
 		
 		
 		model.addAttribute("oList", oList);
+		
+		userNo = null;
+		oList = null;
 		log.info(this.getClass() + ".orderSuccessView end!!!");
 		return "customer/orderList";
 	}
@@ -201,9 +204,42 @@ public class CustomerOrderController {
 		
 		model.addAttribute("oList", oList);
 		
+		userNo = null;
+		oList = null;
 		log.info(this.getClass() + ".customerOrderList end!!!");
 		return "customer/orderList";
 	}
+	
+	@RequestMapping(value="orderList")
+	public String orderList(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".orderList start!!!");
+		
+		List<Order_infoDTO> oList = orderService.getAllOrderDate();
+		if(oList == null){
+			oList = new ArrayList<>();
+		}
+		
+		model.addAttribute("oList", oList);
+		
+		oList = null;
+		log.info(this.getClass() + ".orderList end!!!");
+		return "customer/adminOrderList";
+	}
+	
+	@RequestMapping(value="adminOrderListDoToggle", method=RequestMethod.POST)
+	public @ResponseBody List<Order_infoDTO> adminOrderListDoToggle(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".orderAdminListDoToggle start!!!");
+		String regDt = CmmUtil.nvl(req.getParameter("reg_dt"));
+		log.info(this.getClass() + ".orderAdminListDoToggle regDt : " + regDt);
+		
+		Order_infoDTO oDTO = new Order_infoDTO();
+		oDTO.setReg_dt(regDt);
+		List<Order_infoDTO> oList = orderService.getAdminOrderInfoDateDetailList(oDTO);
+		if(oList == null) oList = new ArrayList<>();
+		log.info(this.getClass() + ".orderAdminListDoToggle end");
+		return oList;
+	}
+	
 	/**
 	 * @param req
 	 * @param resp
@@ -267,5 +303,16 @@ public class CustomerOrderController {
 		log.info(this.getClass() + ".orderDetail end!!!");
 		
 		return "customer/orderDetail";
+	}
+	
+	@RequestMapping(value="pleaseLogin")
+	public String pleaseLogin(HttpServletRequest req, HttpServletResponse resp, HttpSession session, Model model) throws Exception{
+		log.info(this.getClass() + ".pleaseLogin start!!!");
+		
+		model.addAttribute("msg", "로그인을 해주세요.");
+		model.addAttribute("url", "login.do");
+		
+		log.info(this.getClass() + ".pleaseLogin end!!!");
+		return "redirect";
 	}
 }

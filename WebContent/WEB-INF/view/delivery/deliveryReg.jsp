@@ -5,7 +5,9 @@
 <%@ page import="com.sports.util.CmmUtil"
 	import="com.sports.dto.NoticeDTO" import="java.util.ArrayList"
 	import="java.util.List"%>
-
+<%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
+%>
 
 <!DOCTYPE html>
 <html lang="ko">

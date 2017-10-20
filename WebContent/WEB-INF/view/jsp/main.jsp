@@ -17,7 +17,7 @@
 			<img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
 		</div>
 		<div class="logo">
-			<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+			<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
 		</div>
 	</div>
 </header>
@@ -26,14 +26,27 @@
 function myPage(){
 	var uNo = '<%=ss_user_no%>';
 	if(uNo == ""){
-		alert("로그인이 필요한 기능입니다.");
 		if(confirm("로그인 하시겠습니까?")){
 			location.href="login.do";
 		}else{
 			return false;
 		}
 	}else{
-		location.href="userDetail.do?uNo="+uNo;
+		location.href="/userDetail.do?uNo="+uNo;
+		return true;
+	}
+ }
+ 
+ function myOrder(){
+	var uNo = "<%=ss_user_no%>";
+	if(uNo == ""){
+		if(confirm("로그인 하시겠습니까?")){
+			location.href="login.do";
+		}else{
+			return false;
+		}
+	}else{
+		location.href="/customerOrderList.do?userNo="+uNo;
 		return true;
 	}
  }
@@ -46,17 +59,17 @@ function myPage(){
           </a>
         </li>
         <li>
-          <a href="#"><img src="/html5/common/images/ic_menu_02access.png" alt="마이페이지">
-            <p>마이페이지</p>
+          <a href="#" onclick="return myOrder();"><img src="/html5/common/images/ic_menu_02access.png" alt="마이페이지">
+            <p>주문내역</p>
           </a>
         </li>
         <li>
-          <a href="productList.do"><img src="/html5/common/images/ic_menu_03order.png" alt="스포츠 용품 리스트">
+          <a href="/productList.do"><img src="/html5/common/images/ic_menu_03order.png" alt="스포츠 용품 리스트">
             <p>스포츠 용품<br>리스트</p>
           </a>
         </li>
         <li>
-          <a href="#"><img src="/html5/common/images/ic_menu_04academy.png" alt="고객센터">
+          <a href="/customer/QA/QAList.do"><img src="/html5/common/images/ic_menu_04academy.png" alt="고객센터">
             <p>고객센터</p>
           </a>
         </li>
@@ -81,37 +94,32 @@ function myPage(){
     <div class="container">
       <ul class="menu">
         <li>
-          <a href="userList.do"><img src="html5/common/images/ic_menu_01member.png" alt="회원관리">
+          <a href="/userList.do"><img src="html5/common/images/ic_menu_01member.png" alt="회원관리">
             <p>회원관리</p>
           </a>
         </li>
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_02access.png" alt="권한관리">
-            <p>권한관리</p>
-          </a>
-        </li>
-        <li>
-          <a href="#"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
+          <a href="orderList.do"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
             <p>주문관리</p>
           </a>
         </li>
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_04academy.png" alt="학원관리">
+          <a href="/accountmanagement.do"><img src="html5/common/images/ic_menu_04academy.png" alt="학원관리">
             <p>학원관리</p>
           </a>
         </li>
         <li>
-          <a href="basketAnalysis.do"><img src="html5/common/images/ic_menu_05sale.png" alt="매출분석정보">
+          <a href="/basketAnalysis.do"><img src="html5/common/images/ic_menu_05sale.png" alt="매출분석정보">
             <p>매출분석정보</p>
           </a>
         </li>
         <li>
-          <a href="productList.do" class="two-rows"><img src="html5/common/images/ic_menu_06list.png" alt="스포츠용품리스트관리">
+          <a href="/productList.do" class="two-rows"><img src="html5/common/images/ic_menu_06list.png" alt="스포츠용품리스트관리">
             <p>스포츠용품<br>리스트관리</p>
           </a>
         </li>
         <li>
-          <a href="customer/QA/QAList.do"><img src="html5/common/images/ic_menu_07community.png" alt="커뮤니티관리">
+          <a href="/customer/QA/QAList.do"><img src="html5/common/images/ic_menu_07community.png" alt="커뮤니티관리">
             <p>커뮤니티관리</p>
           </a>
         </li>
@@ -119,8 +127,6 @@ function myPage(){
     </div>
 <%@include file="/html5/include/footer.jsp" %>
 </body>
-
-
 <%} %>
 
 </html>

@@ -6,6 +6,7 @@
 <%
 	UserDTO uDTO = (UserDTO) request.getAttribute("uDTO");
 	String auth = (String) session.getAttribute("ss_user_auth");
+	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 %>
 <html lang="ko">
 <head>
@@ -152,6 +153,7 @@
 								<p class="blue_text">상세주소</p> <input type="text" id="address2"
 								name="address2" value="<%=CmmUtil.nvl(uDTO.getAddress2())%>">
 							</li>
+							<%if(ss_user_auth.equals("A")){ %>
 							<li>
 								<p class="blue_text">권한</p> 
 								<select name="auth" id="auth" style="width:50%;">
@@ -159,6 +161,7 @@
 									<option value="U" <%=CmmUtil.select("U", uDTO.getAuth_code()) %>>유저</option>
 								</select>
 							</li>
+							<%} %>
 						</ul>
 					</div>
 					<div class="btn-groub">

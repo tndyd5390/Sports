@@ -1,3 +1,8 @@
+	function addComma(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+
 	function prodReg(){
 		location.href="productReg.do";
 	}
@@ -15,7 +20,6 @@
 			url : 'productAll.do',
 			method : 'post',
 			success : function(data){
-				console.log(data);
 				$.each(data, function(key, value){
 					contents += "<li>";
 					contents += "<a href='#' onclick='prodDetail("+value.prod_no+"); return false;'>";
@@ -24,7 +28,7 @@
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "<p class='price edit'>"+addComma(value.prod_price)+"</p>"
 					contents += "</div>"
 					contents += "</a>";
 					contents += "</li>";
@@ -49,7 +53,7 @@
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "<p class='price edit'>"+addComma(value.prod_price)+"</p>"
 					contents += "</div>"
 					contents += "</a>";
 					contents += "</li>";
@@ -79,7 +83,7 @@
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "<p class='price edit'>"+addComma(value.prod_price)+"</p>"
 					contents += "</div>"
 					contents += "</a>";
 					contents += "</li>";
@@ -116,7 +120,7 @@
 					contents += "</div>";
 					contents += "<div class='info'>";
 					contents += "<p class='title'>"+value.prod_name+"</p>";
-					contents += "<p class='price edit'>"+value.prod_price+"</p>"
+					contents += "<p class='price edit'>"+addComma(value.prod_price)+"</p>"
 					contents += "</div>"
 					contents += "</a>";
 					contents += "</li>";

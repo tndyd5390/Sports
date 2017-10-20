@@ -12,6 +12,7 @@
 <%@ page import="java.util.Date"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 List<QADTO> rList =	(List<QADTO>) request.getAttribute("rList");
 
 if (rList==null) {

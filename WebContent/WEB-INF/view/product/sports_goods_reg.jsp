@@ -4,6 +4,7 @@
 <%@ page import="com.sports.dto.ProductInfoDTO" %>
 <%@ page import="com.sports.util.CmmUtil" %>
 <%
+if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 %>
 <html lang="ko">
