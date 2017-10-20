@@ -79,7 +79,7 @@
 }
 
 a.psyOrderDetailBtn {
-	width: 30%;
+	width: 45%;
 	height: 40px;
 	top: 15px;
 	right: 15px;
@@ -114,7 +114,7 @@ a.psyOrderDetailBtn {
           <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="#"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 
@@ -159,12 +159,18 @@ a.psyOrderDetailBtn {
  			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getOrd_price()) %></div>
  		</div>
  		<div class="shDTable" align="left">
- 			<div class="shCTitle" align="left">주소</div>
- 			<div class="shCDetail" align="left"><%=TextUtil.exchangeEscape(CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail()))%></div>
+ 			<div class="shCTitle" align="left">배송 상태</div>
+ 			<div class="shCDetail" align="left">i want go home</div>
  		</div>
  		<div class="shDTable" align="left">
-
-
+ 			<div class="shCTitle" align="left">주소</div>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail())%></div>
+ 		</div>
+ 		<div class="shDTable" align="left">
+ 			<div class="shCTitle" align="left">배송 메세지</div>
+ 			<div class="shCDetail" align="left"><%=TextUtil.exchangeEscape(CmmUtil.nvl(oDTO.getOrd_message())) %></div>
+ 		</div>
+ 		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">운송장 번호</div>
  			<div class="shCDetail" align="left">
  			<%
@@ -176,6 +182,8 @@ a.psyOrderDetailBtn {
  			%>
  			</div>
  		</div>
+<<<<<<< HEAD
+=======
  	<%if(!"".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){
  			String url = "delivery.do?invoice_no="+CmmUtil.nvl(oDTO.getInvoice_no())+"&deli_co_no="+CmmUtil.nvl(oDTO.getDeli_co_no())
  							+"&tran_no="+CmmUtil.nvl(oDTO.getTran_no());				
@@ -184,13 +192,25 @@ a.psyOrderDetailBtn {
  	
  	<%} %>
  		
+>>>>>>> refs/remotes/origin/test
  	<%if(userNo.equals("5")){ %>
+<<<<<<< HEAD
+ 	<a href="#" class="psyOrderDetailBtn">운송장 번호 수정</a>
+=======
  	
  		<a href="deliveryReg.do?tran_no=<%=CmmUtil.nvl(oDTO.getTran_no())%>" class="psyOrderDetailBtn">운송장 수정</a>
  	
+>>>>>>> refs/remotes/origin/test
  	<%} %>
- 	
+<<<<<<< HEAD
  	<a href="#" class="psyOrderDetailBtn">목록</a>
+=======
+ 	<%if(userNo.equals("5")){ %>
+ 	<a href="orderList.do" class="psyOrderDetailBtn">목록</a>
+ 	<%}else{ %>
+ 	<a href="customerOrderList.do?userNo=<%=userNo%>" class="psyOrderDetailBtn">목록</a>
+ 	<%} %>
+>>>>>>> refs/remotes/origin/test
  	</div>
     </section>
  <%@include file="/html5/include/footer.jsp" %>

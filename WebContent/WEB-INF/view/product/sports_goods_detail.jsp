@@ -176,9 +176,7 @@
 	}
 
 	function orderDirect(){
-		alert('바로구매 기능은 준비중입니다. 장바구니를 이용해 주세요.');
-
-		<%-- var form = document.createElement("form");
+		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "#");
 		
@@ -206,7 +204,7 @@
 			
 			
 			
-		<%}%> --%>
+		<%}%>
 	}
 </script>
 </head>
@@ -218,7 +216,7 @@
           <img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 

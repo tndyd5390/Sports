@@ -88,7 +88,7 @@ a.psyOrderListSearchBtn {
 }
 .psyDetail{
 	border: 1px solid #B9B9B9;
-	width: 25%;
+	width: 20%;
 	color: #000000;
 	display: table-cell;
 	font-weight: bold;
@@ -185,10 +185,10 @@ a.psyOrderDetailBtn {
 				console.log(data);
 				var contents = "";
 				contents += "<div class='shDTable' align='left'>";
-				contents += "<div class='psyDetail' align='left'>주문 번호</div>";
-				contents += "<div class='psyDetail' align='left'>품명</div>";
-				contents += "<div class='psyDetail' align='left'>가격</div>";
-				contents += "<div class='psyDetail' align='left'>수령인 이름</div>";
+				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>주문 번호</div>";
+				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>품명</div>";
+				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>가격</div>";
+				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>수령인 이름</div>";
 				contents += "</div>\n";
 				$.each(data, function(key, value){
 					var prodName = "";
@@ -221,7 +221,7 @@ a.psyOrderDetailBtn {
           <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="#"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 

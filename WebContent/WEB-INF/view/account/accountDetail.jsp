@@ -38,7 +38,7 @@ System.out.println(aDTO.getAca_area2());
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 			<div class="page_title">
@@ -80,7 +80,7 @@ System.out.println(aDTO.getAca_area2());
 								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getTel())%>">
 							</li>
 							<li>
-								<p class="blue_text">거래발생일</p>
+								<p class="blue_text">메모</p>
 								<textarea readonly><%=CmmUtil.nvl(aDTO.getAca_comment()) %></textarea>
 							</li>
 						</ul>
