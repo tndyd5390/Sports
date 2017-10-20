@@ -100,6 +100,7 @@ a.psyATagButton {
 	width: 45%; 
 	float: right; 
 	height:40px; 
+	background-color: #1777cb;
 }
 h5.psyBlue_text{
 	color: #1777cb;
