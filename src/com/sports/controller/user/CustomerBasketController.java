@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sports.dto.BasketDTO;
 import com.sports.dto.Basket_OptionDTO;
+import com.sports.dto.UserDTO;
 import com.sports.service.IBasketService;
 import com.sports.service.impl.BasketService;
 import com.sports.util.CmmUtil;
@@ -243,6 +244,7 @@ public class CustomerBasketController {
 		int totalProdPriceFromView = Integer.parseInt(CmmUtil.nvl(req.getParameter("totalProdPrice")));
 		log.info(this.getClass() + ".customerOrderView totalProdPriceFromView : " + totalProdPriceFromView);
 		
+		//userInfo
 		//장바구니 목록을 가져온다
 		List<BasketDTO> bList = basketService.getCustomerBasketList(userNo);
 		if(bList == null){
@@ -260,7 +262,10 @@ public class CustomerBasketController {
 			model.addAttribute("url", "customerBasketList.do");
 			returnURL = "alert/alert";
 		}else{//최종 결제 금액이 같다면 그대로 결제 진행!!~~
+			UserDTO uDTO = basketService.getUserInfoForOrderView(userNo);
+			if(uDTO == null) uDTO = new UserDTO();
 			model.addAttribute("bList", bList);
+			model.addAttribute("uDTO", uDTO);
 			model.addAttribute("totalProdPriceFromView", totalProdPriceFromView);
 			returnURL = "customer/orderView";
 		}

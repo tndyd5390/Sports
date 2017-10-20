@@ -6,6 +6,7 @@ import com.sports.dto.Basket_OptionDTO;
 import com.sports.dto.OrdProdOptionDTO;
 import com.sports.dto.OrdProductDTO;
 import com.sports.dto.Order_infoDTO;
+import com.sports.dto.UserDTO;
 
 import java.util.List;
 @Mapper("OrderMapper")
@@ -23,4 +24,5 @@ public interface OrderMapper {
 	public void setDelivery(Order_infoDTO oDTO)throws Exception;
 	public List<Order_infoDTO> getAllOrderDate() throws Exception;
 	public List<Order_infoDTO> getAdminOrderInfoDateDetailList(Order_infoDTO oDTO) throws Exception;
+	public UserDTO getUserInfoForOrder(String userNo) throws Exception;
 }

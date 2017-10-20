@@ -6,6 +6,7 @@ import java.util.Map;
 import com.sports.config.Mapper;
 import com.sports.dto.BasketDTO;
 import com.sports.dto.Basket_OptionDTO;
+import com.sports.dto.UserDTO;
 
 @Mapper("BasketMapper")
 public interface BasketMapper {
@@ -15,4 +16,5 @@ public interface BasketMapper {
 	public List<BasketDTO> getCustomerBasketList(String userNo) throws Exception;
 	public List<Basket_OptionDTO> getCustomerBasketOptionList(Map<String, String> parameterMap) throws Exception;
 	public int updateCustomerBasketDeleteOne(String bskNo) throws Exception;
+	public UserDTO getUserInfoForOrderView(String userNo) throws Exception;
 }

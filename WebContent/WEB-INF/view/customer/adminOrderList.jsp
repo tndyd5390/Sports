@@ -85,7 +85,7 @@ a.psyOrderListSearchBtn {
 }
 .psyDetail{
 	border: 1px solid #B9B9B9;
-	width: 25%;
+	width: 20%;
 	color: #000000;
 	display: table-cell;
 	font-weight: bold;
@@ -187,6 +187,7 @@ a.psyOrderDetailBtn {
 				contents += "<div class='psyDetail' align='left'>품명</div>";
 				contents += "<div class='psyDetail' align='left'>가격</div>";
 				contents += "<div class='psyDetail' align='left'>수령인 이름</div>";
+				contents += "<div class='psyDetail' align='left'>배송상태</div>";
 				contents += "</div>\n";
 				$.each(data, function(key, value){
 					var prodName = "";
@@ -202,6 +203,7 @@ a.psyOrderDetailBtn {
 					contents += "<div class='psyDetail' align='left'>" + prodName + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.ord_price + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.recipient + "</div>";
+					contents += "<div class='psyDetail' align='left'>" + value.deli_status + "</div>";
 					contents += "</div>";
 				})
 				$('#' + id).html(contents);
