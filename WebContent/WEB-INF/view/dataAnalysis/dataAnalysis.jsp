@@ -157,7 +157,6 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 					arr1.push(value.category_name);
 					arr2.push(eval(value.sum/10000));
 					arr3.push(value.count);
-					console.log(arr);
 				});
 				if(data.length!=0){
 					var mixedChart = new Chart(ctx1, {
