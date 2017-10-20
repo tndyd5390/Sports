@@ -187,6 +187,7 @@ a.psyOrderDetailBtn {
 				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>품명</div>";
 				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>가격</div>";
 				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>수령인 이름</div>";
+				contents += "<div class='psyDetail' style='background-color : #1777cb; color : #ffffff;' align='left'>배송현황</div>";
 				contents += "</div>\n";
 				$.each(data, function(key, value){
 					var prodName = "";
