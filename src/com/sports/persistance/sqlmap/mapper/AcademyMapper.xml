@@ -12,7 +12,10 @@
 		)
 	</insert>
 	<select id="getAcademyList" resultType="AcademyDTO">
-		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		SELECT ACA_NO, ACA_NAME, ACA_AREA2, TEL, (
+		CASE WHEN ACA_VISIT = 'N' THEN '미방문' WHEN ACA_VISIT = 'T' THEN '거래중' ELSE '방문' END
+		) ACA_VISIT
+		FROM ACADEMY
 		ORDER BY ACA_NO
 		LIMIT 6
 	</select>
@@ -37,7 +40,10 @@
 		LIMIT 6
 	</select>
 	<select id="getAcademyMoreView" resultType="AcademyDTO" parameterType="AcademyDTO">
-		SELECT ACA_NO, ACA_NAME, ACA_CEO, ACA_AREA2, TEL FROM ACADEMY
+		SELECT ACA_NO, ACA_NAME, ACA_AREA2, TEL, (
+		CASE WHEN ACA_VISIT = 'N' THEN '미방문' WHEN ACA_VISIT = 'T' THEN '거래중' ELSE '방문' END
+		) ACA_VISIT
+		FROM ACADEMY
 		ORDER BY ACA_NO
 		LIMIT 6 OFFSET ${read_more};
 	</select>
