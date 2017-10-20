@@ -7,6 +7,10 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 <html lang="ko">
 <head>
 <link rel="stylesheet" href="/html5/common/css/analysis.css" type="text/css">
+<script	src="/html5/common/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.8.18/jquery-ui.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <%@include file="/html5/include/head.jsp"%>
 <script type="text/javascript">
