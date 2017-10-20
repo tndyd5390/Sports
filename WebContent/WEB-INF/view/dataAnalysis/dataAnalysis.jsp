@@ -332,7 +332,7 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 				</div>
 			</div>
 			<div class="page_title">
-				<p>매출 분석</p>
+				<p>매출데이터 분석</p>
 			</div>
 		</header>
 	</section>
@@ -353,7 +353,7 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 			<div class="chy-select">
 				<select style="width:150px;" id="moveSelect">
 					<option>장바구니 분석</option>
-					<option selected>매출 분석</option>
+					<option selected>매출데이터 분석</option>
 				</select>
 			</div>
 			<div id="myTabContent" class="tab-content">

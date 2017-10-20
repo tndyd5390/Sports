@@ -425,7 +425,7 @@ $(function() {
 		<header class="header">
 			<div class="wrap">
 				<div class="left_menu">
-					<img src="html5/common/images/btn_gnb.png" alt="메뉴"
+					<img src="/html5/common/images/btn_gnb.png" alt="메뉴"
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
@@ -454,7 +454,7 @@ $(function() {
 			<div class="chy-select">
 				<select style="width:150px;" id="moveSelect">
 					<option selected>장바구니 분석</option>
-					<option>매출 분석</option>
+					<option>매출데이터 분석</option>
 				</select>
 			</div>
 			<div id="myTabContent" class="tab-content">

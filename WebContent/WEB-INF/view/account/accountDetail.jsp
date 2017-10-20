@@ -80,7 +80,7 @@ System.out.println(aDTO.getAca_area2());
 								<input type="text" readonly value="<%=CmmUtil.nvl(aDTO.getTel())%>">
 							</li>
 							<li>
-								<p class="blue_text">거래발생일</p>
+								<p class="blue_text">메모</p>
 								<textarea readonly><%=CmmUtil.nvl(aDTO.getAca_comment()) %></textarea>
 							</li>
 						</ul>

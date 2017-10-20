@@ -58,7 +58,7 @@
 				</ul>
 			</li>
 			<li>
-				<a href="productList.do">스포츠 용품 리스트</a>
+				<a href="/productList.do">스포츠 용품 리스트</a>
 				<ul class="col-2 more">
 					<li><a href="javascript:doMoveGoods('');"><img src="/html5/common/images/menu/ic_01.png" class="icon">전체</a></li>
 					<li><a href="javascript:doMoveGoods('1');"><img src="/html5/common/images/menu/ic_02.png" class="icon">검도</a></li>
@@ -107,20 +107,20 @@
 		<div class="logout_wrap"><a href="/logout.do">로그아웃</a></div>
 	<%} %>
 	<ul class="menu_list">
-		<li><a href="orderList.do">주문관리</a></li>
+		<li><a href="/userList.do">회원관리</a></li>
+		<li><a href="/orderList.do">주문관리</a></li>
 		<li>
-			<a href="#">학원관리</a>
+			<a href="/accountmanagement.do">학원관리</a>
 			<ul class="col-2">
 				<li><a href="/academyMap.do">학원 밀집도 정보</a></li>
-				<li><a href="/academymanegement.do">거래처 관리</a></li>
+				<li><a href="/accountmanagement.do">거래처 관리</a></li>
 			</ul>
 		</li>
 		<li>
 			<a href="#">매출 분석 정보</a>
-			<ul class="col-3">
-				<li><a href="#"><img src="/html5/common/images/menu/001.png" class="icon"><p>매출분석 정보</p></a></li>
-				<li><a href="#"><img src="/html5/common/images/menu/002.png" class="icon"><p>연관성 분석 정보</p></a></li>
-				<li><a href="basketAnalysis.do"><img src="/html5/common/images/menu/003.png" class="icon"><p>장바구니 분석 정보</p></a></li>
+			<ul class="col-2">
+				<li><a href="/dataAnalysis.do"><img src="/html5/common/images/menu/001.png" class="icon">매출데이터 분석</a></li>
+				<li><a href="/basketAnalysis.do"><img src="/html5/common/images/menu/003.png" class="icon">장바구니 분석</a></li>
 			</ul>
 		</li>
 		<li>
