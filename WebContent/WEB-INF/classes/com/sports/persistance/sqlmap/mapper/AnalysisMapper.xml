@@ -32,7 +32,7 @@
 	</select>
 	
 	<select id="getBasketQuarterDoughnut" parameterType="AnalysisDTO" resultType="AnalysisDTO">
-		SELECT 
+		SELECT
 			PA.CATEGORY_NAME , SUM(B.PROD_QTY) SUM, T.TOTAL, TRUNCATE((SUM(B.PROD_QTY)/T.TOTAL)*100, 2) PERCENT
 	    FROM PRODUCT_INFO P, BASKET_INFO B, CATEGORY_INFO C, CATEGORY_INFO PA,
 	    (SELECT SUM(PROD_QTY) AS TOTAL FROM BASKET_INFO WHERE CEIL(DATE_FORMAT(REG_DT,'%m')/3) = #{quarter}) T

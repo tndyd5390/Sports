@@ -38,7 +38,7 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="#"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 
