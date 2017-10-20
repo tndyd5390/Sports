@@ -341,7 +341,12 @@ ul > li > textarea.psyTermsTextarea{
 			form.submit();
 		}
 	}
-
+	
+	function doCancel(){
+		if(confirm('주문을 취소하시겠습니까???')){
+			location.href="main.do";
+		}
+	}
 </script>
 </head>
 <body>
@@ -490,7 +495,7 @@ ul > li > textarea.psyTermsTextarea{
         </div>
         <div class="btn-groub">
           <button type="button" class="col-2 blue-btn button" onclick="doOrder();">결제하기</button>
-          <button type="button" class="col-2 glay-btn button">취소하기</button>
+          <button type="button" class="col-2 glay-btn button" onclick="doCancel();">취소하기</button>
         </div>
       </div>
     </div>
