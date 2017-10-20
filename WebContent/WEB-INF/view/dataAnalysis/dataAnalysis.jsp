@@ -6,7 +6,10 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="/html5/common/css/analysis.css" type="text/css">
+<title>유저 장바구니 분석</title>
+<%@include file="/html5/include/head.jsp"%>
 <script	src="/html5/common/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
