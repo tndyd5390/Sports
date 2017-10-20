@@ -52,6 +52,9 @@ $(function() {
 			basketDay();
 			bDD();
 		})
+		$('#moveSelect').on("change", function(){
+			location.href = "/dataAnalysis.do";
+		})
 	});
 	function basketDay(){
 		$('#dayBody').html("<canvas id='myChart'></canvas>");
@@ -68,7 +71,7 @@ $(function() {
 				var arr = new Array();
 				var arr1 = new Array();
 				$.each(rs, function(key, value){
-					dt = value.prod_name;
+					dt = value.category_name;
 					dt1 = value.sum;
 					arr.push(dt);
 					arr1.push(dt1);
@@ -169,7 +172,7 @@ $(function() {
 				var arr = new Array();
 				var arr1 = new Array();
 				$.each(rs, function(key, value){
-					dt = value.prod_name;
+					dt = value.category_name;
 					dt1 = value.sum;
 					arr.push(dt);
 					arr1.push(dt1);
@@ -269,7 +272,7 @@ $(function() {
 				var arr = new Array();
 				var arr1 = new Array();
 				$.each(rs, function(key, value){
-					dt = value.prod_name;
+					dt = value.category_name;
 					dt1 = value.sum;
 					arr.push(dt);
 					arr1.push(dt1);
@@ -449,9 +452,9 @@ $(function() {
 					aria-expanded="false">연별</a></li>
 			</ul>
 			<div class="chy-select">
-				<select style="width:150px;">
-					<option>장바구니 분석</option>
-					<option>데이터 분석</option>
+				<select style="width:150px;" id="moveSelect">
+					<option selected>장바구니 분석</option>
+					<option>매출 분석</option>
 				</select>
 			</div>
 			<div id="myTabContent" class="tab-content">

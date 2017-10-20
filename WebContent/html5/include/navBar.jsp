@@ -28,12 +28,8 @@
  function doMoveGoods(pNo){
 	document.location.href = "/productList.do?pNo="+pNo;
  }
-<<<<<<< HEAD
- 
-=======
-
->>>>>>> refs/remotes/origin/test
  </script>
+ 
  
  <% if(ss_user_auth.equals("U")|ss_user_no.equals("")){ %>
 	 <nav id="c-menu--slide-left" class="c-menu c-menu--slide-left">
@@ -54,11 +50,11 @@
 				<a href="#">마이페이지</a>
 				<ul class="col-2">
 				<%if(ss_user_no.equals("5")){ %>
-					<li><a href="orderList.do">주문정보</a></li>
+					<li><a href="/orderList.do">주문정보</a></li>
 				<%}else{ %>
-					<li><a href="customerOrderList.do?userNo=<%=ss_user_no%>">주문정보</a></li>
+					<li><a href="/customerOrderList.do?userNo=<%=ss_user_no%>">주문정보</a></li>
 				<%} %>
-					<li><a href="customerBasketList.do">장바구니</a></li>
+					<li><a href="/customerBasketList.do">장바구니</a></li>
 				</ul>
 			</li>
 			<li>
@@ -115,8 +111,8 @@
 		<li>
 			<a href="#">학원관리</a>
 			<ul class="col-2">
-				<li><a href="academyMap.do">학원 밀집도 정보</a></li>
-				<li><a href="#">거래처 관리</a></li>
+				<li><a href="/academyMap.do">학원 밀집도 정보</a></li>
+				<li><a href="/academymanegement.do">거래처 관리</a></li>
 			</ul>
 		</li>
 		<li>

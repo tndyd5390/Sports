@@ -123,7 +123,7 @@ if(aList == null){
 <%@include file="/html5/include/navBar.jsp" %>
 	<div class="container detail">
     <div align="center">
-		<select class="shSelect">
+<!-- 		<select class="shSelect">
         	<option value=""> 서울 </option>
         	<option value=""> 경기도 </option>
         	<option value=""> 강원도 </option>
@@ -147,7 +147,7 @@ if(aList == null){
     <button class="shBtn">검색</button>
     
     
-
+ -->
 
       <div id="mainWrapper">
         <ul>
