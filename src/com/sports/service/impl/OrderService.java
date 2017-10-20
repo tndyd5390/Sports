@@ -106,8 +106,6 @@ public class OrderService implements IOrderService {
 		oDTO.setOrdProductList(opList);
 		return oDTO;
 	}
-<<<<<<< HEAD
-=======
 
 	@Override
 	public void setDelivery(Order_infoDTO oDTO) throws Exception {
@@ -129,5 +127,4 @@ public class OrderService implements IOrderService {
 		}
 		return oInfoList;
 	}
->>>>>>> refs/remotes/origin/test
 }
