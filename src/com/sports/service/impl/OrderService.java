@@ -12,6 +12,7 @@ import com.sports.dto.Basket_OptionDTO;
 import com.sports.dto.OrdProdOptionDTO;
 import com.sports.dto.OrdProductDTO;
 import com.sports.dto.Order_infoDTO;
+import com.sports.dto.UserDTO;
 import com.sports.persistance.mapper.BasketMapper;
 import com.sports.persistance.mapper.OrderMapper;
 import com.sports.service.IBasketService;
@@ -126,5 +127,10 @@ public class OrderService implements IOrderService {
 			oDTO1.setOrdProductList(oProdList);
 		}
 		return oInfoList;
+	}
+
+	@Override
+	public UserDTO getUserInfoForOrder(String userNo) throws Exception {
+		return orderMapper.getUserInfoForOrder(userNo);
 	}
 }

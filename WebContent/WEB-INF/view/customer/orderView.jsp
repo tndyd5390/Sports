@@ -1,4 +1,5 @@
- <%@page import="com.sports.dto.Basket_OptionDTO"%>
+ <%@page import="com.sports.dto.UserDTO"%>
+<%@page import="com.sports.dto.Basket_OptionDTO"%>
 <%@page import="com.sports.util.TextUtil"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,10 +9,13 @@
 	pageEncoding="UTF-8"%>
 <%
 	if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
+	
 	List<BasketDTO> bList = (List<BasketDTO>)request.getAttribute("bList");
-	if(bList == null){
-		bList = new ArrayList<BasketDTO>();
-	}
+	if(bList == null)bList = new ArrayList<BasketDTO>();
+	
+	UserDTO uDTO = (UserDTO)request.getAttribute("uDTO");
+	if(uDTO == null) uDTO = new UserDTO();
+	
 	for(BasketDTO bDTO : bList){
 		if(bDTO.getBskOptList() == null){
 			bDTO.setBskOptList(new ArrayList());
@@ -217,6 +221,23 @@ ul > li > textarea.psyTermsTextarea{
 		return result;
 	}
 	
+	function onlyNumber(event){
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+			return;
+		else
+			return false;
+	}
+	function removeChar(event) {
+		event = event || window.event;
+		var keyID = (event.which) ? event.which : event.keyCode;
+		if ( keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) 
+			return;
+		else
+			event.target.value = event.target.value.replace(/[^0-9]/g, "");
+	}
+	
 	function doOrder(){
 		var tranTypeRadio = document.getElementsByName('TRAN_TYPE');
 		if(!checkBoxIsAllSelected()){
@@ -384,21 +405,22 @@ ul > li > textarea.psyTermsTextarea{
 				<ul class="register_list" style="padding: 7px;">
 		            <li class="psyLi">
 		              <p class="psyOrderView blue_text">수령인</p>
-		              <input type="text" name="recipient">
+		              <input type="text" name="recipient" value="<%=CmmUtil.nvl(uDTO.getUser_name())%>">
 		            </li>
 		            <li class="psyLi">
 		            <p class="psyOrderView blue_text">연락처</p>
-						<input type="text" name="tel">
+						<input type="text" name="tel" onkeydown="return onlyNumber(event);" onkeyup="removeChar(event);" value="<%=CmmUtil.nvl(uDTO.getTel())%>">
 					</li>
 		           <li class="psyLi">
 		            <p class="psyOrderView blue_text">주소</p>
-						<input type="text" name="postCode" id="postCode" style="width: 50%;" placeholder="우편번호" readonly="readonly"><a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
+						<input type="text" name="postCode" id="postCode" style="width: 50%;" placeholder="우편번호" readonly="readonly" value="<%=CmmUtil.nvl(uDTO.getPostcode())%>" onclick="sample6_execDaumPostcode();">
+							<a href="#" class="btn btn-info psyATagButton" onclick="sample6_execDaumPostcode();">우편 번호 검색</a>
 					</li>
 					<li class="psyLi">
-						<input type="text" name="address" id="address" placeholder="주소" readonly="readonly">
+						<input type="text" name="address" id="address" placeholder="주소" readonly="readonly" value="<%=TextUtil.exchangeEscape(CmmUtil.nvl(uDTO.getAddress1()))%>">
 					</li>
 					<li class="psyLi">
-						<input type="text" name="addressDetail" id="addressDetail" placeholder="상세 주소">
+						<input type="text" name="addressDetail" id="addressDetail" placeholder="상세 주소" value="<%=TextUtil.exchangeEscape(CmmUtil.nvl(uDTO.getAddress2()))%>">
 					</li>
 					<li class="psyLi">
 		            <p class="psyOrderView blue_text">배송 메세지</p>

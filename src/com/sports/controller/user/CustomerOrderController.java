@@ -1,16 +1,11 @@
 package com.sports.controller.user;
 
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
 import org.apache.log4j.Logger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -20,13 +15,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.fasterxml.jackson.core.JsonParser;
-import com.sports.dto.BasketDTO;
-import com.sports.dto.OrdProdOptionDTO;
-import com.sports.dto.OrdProductDTO;
 import com.sports.dto.Order_infoDTO;
+import com.sports.dto.UserDTO;
 import com.sports.service.IOrderService;
+import com.sports.service.IUserService;
 import com.sports.util.CmmUtil;
 
 @Controller
@@ -183,7 +175,18 @@ public class CustomerOrderController {
 		List<Order_infoDTO> oList = orderService.getOrderInfoDate(userNo);
 		if(oList == null) oList = new ArrayList<>();
 		
-		
+		UserDTO uDTO = orderService.getUserInfoForOrder(userNo);
+		if(uDTO != null){
+			session.setAttribute("ss_user_no", uDTO.getUser_no());
+			session.setAttribute("ss_user_id", uDTO.getUser_id());
+			session.setAttribute("ss_user_name", uDTO.getUser_name());
+			session.setAttribute("ss_user_auth", uDTO.getAuth());	
+		} else { 
+			model.addAttribute("msg", "결제는 정상적으로 진행했으나 세션에 문제가 발생했습니다. 다시 로그인해 주세요.");
+			model.addAttribute("url", "login.do");
+			return "redirect";
+		}
+
 		model.addAttribute("oList", oList);
 		
 		userNo = null;

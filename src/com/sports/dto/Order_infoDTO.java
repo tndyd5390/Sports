@@ -24,7 +24,14 @@ public class Order_infoDTO {
 	private List<OrdProductDTO> ordProductList;
 	private String invoice_no;
 	private String deli_co_no;
+	private String deli_status;
 	
+	public String getDeli_status() {
+		return deli_status;
+	}
+	public void setDeli_status(String deli_status) {
+		this.deli_status = deli_status;
+	}
 	public String getInvoice_no() {
 		return invoice_no;
 	}

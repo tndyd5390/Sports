@@ -88,7 +88,7 @@ a.psyOrderListSearchBtn {
 }
 .psyDetail{
 	border: 1px solid #B9B9B9;
-	width: 25%;
+	width: 20%;
 	color: #000000;
 	display: table-cell;
 	font-weight: bold;

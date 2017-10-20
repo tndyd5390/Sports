@@ -85,8 +85,12 @@ a.psyOrderListSearchBtn {
 }
 .psyDetail{
 	border: 1px solid #B9B9B9;
+<<<<<<< HEAD
 	width: 25%;
 	background-color: #ffffff;
+=======
+	width: 20%;
+>>>>>>> refs/remotes/origin/psyBranch
 	color: #000000;
 	display: table-cell;
 	font-weight: bold;
@@ -203,6 +207,7 @@ a.psyOrderDetailBtn {
 					contents += "<div class='psyDetail' align='left'>" + prodName + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.ord_price + "</div>";
 					contents += "<div class='psyDetail' align='left'>" + value.recipient + "</div>";
+					contents += "<div class='psyDetail' align='left'>" + value.deli_status + "</div>";
 					contents += "</div>";
 				})
 				$('#' + id).html(contents);
