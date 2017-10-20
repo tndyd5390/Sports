@@ -18,7 +18,7 @@ public class MailUtil {
 		String host = "gmail-smtp.l.google.com";
 
 		final String username = "kangseokopo@gmail.com";
-		final String password = "vhfflxpr";
+		final String password = "fggbrgppljjozirw";
 
 		Properties props = System.getProperties();
 
