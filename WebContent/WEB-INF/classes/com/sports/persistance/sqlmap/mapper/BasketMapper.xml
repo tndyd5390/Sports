@@ -95,4 +95,7 @@
 		WHERE
 			BSK_NO = #{bskNo}
 	</update>
+	<select id="getUserInfoForOrderView" parameterType="string" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK, AUTH, POSTCODE, ADDRESS1, ADDRESS2, TEL FROM USER_INFO WHERE USER_NO=#{userNo}
+	</select>
 </mapper>

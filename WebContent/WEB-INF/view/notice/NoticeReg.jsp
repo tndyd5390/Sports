@@ -96,7 +96,7 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
           <img src="/html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="#"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 
@@ -144,9 +144,6 @@ String user_no = CmmUtil.nvl((String)session.getAttribute("user_no"));
     <%@include file="/html5/include/footer.jsp"%>
 	</section>
 	
-	<div id="c-mask" class="c-mask"></div>
-	<script src="/html5/common/js/classie.js"></script>
-	<script src="/html5/common/js/common.js"></script>
 	
 </body>
 

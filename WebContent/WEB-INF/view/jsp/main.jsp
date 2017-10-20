@@ -99,7 +99,7 @@ function myPage(){
           </a>
         </li>
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
+          <a href="orderList.do"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
             <p>주문관리</p>
           </a>
         </li>
@@ -110,7 +110,7 @@ function myPage(){
         </li>
         <li>
           <a href="/basketAnalysis.do"><img src="html5/common/images/ic_menu_05sale.png" alt="매출분석정보">
-            <p>매출분석정보</p>
+            <p>매출데이터<br>분석</p>
           </a>
         </li>
         <li>

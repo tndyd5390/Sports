@@ -6,7 +6,6 @@
 <%
 	List<ProductInfoDTO> pList = (List) request.getAttribute("pList");
 	String pNo = CmmUtil.nvl(request.getParameter("pNo"));
-
 %>
 <!DOCTYPE html>
 <html lang="ko">
@@ -22,7 +21,6 @@
 		}else{
 			prodSelect(pNo);
 		};
-		prodList();
 	});
 </script>
 <script src="html5/common/js/productList.js"></script>
@@ -35,7 +33,7 @@
           <img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
         </div>
         <div class="logo">
-          <a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+          <a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
         </div>
       </div>
 

@@ -399,8 +399,15 @@ public class UserController {
 		String postcode = CmmUtil.nvl(req.getParameter("postcode"));
 		String address1 = CmmUtil.nvl(req.getParameter("address1"));
 		String address2 = CmmUtil.nvl(req.getParameter("address2"));
-		String auth = CmmUtil.nvl(req.getParameter("auth"));
 		String ss_user_no = CmmUtil.nvl((String) session.getAttribute("ss_user_no"));
+		String ss_user_auth = CmmUtil.nvl((String) session.getAttribute("ss_user_auth"));
+		
+		String auth = "";
+		if(ss_user_auth.equals("A")){
+			auth = CmmUtil.nvl(req.getParameter("auth"));
+		}else{
+			auth = "U";
+		}
 		
 		log.info("userNo : "+userNo);
 		log.info("userName : "+userName);

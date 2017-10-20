@@ -69,9 +69,9 @@ if(aList == null){
 					contents += "<li>";
 					contents += "<ul>";
 					contents += "<li><a href='accountDetail.do?aca_no="+value.aca_no+"'>"+value.aca_name+"</a></li>";
-                	contents += "<li>"+value.aca_ceo+"</li>";
+					contents +=	"<li>"+value.aca_area2+"</li>";
                 	contents +=	"<li>"+value.tel+"</li>";
-                	contents +=	"<li>"+value.aca_area2+"</li>";
+                	contents +=	"<li>"+value.aca_visit+"</li>";
 					contents += "</ul>";
 					contents += "</li>";
 				});
@@ -111,7 +111,7 @@ if(aList == null){
 				<img src="html5/common/images/btn_gnb.png" alt="메뉴" id="c-button--slide-left" class="c-button">
 			</div>
 			<div class="logo">
-				<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
+				<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
 			</div>
 		</div>
 		
@@ -123,8 +123,10 @@ if(aList == null){
 <%@include file="/html5/include/navBar.jsp" %>
 	<div class="container detail">
     <div align="center">
-		<select class="shSelect">
+<!-- 		<select class="shSelect">
         	<option value=""> 서울 </option>
+		<select class="shSelect">
+        	<option value=""> 인천 </option>
         	<option value=""> 경기도 </option>
         	<option value=""> 강원도 </option>
         	<option value=""> 충청북도 </option>
@@ -137,7 +139,7 @@ if(aList == null){
     	</select>
     	
     	<select class="shSelect">
-        	<option value=""> hi </option>
+        	<option value=""> 계양구 </option>
         	<option value="">  </option>
         	<option value=""> 돌려요 </option>
         	<option value=""> .....ㅎ </option>
@@ -147,7 +149,7 @@ if(aList == null){
     <button class="shBtn">검색</button>
     
     
-
+ -->
 
       <div id="mainWrapper">
         <ul>
@@ -157,9 +159,9 @@ if(aList == null){
                     <li>
                         <ul>
                             <li>거래처명</li>
-                            <li>대표자명</li>
-                            <li>전화번호</li>
                             <li>위치</li>
+                            <li>전화번호</li>
+                            <li>방문여부</li>
                         </ul>
                     </li>
                     <%
@@ -168,9 +170,9 @@ if(aList == null){
                     <li>
                     	<ul>
                     		<li><a href="accountDetail.do?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>"><%=CmmUtil.nvl(aDTO.getAca_name()) %></a></li>
-                    		<li><%=CmmUtil.nvl(aDTO.getAca_ceo()) %></li>
-                    		<li><%=CmmUtil.nvl(aDTO.getTel()) %></li>
                     		<li><%=CmmUtil.nvl(aDTO.getAca_area2()) %></li>
+                    		<li><%=CmmUtil.nvl(aDTO.getTel()) %></li>
+                    		<li><%=CmmUtil.nvl(aDTO.getAca_visit()) %></li>
                     	</ul>
                     </li>
                     <%} %>

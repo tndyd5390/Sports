@@ -141,7 +141,12 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
-		       REG_DT
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		              AND DELI_CO_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
 		  FROM ORDER_INFO
 		 WHERE REG_USER_NO = #{reg_user_no}
 		   AND SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
@@ -159,7 +164,12 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
-		       REG_DT
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		              AND DELI_CO_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
 		  FROM ORDER_INFO
 		 WHERE SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
 		   AND ORD_STAT = 'C'
@@ -176,21 +186,14 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
-		       REG_DT,
-		       INVOICE_NO,
-		       DELI_CO_NO
+		       REG_DT
 		  FROM ORDER_INFO
 		 WHERE TRAN_NO = #{tranNo}
 		   AND ORD_STAT = 'C'
 	</select>
 	
-	<update id="setDelivery" parameterType="Order_infoDTO">
-		
-		UPDATE ORDER_INFO SET
-		INVOICE_NO = #{invoice_no},
-		DELI_CO_NO = #{deli_co_no}
-		WHERE TRAN_NO = #{tran_no}
-		
-	</update>
 	
+	<select id="getUserInfoForOrder" parameterType="string" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK, AUTH FROM USER_INFO WHERE USER_NO=#{userNo}
+	</select>
 </mapper>
