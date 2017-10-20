@@ -176,6 +176,9 @@
 	}
 
 	function orderDirect(){
+		alert("바로구매는 준비중입니다. 장바구니를 이용해 주세요");
+		return;
+	
 		var form = document.createElement("form");
 		form.setAttribute("method", "post");
 		form.setAttribute("action", "#");
