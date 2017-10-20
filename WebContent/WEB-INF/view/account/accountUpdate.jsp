@@ -96,7 +96,7 @@
 									<input type="text" id="aca_area1" name="aca_area1"
 										onclick="daumPostcode()" value="<%=CmmUtil.nvl(aDTO.getAca_area1())%>">
 									<input type="button" class="line-btn" onclick="daumPostcode()" value="주소찾기">
-									<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+									<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>									
 									<script>
 										function daumPostcode() {
 											new daum.Postcode(
