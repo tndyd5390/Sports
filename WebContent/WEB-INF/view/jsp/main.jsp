@@ -99,7 +99,7 @@ function myPage(){
           </a>
         </li>
         <li>
-          <a href="#"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
+          <a href="orderList.do"><img src="html5/common/images/ic_menu_03order.png" alt="주문관리">
             <p>주문관리</p>
           </a>
         </li>

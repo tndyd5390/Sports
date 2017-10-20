@@ -43,7 +43,7 @@
 <head>
 <%@include file="/html5/include/head.jsp" %>
 <script type="text/javascript" src="https://pg.paynuri.com/js/jquery-dateFormat.min.js"></script>
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="https://ssl.daumcdn.net/dmaps/map_js_init/postcode.v2.js"></script>
 <style type="text/css">
 
 hr {

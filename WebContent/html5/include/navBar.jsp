@@ -107,7 +107,7 @@
 		<div class="logout_wrap"><a href="/logout.do">로그아웃</a></div>
 	<%} %>
 	<ul class="menu_list">
-		<li><a href="#">주문관리</a></li>
+		<li><a href="orderList.do">주문관리</a></li>
 		<li>
 			<a href="#">학원관리</a>
 			<ul class="col-2">
