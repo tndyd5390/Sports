@@ -104,6 +104,21 @@ if(aList == null){
 </head>
 
 <body >
+<script type="text/javascript">
+
+$(document).ready(function(){
+	   var max_h=0;
+	   $("#ulTableDetail li").each(function(){
+	 var h = parseInt($(this).css("height"));
+	    if(max_h<h){ max_h = h; }
+	   });
+	   $("#ulTableDetail li").each(function(){
+	 $(this).css({height:max_h});
+	   });
+	  });
+
+
+</script>
   <section id="wrapper" class="wrapper">
   	<header class="header">
 		<div class="wrap">
@@ -150,7 +165,6 @@ if(aList == null){
     
     
  -->
-
       <div id="mainWrapper">
         <ul>
             <li>
@@ -168,7 +182,7 @@ if(aList == null){
                     	for (AcademyDTO aDTO : aList) {
                     %>
                     <li>
-                    	<ul>
+                    	<ul id="ulTableDetail" style="line-height: 1.5em;">
                     		<li><a href="accountDetail.do?aca_no=<%=CmmUtil.nvl(aDTO.getAca_no()) %>"><%=CmmUtil.nvl(aDTO.getAca_name()) %></a></li>
                     		<li><%=CmmUtil.nvl(aDTO.getAca_area2()) %></li>
                     		<li><%=CmmUtil.nvl(aDTO.getTel()) %></li>
