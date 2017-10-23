@@ -8,7 +8,22 @@ public class AnalysisDTO {
 	private String quarter;
 	private String year;
 	private String percent;
+	private String parents_name;
+	private String count;
 	
+	
+	public String getCount() {
+		return count;
+	}
+	public void setCount(String count) {
+		this.count = count;
+	}
+	public String getParents_name() {
+		return parents_name;
+	}
+	public void setParents_name(String parents_name) {
+		this.parents_name = parents_name;
+	}
 	public String getPercent() {
 		return percent;
 	}

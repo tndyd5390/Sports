@@ -363,11 +363,6 @@ String auth = CmmUtil.nvl((String)session.getAttribute("ss_user_auth"));
 	</form>
 	
 	</section>
-	
-	<div id="c-mask" class="c-mask"></div>
-	<script src="/html5/common/js/classie.js"></script>
-	<script src="/html5/common/js/common.js"></script>
-	
 </body>
 
 </html>

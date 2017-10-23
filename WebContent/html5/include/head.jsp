@@ -23,7 +23,9 @@
     		var url = window.location.href;
     		var a = "http://www.tmaxxsports.com/";
     		var b = "http://tmaxxsports.com/";
-    		if(url==a||url==b){
+    		var c = "http://tmaxxsports.com/main.do";
+    		var d = "http://tmaxxsports.com/main.do/";
+    		if(url==a||url==b||url==c||url==d){
     			window.location.href = "http://www.tmaxxsports.net/";
     		}
     	});

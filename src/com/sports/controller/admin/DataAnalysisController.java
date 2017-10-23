@@ -126,4 +126,48 @@ public class DataAnalysisController {
 		return aList;
 	}
 	
+	@RequestMapping(value="salesDay")
+	public @ResponseBody List<AnalysisDTO> salesDay(@RequestParam(value="date") String date) throws Exception{
+		log.info(this.getClass() + " salesDay Start!!");
+		
+		log.info("date : " + date);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setReg_dt(date);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		
+		aList = analysisService.getSalesDay(aDTO);
+		
+		log.info(this.getClass() + " salesDay End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="salesQuarter")
+	public @ResponseBody List<AnalysisDTO> salesQuarter(@RequestParam(value="quarter") String quarter) throws Exception{
+		log.info(this.getClass() + " salesQuarter Start!!");
+		
+		log.info("quarter : " +quarter);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setQuarter(quarter);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		
+		aList = analysisService.getSalesQuarter(aDTO);
+		
+		
+		log.info(this.getClass() + " salesQuarter End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="salesYear")
+	public @ResponseBody List<AnalysisDTO> salesYear(@RequestParam(value="year") String year) throws Exception{
+		log.info(this.getClass() + " salesYear Start!!");
+		
+		log.info("year : "+year);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setYear(year);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getSalesYear(aDTO);
+		
+		log.info(this.getClass() + " salesYear End!!");
+		return aList;
+	}
 }

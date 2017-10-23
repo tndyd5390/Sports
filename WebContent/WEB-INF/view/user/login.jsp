@@ -48,7 +48,7 @@ function doSubmit(f){
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="list_wrap">
-				<form method="post" name="f" id="f" action="loginProc.do" onsubmit="return doSubmit(this)">
+				<form method="post" name="f" id="f" action="/loginProc.do" onsubmit="return doSubmit(this)">
 					<ul class="register_list">
 						<li>
 							<p class="blue_text">아이디</p> <input type="text" name="id" id="id">

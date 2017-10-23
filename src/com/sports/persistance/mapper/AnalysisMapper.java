@@ -20,4 +20,10 @@ public interface AnalysisMapper {
 
 	List<AnalysisDTO> getBasketYearDoughnut(AnalysisDTO aDTO) throws Exception;
 
+	List<AnalysisDTO> getSalesDay(AnalysisDTO aDTO) throws Exception;
+
+	List<AnalysisDTO> getSalesQuarter(AnalysisDTO aDTO) throws Exception;
+
+	List<AnalysisDTO> getSalesYear(AnalysisDTO aDTO) throws Exception;
+
 }

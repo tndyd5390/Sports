@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.sports.dto.BasketDTO;
 import com.sports.dto.Basket_OptionDTO;
+import com.sports.dto.UserDTO;
 import com.sports.persistance.mapper.BasketMapper;
 import com.sports.service.IBasketService;
 
@@ -74,5 +75,10 @@ public class BasketService implements IBasketService{
 			bList = new ArrayList<>();
 		}
 		return bList;
+	}
+
+	@Override
+	public UserDTO getUserInfoForOrderView(String userNo) throws Exception {
+		return basketMapper.getUserInfoForOrderView(userNo);
 	}
 }

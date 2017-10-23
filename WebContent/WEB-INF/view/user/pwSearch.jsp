@@ -54,7 +54,7 @@ function doSubmit(f){
 		<div class="container detail">
 			<div class="wrap search-wrap btn-wrap">
 				<div class="list_wrap">
-				<form method="post" name="f" id="f" action="pwSearchProc.do" onsubmit="return doSubmit(this)">
+				<form method="post" name="f" id="f" action="/pwSearchProc.do" onsubmit="return doSubmit(this)">
 				<input type="hidden" name="uNo" value="<%=CmmUtil.nvl(uDTO.getUser_no())%>">
 					<ul class="register_list">
 						<li>
