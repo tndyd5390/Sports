@@ -79,7 +79,7 @@
 }
 
 a.psyOrderDetailBtn {
-	width: 45%;
+	width: 30%;
 	height: 40px;
 	top: 15px;
 	right: 15px;

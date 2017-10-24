@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,21 +17,27 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sports.dto.Order_infoDTO;
+import com.sports.service.IOrderService;
+
 
 @Controller
 public class DeliveryController {
 	private Logger log = Logger.getLogger(this.getClass());
 	
+	@Resource(name="OrderService")
+	private IOrderService orderService;
 	
 	
 	@RequestMapping(value="delivery")
-	public  String delivery(ModelMap model) throws Exception{
+	public  String delivery(ModelMap model,HttpServletRequest request) throws Exception{
+		String tran_no = request.getParameter("tran_no");
 		String url = "http://info.sweettracker.co.kr/api/v1/trackingInfo?";
-		String key = "vHIm8cvc9TWPvLHhaAFXnA";
-		String t_code = "05";
-		String t_invoice = "8601360191";
+		String key = "TGm4UKPZiaIyZsVe8nFsOQ";
+		String t_code = request.getParameter("deli_co_no");
+		String t_invoice = request.getParameter("invoice_no");
 		String final_url = url + "t_key="+key+"&t_code="+t_code+"&t_invoice="+t_invoice;
-		
+		//05,8601360191
 		System.out.println("final_url : "+final_url);
 
 		
@@ -67,6 +74,7 @@ public class DeliveryController {
         
         System.out.println("result : "+result);
         
+        model.addAttribute("tran_no",tran_no);
         model.addAttribute("result",result);
         model.addAttribute("code",t_code);
         
@@ -74,8 +82,34 @@ public class DeliveryController {
 	}
 	
 	@RequestMapping(value="/deliveryReg")
-	public String deliveryReg(){
+	public String deliveryReg(HttpServletRequest request, ModelMap model){
+		
+		String tran_no = request.getParameter("tran_no");
+		
+		model.addAttribute("tran_no",tran_no);
+		
 		
 		return "/delivery/deliveryReg";
+	}
+
+	@RequestMapping(value="/deliveryReg_proc")
+	public String deliveryReg_proc(HttpServletRequest request, ModelMap model)throws Exception{
+		
+		String tran_no = request.getParameter("tran_no");
+		String invoice_no = request.getParameter("invoice_no");
+		String deli_co_no = request.getParameter("deli_co_no");
+		System.out.println("tran_no : "+tran_no);
+		
+		Order_infoDTO oDTO = new Order_infoDTO();
+		
+		oDTO.setTran_no(tran_no);
+		oDTO.setInvoice_no(invoice_no);
+		oDTO.setDeli_co_no(deli_co_no);
+		orderService.setDelivery(oDTO);//sql문 적어야대
+		
+		model.addAttribute("msg", "운송장 번호 등록이 완료 되었습니다.");
+		model.addAttribute("url", "/orderDetail.do?tranNo="+tran_no);
+		
+		return "/alert/alert";
 	}
 }
