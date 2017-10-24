@@ -196,4 +196,11 @@
 	<select id="getUserInfoForOrder" parameterType="string" resultType="UserDTO">
 		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK, AUTH FROM USER_INFO WHERE USER_NO=#{userNo}
 	</select>
+
+	<update id="setDelivery" parameterType="Order_infoDTO">
+		UPDATE ORDER_INFO SET
+		INVOICE_NO = #{invoice_no},
+		DELI_CO_NO = #{deli_co_no}
+		WHERE TRAN_NO = #{tran_no}
+	</update>
 </mapper>
