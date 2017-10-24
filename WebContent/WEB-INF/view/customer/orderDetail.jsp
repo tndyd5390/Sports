@@ -160,15 +160,11 @@ a.psyOrderDetailBtn {
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">배송 상태</div>
- 			<%if("".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){ %>
- 			<div class="shCDetail" align="left">배송완료</div>
- 			<%}else{ %>
- 			<div class="shCDetail" align="left">배송중</div>
- 			<%} %>
+ 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getDeli_status()) %></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">주소</div>
- 			<div class="shCDetail" align="left"><%=CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail())%></div>
+ 			<div class="shCDetail" align="left"><%=TextUtil.exchangeEscape(CmmUtil.nvl(oDTO.getAddress()) + " " + CmmUtil.nvl(oDTO.getAddressDetail()))%></div>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">배송 메세지</div>
