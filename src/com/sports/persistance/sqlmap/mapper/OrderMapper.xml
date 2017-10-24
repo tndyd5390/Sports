@@ -143,7 +143,6 @@
 		       ORD_MESSAGE,
 		       REG_DT,
 		       (CASE WHEN INVOICE_NO IS NOT NULL 
-		              AND DELI_CO_NO IS NOT NULL 
 		             THEN '배송완료' 
 		             ELSE '배송중' 
 		             END) AS DELI_STATUS
@@ -186,7 +185,11 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
-		       REG_DT
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
 		  FROM ORDER_INFO
 		 WHERE TRAN_NO = #{tranNo}
 		   AND ORD_STAT = 'C'
