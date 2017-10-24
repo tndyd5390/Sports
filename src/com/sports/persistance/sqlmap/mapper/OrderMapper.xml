@@ -165,7 +165,6 @@
 		       ORD_MESSAGE,
 		       REG_DT,
 		       (CASE WHEN INVOICE_NO IS NOT NULL 
-		              AND DELI_CO_NO IS NOT NULL 
 		             THEN '배송완료' 
 		             ELSE '배송중' 
 		             END) AS DELI_STATUS
