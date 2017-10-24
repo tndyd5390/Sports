@@ -236,7 +236,7 @@ span.chy-plus2{
                 		}
                 	}
                 	%>
-                	<p class="sub_text"><%=optionString %><span class="chy-price"><%=bDTO.getBsk_price() %></span></p>
+                	<p class="sub_text"><%=optionString %><span class="chy-price"><%=TextUtil.addComma(bDTO.getBsk_price()) %></span></p>
             		<p class="chy-count">수량 : <%=bDTO.getProd_qty() %> 
             		<a class="btn btn-default chy-btn" style="display: inline;" onclick="customerBasketDeleteOne(<%=bDTO.getBsk_no()%>);">삭제</a>
             	</div>	

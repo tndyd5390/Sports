@@ -160,7 +160,11 @@ a.psyOrderDetailBtn {
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">배송 상태</div>
- 			<div class="shCDetail" align="left">i want go home</div>
+ 			<%if("".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){ %>
+ 			<div class="shCDetail" align="left">배송완료</div>
+ 			<%}else{ %>
+ 			<div class="shCDetail" align="left">배송중</div>
+ 			<%} %>
  		</div>
  		<div class="shDTable" align="left">
  			<div class="shCTitle" align="left">주소</div>
