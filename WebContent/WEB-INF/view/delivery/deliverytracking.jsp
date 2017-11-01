@@ -3,14 +3,11 @@
 <%@page import="org.json.simple.parser.JSONParser"%>
 <%@page import="org.json.simple.JSONObject"%>
 <%@page import="org.json.simple.JSONArray"%>
-<%
-if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.sendRedirect("pleaseLogin.do");
-%>
+
 <%
 	String result = CmmUtil.nvl((String) request.getAttribute("result"));//컨트롤러에서 받은 json데이터의 String형태
 	String code = CmmUtil.nvl((String) request.getAttribute("code"));//컨트롤러에서 받은 택배사 코드
 	String company = "";//택배사 이름 초기화
-
 	if (code.equals("01")) {
 		company = "우체국택배";
 	} else if (code.equals("02")) {
@@ -34,19 +31,14 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 <%
 	JSONParser parser = new JSONParser();//Json파서 생성
 	Object obj = parser.parse(result);//String 데이터를 Object로 파서
-
 	System.out.println("obj : " + obj);
-
 	JSONObject jsonObj = (JSONObject) obj; // Object데이터를 Json 데이터로 파서
-
 	System.out.println("jsonObj : " + jsonObj);
-
 	String invoiceNo = CmmUtil.nvl((String) jsonObj.get("invoiceNo"));//송장번호
 	String itemName = CmmUtil.nvl((String) jsonObj.get("itemName"));//상품명
 	String completeYN = CmmUtil.nvl((String) jsonObj.get("completeYN"));//배송완료여부
 	String receiverName = CmmUtil.nvl((String) jsonObj.get("receiverName"));//받는 사람
 	String receiverAddr = CmmUtil.nvl((String) jsonObj.get("receiverAddr"));//주소
-
 	JSONArray trackingDetails = (JSONArray) jsonObj.get("trackingDetails");//배열 형태의 json데이터를 JsonArray 로 생성
 	
 	JSONObject lastDeatail = (JSONObject)jsonObj.get("lastDetail");//Object 형태의 
@@ -84,7 +76,6 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 <script src="/html5/common/js/bootstrap-theme.min.js"></script> -->
 <script src="/html5/common/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-
 $(document).ready(function(){
 	   var max_h=0;
 	   $("#ulTableDetail li").each(function(){
@@ -95,12 +86,9 @@ $(document).ready(function(){
 	 $(this).css({height:max_h});
 	   });
 	  });
-
-
 </script>
 
 <style>
-
 a.psyOrderDetailBtn {
 	width: 100%;
 	height: 40px;
@@ -140,7 +128,7 @@ a.psyOrderDetailBtn {
 						id="c-button--slide-left" class="c-button">
 				</div>
 				<div class="logo">
-					<a href="/main.do"><h2 class="title">모두의 스포츠</h2></a>
+					<a href="main.do"><h2 class="title">모두의 스포츠</h2></a>
 				</div>
 			</div>
 
@@ -231,5 +219,3 @@ a.psyOrderDetailBtn {
 </body>
 
 </html>
-
-<!-- asd -->
