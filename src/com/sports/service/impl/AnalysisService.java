@@ -60,4 +60,19 @@ public class AnalysisService implements IAnalysisService{
 		return analysisMapper.getSalesYear(aDTO);
 	}
 
+	@Override
+	public List<AnalysisDTO> getSalesMonth(AnalysisDTO aDTO) throws Exception {
+		return analysisMapper.getSalesMonth(aDTO);
+	}
+
+	@Override
+	public List<AnalysisDTO> getBasketMonth(AnalysisDTO aDTO) throws Exception {
+		return analysisMapper.getBasketMonth(aDTO);
+	}
+
+	@Override
+	public List<AnalysisDTO> getBasketMonthDoughnut(AnalysisDTO aDTO) throws Exception {
+		return analysisMapper.getBasketMonthDoughnut(aDTO);
+	}
+
 }

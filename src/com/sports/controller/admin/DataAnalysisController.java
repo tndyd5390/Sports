@@ -125,6 +125,33 @@ public class DataAnalysisController {
 		log.info(this.getClass() + " bYD End!!");
 		return aList;
 	}
+	@RequestMapping(value="basketMonth")
+	public @ResponseBody List<AnalysisDTO> basketMonth(@RequestParam(value="month") String month) throws Exception{
+		log.info(this.getClass() + " basketMonth Start!!");
+		
+		log.info(" month :" +month);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setMonth(month);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketMonth(aDTO);
+		
+		log.info(this.getClass() + " basketMonth End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="basketMonthDoughnut")
+	public @ResponseBody List<AnalysisDTO> bMD(@RequestParam(value="month") String month) throws Exception{
+		log.info(this.getClass() + " bMD Start!!");
+		
+		log.info("month : " + month);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setMonth(month);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getBasketMonthDoughnut(aDTO);
+		
+		log.info(this.getClass() + " bMD End!!");
+		return aList;
+	}
 	
 	@RequestMapping(value="salesDay")
 	public @ResponseBody List<AnalysisDTO> salesDay(@RequestParam(value="date") String date) throws Exception{
@@ -168,6 +195,20 @@ public class DataAnalysisController {
 		aList = analysisService.getSalesYear(aDTO);
 		
 		log.info(this.getClass() + " salesYear End!!");
+		return aList;
+	}
+	
+	@RequestMapping(value="salesMonth")
+	public @ResponseBody List<AnalysisDTO> salesMonth(@RequestParam(value="month") String month) throws Exception{
+		log.info(this.getClass() + " salesMonth Start!!");
+		
+		log.info("month : "+month);
+		AnalysisDTO aDTO = new AnalysisDTO();
+		aDTO.setMonth(month);
+		List<AnalysisDTO> aList = new ArrayList<AnalysisDTO>();
+		aList = analysisService.getSalesMonth(aDTO);
+		
+		log.info(this.getClass() + " salesMonth End!!");
 		return aList;
 	}
 }

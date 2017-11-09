@@ -24,4 +24,10 @@ public interface IAnalysisService {
 
 	List<AnalysisDTO> getSalesYear(AnalysisDTO aDTO) throws Exception;
 
+	List<AnalysisDTO> getSalesMonth(AnalysisDTO aDTO) throws Exception;
+
+	List<AnalysisDTO> getBasketMonth(AnalysisDTO aDTO) throws Exception;
+
+	List<AnalysisDTO> getBasketMonthDoughnut(AnalysisDTO aDTO) throws Exception;
+
 }

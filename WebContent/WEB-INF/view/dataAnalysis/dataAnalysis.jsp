@@ -18,9 +18,11 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 <%@include file="/html5/include/head.jsp"%>
 <script type="text/javascript">
 	$(function() {
+		now();
 		salesQuarter();
 		salesYear();
-		
+		salesDay();
+		salesMonth();
 		$('#chy-yearLeft').click(function() {
 			$('#chy-years').text(parseInt($('#chy-years').text()) - 1);
 			salesYear();
@@ -43,6 +45,19 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 			salesQuarter();
 			return false;
 		})
+		$('#chy-monthLeft').click(function() {
+			if ($('#chy-month').text() != "1")
+				$('#chy-month').text(parseInt($('#chy-month').text()) - 1);
+			salesMonth();
+			return false;
+		})
+		$('#chy-monthRight').click(function() {
+			if ($('#chy-month').text() != "12")
+				$('#chy-month').text(parseInt($('#chy-month').text()) + 1);
+			salesMonth();
+			return false;
+		})
+
 		$('#datepicker1').on("change",function(){
 			var day = $('#datepicker1').val();
 			salesDay();
@@ -51,6 +66,17 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 			location.href = "/basketAnalysis.do";
 		})
 	})
+	
+	function now(){
+		var now = new Date();
+	    var year= now.getFullYear();
+	    var mon = (now.getMonth()+1)>9 ? ''+(now.getMonth()+1) : '0'+(now.getMonth()+1);
+	    var day = now.getDate()>9 ? ''+now.getDate() : '0'+now.getDate();
+		var today = year + '-' + mon + '-' + day;
+		
+		$('#datepicker1').val(today);
+		$('#chy-month').text(mon);
+	}
 	
 	function salesDay(){
 		$('#dayBody').html("<canvas id='myChart'></canvas>");
@@ -318,6 +344,97 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 			$('#tbody-year').html(contents);
 			$('#tbody-year1').html(contents1);
 	}
+	
+
+	function salesMonth(){
+		$('#monthBody').html("<canvas id='monthChart'></canvas>");
+		var now = new Date();
+	    var year= now.getFullYear();
+		var month = year +'-'+ $('#chy-month').text();
+		var ctx2 = $('#monthChart').get(0).getContext('2d');
+		$.ajax({
+			url : 'salesMonth.do',
+			method : 'post',
+			data : {'month' : month},
+			success : function(data){
+				var arr = new Array();
+				var arr1 = new Array();
+				var arr2 = new Array();	
+				var arr3 = new Array();
+				$.each(data, function(key, value){
+					arr.push(value.parents_name);
+					arr1.push(value.category_name);
+					arr2.push(eval(value.sum/10000));
+					arr3.push(value.count);
+				});
+				if(data.length!=0){
+					var mixedChart = new Chart(ctx2, {
+						  type: 'bar',
+						  data: {
+						    datasets: [{
+						          label: '갯수',
+						          data: arr3,
+						            backgroundColor: 'rgb(23, 119, 203)',
+						            borderColor: 'rgb(23, 119, 203)',
+						            borderWidth : 1
+						        }, {
+						          label: '매출(만원)',
+						          data: arr2,
+						          type: 'line',
+						          backgroundColor: false
+						        }],
+						    labels: arr
+						  },
+						  options: {
+		                        responsive: true,
+						    	maintainAspectRatio: false,
+						        scales: {
+						            yAxes: [{
+						                ticks: {
+						                    beginAtZero:true 
+						                }
+						            }]
+						        }
+						    }
+					}
+				);
+				tbodyMonth(arr, arr2);
+				}else{
+					$('#monthBody').html("<canvas id='monthChart'></canvas>");
+					$('#thead-month').html("");
+					$('#tbody-month').html("");
+					$('#tbody-month1').html("");
+				}
+			}
+		});
+	};
+	function tbodyMonth(dt, dt1){
+		var month = $('#chy-month').text()+'월';
+		var thead = "<div class='chy-TableCell' id='thead_month'>"+month+"</div>"
+		var contents = "<div class='chy-TableCell'>품목</div>"
+		var contents1 = "<div class='chy-TableCell'>매출</div>"
+			for(var i =0; i<3;i++){
+				if(dt[i]!=null){
+					contents += "<div class='chy-TableCell'>";
+					contents += dt[i];
+					contents += "</div>";
+					contents1 += "<div class='chy-TableCell'>";
+					contents1 += dt1[i];
+					contents1 += "만원</div>";
+				}else{
+					contents += "<div class='chy-TableCell'>";
+					contents += "없음";
+					contents += "</div>";
+					contents1 += "<div class='chy-TableCell'>";
+					contents1 += "없음";
+					contents1 += "</div>";
+				}
+				thead += "<div class='chy-TableCell'>"+(i+1)+"위</div>"
+			}
+			$('#thead-month').html(thead);
+			$('#tbody-month').html(contents);
+			$('#tbody-month1').html(contents1);
+	}
 
 </script>
 </head>
@@ -346,9 +463,15 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 				<li role="presentation" class="active"><a href="#home"
 					id="home-tab" role="tab" data-toggle="tab" aria-controls="home"
 					aria-expanded="true">일별</a></li>
+					
+				<li role="presentation" class=""><a href="#month"
+					role="tab" id="month-tab" role="tab" data-toggle="tab" aria-controls="month"
+					aria-expanded="false">월별</a></li>
+					
 				<li role="presentation" class=""><a href="#profile"
 					role="tab" id="profile-tab" data-toggle="tab"
 					aria-controls="profile" aria-expanded="false">분기별</a></li>
+					
 				<li role="presentation" class=""><a href="#year"
 					role="tab" id="year-tab" data-toggle="tab" aria-controls="year"
 					aria-expanded="false">연별</a></li>
@@ -397,7 +520,7 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 					aria-labelledby="profile-tab">
 					<h2 class="chy-chartHeader">
 						<a href="#" id="chy-countLeft">&#60;</a><span class="chy-year"><span
-							id="chy-count">1</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
+							id="chy-count">4</span>분기</span><a href="#" id="chy-countRight">&#62;</a>
 					</h2>
 					<div class="chy-chartBody" id='qtBody'><!-- 차트넣으면됨 -->
 				
@@ -416,6 +539,30 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 						</div>
 					</div>			
 				</div>
+				<div role="tabpanel" class="tab-pane fade" id="month"
+					aria-labelledby="month-tab">
+					<h2 class="chy-chartHeader">
+						<a href="#" id="chy-monthLeft">&#60;</a><span class="chy-year"><span
+							id="chy-month">11</span>월</span><a href="#" id="chy-monthRight">&#62;</a>
+					</h2>
+					<div class="chy-chartBody" id='monthBody'><!-- 차트넣으면됨 -->
+				
+					</div>
+						<!--  테이블 시작 -->
+						<div class="chy-Table">
+						<div class="chy-TableHead" id="thead-month">
+
+						</div>	
+						<div class="chy-TableBody">
+							<div class="chy-TableRow" id="tbody-month">
+							</div>	
+							<div class="chy-TableRow" id="tbody-month1">
+							</div>		
+							
+						</div>
+					</div>			
+				</div>
+				
 				<div role="tabpanel" class="tab-pane fade" id="year"
 					aria-labelledby="year-tab">
 					<h2 class="chy-chartHeader">

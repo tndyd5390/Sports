@@ -10,8 +10,15 @@ public class AnalysisDTO {
 	private String percent;
 	private String parents_name;
 	private String count;
+	private String month;
 	
 	
+	public String getMonth() {
+		return month;
+	}
+	public void setMonth(String month) {
+		this.month = month;
+	}
 	public String getCount() {
 		return count;
 	}
