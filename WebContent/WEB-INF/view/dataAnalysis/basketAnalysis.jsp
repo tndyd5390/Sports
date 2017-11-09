@@ -391,7 +391,8 @@ $(function() {
 		$('#mtBody').html("<canvas id='monthChart'></canvas>");
 		var now = new Date();
 	    var year= now.getFullYear();
-		var month = year +'-'+ $('#chy-month').text();
+	    var mon = $('#chy-month').text()>9 ? ''+ $('#chy-month').text() : '0'+$('#chy-month').text();
+		var month = year +'-'+ mon;
 		var ctx = $('#monthChart').get(0).getContext('2d');
 		$.ajax({
 			url : 'basketMonth.do',
@@ -447,7 +448,8 @@ $(function() {
 		$('#bMDBody').html("<center><canvas id='monthDoughnut' style='max-width:300px; max-height:295px;'></canvas></center>");
 		var now = new Date();
 	    var year= now.getFullYear();
-		var month = year +'-'+ $('#chy-month').text();
+	    var mon = $('#chy-month').text()>9 ? ''+ $('#chy-month').text() : '0'+$('#chy-month').text();
+		var month = year +'-'+ mon;
 		var ctx1 = $('#monthDoughnut').get(0).getContext('2d');
 		$.ajax({
 			url : 'basketMonthDoughnut.do',

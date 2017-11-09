@@ -350,7 +350,8 @@ if("".equals(CmmUtil.nvl((String)session.getAttribute("ss_user_no")))) response.
 		$('#monthBody').html("<canvas id='monthChart'></canvas>");
 		var now = new Date();
 	    var year= now.getFullYear();
-		var month = year +'-'+ $('#chy-month').text();
+	    var mon = $('#chy-month').text()>9 ? ''+ $('#chy-month').text() : '0'+$('#chy-month').text();
+		var month = year +'-'+ mon;
 		var ctx2 = $('#monthChart').get(0).getContext('2d');
 		$.ajax({
 			url : 'salesMonth.do',
