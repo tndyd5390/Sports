@@ -184,6 +184,8 @@
 		       ORD_STAT,
 		       ORD_CANCEL,
 		       ORD_MESSAGE,
+		       INVOICE_NO,
+		       DELI_CO_NO,
 		       REG_DT,
 		       (CASE WHEN INVOICE_NO IS NOT NULL 
 		             THEN '배송완료' 

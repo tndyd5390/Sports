@@ -24,8 +24,11 @@ public class DeliveryDTO {
 	private String status;
 	private String msg;
 	private String code;
-	
-	
+	private String detailkind;
+	private String company;
+	private String kind;
+	private String where;
+	private String timeString;
 	
 	public Object[] getTrackingDetails() {
 		return trackingDetails;
@@ -164,5 +167,35 @@ public class DeliveryDTO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getDetailkind() {
+		return detailkind;
+	}
+	public void setDetailkind(String detailkind) {
+		this.detailkind = detailkind;
+	}
+	public String getCompany() {
+		return company;
+	}
+	public void setCompany(String company) {
+		this.company = company;
+	}
+	public String getKind() {
+		return kind;
+	}
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+	public String getWhere() {
+		return where;
+	}
+	public void setWhere(String where) {
+		this.where = where;
+	}
+	public String getTimeString() {
+		return timeString;
+	}
+	public void setTimeString(String timeString) {
+		this.timeString = timeString;
 	}
 }

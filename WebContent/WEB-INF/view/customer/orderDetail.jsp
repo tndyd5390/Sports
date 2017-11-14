@@ -182,7 +182,7 @@ a.psyOrderDetailBtn {
  			%>
  			</div>
  		</div>
- 	<%if(!"".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){
+ 		<%if(!"".equals(CmmUtil.nvl(oDTO.getInvoice_no()))){
  			String url = "delivery.do?invoice_no="+CmmUtil.nvl(oDTO.getInvoice_no())+"&deli_co_no="+CmmUtil.nvl(oDTO.getDeli_co_no())
  							+"&tran_no="+CmmUtil.nvl(oDTO.getTran_no());				
  			 %>

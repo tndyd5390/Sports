@@ -303,6 +303,9 @@ public class CustomerOrderController {
 		if(oDTO == null) oDTO = new Order_infoDTO();
 		
 		model.addAttribute("oDTO", oDTO);
+		
+		System.out.println("택배사 코드 : "+oDTO.getDeli_co_no());
+		
 		log.info(this.getClass() + ".orderDetail end!!!");
 		
 		return "customer/orderDetail";
