@@ -10,7 +10,29 @@ if(aList == null){
 	aList = new ArrayList<AcademyDTO>();
 }
 %>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<%@include file="/html5/include/head.jsp" %>
+<!-- Styles : sanghoon Kim-->
+<link rel="stylesheet" href="/html5/common/css/sangAccount.css">
 <script type="text/javascript">
+
+$(document).ready(function(){
+	   fixHeight();
+	  });
+
+function fixHeight(){
+	var max_h=0;
+	   $("#ulTableDetail li").each(function(){
+	 var h = parseInt($(this).css("height"));
+	    if(max_h<h){ max_h = h; }
+	   });
+	   $("#ulTableDetail li").each(function(){
+	 $(this).css({height:max_h});
+	   });
+	}
+
 	/* $(function() {
 		var cnt = 6;
 		var search = ""; */
@@ -67,7 +89,7 @@ if(aList == null){
 				console.log(data)
 				$.each(data, function(key, value) {
 					contents += "<li>";
-					contents += "<ul>";
+					contents += "<ul id='ulTableDetail' style='line-height: 1.5em;'>";
 					contents += "<li><a href='accountDetail.do?aca_no="+value.aca_no+"'>"+value.aca_name+"</a></li>";
 					contents +=	"<li>"+value.aca_area2+"</li>";
                 	contents +=	"<li>"+value.tel+"</li>";
@@ -80,6 +102,7 @@ if(aList == null){
 				if ((data).length < 6 ) {
 					$('#addview').remove();
 				}
+				fixHeight();
 				
 			} //성공
 		}); //아작스 닫음
@@ -94,31 +117,9 @@ if(aList == null){
 
 
 </script>
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<%@include file="/html5/include/head.jsp" %>
-<!-- Styles : sanghoon Kim-->
-<link rel="stylesheet" href="/html5/common/css/sangAccount.css">
-
 </head>
 
 <body >
-<script type="text/javascript">
-
-$(document).ready(function(){
-	   var max_h=0;
-	   $("#ulTableDetail li").each(function(){
-	 var h = parseInt($(this).css("height"));
-	    if(max_h<h){ max_h = h; }
-	   });
-	   $("#ulTableDetail li").each(function(){
-	 $(this).css({height:max_h});
-	   });
-	  });
-
-
-</script>
   <section id="wrapper" class="wrapper">
   	<header class="header">
 		<div class="wrap">
@@ -191,8 +192,8 @@ $(document).ready(function(){
                     </li>
                     <%} %>
                 </ul>
-            </li>
-        </ul>
+        	</li>
+         </ul>
         </div>
     <%if (aList.size() >= 6){ %>
     <div id="searchadd"><button class="add_btn" id="addview" onclick="moreview()">더보기</button></div>
