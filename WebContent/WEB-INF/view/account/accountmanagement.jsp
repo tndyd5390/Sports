@@ -32,9 +32,7 @@ function fixHeight(){
 	 $(this).css({height:max_h});
 	   });
 	}
-</script>
 
-<script type="text/javascript">
 	/* $(function() {
 		var cnt = 6;
 		var search = ""; */

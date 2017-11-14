@@ -105,11 +105,7 @@ public class AcademyController {
 		aDTO.setAca_lng(y);
 		aDTO.setReg_user_no(reg_user_no);
 		
-		log.info("test!!!!!!!!!");
-		
 		academyService.insertAcademy(aDTO);
-		
-		log.info("test???????????");
 		
 		aDTO = null;
 		
@@ -225,14 +221,11 @@ public class AcademyController {
 		return "alert/alert";
 	}
 	@RequestMapping(value="readMore")
-	public @ResponseBody List<AcademyDTO> AcademyMoreView(@RequestParam(value = "cnt") String cnt,
-			@RequestParam(value = "search") String search) throws Exception{
+	public @ResponseBody List<AcademyDTO> AcademyMoreView(@RequestParam(value = "cnt") String cnt) throws Exception{
 		AcademyDTO aDTO = new AcademyDTO();
 		
 		aDTO.setRead_more(cnt);
 		log.info("cnt : " + cnt);
-		aDTO.setSearch(search);
-		log.info("search : " + search);
 		
 		List <AcademyDTO> MoreList = academyService.AcademyMoreList(aDTO);
 		
