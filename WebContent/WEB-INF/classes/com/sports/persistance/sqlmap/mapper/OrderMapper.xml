@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sports.persistance.mapper.OrderMapper">
+	<insert id="insertOrderProdFromBasket" parameterType="BasketDTO">
+		INSERT INTO ORD_PRODUCT
+		(
+			TRAN_NO,
+			PROD_NO,
+			PROD_QTY,
+			REG_USER_NO,
+			REG_DT
+		)
+		VALUES
+		(
+			#{tranNo},
+			#{prod_no},
+			#{prod_qty},
+			#{reg_user_no},
+			NOW()
+		)
+	</insert>
+	
+	<insert id="insertOrderProdOptFromBasket" parameterType="list">
+		INSERT INTO ORD_PRODUCT_OPTION
+		(
+			ORD_PROD_NO,
+			TRAN_NO,
+			ORD_PRODOPT_NAME,
+			ORD_PRODOPT_KIND,
+			REG_USER_NO,
+			REG_DT
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index" separator=",">
+			((SELECT MAX(ORD_PROD_NO) FROM ORD_PRODUCT), #{item.tranNo}, #{item.opt_name}, #{item.opt_kind}, #{item.reg_user_no}, NOW())
+		</foreach>
+	</insert>
+	
+	<update id="updateOrderProdStatusFromBasket" parameterType="list">
+		<foreach collection="list" item="item" index="index" separator=";">
+			UPDATE BASKET_INFO SET STATUS = 'N' WHERE BSK_NO = #{item.bsk_no}
+		</foreach>
+		;
+	</update>
+	
+	<insert id="insertOrderInfoFromBasket" parameterType="Order_infoDTO">
+		INSERT INTO ORDER_INFO
+		(
+			TRAN_NO,
+			RECIPIENT,
+			TEL,
+			POSTCODE,
+			ORD_PRICE,
+			ADDRESS,
+			ADDRESSDETAIL,
+			ORD_STAT,
+			ORD_CANCEL,
+			ORD_MESSAGE,
+			REG_USER_NO,
+			REG_DT,
+			TRANTYPE,
+			TID
+		)
+		VALUES
+		(	
+			#{tran_no},
+			#{recipient},
+			#{tel},
+			#{postCode},
+			#{ord_price},
+			#{address},
+			#{addressDetail},
+			#{ord_stat},
+			#{ord_cancel},
+			#{ord_message},
+			#{reg_user_no},
+			NOW(),
+			#{tranType},
+			#{tid}
+		)
+	</insert>
+	<select id="getTotalOrderInfoList" parameterType="string" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{userNo} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	<select id="getOrderProductList" parameterType="string" resultType="OrdProductDTO">
+		SELECT OP.ORD_PROD_NO,
+			   OP.TRAN_NO,
+			   OP.PROD_NO,
+			   PI.PROD_NAME,
+			   OP.PROD_QTY,
+			   OP.REG_USER_NO
+		  FROM ORD_PRODUCT OP 
+		 INNER JOIN PRODUCT_INFO PI 
+			ON OP.PROD_NO = PI.PROD_NO 
+		 WHERE TRAN_NO = #{TRAN_NO}
+	</select>
+	
+	<select id="getOrderProductOptionList" parameterType="string" resultType="OrdProdOptionDTO">
+		SELECT ORD_PRODOPT_NO,
+			   ORD_PROD_NO,
+			   TRAN_NO,
+			   ORD_PRODOPT_NAME,
+			   ORD_PRODOPT_KIND,
+			   REG_USER_NO
+		  FROM ORD_PRODUCT_OPTION
+		 WHERE ORD_PROD_NO = #{ordProdNo}
+	</select>
+	
+	<select id="getOrderInfoDate" parameterType="string" resultType="Order_infoDTO">
+		SELECT DISTINCT(SUBSTRING(REG_DT, 1, 10)) AS REG_DT
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{userNo}
+	</select>
+	
+	<select id="getAllOrderDate" resultType="Order_infoDTO">
+		SELECT DISTINCT(SUBSTRING(REG_DT, 1, 10)) AS REG_DT
+		  FROM ORDER_INFO
+	</select>
+		
+	<select id="getOrderInfoDateDetailList" parameterType="Order_infoDTO" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
+		  FROM ORDER_INFO
+		 WHERE REG_USER_NO = #{reg_user_no}
+		   AND SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	<select id="getAdminOrderInfoDateDetailList" parameterType="Order_infoDTO" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
+		  FROM ORDER_INFO
+		 WHERE SUBSTRING(REG_DT, 1, 10) = #{reg_dt} 
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	<select id="getOrderInfoDetail" parameterType="string" resultType="Order_infoDTO">
+		SELECT TRAN_NO,
+		       RECIPIENT,
+		       TEL,
+		       POSTCODE,
+		       ORD_PRICE,
+		       ADDRESS,
+		       ADDRESSDETAIL,
+		       ORD_STAT,
+		       ORD_CANCEL,
+		       ORD_MESSAGE,
+		       INVOICE_NO,
+		       DELI_CO_NO,
+		       REG_DT,
+		       (CASE WHEN INVOICE_NO IS NOT NULL 
+		             THEN '배송완료' 
+		             ELSE '배송중' 
+		             END) AS DELI_STATUS
+		  FROM ORDER_INFO
+		 WHERE TRAN_NO = #{tranNo}
+		   AND ORD_STAT = 'C'
+	</select>
+	
+	
+	<select id="getUserInfoForOrder" parameterType="string" resultType="UserDTO">
+		SELECT USER_NO, USER_ID, USER_NAME, EMAIL_CK, AUTH FROM USER_INFO WHERE USER_NO=#{userNo}
+	</select>
+
+	<update id="setDelivery" parameterType="Order_infoDTO">
+		UPDATE ORDER_INFO SET
+		INVOICE_NO = #{invoice_no},
+		DELI_CO_NO = #{deli_co_no}
+		WHERE TRAN_NO = #{tran_no}
+	</update>
+</mapper>
