@@ -22,11 +22,11 @@
     	$(function(){
     		var url = window.location.href;
     		var a = "http://www.tmaxxsports.com/";
-    		var b = "http://tmaxxsports.com/";
+    		var b = "http://www.tmaxxsports.net/";
     		var c = "http://tmaxxsports.com/main.do";
     		var d = "http://tmaxxsports.com/main.do/";
     		if(url==a||url==b||url==c||url==d){
-    			window.location.href = "http://www.tmaxxsports.net/";
+    			window.location.href = "http://tmaxxsports.com/";
     		}
     	});
     </script>
